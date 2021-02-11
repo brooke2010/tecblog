@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LINQ查詢運算式 - where、order by、let">
+<meta property="og:url" content="https://brooke2010.github.io/2020/03/04/linq-query2/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583372386.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583372962.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583373084.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583373297.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583374916.png">
+<meta property="article:published_time" content="2020-03-04T08:24:11.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="LINQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2020/03/04/linq-query2/1583372386.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2020/03/04/linq-query2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>LINQ查詢運算式 - where、order by、let | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2020/03/04/linq-query2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LINQ查詢運算式 - where、order by、let
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-04 16:24:11" itemprop="dateCreated datePublished" datetime="2020-03-04T16:24:11+08:00">2020-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/LINQ/" itemprop="url" rel="index">
+                    <span itemprop="name">LINQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2020/03/04/linq-query2/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/04/linq-query2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>完整的資料結構範例放在文章的最下面，</p>
+
+<p>其他說明則以 main function 為主。</p>
+
+<p>&nbsp;</p>
+
+<p>四、where</p>
+
+<p>where 子句位置是放在 from 句子之後(之下)， select 子句之上。</p>
+
+<p>&nbsp;</p>
+
+<p>可以使用多個 where 條件去篩選</p>
+
+<p>例：在眾多問題單中選出 bug 狀態還沒被處理掉，並且是由 Tim 負責的問題單。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            SampleData data = <span style="color:#0000ff;">new</span> SampleData();
+            User tim = SampleData.Users.TesterTim;
+
+            <span style="color:#0000ff;">var</span> query = from bug <span style="color:#0000ff;">in</span> SampleData.AllDefects
+                        <span style="background-color:#FFFF00;">where bug.Status != Status.Closed</span>
+                        <span style="background-color:#FFFF00;">where bug.AssignedTo == tim</span>
+                        select bug;
+
+            <span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> query)
+            &#123;
+                Console.WriteLine(item);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="272" src="1583372386.png" width="877" /></p>
+
+<p>&nbsp;</p>
+
+<p>多項 where 條件子句也可以合成一個 where 子句，使用「&amp;&amp;」運算元</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">var</span> query = from bug <span style="color:#0000ff;">in</span> SampleData.AllDefects
+            where bug.Status != Status.Closed <span style="background-color:#FFFF00;">&amp;&amp;</span>
+            bug.AssignedTo == tim
+            select bug;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>五、order by</p>
+
+<p>order by 子句為放在 where 子句下面，select 子句上面。</p>
+
+<p>from 後的範圍變數會提供 order by 來操作</p>
+
+<p>&nbsp;</p>
+
+<p>例：承上例，將該篩選出來的資料依嚴重性做排序，預設為由小到大(遞增)</p>
+
+<p>Serverity 的權重順序為</p>
+
+<pre>
+<code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">namespace</span> Chapter11.Model
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">enum</span> Severity : <span class="key" style="color: rgb(0, 0, 255);">byte</span>
+    &#123;
+        Trivial,
+        Minor,
+        Major,
+        Showstopper,
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            SampleData data = <span style="color:#0000ff;">new</span> SampleData();
+            User tim = SampleData.Users.TesterTim;
+
+            <span style="color:#0000ff;">var</span> query = from bug <span style="color:#0000ff;">in</span> SampleData.AllDefects
+                        where bug.Status != Status.Closed
+                        where bug.AssignedTo == tim
+                        <span style="background-color:#FFFF00;">orderby bug.Severity</span>
+                        select bug;
+
+            <span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> query)
+            &#123;
+                Console.WriteLine(item);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="275" src="1583372962.png" width="876" /></p>
+
+<p>&nbsp;</p>
+
+<p>如果要由大到小(遞減)排序則 order by 子句請加上「descending」</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            SampleData data = <span style="color:#0000ff;">new</span> SampleData();
+            User tim = SampleData.Users.TesterTim;
+
+            <span style="color:#0000ff;">var</span> query = from bug <span style="color:#0000ff;">in</span> SampleData.AllDefects
+                        where bug.Status != Status.Closed
+                        where bug.AssignedTo == tim
+                        orderby bug.Severity <span style="background-color:#FFFF00;">descending</span>
+                        select bug;
+
+            <span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> query)
+            &#123;
+                Console.WriteLine(item);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="273" src="1583373084.png" width="889" /></p>
+
+<p>&nbsp;</p>
+
+<p>如果要考慮多個排序因素的話，則使用「,」符號來處理，</p>
+
+<p>例如：依 Severity 做遞減排序後，再依&nbsp;LastModified 做遞增排序。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            SampleData data = <span style="color:#0000ff;">new</span> SampleData();
+            User tim = SampleData.Users.TesterTim;
+
+            <span style="color:#0000ff;">var</span> query = from bug <span style="color:#0000ff;">in</span> SampleData.AllDefects
+                        where bug.Status != Status.Closed
+                        where bug.AssignedTo == tim
+                        orderby bug.Severity descending<span style="background-color:#FFFF00;">,</span> bug.LastModified
+                        select bug;
+
+            <span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> query)
+            &#123;
+                Console.WriteLine(item);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="274" src="1583373297.png" width="885" /></p>
+
+<p>注意，不要拆成兩個order by子句</p>
+
+<p>orderby bug.Severity descending</p>
+
+<p>orderby bug.LastModified</p>
+
+<p>這樣的結果會變成針對servirity排序後，不管之前做好的排序，</p>
+
+<p>再針對LastModified做一次重新排序。</p>
+
+<p>&nbsp;</p>
+
+<p>orderby 子句在編譯時會轉成 OrderBy、OrderByDescending、ThenBy、ThenByDescending 擴充方法</p>
+
+<p>&nbsp;</p>
+
+<p>六、let</p>
+
+<p>let 子句可以新增一個範圍變數與其他子句操作</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            SampleData data = <span style="color:#0000ff;">new</span> SampleData();
+            User tim = SampleData.Users.TesterTim;
+
+            <span style="color:#0000ff;">var</span> query = from user <span style="color:#0000ff;">in</span> SampleData.AllUsers
+                        <span style="background-color:#FFFF00;">let theLength = user.Name.Length</span>
+                        select <span style="color:#0000ff;">new</span> &#123; Name = user.Name, Length = theLength &#125;;
+
+            <span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> query)
+            &#123;
+                Console.WriteLine($<span style="color:#a31515;">&quot;&#123;item.Name&#125; - &#123;item.Length&#125;&quot;</span>);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="172" src="1583374916.png" width="276" /></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>資料結構範例</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> SampleData
+    &#123;
+        <span style="color:#0000ff;">static</span> List&lt;Defect&gt; defects;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> IEnumerable&lt;Defect&gt; AllDefects
+        &#123;
+            <span style="color:#0000ff;">get</span> &#123; <span style="color:#0000ff;">return</span> defects; &#125;
+        &#125;
+
+        <span style="color:#0000ff;">static</span> List&lt;User&gt; users;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> IEnumerable&lt;User&gt; AllUsers
+        &#123;
+            <span style="color:#0000ff;">get</span> &#123; <span style="color:#0000ff;">return</span> users; &#125;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">class</span> Users
+        &#123;
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User TesterTim = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Tim Trotter&quot;</span>, UserType.Tester);
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User TesterTara = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Tara Tutu&quot;</span>, UserType.Tester);
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User DeveloperDeborah = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Deborah Denton&quot;</span>, UserType.Developer);
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User DeveloperDarren = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Darren Dahlia&quot;</span>, UserType.Developer);
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User ManagerMary = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Mary Malcop&quot;</span>, UserType.Manager);
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> User CustomerColin = <span style="color:#0000ff;">new</span> User(<span style="color:#a31515;">&quot;Colin Carton&quot;</span>, UserType.Customer);
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">class</span> Projects
+        &#123;
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> Project SkeetyMediaPlayer = <span style="color:#0000ff;">new</span> Project &#123; Name = <span style="color:#a31515;">&quot;Skeety Media Player&quot;</span> &#125;;
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> Project SkeetyTalk = <span style="color:#0000ff;">new</span> Project &#123; Name = <span style="color:#a31515;">&quot;Skeety Talk&quot;</span> &#125;;
+            <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">readonly</span> Project SkeetyOffice = <span style="color:#0000ff;">new</span> Project &#123; Name = <span style="color:#a31515;">&quot;Skeety Office&quot;</span> &#125;;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> SampleData()
+        &#123;
+            users = <span style="color:#0000ff;">new</span> List&lt;User&gt;
+            &#123;
+                Users.TesterTim,
+                Users.TesterTara,
+                Users.DeveloperDeborah,
+                Users.DeveloperDarren,
+                Users.ManagerMary,
+                Users.CustomerColin
+            &#125;;
+
+            defects = <span style="color:#0000ff;">new</span> List&lt;Defect&gt;
+            &#123;
+                 <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(1),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;MP3 files crash system&quot;</span>,
+                    Severity = Severity.Showstopper,
+                    AssignedTo = Users.DeveloperDarren,
+                    Status = Status.Accepted,
+                    LastModified = May(23)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(6),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Installation is slow&quot;</span>,
+                    Severity = Severity.Trivial,
+                    AssignedTo = Users.TesterTim,
+                    Status = Status.Fixed,
+                    LastModified = May(15)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(8),
+                    CreatedBy = Users.DeveloperDarren,
+                    Summary = <span style="color:#a31515;">&quot;Subtitles only work in Welsh&quot;</span>,
+                    Severity = Severity.Major,
+                    AssignedTo = Users.TesterTim,
+                    Status = Status.Fixed,
+                    LastModified = May(23)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyTalk,
+                    Created = May(9),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;User interface should be more caramelly&quot;</span>,
+                    Severity = Severity.Trivial,
+                    AssignedTo = Users.DeveloperDarren,
+                    Status = Status.Created,
+                    LastModified = May(9)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(12),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Play button points the wrong way&quot;</span>,
+                    Severity = Severity.Major,
+                    AssignedTo = Users.TesterTim,
+                    Status = Status.Fixed,
+                    LastModified = May(17)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyTalk,
+                    Created = May(13),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Server crashes under heavy load (3 users)&quot;</span>,
+                    Severity = Severity.Major,
+                    AssignedTo = Users.DeveloperDeborah,
+                    Status = Status.Accepted,
+                    LastModified = May(17)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(17),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Modern music sounds rubbish&quot;</span>,
+                    Severity = Severity.Trivial,
+                    AssignedTo = Users.DeveloperDarren,
+                    Status = Status.Created,
+                    LastModified = May(17)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyTalk,
+                    Created = May(18),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Webcam makes me look bald&quot;</span>,
+                    Severity = Severity.Showstopper,
+                    AssignedTo = Users.TesterTim,
+                    Status = Status.Fixed,
+                    LastModified = May(27)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(22),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;DVD Easter eggs unavailable&quot;</span>,
+                    Severity = Severity.Trivial,
+                    AssignedTo = Users.DeveloperDarren,
+                    Status = Status.Created,
+                    LastModified = May(22)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyTalk,
+                    Created = May(25),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Logs record confidential conversations&quot;</span>,
+                    Severity = Severity.Major,
+                    AssignedTo = Users.DeveloperDarren,
+                    Status = Status.Reopened,
+                    LastModified = May(30)
+                &#125;,
+
+                <span style="color:#0000ff;">new</span> Defect
+                &#123;
+                    Project = Projects.SkeetyMediaPlayer,
+                    Created = May(30),
+                    CreatedBy = Users.TesterTim,
+                    Summary = <span style="color:#a31515;">&quot;Network is saturated when playing WAV file&quot;</span>,
+                    Severity = Severity.Minor,
+                    AssignedTo = Users.TesterTim,
+                    Status = Status.Fixed,
+                    LastModified = May(31)
+                &#125;
+            &#125;;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> DateTime May(<span style="color:#0000ff;">int</span> day)
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">new</span> DateTime(2010, 5, day);
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Defect
+    &#123;
+        <span style="color:#0000ff;">public</span> Project Project &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Which user is this defect currently assigned to? Should not be null until the status is Closed.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        <span style="color:#0000ff;">public</span> User AssignedTo &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Summary &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> Severity Severity &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> Status Status &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> DateTime Created &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> DateTime LastModified &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> User CreatedBy &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">int</span> ID &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">set</span>; &#125;
+
+        <span style="color:#0000ff;">public</span> Defect()
+        &#123;
+            ID = StaticCounter.Next();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">string</span> ToString()
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">string</span>.Format(<span style="color:#a31515;">&quot;&#123;0,2&#125;: &#123;1&#125;\r\n    (&#123;2:d&#125;-&#123;3:d&#125;, &#123;4&#125;/&#123;5&#125;, &#123;6&#125; -&gt; &#123;7&#125;)&quot;</span>,
+                ID, Summary, Created, LastModified, Severity, Status, CreatedBy.Name,
+                AssignedTo == <span style="color:#0000ff;">null</span> ? <span style="color:#a31515;">&quot;n/a&quot;</span> : AssignedTo.Name);
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">class</span> StaticCounter
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">int</span> next = 1;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">int</span> Next()
+        &#123;
+            <span style="color:#0000ff;">return</span> next++;
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Project
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">string</span> ToString()
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">string</span>.Format(<span style="color:#a31515;">&quot;Project: &#123;0&#125;&quot;</span>, Name);
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">enum</span> Severity : <span style="color:#0000ff;">byte</span>
+    &#123;
+        Trivial,
+        Minor,
+        Major,
+        Showstopper,
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">enum</span> Status : <span style="color:#0000ff;">byte</span>
+    &#123;
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Defect has been opened, but not verified as reproducible or an issue.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        Created,
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Defect has been verified as an issue requiring work.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        Accepted,
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Defect has been fixed in code, but not verified other than through developer testing.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        Fixed,
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Defect was fixed, but has now been reopened due to failing verification.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        Reopened,
+        <span style="color:#008000;">/// &lt;summary&gt;</span>
+        <span style="color:#008000;">/// Defect has been fixed and tested; the fix is satisfactory.</span>
+        <span style="color:#008000;">/// &lt;/summary&gt;</span>
+        Closed,
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> User
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> UserType UserType &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+
+        <span style="color:#0000ff;">public</span> User(<span style="color:#0000ff;">string</span> name, UserType userType)
+        &#123;
+            Name = name;
+            UserType = userType;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">string</span> ToString()
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">string</span>.Format(<span style="color:#a31515;">&quot;User: &#123;0&#125; (&#123;1&#125;)&quot;</span>, Name, UserType);
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">enum</span> UserType : <span style="color:#0000ff;">byte</span>
+    &#123;
+        Customer,
+        Developer,
+        Tester,
+        Manager,
+    &#125;
+&#125;
+</code></pre>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/LINQ/" rel="tag"># LINQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/03/04/hexo-search-use-Algolia/" rel="prev" title="hexo-search-use-Algolia">
+      <i class="fa fa-chevron-left"></i> hexo-search-use-Algolia
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/03/04/linq-query3/" rel="next" title="LINQ查詢運算式 - inner join、left join、Cartesian Product">
+      LINQ查詢運算式 - inner join、left join、Cartesian Product <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2020/03/04/linq-query2/";
+    this.page.identifier = "2020/03/04/linq-query2/";
+    this.page.title = "LINQ查詢運算式 - where、order by、let";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

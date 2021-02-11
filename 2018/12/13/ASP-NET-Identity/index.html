@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Identity">
+<meta property="og:url" content="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/1554798022_25831.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/1551750536_91187.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/1551705185_29839.png">
+<meta property="article:published_time" content="2018-12-13T09:47:13.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="OWIN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/1554798022_25831.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ASP.NET Identity | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ASP.NET Identity
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-13 17:47:13" itemprop="dateCreated datePublished" datetime="2018-12-13T17:47:13+08:00">2018-12-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/OWIN/" itemprop="url" rel="index">
+                    <span itemprop="name">OWIN</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2018/12/13/ASP-NET-Identity/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/13/ASP-NET-Identity/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>開一個預設的 ASP.NET MVC (individual User Accounts) 範本，</p>
+
+<p>就有提供&nbsp;ASP.NET Identity 架構可玩玩。</p>
+
+<p><img height="749" src="1554798022_25831.png" width="1026" /></p>
+
+<p>&nbsp;</p>
+
+<p>把專案 RUN 起來，然後在 Login 頁面的欄位隨意填入並登入，</p>
+
+<p><img height="454" src="1551750536_91187.png" width="482" /></p>
+
+<p>此動作當然會登入失敗，不過醉翁之意不在酒，</p>
+
+<p>其目的是程式會藉由此動作來自動建立資料庫，</p>
+
+<p>我想這應該是&nbsp;code first 關係。</p>
+
+<p>所產生的資料庫如下圖。</p>
+
+<p><img height="413" src="1551705185_29839.png" width="252" /></p>
+
+<p>各 Table 用途請參考&nbsp;<a target="_blank" rel="noopener" href="http://1drv.ms/1HrGLlt">MVC會員資料表</a></p>
+
+<p>&nbsp;</p>
+
+<p>經由web.config去查詢連線字串去看資料庫長在哪裡</p>
+
+<pre>
+<code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);">&lt;connectionStrings&gt;
+  &lt;add name=<span class="str" style="color: rgb(163, 21, 21);">&quot;DefaultConnection&quot;</span> connectionString=<span class="str" style="color: rgb(163, 21, 21);">&quot;Data Source=</span><span class="str" style="color: rgb(163, 21, 21);">(LocalDb)\MSSQLLocalDB</span><span class="str" style="color: rgb(163, 21, 21);">;AttachDbFilename=|DataDirectory|\aspnet-LearnningASP.NET_Identity-20150525080608.mdf;Initial Catalog=aspnet-LearnningASP.NET_Identity-20150525080608;Integrated Security=True&quot;</span>
+    providerName=<span class="str" style="color: rgb(163, 21, 21);">&quot;System.Data.SqlClient&quot;</span> /&gt;
+&lt;/connectionStrings&gt;</code></pre>
+
+<p>由上可知他是連到 (LocalDb)\MSSQLLocalDB 執行個體，這是&nbsp;SQL Server 2014&nbsp;Express LocalDB，</p>
+
+<p>SQL Server 2014&nbsp;Express LocalDB 以後的版本皆為 (LocalDb)\MSSQLLocalDB 執行個體。</p>
+
+<p>而&nbsp;SQL Server 2012&nbsp;Express LocalDB 則為&nbsp;(LocalDb)\v11.0 執行個體。</p>
+
+<p>&nbsp;</p>
+
+<p>有人表示安裝 Visual studio 2013 其範本 web.config 預設為&nbsp;(LocalDb)\v11.0，</p>
+
+<p>而安裝 Visual studio 2015&nbsp;以後其範本 web.config 預設為&nbsp;(LocalDb)\MSSQLLocalDB，</p>
+
+<p>雖然我不確定是否如此，不過我想實際應該就是這樣吧，參考參考。</p>
+
+<p>&nbsp;</p>
+
+<p>部份程式重點與功能</p>
+
+<p>一、Startup.Auth.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity.Owin;
+<span style="color:#0000ff;">using</span> Microsoft.Owin;
+<span style="color:#0000ff;">using</span> Microsoft.Owin.Security.Cookies;
+<span style="color:#0000ff;">using</span> Microsoft.Owin.Security.Google;
+<span style="color:#0000ff;">using</span> Owin;
+<span style="color:#0000ff;">using</span> WebApplication1.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> Startup
+    &#123;
+        <span style="color:#008000;">// For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864</span>
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> ConfigureAuth(IAppBuilder app)
+        &#123;
+            <span style="color:#008000;">// Configure the db context, user manager and signin manager to use a single instance per request</span>
+            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext&lt;ApplicationUserManager&gt;(ApplicationUserManager.Create);
+            app.CreatePerOwinContext&lt;ApplicationSignInManager&gt;(ApplicationSignInManager.Create);
+
+            <span style="color:#008000;">// Enable the application to use a cookie to store information for the signed in user</span>
+            <span style="color:#008000;">// and to use a cookie to temporarily store information about a user logging in with a third party login provider</span>
+            <span style="color:#008000;">// Configure the sign in cookie</span>
+            app.UseCookieAuthentication(<span style="color:#0000ff;">new</span> CookieAuthenticationOptions
+            &#123;
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = <span style="color:#0000ff;">new</span> PathString(<span style="color:#a31515;">&quot;/Account/Login&quot;</span>),
+                Provider = <span style="color:#0000ff;">new</span> CookieAuthenticationProvider
+                &#123;
+                    <span style="color:#008000;">// Enables the application to validate the security stamp when the user logs in.</span>
+                    <span style="color:#008000;">// This is a security feature which is used when you change a password or add an external login to your account.  </span>
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity&lt;ApplicationUserManager, ApplicationUser&gt;(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) =&gt; user.GenerateUserIdentityAsync(manager))
+                &#125;
+            &#125;);            
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            <span style="color:#008000;">// Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.</span>
+            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
+
+            <span style="color:#008000;">// Enables the application to remember the second login verification factor such as phone or email.</span>
+            <span style="color:#008000;">// Once you check this option, your second step of verification during the login process will be remembered on the device where you logged in from.</span>
+            <span style="color:#008000;">// This is similar to the RememberMe option when you log in.</span>
+            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+
+            <span style="color:#008000;">// Uncomment the following lines to enable logging in with third party login providers</span>
+            <span style="color:#008000;">//app.UseMicrosoftAccountAuthentication(</span>
+            <span style="color:#008000;">//    clientId: &quot;&quot;,</span>
+            <span style="color:#008000;">//    clientSecret: &quot;&quot;);</span>
+
+            <span style="color:#008000;">//app.UseTwitterAuthentication(</span>
+            <span style="color:#008000;">//   consumerKey: &quot;&quot;,</span>
+            <span style="color:#008000;">//   consumerSecret: &quot;&quot;);</span>
+
+            <span style="color:#008000;">//app.UseFacebookAuthentication(</span>
+            <span style="color:#008000;">//   appId: &quot;&quot;,</span>
+            <span style="color:#008000;">//   appSecret: &quot;&quot;);</span>
+
+            <span style="color:#008000;">//app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()</span>
+            <span style="color:#008000;">//&#123;</span>
+            <span style="color:#008000;">//    ClientId = &quot;&quot;,</span>
+            <span style="color:#008000;">//    ClientSecret = &quot;&quot;</span>
+            <span style="color:#008000;">//&#125;);</span>
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>說明：</p>
+
+<p>1、AppBuilderExtensions.CreatePerOwinContext() 方法是用來開啟對資料庫連線通道。</p>
+
+<p>2、CookieAuthenticationOptions.LoginPath 屬性為指定使用者登入路徑之入口。</p>
+
+<p>3、validateInterval 屬性表示登入有效時間。</p>
+
+<p>&nbsp;</p>
+
+<p>二、IdentityConfig.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Data.Entity;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Security.Claims;
+<span style="color:#0000ff;">using</span> System.Threading.Tasks;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity.EntityFramework;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity.Owin;
+<span style="color:#0000ff;">using</span> Microsoft.Owin;
+<span style="color:#0000ff;">using</span> Microsoft.Owin.Security;
+<span style="color:#0000ff;">using</span> WebApplication1.Models;
+<span style="color:#0000ff;">using</span> System.Web.Helpers;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> EmailService : IIdentityMessageService
+    &#123;
+        <span style="color:#0000ff;">public</span> Task SendAsync(IdentityMessage message)
+        &#123;
+            <span style="color:#008000;">// Plug in your email service here to send an email.</span>
+            WebMail.SmtpPort = 25;
+            WebMail.SmtpServer = <span style="color:#a31515;">&quot;smtp-mail.outlook.com&quot;</span>;
+            WebMail.UserName = <span style="color:#a31515;">&quot;test@hotmail.com&quot;</span>;
+            WebMail.Password = <span style="color:#a31515;">&quot;Password&quot;</span>;
+            WebMail.EnableSsl = <span style="color:#0000ff;">true</span>;
+            WebMail.From = <span style="color:#a31515;">&quot;test@hotmail.com&quot;</span>;
+            WebMail.Send(message.Destination, message.Subject, message.Body);
+            <span style="color:#0000ff;">return</span> Task.FromResult(0);
+        &#125;
+    &#125;
+
+    <span style="color:#008000;">// Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ApplicationUserManager : UserManager&lt;ApplicationUser&gt;
+    &#123;
+        <span style="color:#0000ff;">public</span> ApplicationUserManager(IUserStore&lt;ApplicationUser&gt; store)
+            : <span style="color:#0000ff;">base</span>(store)
+        &#123;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> ApplicationUserManager Create(IdentityFactoryOptions&lt;ApplicationUserManager&gt; options, IOwinContext context)
+        &#123;
+            <span style="color:#0000ff;">var</span> manager = <span style="color:#0000ff;">new</span> ApplicationUserManager(<span style="color:#0000ff;">new</span> UserStore&lt;ApplicationUser&gt;(context.Get&lt;ApplicationDbContext&gt;()));
+            <span style="color:#008000;">// Configure validation logic for usernames</span>
+            manager.UserValidator = <span style="color:#0000ff;">new</span> UserValidator&lt;ApplicationUser&gt;(manager)
+            &#123;
+                AllowOnlyAlphanumericUserNames = <span style="color:#0000ff;">false</span>,
+                RequireUniqueEmail = <span style="color:#0000ff;">true</span>
+            &#125;;
+
+            <span style="color:#008000;">// Configure validation logic for passwords</span>
+            manager.PasswordValidator = <span style="color:#0000ff;">new</span> PasswordValidator
+            &#123;
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = <span style="color:#0000ff;">true</span>,
+                RequireDigit = <span style="color:#0000ff;">true</span>,
+                RequireLowercase = <span style="color:#0000ff;">true</span>,
+                RequireUppercase = <span style="color:#0000ff;">true</span>,
+            &#125;;
+
+            <span style="color:#008000;">// Configure user lockout defaults</span>
+            manager.UserLockoutEnabledByDefault = <span style="color:#0000ff;">true</span>;
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+
+            <span style="color:#008000;">// Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user</span>
+            <span style="color:#008000;">// You can write your own provider and plug it in here.</span>
+            manager.RegisterTwoFactorProvider(<span style="color:#a31515;">&quot;Phone Code&quot;</span>, <span style="color:#0000ff;">new</span> PhoneNumberTokenProvider&lt;ApplicationUser&gt;
+            &#123;
+                MessageFormat = <span style="color:#a31515;">&quot;Your security code is &#123;0&#125;&quot;</span>
+            &#125;);
+            manager.RegisterTwoFactorProvider(<span style="color:#a31515;">&quot;Email Code&quot;</span>, <span style="color:#0000ff;">new</span> EmailTokenProvider&lt;ApplicationUser&gt;
+            &#123;
+                Subject = <span style="color:#a31515;">&quot;Security Code&quot;</span>,
+                BodyFormat = <span style="color:#a31515;">&quot;Your security code is &#123;0&#125;&quot;</span>
+            &#125;);
+            manager.EmailService = <span style="color:#0000ff;">new</span> EmailService();
+            manager.SmsService = <span style="color:#0000ff;">new</span> SmsService();
+            <span style="color:#0000ff;">var</span> dataProtectionProvider = options.DataProtectionProvider;
+            <span style="color:#0000ff;">if</span> (dataProtectionProvider != <span style="color:#0000ff;">null</span>)
+            &#123;
+                manager.UserTokenProvider =
+                    <span style="color:#0000ff;">new</span> DataProtectorTokenProvider&lt;ApplicationUser&gt;(dataProtectionProvider.Create(<span style="color:#a31515;">&quot;ASP.NET Identity&quot;</span>));
+            &#125;
+            <span style="color:#0000ff;">return</span> manager;
+        &#125;
+    &#125;
+
+    <span style="color:#008000;">// Configure the application sign-in manager which is used in this application.</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ApplicationSignInManager : SignInManager&lt;ApplicationUser, <span style="color:#0000ff;">string</span>&gt; &#123; &#125;
+&#125;
+</code></pre>
+
+<p>說明：</p>
+
+<p>1、ApplicationUserManager 類別繼承了 UserManager 類別，用來處理資料表CRUD方面與邏輯設定。</p>
+
+<p>2、ApplicationSignInManager&nbsp;類別為處理登入方面。</p>
+
+<p>3、UserManager.UserValidator 屬性為用來設定帳號邏輯。</p>
+
+<p>4、UserManager.PasswordValidator&nbsp;屬性為用來設定密碼邏輯。</p>
+
+<p>5、EmailService 類別用來作電子郵件驗證，設定其 SMTP，</p>
+
+<p>使用 WebMail 靜態類別時，記得 include&nbsp;System.Web.Helpers 命名空間。</p>
+
+<p>&nbsp;</p>
+
+<p>三、IdentityModels.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Data.Entity;
+<span style="color:#0000ff;">using</span> System.Security.Claims;
+<span style="color:#0000ff;">using</span> System.Threading.Tasks;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity.EntityFramework;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Models
+&#123;
+    <span style="color:#008000;">// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ApplicationUser : IdentityUser
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">async</span> Task&lt;ClaimsIdentity&gt; GenerateUserIdentityAsync(UserManager&lt;ApplicationUser&gt; manager)
+        &#123;
+            <span style="color:#008000;">// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType</span>
+            <span style="color:#0000ff;">var</span> userIdentity = <span style="color:#0000ff;">await</span> manager.CreateIdentityAsync(<span style="color:#0000ff;">this</span>, DefaultAuthenticationTypes.ApplicationCookie);
+            <span style="color:#008000;">// Add custom user claims here</span>
+            <span style="color:#0000ff;">return</span> userIdentity;
+        &#125;
+    &#125;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ApplicationDbContext : IdentityDbContext&lt;ApplicationUser&gt;
+    &#123;
+        <span style="color:#0000ff;">public</span> ApplicationDbContext()
+            : <span style="color:#0000ff;">base</span>(<span style="color:#a31515;">&quot;DefaultConnection&quot;</span>, throwIfV1Schema: <span style="color:#0000ff;">false</span>)
+        &#123;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> ApplicationDbContext Create()
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">new</span> ApplicationDbContext();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>四、AccountController.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Globalization;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Security.Claims;
+<span style="color:#0000ff;">using</span> System.Threading.Tasks;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity;
+<span style="color:#0000ff;">using</span> Microsoft.AspNet.Identity.Owin;
+<span style="color:#0000ff;">using</span> Microsoft.Owin.Security;
+<span style="color:#0000ff;">using</span> WebApplication1.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    [Authorize]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> AccountController : Controller
+    &#123;
+        <span style="color:#0000ff;">private</span> ApplicationSignInManager _signInManager;
+        <span style="color:#0000ff;">private</span> ApplicationUserManager _userManager;
+
+
+        <span style="color:#0000ff;">public</span> AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        &#123;
+            UserManager = userManager;
+            SignInManager = signInManager;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ApplicationSignInManager SignInManager
+        &#123;
+            <span style="color:#0000ff;">get</span>
+            &#123;
+                <span style="color:#0000ff;">return</span> _signInManager ?? HttpContext.GetOwinContext().Get&lt;ApplicationSignInManager&gt;();
+            &#125;
+            <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">set</span>
+            &#123;
+                _signInManager = value;
+            &#125;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ApplicationUserManager UserManager
+        &#123;
+            <span style="color:#0000ff;">get</span>
+            &#123;
+                <span style="color:#0000ff;">return</span> _userManager ?? HttpContext.GetOwinContext().GetUserManager&lt;ApplicationUserManager&gt;();
+            &#125;
+            <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">set</span>
+            &#123;
+                _userManager = value;
+            &#125;
+        &#125;
+
+        <span style="color:#008000;">//</span>
+        <span style="color:#008000;">// POST: /Account/Login</span>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">async</span> Task&lt;ActionResult&gt; Login(LoginViewModel model, <span style="color:#0000ff;">string</span> returnUrl)
+        &#123;
+            <span style="color:#0000ff;">if</span> (!ModelState.IsValid)
+            &#123;
+                <span style="color:#0000ff;">return</span> View(model);
+            &#125;
+
+            <span style="color:#008000;">// This doesn&#39;t count login failures towards account lockout</span>
+            <span style="color:#008000;">// To enable password failures to trigger account lockout, change to shouldLockout: true</span>
+            <span style="color:#0000ff;">var</span> result = <span style="color:#0000ff;">await</span> SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: <span style="color:#0000ff;">false</span>);
+            <span style="color:#0000ff;">switch</span> (result)
+            &#123;
+                <span style="color:#0000ff;">case</span> SignInStatus.Success:
+                    <span style="color:#0000ff;">return</span> RedirectToLocal(returnUrl);
+                <span style="color:#0000ff;">case</span> SignInStatus.LockedOut:
+                    <span style="color:#0000ff;">return</span> View(<span style="color:#a31515;">&quot;Lockout&quot;</span>);
+                <span style="color:#0000ff;">case</span> SignInStatus.RequiresVerification:
+                    <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;SendCode&quot;</span>, <span style="color:#0000ff;">new</span> &#123; ReturnUrl = returnUrl, RememberMe = model.RememberMe &#125;);
+                <span style="color:#0000ff;">case</span> SignInStatus.Failure:
+                <span style="color:#0000ff;">default</span>:
+                    ModelState.AddModelError(<span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#a31515;">&quot;Invalid login attempt.&quot;</span>);
+                    <span style="color:#0000ff;">return</span> View(model);
+            &#125;
+        &#125;
+
+        <span style="color:#008000;">//</span>
+        <span style="color:#008000;">// POST: /Account/Register</span>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">async</span> Task&lt;ActionResult&gt; Register(RegisterViewModel model)
+        &#123;
+            <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+            &#123;
+                <span style="color:#0000ff;">var</span> user = <span style="color:#0000ff;">new</span> ApplicationUser &#123; UserName = model.Email, Email = model.Email &#125;;
+                <span style="color:#0000ff;">var</span> result = <span style="color:#0000ff;">await</span> UserManager.CreateAsync(user, model.Password);
+                <span style="color:#0000ff;">if</span> (result.Succeeded)
+                &#123;
+                    <span style="color:#0000ff;">await</span> SignInManager.SignInAsync(user, isPersistent: <span style="color:#0000ff;">false</span>, rememberBrowser: <span style="color:#0000ff;">false</span>);
+
+                    <span style="color:#008000;">// For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771</span>
+                    <span style="color:#008000;">// Send an email with this link</span>
+                    <span style="color:#008000;">// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);</span>
+                    <span style="color:#008000;">// var callbackUrl = Url.Action(&quot;ConfirmEmail&quot;, &quot;Account&quot;, new &#123; userId = user.Id, code = code &#125;, protocol: Request.Url.Scheme);</span>
+                    <span style="color:#008000;">// await UserManager.SendEmailAsync(user.Id, &quot;Confirm your account&quot;, &quot;Please confirm your account by clicking &lt;a href=\&quot;&quot; + callbackUrl + &quot;\&quot;&gt;here&lt;/a&gt;&quot;);</span>
+
+                    <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>, <span style="color:#a31515;">&quot;Home&quot;</span>);
+                &#125;
+                AddErrors(result);
+            &#125;
+
+            <span style="color:#008000;">// If we got this far, something failed, redisplay form</span>
+            <span style="color:#0000ff;">return</span> View(model);
+        &#125;
+
+        <span style="color:#008000;">//</span>
+        <span style="color:#008000;">// POST: /Account/LogOff</span>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        <span style="color:#0000ff;">public</span> ActionResult LogOff()
+        &#123;
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>, <span style="color:#a31515;">&quot;Home&quot;</span>);
+        &#125;
+
+        #region Helpers
+        <span style="color:#0000ff;">private</span> IAuthenticationManager AuthenticationManager
+        &#123;
+            <span style="color:#0000ff;">get</span>
+            &#123;
+                <span style="color:#0000ff;">return</span> HttpContext.GetOwinContext().Authentication;
+            &#125;
+        &#125;
+        #endregion
+    &#125;
+&#125;</code></pre>
+
+<p>說明：</p>
+
+<p>1、HttpContext.GetOwinContext().Get&lt;ApplicationUserManager&gt;();</p>
+
+<p>是用來取得資料庫連線。</p>
+
+<p>2、var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);</p>
+
+<p>是用作於登入。</p>
+
+<p>3、var result = await UserManager.CreateAsync(user, model.Password);</p>
+
+<p>作用為新增一筆資料至 DB。</p>
+
+<p>&nbsp;</p>
+
+<p>五、ManageController.cs</p>
+
+<p>其處理目的跟&nbsp;AccountController.cs 差不多。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/magazine/dn451439.aspx?f=255&amp;MSPPError=-2147217396">Nancy Web framework</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/jesse2013/p/aspnet-identity-claims-based-authentication-and-owin.html">MVC5 - ASP.NET Identity登录原理 - Claims-based认证和OWIN</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.asp.net/mvc/tutorials/security/using-oauth-providers-with-mvc">Using OAuth Providers with MVC 4</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/OWIN/" rel="tag"># OWIN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/12/12/FormsAuthentication/" rel="prev" title="FormsAuthentication 登入機制">
+      <i class="fa fa-chevron-left"></i> FormsAuthentication 登入機制
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/12/16/Application-state-HttpApplicationStateBase/" rel="next" title="Application state (HttpApplicationStateBase)">
+      Application state (HttpApplicationStateBase) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2018/12/13/ASP-NET-Identity/";
+    this.page.identifier = "2018/12/13/ASP-NET-Identity/";
+    this.page.title = "ASP.NET Identity";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

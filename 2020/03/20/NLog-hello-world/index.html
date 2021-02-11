@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NLog] NLog hello world">
+<meta property="og:url" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584518892.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584520830.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584520975.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584521104.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584521738.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584521816.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584522080.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584523945.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584707364.png">
+<meta property="article:published_time" content="2020-03-20T13:11:41.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="隨手文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2020/03/20/NLog-hello-world/1584518892.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2020/03/20/NLog-hello-world/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[NLog] NLog hello world | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2020/03/20/NLog-hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NLog] NLog hello world
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-20 21:11:41" itemprop="dateCreated datePublished" datetime="2020-03-20T21:11:41+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E9%9A%A8%E6%89%8B%E6%96%87%E7%AB%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">隨手文章</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2020/03/20/NLog-hello-world/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/20/NLog-hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>本文章目的在於做一個&nbsp;NLog hello world 的專案，</p>
+
+<p>不多做參數細部解說，相關請查閱&nbsp;NLog 官網。&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>一、以&nbsp;.NET Core 3.1&nbsp;Console application 為例</p>
+
+<p>1、於 NuGet 安裝 NLog</p>
+
+<p>你可以使用 NuGet Package Manager Console 或是 Manage NuGet Packages for solution 方式安裝，二者擇一即可。</p>
+
+<p>PM&gt; Install-Package NLog</p>
+
+<p><img height="197" src="1584518892.png" width="568" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、新增&nbsp;nlog.config</p>
+
+<p>新增&nbsp;nlog.config 有兩種方式，二者擇一即可(檔名不分大小寫)，</p>
+
+<p>一是自己寫&nbsp;nlog.config 並放置如下檔案結構</p>
+
+<p><img height="100" src="1584520830.png" width="263" /></p>
+
+<p>&nbsp;</p>
+
+<p>nlog.config 預設的內容為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+&lt;?xml version=&quot;<span style="color:#008c00; ">1.0</span>&quot; encoding=&quot;utf-<span style="color:#008c00; ">8</span>&quot; ?&gt;
+<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">nlog</span><span style="color:#274796; "> </span><span style="color:#074726; ">xmlns</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#074726; ">xmlns</span><span style="color:#274796; ">:xsi</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoReload</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;true&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throwExceptions</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;false&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internalLogLevel</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;Off&quot;</span><span style="color:#274796; "> internalLogFile</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;c:\temp\nlog-internal.log&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+  <span style="color:#696969; ">&lt;!-- optional, add some variables</span>
+<span style="color:#696969; ">&nbsp;&nbsp;</span><span style="color:#5555dd; ">https://github.com/nlog/NLog/wiki/Configuration-file#variables</span><span style="color:#696969; "></span>
+<span style="color:#696969; ">&nbsp;&nbsp;--&gt;</span>
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">variable</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myvar&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myvalue&quot;</span><span style="color:#a65700; ">/&gt;</span>
+
+  <span style="color:#696969; ">&lt;!--</span>
+<span style="color:#696969; ">&nbsp;&nbsp;See </span><span style="color:#5555dd; ">https://github.com/nlog/nlog/wiki/Configuration-file</span><span style="color:#696969; "></span>
+<span style="color:#696969; ">&nbsp;&nbsp;for information on customizing logging rules and outputs.</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;--&gt;</span>
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#696969; ">&lt;!--</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;add your targets here</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;See </span><span style="color:#5555dd; ">https://github.com/nlog/NLog/wiki/Targets</span><span style="color:#696969; "> for possible targets.</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;See </span><span style="color:#5555dd; ">https://github.com/nlog/NLog/wiki/Layout-Renderers</span><span style="color:#696969; "> for the possible layout renderers.</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;--&gt;</span>
+
+    <span style="color:#696969; ">&lt;!--</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;Write events to a file with the date in the filename.</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&lt;target xsi:type=&quot;File&quot; name=&quot;f&quot; fileName=&quot;${basedir}/logs/${shortdate}.log&quot;</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout=&quot;${longdate} ${uppercase:${level}} ${message}&quot; /&gt;</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;--&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#696969; ">&lt;!-- add your logging rules here --&gt;</span>
+
+    <span style="color:#696969; ">&lt;!--</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;Write all events with minimal level of Debug (So Debug, Info, Warn, Error and Fatal, but not Trace)  to &quot;f&quot;</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&lt;logger name=&quot;*&quot; minlevel=&quot;Debug&quot; writeTo=&quot;f&quot; /&gt;</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;--&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">nlog</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2020-03-18 08:51:54 UTC -->
+
+<p>&nbsp;</p>
+
+<p>二是用&nbsp;NuGet 安裝，NLog.Config 套件</p>
+
+<p><img height="75" src="1584520975.png" width="517" /></p>
+
+<p>不管你選何種方式產生 nlog.config，請記得 Copy to Ouput Directory 選 Copy always，</p>
+
+<p><img height="372" src="1584521104.png" width="373" /></p>
+
+<p>否則 NLog 不會動作。</p>
+
+<p>&nbsp;</p>
+
+<p>3、安裝 NLog.Schema 套件</p>
+
+<p>你可能會在你的&nbsp;nlog.config 發現找不到 NLog.xsd 警告</p>
+
+<p><img height="259" src="1584521738.png" width="879" /></p>
+
+<p>請於 NuGet 安裝&nbsp;NLog.Schema 套件，來取得&nbsp;NLog.xsd 檔，</p>
+
+<p><img height="72" src="1584521816.png" width="522" /></p>
+
+<p>個人將 NLog.xsd 檔案放於如下檔案結構</p>
+
+<p><img height="117" src="1584522080.png" width="275" /></p>
+
+<p>完成後兩個警告就被解決了。</p>
+
+<p>&nbsp;</p>
+
+<p>4、NLog hello world</p>
+
+<p>前期準好了，開始進入主題做一個&nbsp;NLog hello world 的專案。</p>
+
+<p>&nbsp;</p>
+
+<p>nlog.config 改為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+&lt;?xml version=&quot;<span style="color:#008c00; ">1.0</span>&quot; encoding=&quot;utf-<span style="color:#008c00; ">8</span>&quot; ?&gt;
+<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">nlog</span><span style="color:#274796; "> </span><span style="color:#074726; ">xmlns</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#074726; ">xmlns</span><span style="color:#274796; ">:xsi</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoReload</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;true&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throwExceptions</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;false&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internalLogLevel</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;Off&quot;</span><span style="color:#274796; "> internalLogFile</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;c:\temp\nlog-internal.log&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">target</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;fatalfile&quot;</span><span style="color:#274796; "> xsi:</span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;File&quot;</span><span style="color:#274796; "> fileName</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;${baseDir}/${shortdate}.log&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;${date}---${level}---${message}&quot;</span><span style="color:#a65700; ">/&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">logger</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;*&quot;</span><span style="color:#274796; "> level</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;Fatal&quot;</span><span style="color:#274796; "> writeTo</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;fatalfile&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">nlog</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2020-03-18 09:27:58 UTC -->
+
+<p>&nbsp;</p>
+
+<p>Program.cs 改為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> NLog;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">static</span> Logger logger = LogManager.GetCurrentClassLogger();
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            logger.Fatal(<span style="color:#a31515;">&quot;Hello World!!!&quot;</span>);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>執行後，</p>
+
+<p>個人將 NLog 輸出至我的桌面，所以我的桌面會看到一個 log 檔，</p>
+
+<p><img height="101" src="1584523945.png" width="103" /></p>
+
+<p>其輸出的內容為</p>
+
+<p>「2020/03/18 17:25:26.330---Fatal---Hello World!!!」</p>
+
+<p>&nbsp;</p>
+
+<p>二、以&nbsp;.NET Framework Web application 為例</p>
+
+<p>主要流程大同小異</p>
+
+<p>1、於 NuGet 安裝 NLog</p>
+
+<p>&nbsp;</p>
+
+<p>2、新增&nbsp;nlog.config</p>
+
+<p>你可以使用原來的方式，把&nbsp;nlog.config 檔案加到 Web application 專案目錄底下，</p>
+
+<p>但我這一次使用的方式是將 nlog.config 的內容加到 Web.config 裡</p>
+
+<p><img height="299" src="1584707364.png" width="285" /></p>
+
+<p>&nbsp;</p>
+
+<p>Web.config 裡跟 nlog.config 內容有關的如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+&lt;?xml version=&quot;<span style="color:#008c00; ">1.0</span>&quot; encoding=&quot;utf-<span style="color:#008c00; ">8</span>&quot;?&gt;
+<span style="color:#696969; ">&lt;!--</span>
+<span style="color:#696969; ">&nbsp;&nbsp;For more information on how to configure your ASP.NET application, please visit</span>
+<span style="color:#696969; ">&nbsp;&nbsp;</span><span style="color:#5555dd; ">https://go.microsoft.com/fwlink/?LinkId=301880</span><span style="color:#696969; "></span>
+<span style="color:#696969; ">&nbsp;&nbsp;--&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">configuration</span><span style="color:#a65700; ">&gt;</span>
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">configSections</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">section</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;nlog&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;NLog.Config.ConfigSectionHandler, NLog&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">configSections</span><span style="color:#a65700; ">&gt;</span>
+  <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">nlog</span><span style="color:#274796; "> </span><span style="color:#074726; ">xmlns</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#074726; ">xmlns</span><span style="color:#274796; ">:xsi</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://www.nlog-project.org/schemas/NLog.xsd NLog.xsd&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoReload</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;true&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throwExceptions</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;false&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internalLogLevel</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;Off&quot;</span><span style="color:#274796; "> internalLogFile</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;c:\temp\nlog-internal.log&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+      <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">target</span><span style="color:#274796; "> xsi:</span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;BufferingWrapper&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;bufferingDB&quot;</span><span style="color:#274796; "> flushTimeout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;5000&quot;</span><span style="color:#274796; "> slidingTimeout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;true&quot;</span><span style="color:#274796; "> bufferSize</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;10&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">target</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;DB&quot;</span><span style="color:#274796; "> xsi:</span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;Database&quot;</span><span style="color:#274796; "> dbProvider</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;System.Data.SqlClient&quot;</span><span style="color:#274796; "> connectionString</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;server=DESKTOP-***\SQLEXPRESS;Database=testDB;user id=sa;password=***;&quot;</span><span style="color:#a65700; ">&gt;</span>
+          <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">commandText</span><span style="color:#a65700; ">&gt;</span>
+            insert into dbo<span style="color:#008c00; ">.</span>NLogs (Logger, Level, Message)
+            values (@Logger, @Level, @Message);
+          <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">commandText</span><span style="color:#a65700; ">&gt;</span>
+          <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">parameter</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;@Logger&quot;</span><span style="color:#274796; "> layout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;${logger}&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+          <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">parameter</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;@Level&quot;</span><span style="color:#274796; "> layout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;${level}&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+          <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">parameter</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;@Message&quot;</span><span style="color:#274796; "> layout</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;${message:withException=false:exceptionSeparator=\r\n}&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+        <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">target</span><span style="color:#a65700; ">&gt;</span>
+      <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">target</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">targets</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+      <span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">logger</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;*&quot;</span><span style="color:#274796; "> writeTo</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;DB&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">rules</span><span style="color:#a65700; ">&gt;</span>
+  <span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">nlog</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#5f5035; ">configuration</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2020-03-20 13:05:10 UTC -->
+
+<p>這裡我刻意加了&nbsp;Target Wrappers 作範例，</p>
+
+<p>把&nbsp;Target Wrappers 拿掉，執行上也是沒問題的。</p>
+
+<p>&nbsp;</p>
+
+<p>3、新增測試 DB</p>
+
+<p>由於這次的 log 是要寫進 DB，所以要新增一個測試用&nbsp;DB 與 Table</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">DATABASE</span> testDB<span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">USE</span> testDB<span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> NLogs <span style="color:#808030; ">(</span>
+      <span style="color:#808030; ">[</span><span style="color:#bb7977; font-weight:bold; ">UID</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">int</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">IDENTITY</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span>Logger<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>nvarchar<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">100</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">Level</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>nvarchar<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span>Message<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>nvarchar<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#bb7977; font-weight:bold; ">max</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span>
+<span style="color:#808030; ">)</span>
+
+<span style="color:#800000; font-weight:bold; ">GO</span>
+</pre>
+
+<p><!--Created using ToHtml.com on 2020-03-20 12:42:31 UTC --></p>
+
+<p>&nbsp;</p>
+
+<p>4、撰寫 Log 程式</p>
+
+<p>你可以在程式的任何地方撰寫 Log 程式，</p>
+
+<p>以我的例子，我將&nbsp;Log 程式寫在 HomeController 如下</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;"><span style="background-color:#FFFF00;">using</span></span><span style="background-color:#FFFF00;"> NLog;</span>
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;"><span style="background-color:#FFFF00;">private</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">static</span></span><span style="background-color:#FFFF00;"> Logger logger = LogManager.GetCurrentClassLogger();</span>
+
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="background-color:#FFFF00;">logger.Fatal(</span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;Hello World!!!&quot;</span></span><span style="background-color:#FFFF00;">);</span>
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>到此 Log 範例就已經寫好了，程式執行後你可以去 DB 看 log 訊息有沒有寫入，</p>
+
+<p>如果沒有的話，你可以將 nlog 的 throwExceptions 打開，如下</p>
+
+<p>&lt;nlog throwExceptions=&quot;true&quot;&gt;</p>
+
+<p>去找出那裡出問題。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/NLog/NLog/wiki/Configuration-file#nlog-config-xml">NLog config XML</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/NLog/NLog/wiki/Tutorial#target-wrappers">Target Wrappers</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://nlog-project.org/config/?tab=layout-renderers">Layout renderers</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E9%9A%A8%E6%89%8B%E6%96%87%E7%AB%A0/" rel="tag"># 隨手文章</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/03/15/MaterialPro-admin-introduce/" rel="prev" title="MaterialPro admin 文件簡介">
+      <i class="fa fa-chevron-left"></i> MaterialPro admin 文件簡介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/03/30/adds-install-add/" rel="next" title="Active Directory 網域服務 ADDS 安裝、加入網域">
+      Active Directory 網域服務 ADDS 安裝、加入網域 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2020/03/20/NLog-hello-world/";
+    this.page.identifier = "2020/03/20/NLog-hello-world/";
+    this.page.title = "[NLog] NLog hello world";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

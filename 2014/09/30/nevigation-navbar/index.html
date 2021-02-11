@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(文章已過時)navigation navbar 導航條或叫導覽列">
+<meta property="og:url" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/201410322173928.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/2014103221651319.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/2014929153643811.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/201492916103721.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/201410674121437.png">
+<meta property="article:published_time" content="2014-09-30T00:45:30.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2014/09/30/nevigation-navbar/201410322173928.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2014/09/30/nevigation-navbar/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>(文章已過時)navigation navbar 導航條或叫導覽列 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2014/09/30/nevigation-navbar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (文章已過時)navigation navbar 導航條或叫導覽列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-09-30 08:45:30" itemprop="dateCreated datePublished" datetime="2014-09-30T08:45:30+08:00">2014-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/Bootstrap/" itemprop="url" rel="index">
+                    <span itemprop="name">Bootstrap</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2014/09/30/nevigation-navbar/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/30/nevigation-navbar/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、navigation bar原理拆解</p>
+
+<p><img alt="Alternate Text" src="201410322173928.png" /> <img alt="Alternate Text" src="2014103221651319.png" /></p>
+
+<p>&nbsp;</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium; overflow:auto">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">charset</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;utf-8&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">http-equiv</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;X-UA-Compatible&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;IE=edge&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">name</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;viewport&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>Bootstrap Template<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- Bootstrap --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- WARNING: Respond.js doesn&#39;t work if you view the page via file:// --&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!--[if lt IE 9]&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;</span><span style="color: rgb(85, 85, 221);">https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js</span><span style="color: rgb(105, 105, 105);">&quot;&gt;&lt;/script&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;</span><span style="color: rgb(85, 85, 221);">https://oss.maxcdn.com/respond/1.4.2/respond.min.js</span><span style="color: rgb(105, 105, 105);">&quot;&gt;&lt;/script&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;![endif]--&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar <span style="background-color:#FFFF00;">navbar-default</span>&quot;</span><span style="color: rgb(39, 71, 150);"> role</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navigation&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;container-fluid&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;<span style="background-color:#FFFF00;">navbar-header</span>&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;button&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;<span style="background-color:#FFFF00;">navbar-toggle</span> <span style="background-color:#FFA500;">collapsed</span>&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);"><span style="background-color:#FFA500;">data</span></span><span style="color: rgb(39, 71, 150);"><span style="background-color:#FFA500;">-toggle</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#FFA500;">=</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#FFA500;">&quot;collapse&quot;</span></span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);"><span style="background-color:#FFA500;">data</span></span><span style="color: rgb(39, 71, 150);"><span style="background-color:#FFA500;">-</span></span><span style="color: rgb(7, 71, 38);"><span style="background-color:#FFA500;">target</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#FFA500;">=</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#FFA500;">&quot;#bs-example-navbar-collapse-1&quot;</span></span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;sr-only&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Toggle navigation<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;icon-bar&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;icon-bar&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;icon-bar&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;<span style="background-color:#FFFF00;">navbar-brand</span>&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Brand<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;collapse navbar-collapse&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);"><span style="background-color:#FFA500;">id</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#FFA500;">=</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#FFA500;">&quot;bs-example-navbar-collapse-1&quot;</span></span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">label</span><span style="color: rgb(166, 87, 0);">&gt;</span>當寬度小於768px就會隱藏<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">label</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- jQuery (necessary for Bootstrap&#39;s JavaScript plugins) --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p><a class="jsbin-embed" target="_blank" rel="noopener" href="http://jsbin.com/jasuferono/1/embed?html,output">Bootstrap Template</a> <script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>(1)使用&lt;nav&gt;來宣告導航範圍。</p>
+
+<p>(2)導航條預設都會套用navbar-default樣式，navbar-default樣式主要影響文字顏色。</p>
+
+<p>(3)navbar-header為導航條的特異部分，通常會放navbar-toggle與navbar-brand。</p>
+
+<p>(4)navbar-brand與navbar-toggle兩部分所放的位置可不分先後順序，因為navbar-toggle裡有一個屬性為float:right。</p>
+
+<p>(5)上例的</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">label</span><span style="color:#a65700; ">&gt;</span>當寬度小於768px就會隱藏<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">label</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>樣式有點醜，該改成</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-text&quot;</span><span style="color:#a65700; ">&gt;</span>當寬度小於768px就會隱藏<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>(6)navbar-header、navbar-brand、navbar-toggle(hamburger)為樣式</p>
+
+<p>(7)藉由data-toggle=&quot;collapse&quot;來綁定click事件，來添加collapsed樣式</p>
+
+<p>(8)藉由data-target=&quot;#bs-example-navbar-collapse-1&quot;來綁定click事件，來指向目標id</p>
+
+<p>(9)data-target=&quot;#bs-example-navbar-collapse-1&quot;可以改寫成</p>
+
+<p>data-target=&quot;<span style="background-color:#FFFF00;">.</span>bs-example-navbar-collapse-1&quot;，當然其標的物也要改成</p>
+
+<p>&lt;div <span style="background-color:#FFFF00;">class</span>=&quot;collapse navbar-collapse <span style="background-color:#FFFF00;">bs-example-navbar-collapse-1</span>&quot;&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>二、其他導覽列範例</p>
+
+<p>1、導覽列預設範例</p>
+
+<p><img alt="Alternate Text" src="2014929153643811.png" /></p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>Bootstrap Case<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width, initial-scale=1&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">link</span><span style="color:#274796; "> </span><span style="color:#074726; ">rel</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;stylesheet&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7&quot;</span><span style="color:#274796; "> crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; "> type=&quot;text/css&quot;&gt;</span>
+                            <span style="color:#800000; font-weight:bold; ">html</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">body</span> <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">.</span>height-100 <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+                            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#797997; ">blue</span> <span style="color:#074726; ">solid</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>a <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">FF5</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>b <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">F5F</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>c <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">5FF</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">nav</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar <span style="background-color:#FFFF00;">navbar-default</span>&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container-fluid&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-header&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-brand&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#&quot;</span><span style="color:#a65700; ">&gt;</span>WebSiteName<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;<span style="background-color:#FFFF00;">nav navbar-nav</span>&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;active&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#&quot;</span><span style="color:#a65700; ">&gt;</span>Home<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#a&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">1</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#b&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">2</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#c&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">3</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">nav</span><span style="color:#a65700; ">&gt;</span>
+
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;a&quot;</span><span style="color:#a65700; ">&gt;</span>a<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;b&quot;</span><span style="color:#a65700; ">&gt;</span>b<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;c&quot;</span><span style="color:#a65700; ">&gt;</span>c<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://code.jquery.com/jquery-2.2.1.min.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS&quot;</span><span style="color:#274796; "> crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>其版面有預設navbar-default樣式與navbar-inverse兩種</p>
+
+<p>&nbsp;</p>
+
+<p>2、navbar動作</p>
+
+<p>navbar有四種動作分別是</p>
+
+<p>navbar-fixed-top與navbar-fixed-bottom與navbar-static-top與navbar-static-bottom</p>
+
+<p>navbar-fixed-top：不管滑鼠怎麼捲動，navigation bar&nbsp;為固定在視窗上。</p>
+
+<p>navbar-static-top：為navigation bar會隨著滑鼠捲動消失在視窗上。</p>
+
+<pre style="font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>Bootstrap Case<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">charset</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;utf-8&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">name</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;viewport&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar navbar-inverse <span style="background-color: rgb(255, 255, 0);">navbar-fixed-top</span>&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;container-fluid&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar-header&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar-brand&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>WebSiteName<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;nav navbar-nav&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;active&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Home<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">3</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>2<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>3<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>4<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>5<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>6<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>官方建議搭配以下CSS，以免body內容被遮到</p>
+
+<p>&lt;style&gt;</p>
+
+<p style="margin-left: 40px;">body {padding-top:50px;}</p>
+
+<p>&lt;/style&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>3、navbar-left與navbar-right</p>
+
+<p>於navigation bar右側加入兩個項目signUp&amp;Login</p>
+
+<p><img alt="Alternate Text" src="201492916103721.png" /></p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>Bootstrap Case<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">charset</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;utf-8&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">name</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;viewport&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar navbar-inverse&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;container-fluid&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar-header&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;navbar-brand&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>WebSiteName<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;nav navbar-nav&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;active&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Home<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span> 
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Page <span style="color: rgb(0, 140, 0);">3</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span> 
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;nav navbar-nav <span style="background-color: rgb(255, 255, 0);">navbar-right</span>&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;glyphicon glyphicon-user&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span> Sign Up<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;#&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;glyphicon glyphicon-user&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(166, 87, 0);">&gt;</span> Login<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">a</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">li</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">ul</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(95, 80, 53);">nav</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(0, 140, 0);">1</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">P</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>4、navbar-form</p>
+
+<p>form-inline與navbar-form的不同</p>
+
+<p><img alt="Alternate Text" src="201410674121437.png" /></p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">charset</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;utf-8&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">http-equiv</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;X-UA-Compatible&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;IE=edge&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">name</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;viewport&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">content</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>Bootstrap Template<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">title</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- Bootstrap --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">link</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">rel</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;stylesheet&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">href</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- WARNING: Respond.js doesn&#39;t work if you view the page via file:// --&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!--[if lt IE 9]&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;</span><span style="color: rgb(85, 85, 221);">https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js</span><span style="color: rgb(105, 105, 105);">&quot;&gt;&lt;/script&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src=&quot;</span><span style="color: rgb(85, 85, 221);">https://oss.maxcdn.com/respond/1.4.2/respond.min.js</span><span style="color: rgb(105, 105, 105);">&quot;&gt;&lt;/script&gt;</span>
+<span style="color: rgb(105, 105, 105);">&nbsp;&nbsp;&nbsp;&nbsp;&lt;![endif]--&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(166, 87, 0);">&gt;</span>Hello, world!<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">form</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;<span style="background-color:#ffff00;">form-inline</span> navbar-left&quot;</span><span style="color: rgb(39, 71, 150);"> role</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;search&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;form-group&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">input</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;text&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;form-control&quot;</span><span style="color: rgb(39, 71, 150);"> placeholder</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;Search&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;submit&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;btn btn-default&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Submit<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">form</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">form</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;<span style="background-color:#ffff00;">navbar-form</span> navbar-left&quot;</span><span style="color: rgb(39, 71, 150);"> role</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;search&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;form-group&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">input</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;text&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;form-control&quot;</span><span style="color: rgb(39, 71, 150);"> placeholder</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;Search&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;submit&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">class</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;btn btn-default&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Submit<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">form</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- jQuery (necessary for Bootstrap&#39;s JavaScript plugins) --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+                            <span style="color: rgb(105, 105, 105);">&lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;</span>
+                            <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>5、自訂navbar特效</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>Bootstrap Case<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width, initial-scale=1&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">link</span><span style="color:#274796; "> </span><span style="color:#074726; ">rel</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;stylesheet&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7&quot;</span><span style="color:#274796; "> crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; "> type=&quot;text/css&quot;&gt;</span>
+                            <span style="color:#800000; font-weight:bold; ">html</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">body</span> <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">.</span>height-100 <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+                            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#797997; ">blue</span> <span style="color:#074726; ">solid</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>a <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">FF5</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>b <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">F5F</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">#</span>c <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">5FF</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">.</span>navbar-custom <span style="color:#808030; ">.</span>nav <span style="color:#800000; font-weight:bold; ">li</span> <span style="color:#800000; font-weight:bold; ">a</span> <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">transition</span><span style="color:#808030; ">:</span> <span style="color:#007997; ">background</span> <span style="color:#008c00; ">.</span><span style="color:#008c00; ">3</span><span style="color:#006600; ">s</span> <span style="color:#074726; ">ease-in-out</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+
+                            <span style="color:#808030; ">.</span>navbar-custom <span style="color:#808030; ">.</span>nav <span style="color:#800000; font-weight:bold; ">li</span> <span style="color:#800000; font-weight:bold; ">a</span><span style="color:#800080; ">:</span><span style="color:#800000; font-weight:bold; ">hover</span><span style="color:#808030; ">,</span>
+                            <span style="color:#808030; ">.</span>navbar-custom <span style="color:#808030; ">.</span>nav <span style="color:#800000; font-weight:bold; ">li</span> <span style="color:#800000; font-weight:bold; ">a</span><span style="color:#800080; ">:</span><span style="color:#800000; font-weight:bold; ">focus</span><span style="color:#808030; ">,</span>
+                            <span style="color:#808030; ">.</span>navbar-custom <span style="color:#808030; ">.</span>nav <span style="color:#800000; font-weight:bold; ">li</span> <span style="color:#800000; font-weight:bold; ">a</span><span style="color:#800080; ">:</span><span style="color:#800000; font-weight:bold; ">active</span> <span style="color:#800080; ">{</span>
+                            <span style="color:#bb7977; font-weight:bold; ">background-color</span><span style="color:#808030; ">:</span> <span style="color:#400000; ">rgba</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">100</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">255</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">100</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">nav</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar navbar-default navbar-fixed-top <span style="background-color:#FFFF00;">navbar-custom</span>&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container-fluid&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-header&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-brand&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#&quot;</span><span style="color:#a65700; ">&gt;</span>WebSiteName<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;nav navbar-nav&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;active&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#&quot;</span><span style="color:#a65700; ">&gt;</span>Home<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#a&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">1</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#b&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">2</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;#c&quot;</span><span style="color:#a65700; ">&gt;</span>Page <span style="color:#008c00; ">3</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">nav</span><span style="color:#a65700; ">&gt;</span>
+
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;a&quot;</span><span style="color:#a65700; ">&gt;</span>a<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;b&quot;</span><span style="color:#a65700; ">&gt;</span>b<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;height-100&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;c&quot;</span><span style="color:#a65700; ">&gt;</span>c<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://code.jquery.com/jquery-2.2.1.min.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS&quot;</span><span style="color:#274796; "> crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>6、其他</p>
+
+<p>如navbar-btn、navbar-text、navbar-link</p>
+
+<p>&nbsp;</p>
+
+<p>參考網址：</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/bootstrap/bootstrap_ref_comp_navs.asp">Bootstrap Navigation Components</a></p>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/Bootstrap/" rel="tag"># Bootstrap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/30/Sublime-Text3-SublimeHighlight/" rel="prev" title="於Sublime Text 3 使用SublimeHighlight複製程式碼格式顏色">
+      <i class="fa fa-chevron-left"></i> 於Sublime Text 3 使用SublimeHighlight複製程式碼格式顏色
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/30/Bootstrap-Table/" rel="next" title="Bootstrap-Table">
+      Bootstrap-Table <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2014/09/30/nevigation-navbar/";
+    this.page.identifier = "2014/09/30/nevigation-navbar/";
+    this.page.title = "(文章已過時)navigation navbar 導航條或叫導覽列";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

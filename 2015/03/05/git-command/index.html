@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git指令基本應用">
+<meta property="og:url" content="https://brooke2010.github.io/2015/03/05/git-command/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/1508326768_17043.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/1508312062_95181.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/201535154940150.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/20154250751952.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/1450255290_84312.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/201557131344934.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/03/05/git-command/201557131353950.png">
+<meta property="article:published_time" content="2015-03-05T07:29:59.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="GIT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/03/05/git-command/1508326768_17043.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/03/05/git-command/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>git指令基本應用 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/03/05/git-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git指令基本應用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-05 15:29:59" itemprop="dateCreated datePublished" datetime="2015-03-05T15:29:59+08:00">2015-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/GIT/" itemprop="url" rel="index">
+                    <span itemprop="name">GIT</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/03/05/git-command/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/05/git-command/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>例如想把一資料夾納入git版控時可用</p>
+
+<p><span style="background-color:#FFFF00;">git init</span>指令</p>
+
+<p><img height="140" src="1508326768_17043.png" width="626" /></p>
+
+<p>&nbsp;</p>
+
+<p>想要從github把專案匯進電腦時會需要用到</p>
+
+<p><span style="background-color:#ffff00;">git clone</span>指令</p>
+
+<p><img height="172" src="1508312062_95181.png" width="515" /></p>
+
+<p>&nbsp;</p>
+
+<p>當程式寫完想上傳時，則會使用</p>
+
+<p><span style="background-color:#ffff00;">git status</span>指令另看一下git的標記狀態，</p>
+
+<p><img border="0" src="201535154940150.png" /></p>
+
+<p>&nbsp;</p>
+
+<p>發現有一些檔案沒被加入追蹤，則使用</p>
+
+<p><span style="background-color:#ffff00;">git add .</span>來一次加入stage狀態，</p>
+
+<p>&nbsp;</p>
+
+<p>接下來則使用 <span style="background-color:#FFFF00;">git commit</span></p>
+
+<p>(如果你是剛安裝完git第一次使用時則會出現user設定訊息)</p>
+
+<p><img border="0" src="20154250751952.png" /></p>
+
+<p>然後會進入Vim編輯器的正常模式，再按任意字母鍵進入插入模式後，</p>
+
+<p>接下來你就可以輸入註解，寫完註解後按ESC回到正常模式，</p>
+
+<p>按shift+w+q跳到指令模式，再輸入w+q+enter完成註解儲存；</p>
+
+<p>或是輸入「:」冒號跳到指令模式，再輸入w+q+enter完成註解儲存也可以。</p>
+
+<p>有關Vim指令以下請參考</p>
+
+<ul style="margin: 0px 0px 1em 30px; padding: 0px; border: 0px; font-size: 15px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 19.5px;">
+    <li style="margin: 0px 0px 0.5em; padding: 0px; border: 0px; word-wrap: break-word;"><code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:q</code>&nbsp;to quit (short for&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:quit</code>)</li>
+    <li style="margin: 0px 0px 0.5em; padding: 0px; border: 0px; word-wrap: break-word;"><code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:q!</code>&nbsp;to quit without saving (short for&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:quit!</code>)</li>
+    <li style="margin: 0px 0px 0.5em; padding: 0px; border: 0px; word-wrap: break-word;"><code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:wq</code>&nbsp;to write and quit (think write and quit)</li>
+    <li style="margin: 0px 0px 0.5em; padding: 0px; border: 0px; word-wrap: break-word;"><code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:x</code>&nbsp;to write and quit (shorter than&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:wq</code>)</li>
+    <li style="margin: 0px 0px 0.5em; padding: 0px; border: 0px; word-wrap: break-word;"><code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:qa</code>&nbsp;to quit all (short for&nbsp;<code style="margin: 0px; padding: 1px 5px; border: 0px; font-size: 13px; font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; white-space: pre-wrap; background-color: rgb(238, 238, 238);">:quitall</code>)</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>另外也可不用Vim寫註解，可用<span style="background-color:#FFFF00;">git commit -m</span> &quot;commit message&quot;指令，</p>
+
+<p>直接寫註解也可。</p>
+
+<p>如果你要利用git commit -m指令，來寫多行註解怎麼辦?</p>
+
+<p>只要在第一行結尾不要輸入雙引號，就可以繼續寫下一行，</p>
+
+<p>要結束時，最後再加上雙引號即可，如下圖紅圈處。</p>
+
+<p>藍圈的雙引號會被忽略。</p>
+
+<p><img height="130" src="1450255290_84312.png" width="885" /></p>
+
+<p>&nbsp;</p>
+
+<p>接下來再使用<span style="background-color:#ffff00;">git push</span>&nbsp;to publish your local commits，結束。</p>
+
+<p>&nbsp;</p>
+
+<p>Git reset 取消上一次的操作</p>
+
+<p><span style="background-color:#FFFF00;">git reset --hard ORIG_HEAD</span></p>
+
+<p>&nbsp;</p>
+
+<p>取消已暫存的檔案<br />
+有時候不小心將還沒修改完的檔案使用 git add 加入了 stage ，<br />
+這時候可以使用 <span style="background-color:#FFFF00;">git reset HEAD &lt;file&gt;</span> 來將這支檔案取消 stage</p>
+
+<p>&nbsp;</p>
+
+<p>取消修改過的檔案<br />
+若是我想完全放棄這次修改 (將檔案狀態回復到最新的一次 commit 時的狀態)，<br />
+我可以使用 <span style="background-color:#FFFF00;">git checkout -- &lt;file&gt;</span> 來回復這支檔案</p>
+
+<p>&nbsp;</p>
+
+<p>強制回復到上一次 commit 的版本<br />
+有時候我們想要放棄所有修改回到 commit 時的狀態，<br />
+這時候我們可以下 <span style="background-color:#FFFF00;">git reset --hard HEAD</span> 來回復，<br />
+HEAD 參數可以加上一些變化，<br />
+例如 HEAD^ 表示目前版本的上一個版本 HEAD~2 則是再上一個，<br />
+因此你可以自由的跳回去之前的狀態。</p>
+
+<p>&nbsp;</p>
+
+<p>git reset, hard 與 soft 的差異<br />
+你可能會在這邊感到疑惑，<br />
+在使用 git reset 的時候都會看到一個 soft 或是 hard 的參數，<br />
+這代表什麼樣的意義？基本上在使用 git reset 的時候，<br />
+都會把目前狀態回復到你想回復的版本，但若是不加參數的情況，<br />
+會把你做過的修改仍然保留，但是，若是加上 &mdash;soft 參數，<br />
+則會把做過的修改加入 stage ，<br />
+若是加上 hard 參數的話則是把做過的修改完全刪除，<br />
+回到那個版本原本的樣子。</p>
+
+<p>&nbsp;</p>
+
+<p><span style="background-color:#FFFF00;">git rm</span>指令</p>
+
+<p>當自己手動刪除檔案而沒移除該檔案的追蹤紀錄時遇到如下情況，</p>
+
+<p><img border="0" src="201557131344934.png" /></p>
+
+<p>代表你要使用git rm指令來移除該檔案的追蹤紀錄，</p>
+
+<p>可別以為繼續使用git add .-&gt;git commit-&gt;git push就可以成功刪除檔案與紀錄，</p>
+
+<p>範例：使用git rm DotblogsBackup/Verify.cs指令即可成功移除該紀錄</p>
+
+<p><img border="0" src="201557131353950.png" /></p>
+
+<p>這是1.9.5版的狀況，但我在2.6.x版這種形況似乎被修正了。</p>
+
+<p>&nbsp;</p>
+
+<p>現在git已經發展到2.0版了，當你第一次例如使用git status指令時，</p>
+
+<p>或是要把新的分支push上去時會發生如下警告訊息</p>
+
+<p>---------------------------------------------------------------------------------------------------------<br />
+$ git status<br />
+On branch master<br />
+Your branch is based on &#39;origin/master&#39;, but the upstream is gone.<br />
+(use &quot;git branch --unset-upstream&quot; to fixup)<br />
+nothing to commit, working directory clean</p>
+
+<p>git branch --unset-upstream</p>
+
+<p>git push --set-upstream origin master</p>
+
+<p>warning: push.default is unset; its implicit value is changing in&nbsp;<br />
+Git 2.0 from &#39;matching&#39; to &#39;simple&#39;. To squelch this message&nbsp;<br />
+and maintain the current behavior after the default changes, use:&nbsp;<br />
+&nbsp;<br />
+git config --global push.default matching<br />
+&nbsp;<br />
+To squelch this message and adopt the new behavior now, use:&nbsp;<br />
+&nbsp;<br />
+git config --global push.default simple<br />
+---------------------------------------------------------------------------------------------------------</p>
+
+<p>基本上看上面的訊息就可以解開了，不過我還不是很了解matching與simple的選擇啦，</p>
+
+<p>似乎使用git simple 比較好，而不會push 到錯的分支，</p>
+
+<p>不過Git-2.6.0版似乎又做調整了，再試試看吧。</p>
+
+<p>可參考這篇文章的解說</p>
+
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/13148066/warning-push-default-is-unset-its-implicit-value-is-changing-in-git-2-0">Warning: push.default is unset; its implicit value is changing in Git 2.0</a></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="http://gogojimmy.net/2012/02/29/git-scenario/">Git 情境劇</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://gogojimmy.net/2012/01/17/how-to-use-git-1-git-basic/">Git 教學(1) : Git 的基本使用</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/doggy8088/Learn-Git-in-30-days">Learn-Git-in-30-days</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://backlogtool.com/git-guide/tw/">連猴子都能懂的Git入門指南〜掌握版本控制</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.ithome.com.tw/news/95283">Git達人教你搞懂GitHub基礎觀念</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://git-scm.com/book/zh-tw/v1">Pro Git</a></p>
+
+<p>VIM</p>
+
+<p><a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_basic/0310vi.php">鳥哥的Linux 私房菜-- vim 程式編輯器</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://blog.winwu.today/2013/08/vim.html">我的 Vim 指令筆記</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.vixual.net/blog/archives/234">vi 與 vim 的指令整理</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor">How to exit the VIM editor?</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/GIT/" rel="tag"># GIT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/03/04/html-text-val/" rel="prev" title=".html() .text() .val() 的差別與前端html編解碼">
+      <i class="fa fa-chevron-left"></i> .html() .text() .val() 的差別與前端html編解碼
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/03/06/implicity-type/" rel="next" title="匿名型別、隱含型別與物件與集合初始設定與具名引數">
+      匿名型別、隱含型別與物件與集合初始設定與具名引數 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/03/05/git-command/";
+    this.page.identifier = "2015/03/05/git-command/";
+    this.page.title = "git指令基本應用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

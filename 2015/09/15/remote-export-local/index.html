@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="從遠端 SQL Server 把資料匯出到本地">
+<meta property="og:url" content="https://brooke2010.github.io/2015/09/15/remote-export-local/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578013861_79683.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578015459_86687.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578069253_78406.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578069945_15173.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578070294_45854.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578069965_59426.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578069973_90238.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578070945_42208.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578073027_23699.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018447_96826.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578073423_97855.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018526_44811.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018628_39004.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018819_28713.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018824_9299.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578018830_04975.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578019262_14199.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578020258_63217.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578020846_73017.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578020585_42462.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578075913_25663.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578031642_79161.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578076369_31814.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578031735_28096.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578032252_2461.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578032121_93954.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578032181_68991.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578077037_98586.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578077122_95495.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578077182_84944.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578032589_86654.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578032685_98203.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578040738_89142.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578040465_38222.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578040541_7694.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578040902_45922.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578040969_34479.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041078_1214.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041146_07285.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041273_79313.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041315_057.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041354_383.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041402_66975.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578041480_67294.png">
+<meta property="article:published_time" content="2015-09-15T04:37:54.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="SQL SERVER">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/09/15/remote-export-local/1578013861_79683.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/09/15/remote-export-local/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>從遠端 SQL Server 把資料匯出到本地 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/09/15/remote-export-local/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          從遠端 SQL Server 把資料匯出到本地
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-09-15 12:37:54" itemprop="dateCreated datePublished" datetime="2015-09-15T12:37:54+08:00">2015-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/SQL-SERVER/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL SERVER</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/09/15/remote-export-local/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/15/remote-export-local/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>以下介紹從遠端 SQL Server 把資料匯出到本地的方法，</p>
+
+<p>用「Generate and Publish Scripts Wizard」、「SSDT」、「SQLDumper」</p>
+
+<p>script 的方式較能閃避因權限而被阻擋問題；</p>
+
+<p>而用「Data-tier Application」、「SQL Server 匯入和匯出精靈」，</p>
+
+<p>則會較常遇到因權限而被阻擋問題。</p>
+
+<p>但以上五種方式沒有絕對好壞，而是看應用在什麼場合。</p>
+
+<p>&nbsp;</p>
+
+<p>準備一範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">DATABASE</span> MYDATABASE<span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">USE</span> MYDATABASE<span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> TABLE_NAME <span style="color:#808030; ">(</span>
+    id_a <span style="color:#800000; font-weight:bold; ">INT</span> <span style="color:#800000; font-weight:bold; ">NULL</span>
+   <span style="color:#808030; ">,</span>name_a NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">50</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span>
+<span style="color:#808030; ">)</span>
+
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TABLE_NAME <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;Tom&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TABLE_NAME <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;Bob&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TABLE_NAME <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;Tim&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2020-01-03 01:35:10 UTC -->
+
+<p>&nbsp;</p>
+
+<p>一、Generate Scripts&nbsp;(Generate and Publish Scripts Wizard)</p>
+
+<p>此範例示範從遠端把 MYDATABASE 資料庫以 script 方式產出，爾後利用該 script 來達到還原資料庫的目地。</p>
+
+<p><img height="702" src="1578013861_79683.png" width="707" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="613" src="1578015459_86687.png" width="716" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="617" src="1578069253_78406.png" width="718" /></p>
+
+<p>&nbsp;</p>
+
+<p>每一張 Table、View、Stored Procedures 都可算是一個 object。</p>
+
+<p><img height="612" src="1578069945_15173.png" width="715" /></p>
+
+<p>&nbsp;</p>
+
+<p>進階設定項目如下，其中一項常被設定項目是「Types of data to script」，</p>
+
+<p>你可以設定只產生 schema script 是 data script 或兩者皆要。</p>
+
+<p><img height="839" src="1578070294_45854.png" width="480" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="612" src="1578069965_59426.png" width="715" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="613" src="1578069973_90238.png" width="715" /></p>
+
+<p>&nbsp;</p>
+
+<p>產生出的 script 內容如下</p>
+
+<p><img height="837" src="1578070945_42208.png" width="1586" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、SQL Server Data Tools (SSDT)</p>
+
+<p>此範例利用&nbsp;SSDT 從遠端把 MYDATABASE 資料庫以 script 方式產出，爾後利用該 script 來達到還原資料庫的目地。</p>
+
+<p>現在 VS2019 已把 SSDT 整合進去了，不用獨立安裝。</p>
+
+<p>&nbsp;</p>
+
+<p>在 server Explorer 裡</p>
+
+<p><img height="161" src="1578073027_23699.png" width="455" /></p>
+
+<p>&nbsp;</p>
+
+<p>於 Data Connections 去連到來源&nbsp;server 與目地資料庫</p>
+
+<p><img height="276" src="1578018447_96826.png" width="506" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="335" src="1578073423_97855.png" width="505" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="631" src="1578018526_44811.png" width="556" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="409" src="1578018628_39004.png" width="487" /></p>
+
+<p>&nbsp;</p>
+
+<p>可設定匯出筆數上限</p>
+
+<p><img height="154" src="1578018819_28713.png" width="368" /></p>
+
+<p>&nbsp;</p>
+
+<p>可選擇直接產生 script</p>
+
+<p><img height="159" src="1578018824_9299.png" width="383" /></p>
+
+<p>&nbsp;</p>
+
+<p>或是產生 script 檔</p>
+
+<p><img height="154" src="1578018830_04975.png" width="446" /></p>
+
+<p>&nbsp;</p>
+
+<p>使用直接產生 script 方式的內容為</p>
+
+<p><img height="123" src="1578019262_14199.png" width="562" /></p>
+
+<p>&nbsp;</p>
+
+<p>小結：</p>
+
+<p>SSDT 只能針對一張一張 table 去產生 script 而不能整批處理。</p>
+
+<p>&nbsp;</p>
+
+<p>三、SQLDumper</p>
+
+<p>利用&nbsp;SQLDumper 從遠端把 MYDATABASE 資料庫以 script 方式產出，爾後利用該 script 來達到還原資料庫的目地。</p>
+
+<p>SQLDumper 他幫我完成了許多工作，我非常感激他，目前還可使用，</p>
+
+<p>但 SQLDumper 已不會再有人維護了，故不推薦。</p>
+
+<p>下圖設定請自行參考。</p>
+
+<p><img height="644" src="1578020258_63217.png" width="834" /></p>
+
+<p>一個絕版的軟體，備份檔如右&nbsp;<a target="_blank" rel="noopener" href="https://1drv.ms/u/s!Au3E0pOlHdyLhHZie7nS3ChFBmW0?e=eESLPd">SQLDumper</a></p>
+
+<p>&nbsp;</p>
+
+<p>四、Data-tier Application (製作&nbsp;.bacpac 檔，與還原 .bacpac 檔 )</p>
+
+<p>利用&nbsp;Data-tier Application&nbsp;對遠端的來源資料庫 (MYDATABASE) 製作&nbsp;.bacpac 檔，</p>
+
+<p>爾後利用該 .bacpac 檔來達到還原資料庫的目地。</p>
+
+<p>&nbsp;</p>
+
+<p>針對要製作 .bacpac 檔的來源資料庫，請使用「Export Data-tier Application」選項</p>
+
+<p><img height="715" src="1578020846_73017.png" width="724" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="739" src="1578020585_42462.png" width="824" /></p>
+
+<p>&nbsp;</p>
+
+<p>指定 .bacpac 檔所要儲存的路徑</p>
+
+<p><img height="739" src="1578075913_25663.png" width="825" /></p>
+
+<p>&nbsp;</p>
+
+<p>進階選項可選那幾張表要被匯出</p>
+
+<p><img height="742" src="1578031642_79161.png" width="826" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="742" src="1578076369_31814.png" width="825" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="744" src="1578031735_28096.png" width="828" /></p>
+
+<p>&nbsp;</p>
+
+<p>完成後，將產生一個 .bacpac 檔</p>
+
+<p><img height="83" src="1578032252_2461.png" width="80" /></p>
+
+<p>&nbsp;</p>
+
+<p>接下來，還原 .bacpac 檔，來達到還原資料庫的目地。</p>
+
+<p>首先，在目地端 server，對 Database 資料夾，請使用「Import Data-tier Application」選項</p>
+
+<p><img height="316" src="1578032121_93954.png" width="379" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="694" src="1578032181_68991.png" width="828" /></p>
+
+<p>&nbsp;</p>
+
+<p>匯入剛所製作的 .bacpac 檔</p>
+
+<p><img height="691" src="1578077037_98586.png" width="828" /></p>
+
+<p>&nbsp;</p>
+
+<p>指定還原的資料庫名稱(通常使用原來的資料庫名稱即可)，</p>
+
+<p>與決定其所產生的&nbsp;.mdf .ldf 檔要放在何處。</p>
+
+<p><img height="692" src="1578077122_95495.png" width="825" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="693" src="1578077182_84944.png" width="825" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="691" src="1578032589_86654.png" width="830" /></p>
+
+<p>&nbsp;</p>
+
+<p>完成後，將於目地 server 產生名為 MYDATABASE 資料庫</p>
+
+<p><img height="305" src="1578032685_98203.png" width="260" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、SQL Server 匯入和匯出精靈</p>
+
+<p>利用「SQL Server 匯入和匯出精靈」將遠端的來源資料庫 (MYDATABASE) ，直接匯到特定 server 上(不一定要在本地端)。</p>
+
+<p>&nbsp;</p>
+
+<p>選擇「Export Data」選項，開啟「SQL Server 匯入和匯出精靈」</p>
+
+<p><img height="591" src="1578040738_89142.png" width="720" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="546" src="1578040465_38222.png" width="638" /></p>
+
+<p>&nbsp;</p>
+
+<p>選擇資料來源型態</p>
+
+<p><img height="552" src="1578040541_7694.png" width="640" /></p>
+
+<p>&nbsp;</p>
+
+<p>指定來源</p>
+
+<p><img height="551" src="1578040902_45922.png" width="640" /></p>
+
+<p>&nbsp;</p>
+
+<p>選擇資料目地型態</p>
+
+<p><img height="546" src="1578040969_34479.png" width="636" /></p>
+
+<p>&nbsp;</p>
+
+<p>指定目地。注意，目地資料庫 (MYDATABASE) 需存在，如沒有，請先新增一個。</p>
+
+<p><img height="548" src="1578041078_1214.png" width="639" /></p>
+
+<p>&nbsp;</p>
+
+<p>可以選擇匯出所有 table，或是有條件限制匯出。</p>
+
+<p><img height="544" src="1578041146_07285.png" width="636" /></p>
+
+<p>&nbsp;</p>
+
+<p>可以選擇要匯出那幾張 table，也可以細部調整 column 的映對方式。</p>
+
+<p><img height="554" src="1578041273_79313.png" width="1236" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="548" src="1578041315_057.png" width="636" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="548" src="1578041354_383.png" width="636" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="549" src="1578041402_66975.png" width="636" /></p>
+
+<p>&nbsp;</p>
+
+<p>完成後，可以發現目地資料庫裡的資料也都有了。</p>
+
+<p><img height="445" src="1578041480_67294.png" width="531" /></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sql/ssms/scripting/generate-and-publish-scripts-wizard?view=sql-server-ver15">Generate and Publish Scripts Wizard</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver15">Data-tier Applications</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://blog.yowko.com/sql-server-dac/">你認識 SQL Server 的資料層應用程式(Data-tier Applications - DAC)嗎?</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/SQL-SERVER/" rel="tag"># SQL SERVER</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/08/28/DropDownList-DropDownListFor/" rel="prev" title="DropDownList與DropDownListFor的用法">
+      <i class="fa fa-chevron-left"></i> DropDownList與DropDownListFor的用法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/10/06/BitmapEncoder-BitmapDecoder/" rel="next" title="BitmapEncoder與BitmapDecoder的使用">
+      BitmapEncoder與BitmapDecoder的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/09/15/remote-export-local/";
+    this.page.identifier = "2015/09/15/remote-export-local/";
+    this.page.title = "從遠端 SQL Server 把資料匯出到本地";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

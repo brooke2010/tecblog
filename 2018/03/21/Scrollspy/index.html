@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrollspy (滚动监听)">
+<meta property="og:url" content="https://brooke2010.github.io/2018/03/21/Scrollspy/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-21T02:01:16.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2018/03/21/Scrollspy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Scrollspy (滚动监听) | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2018/03/21/Scrollspy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Scrollspy (滚动监听)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-03-21 10:01:16" itemprop="dateCreated datePublished" datetime="2018-03-21T10:01:16+08:00">2018-03-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/Bootstrap/" itemprop="url" rel="index">
+                    <span itemprop="name">Bootstrap</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2018/03/21/Scrollspy/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/21/Scrollspy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>Scrollspy 通常跟 nav 或 navbar 或 list group 結合呈現，</p>
+
+<p>請參考以下以 navbar 呈現的 Scrollspy 範例。</p>
+
+<pre style="background:#fff;color:#000">
+&lt;!<span style="background:#900;color:#fff">d</span><span style="background:#900;color:#fff">o</span><span style="background:#900;color:#fff">c</span><span style="background:#900;color:#fff">t</span><span style="background:#900;color:#fff">y</span><span style="background:#900;color:#fff">p</span><span style="background:#900;color:#fff">e </span><span style="background:#900;color:#fff">h</span><span style="background:#900;color:#fff">t</span><span style="background:#900;color:#fff">m</span><span style="background:#900;color:#fff">l</span>&gt;
+&lt;html lang=<span style="color:#00a33f">&quot;en&quot;</span>&gt;
+&lt;head&gt;
+    <span style="color:#919191">&lt;!-- Required meta tags --&gt;</span>
+    &lt;meta charset=<span style="color:#00a33f">&quot;utf-8&quot;</span>&gt;
+    &lt;meta name=<span style="color:#00a33f">&quot;viewport&quot;</span> content=<span style="color:#00a33f">&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;</span>&gt;
+
+    <span style="color:#919191">&lt;!-- Bootstrap CSS --&gt;</span>
+    &lt;link rel=<span style="color:#00a33f">&quot;stylesheet&quot;</span> href=<span style="color:#00a33f">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;
+
+    &lt;style&gt;
+        body {
+            position: relative;
+        }
+
+        .scrollspy-example {
+            height: 200px;
+            overflow: auto;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body data-spy=<span style="color:#00a33f">&quot;scroll&quot;</span> data-target=<span style="color:#00a33f">&quot;<span style="background-color:#FFFF00;">#bd-example</span>&quot;</span>&gt;
+    &lt;div class=<span style="color:#00a33f">&quot;<span style="background-color:#FFFF00;">bd-example</span>&quot;</span>&gt;
+        &lt;nav id=<span style="color:#00a33f">&quot;<span style="background-color:#00FFFF;">navbar-example2</span>&quot;</span> class=<span style="color:#00a33f">&quot;navbar navbar-light bg-light&quot;</span>&gt;
+            &lt;a class=<span style="color:#00a33f">&quot;navbar-brand&quot;</span> href=<span style="color:#00a33f">&quot;#&quot;</span>&gt;Navbar&lt;/a&gt;
+            &lt;ul class=<span style="color:#00a33f">&quot;nav nav-pills&quot;</span>&gt;
+                &lt;li class=<span style="color:#00a33f">&quot;nav-item&quot;</span>&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link active&quot;</span> href=<span style="color:#00a33f">&quot;#fat&quot;</span>&gt;@fat&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=<span style="color:#00a33f">&quot;nav-item&quot;</span>&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link&quot;</span> href=<span style="color:#00a33f">&quot;#mdo&quot;</span>&gt;@mdo&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=<span style="color:#00a33f">&quot;nav-item dropdown&quot;</span>&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link dropdown-toggle&quot;</span> data-toggle=<span style="color:#00a33f">&quot;dropdown&quot;</span> href=<span style="color:#00a33f">&quot;#&quot;</span> role=<span style="color:#00a33f">&quot;button&quot;</span> aria-haspopup=<span style="color:#00a33f">&quot;true&quot;</span> aria-expanded=<span style="color:#00a33f">&quot;false&quot;</span>&gt;Dropdown&lt;/a&gt;
+                    &lt;div class=<span style="color:#00a33f">&quot;dropdown-menu&quot;</span>&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;dropdown-item&quot;</span> href=<span style="color:#00a33f">&quot;#one&quot;</span>&gt;one&lt;/a&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;dropdown-item&quot;</span> href=<span style="color:#00a33f">&quot;#two&quot;</span>&gt;two&lt;/a&gt;
+                        &lt;div role=<span style="color:#00a33f">&quot;separator&quot;</span> class=<span style="color:#00a33f">&quot;dropdown-divider&quot;</span>&gt;&lt;/div&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;dropdown-item&quot;</span> href=<span style="color:#00a33f">&quot;#three&quot;</span>&gt;three&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+        &lt;div data-spy=<span style="color:#00a33f">&quot;scroll&quot;</span> data-target=<span style="color:#00a33f">&quot;<span style="background-color:#00FFFF;">#navbar-example2</span>&quot;</span> data-offset=<span style="color:#00a33f">&quot;0&quot;</span> class=<span style="color:#00a33f">&quot;scrollspy-example&quot;</span>&gt;
+            &lt;h4 id=<span style="color:#00a33f">&quot;fat&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;@fat&lt;/h4&gt;
+            &lt;p&gt;Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney&#39;s photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven&#39;t heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.&lt;/p&gt;
+            &lt;h4 id=<span style="color:#00a33f">&quot;mdo&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;@mdo&lt;/h4&gt;
+            &lt;p&gt;Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney&#39;s vero. Cupidatat four loko nisi, ea helvetica nulla carles. Tattooed cosby sweater food truck, mcsweeney&#39;s quis non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non aesthetic exercitation quis gentrify. Brooklyn adipisicing craft beer vice keytar deserunt.&lt;/p&gt;
+            &lt;h4 id=<span style="color:#00a33f">&quot;one&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;one&lt;/h4&gt;
+            &lt;p&gt;Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore single-origin coffee in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.&lt;/p&gt;
+            &lt;h4 id=<span style="color:#00a33f">&quot;two&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;two&lt;/h4&gt;
+            &lt;p&gt;In incididunt echo park, officia deserunt mcsweeney&#39;s proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven&#39;t heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.&lt;/p&gt;
+            &lt;h4 id=<span style="color:#00a33f">&quot;three&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;three&lt;/h4&gt;
+            &lt;p&gt;Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney&#39;s photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven&#39;t heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.&lt;/p&gt;
+            &lt;p&gt;
+                Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven&#39;t heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    <span style="color:#919191">&lt;!-- Optional JavaScript --&gt;</span>
+    <span style="color:#919191">&lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;</span>
+    &lt;script src=<span style="color:#00a33f">&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+    &lt;script src=<span style="color:#00a33f">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+    &lt;script src=<span style="color:#00a33f">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>&nbsp;</p>
+
+<p>另一範例&nbsp;nested nav</p>
+
+<pre style="background:#fff;color:#000">
+&lt;!<span style="background:#900;color:#fff">d</span><span style="background:#900;color:#fff">o</span><span style="background:#900;color:#fff">c</span><span style="background:#900;color:#fff">t</span><span style="background:#900;color:#fff">y</span><span style="background:#900;color:#fff">p</span><span style="background:#900;color:#fff">e </span><span style="background:#900;color:#fff">h</span><span style="background:#900;color:#fff">t</span><span style="background:#900;color:#fff">m</span><span style="background:#900;color:#fff">l</span>&gt;
+&lt;html lang=<span style="color:#00a33f">&quot;en&quot;</span>&gt;
+&lt;head&gt;
+    <span style="color:#919191">&lt;!-- Required meta tags --&gt;</span>
+    &lt;meta charset=<span style="color:#00a33f">&quot;utf-8&quot;</span>&gt;
+    &lt;meta name=<span style="color:#00a33f">&quot;viewport&quot;</span> content=<span style="color:#00a33f">&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;</span>&gt;
+
+    <span style="color:#919191">&lt;!-- Bootstrap CSS --&gt;</span>
+    &lt;link rel=<span style="color:#00a33f">&quot;stylesheet&quot;</span> href=<span style="color:#00a33f">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;
+
+    &lt;style&gt;
+        body {
+            position: relative;
+        }
+
+        .scrollspy-example-3 {
+            height: 370px;
+            overflow: auto;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body data-spy=<span style="color:#00a33f">&quot;scroll&quot;</span> data-target=<span style="color:#00a33f">&quot;#bd-example&quot;</span>&gt;
+    &lt;div class=<span style="color:#00a33f">&quot;row bd-example&quot;</span>&gt;
+
+        &lt;div class=<span style="color:#00a33f">&quot;col-4&quot;</span>&gt;
+            &lt;nav id=<span style="color:#00a33f">&quot;navbar-example3&quot;</span> class=<span style="color:#00a33f">&quot;navbar navbar-light bg-light flex-column&quot;</span>&gt;
+                &lt;a class=<span style="color:#00a33f">&quot;navbar-brand&quot;</span> href=<span style="color:#00a33f">&quot;#&quot;</span>&gt;Navbar&lt;/a&gt;
+                &lt;nav class=<span style="color:#00a33f">&quot;nav nav-pills flex-column&quot;</span>&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link&quot;</span> href=<span style="color:#00a33f">&quot;#item-1&quot;</span>&gt;Item 1&lt;/a&gt;
+                    &lt;nav class=<span style="color:#00a33f">&quot;nav nav-pills flex-column&quot;</span>&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;nav-link ml-3 my-1&quot;</span> href=<span style="color:#00a33f">&quot;#item-1-1&quot;</span>&gt;Item 1-1&lt;/a&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;nav-link ml-3 my-1&quot;</span> href=<span style="color:#00a33f">&quot;#item-1-2&quot;</span>&gt;Item 1-2&lt;/a&gt;
+                    &lt;/nav&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link&quot;</span> href=<span style="color:#00a33f">&quot;#item-2&quot;</span>&gt;Item 2&lt;/a&gt;
+                    &lt;a class=<span style="color:#00a33f">&quot;nav-link active&quot;</span> href=<span style="color:#00a33f">&quot;#item-3&quot;</span>&gt;Item 3&lt;/a&gt;
+                    &lt;nav class=<span style="color:#00a33f">&quot;nav nav-pills flex-column&quot;</span>&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;nav-link ml-3 my-1&quot;</span> href=<span style="color:#00a33f">&quot;#item-3-1&quot;</span>&gt;Item 3-1&lt;/a&gt;
+                        &lt;a class=<span style="color:#00a33f">&quot;nav-link ml-3 my-1&quot;</span> href=<span style="color:#00a33f">&quot;#item-3-2&quot;</span>&gt;Item 3-2&lt;/a&gt;
+                    &lt;/nav&gt;
+                &lt;/nav&gt;
+            &lt;/nav&gt;
+        &lt;/div&gt;
+
+        &lt;div class=<span style="color:#00a33f">&quot;col-8&quot;</span>&gt;
+            &lt;div data-spy=<span style="color:#00a33f">&quot;scroll&quot;</span> data-target=<span style="color:#00a33f">&quot;#navbar-example3&quot;</span> data-offset=<span style="color:#00a33f">&quot;0&quot;</span> class=<span style="color:#00a33f">&quot;scrollspy-example-3&quot;</span>&gt;
+                &lt;h4 id=<span style="color:#00a33f">&quot;item-1&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 1&lt;/h4&gt;
+                &lt;p&gt;Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna ullamco eu. Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum incididunt tempor eu consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in. Aliqua et aliqua officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt mollit dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit cupidatat commodo velit ut eiusmod cupidatat elit dolore.&lt;/p&gt;
+                &lt;h5 id=<span style="color:#00a33f">&quot;item-1-1&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 1-1&lt;/h5&gt;
+                &lt;p&gt;Amet tempor mollit aliquip pariatur excepteur commodo do ea cillum commodo Lorem et occaecat elit qui et. Aliquip labore ex ex esse voluptate occaecat Lorem ullamco deserunt. Aliqua cillum excepteur irure consequat id quis ea. Sit proident ullamco aute magna pariatur nostrud labore. Reprehenderit aliqua commodo eiusmod aliquip est do duis amet proident magna consectetur consequat eu commodo fugiat non quis. Enim aliquip exercitation ullamco adipisicing voluptate excepteur minim exercitation minim minim commodo adipisicing exercitation officia nisi adipisicing. Anim id duis qui consequat labore adipisicing sint dolor elit cillum anim et fugiat.&lt;/p&gt;
+                &lt;h5 id=<span style="color:#00a33f">&quot;item-1-2&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 2-2&lt;/h5&gt;
+                &lt;p&gt;Cillum nisi deserunt magna eiusmod qui eiusmod velit voluptate pariatur laborum sunt enim. Irure laboris mollit consequat incididunt sint et culpa culpa incididunt adipisicing magna magna occaecat. Nulla ipsum cillum eiusmod sint elit excepteur ea labore enim consectetur in labore anim. Proident ullamco ipsum esse elit ut Lorem eiusmod dolor et eiusmod. Anim occaecat nulla in non consequat eiusmod velit incididunt.&lt;/p&gt;
+                &lt;h4 id=<span style="color:#00a33f">&quot;item-2&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 2&lt;/h4&gt;
+                &lt;p&gt;Quis magna Lorem anim amet ipsum do mollit sit cillum voluptate ex nulla tempor. Laborum consequat non elit enim exercitation cillum aliqua consequat id aliqua. Esse ex consectetur mollit voluptate est in duis laboris ad sit ipsum anim Lorem. Incididunt veniam velit elit elit veniam Lorem aliqua quis ullamco deserunt sit enim elit aliqua esse irure. Laborum nisi sit est tempor laborum mollit labore officia laborum excepteur commodo non commodo dolor excepteur commodo. Ipsum fugiat ex est consectetur ipsum commodo tempor sunt in proident.&lt;/p&gt;
+                &lt;h4 id=<span style="color:#00a33f">&quot;item-3&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 3&lt;/h4&gt;
+                &lt;p&gt;Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.&lt;/p&gt;
+                &lt;h5 id=<span style="color:#00a33f">&quot;item-3-1&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 3-1&lt;/h5&gt;
+                &lt;p&gt;Deserunt quis elit Lorem eiusmod amet enim enim amet minim Lorem proident nostrud. Ea id dolore anim exercitation aute fugiat labore voluptate cillum do laboris labore. Ex velit exercitation nisi enim labore reprehenderit labore nostrud ut ut. Esse officia sunt duis aliquip ullamco tempor eiusmod deserunt irure nostrud irure. Ullamco proident veniam laboris ea consectetur magna sunt ex exercitation aliquip minim enim culpa occaecat exercitation. Est tempor excepteur aliquip laborum consequat do deserunt laborum esse eiusmod irure proident ipsum esse qui.&lt;/p&gt;
+                &lt;h5 id=<span style="color:#00a33f">&quot;item-3-2&quot;</span> style=<span style="color:#00a33f">&quot;&quot;</span>&gt;Item 3-2&lt;/h5&gt;
+                &lt;p&gt;Labore sit culpa commodo elit adipisicing sit aliquip elit proident voluptate minim mollit nostrud aute reprehenderit do. Mollit excepteur eu Lorem ipsum anim commodo sint labore Lorem in exercitation velit incididunt. Occaecat consectetur nisi in occaecat proident minim enim sunt reprehenderit exercitation cupidatat et do officia. Aliquip consequat ad labore labore mollit ut amet. Sit pariatur tempor proident in veniam culpa aliqua excepteur elit magna fugiat eiusmod amet officia.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    <span style="color:#919191">&lt;!-- Optional JavaScript --&gt;</span>
+    <span style="color:#919191">&lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;</span>
+    &lt;script src=<span style="color:#00a33f">&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+    &lt;script src=<span style="color:#00a33f">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+    &lt;script src=<span style="color:#00a33f">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js&quot;</span> integrity=<span style="color:#00a33f">&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot;</span> crossorigin=<span style="color:#00a33f">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/Bootstrap/" rel="tag"># Bootstrap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/02/23/pointer-events/" rel="prev" title="pointer-events">
+      <i class="fa fa-chevron-left"></i> pointer-events
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/03/22/Collapsing-margins/" rel="next" title="Collapsing margins">
+      Collapsing margins <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2018/03/21/Scrollspy/";
+    this.page.identifier = "2018/03/21/Scrollspy/";
+    this.page.title = "Scrollspy (滚动监听)";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

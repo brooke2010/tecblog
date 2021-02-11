@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE">
+<meta property="og:url" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465205721_96735.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465205809_45402.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465205900_10985.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465208679_96407.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465208730_73679.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465208763_14625.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465209367_66851.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465209411_50159.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465209599_04385.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465209661_22471.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465209762_84978.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465210340_69025.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465346451_63262.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465346622_96008.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465348159_70196.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465348234_17796.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465351122_58642.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465351200_35799.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465351812_69869.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465351856_29941.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465352278_65986.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465352320_34584.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465352772_54362.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465353318_18484.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465354472_48599.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465355110_30022.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465355468_57211.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465355568_97316.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465356092_63127.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465356528_46655.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1466572350_12903.png">
+<meta property="article:published_time" content="2016-06-06T01:36:17.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="T-SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/06/06/t-sql-select1/1465205721_96735.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/06/06/t-sql-select1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/06/06/t-sql-select1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-06-06 09:36:17" itemprop="dateCreated datePublished" datetime="2016-06-06T09:36:17+08:00">2016-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/T-SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">T-SQL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/06/06/t-sql-select1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/06/t-sql-select1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、select基本輸出</p>
+
+<p>語法：SELECT expression</p>
+
+<p>(1)、輸出字串</p>
+
+<p><img height="113" src="1465205721_96735.png" width="172" /></p>
+
+<p>(2)、輸出運算式</p>
+
+<p><img height="110" src="1465205809_45402.png" width="148" /></p>
+
+<p>(3)、同時輸出多個項目</p>
+
+<p><img height="117" src="1465205900_10985.png" width="257" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、常用的數學函數</p>
+
+<p>(1)、四捨五入</p>
+
+<p>語法：ROUND(numeric_expression , length)</p>
+
+<p>(a)、四捨五入到小數點以下第一位</p>
+
+<p><img height="117" src="1465208679_96407.png" width="191" /></p>
+
+<p>(b)、四捨五入到整數第一位</p>
+
+<p><img height="116" src="1465208730_73679.png" width="197" /></p>
+
+<p>(c)、四捨五入到整數第二位</p>
+
+<p><img height="119" src="1465208763_14625.png" width="201" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、天花板(CEILING)與地板(FLOOR)函數</p>
+
+<p>(a)、(CEILING)小數以下無條件進位至整數</p>
+
+<p><img height="115" src="1465209367_66851.png" width="189" /></p>
+
+<p>(b)、(FLOOR)小數以下無條件捨去至整數</p>
+
+<p><img height="117" src="1465209411_50159.png" width="175" /></p>
+
+<p>&nbsp;</p>
+
+<p>(3)、開平方根(SQRT)與平方(SQUARE)函數</p>
+
+<p>(a)、開方</p>
+
+<p><img height="113" src="1465209599_04385.png" width="142" /></p>
+
+<p>(b)、平方</p>
+
+<p><img height="113" src="1465209661_22471.png" width="152" /></p>
+
+<p>(4)、絕對值函數</p>
+
+<p><img height="114" src="1465209762_84978.png" width="142" /></p>
+
+<p>&nbsp;</p>
+
+<p>三、常用的轉換函數</p>
+
+<p>(1)、資料型態轉換函數CAST與CONVERT</p>
+
+<p>語法：</p>
+
+<p>CAST (expression AS data_type)</p>
+
+<p>CONVERT (data_type , expression)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">CAST</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">90</span> <span style="color:#800000; font-weight:bold; ">AS</span> <span style="color:#800000; font-weight:bold; ">VARCHAR</span><span style="color:#808030; ">)</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">CAST</span><span style="color:#808030; ">]</span>
+</pre>
+
+<p>其結果相等於</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#bb7977; font-weight:bold; ">CONVERT</span><span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">VARCHAR</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">90</span><span style="color:#808030; ">)</span> <span style="color:#808030; ">[</span><span style="color:#bb7977; font-weight:bold; ">CONVERT</span><span style="color:#808030; ">]</span>
+</pre>
+
+<p><img height="202" src="1465210340_69025.png" width="310" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、具有固定有效位數和小數位數的數值資料類型與CAST方法配合</p>
+
+<p><img height="116" src="1465346451_63262.png" width="296" /></p>
+
+<p>&nbsp;</p>
+
+<p>四、常用的日期函數</p>
+
+<p>(1)、取得目前系統日期時間函數</p>
+
+<p><img height="113" src="1465346622_96008.png" width="177" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、取得日期的部份資訊</p>
+
+<p>語法：</p>
+
+<p>DATEPART( datepart , date )</p>
+
+<p>(a)、datepart引數</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+    <tbody>
+        <tr>
+            <td><strong>date的部份</strong></td>
+            <td><strong>縮寫</strong></td>
+        </tr>
+        <tr>
+            <td>年(year)</td>
+            <td>yy或yyyy</td>
+        </tr>
+        <tr>
+            <td>季(quarter)</td>
+            <td>qq或q</td>
+        </tr>
+        <tr>
+            <td>月(month)</td>
+            <td>mm或m</td>
+        </tr>
+        <tr>
+            <td>日(day)</td>
+            <td>dd或d</td>
+        </tr>
+        <tr>
+            <td>一年中的第幾週(week)</td>
+            <td>wk或ww</td>
+        </tr>
+        <tr>
+            <td>一週中的第幾天(weekday)</td>
+            <td>dw</td>
+        </tr>
+        <tr>
+            <td>時(hour)</td>
+            <td>hh</td>
+        </tr>
+        <tr>
+            <td>分(minute)</td>
+            <td>mi或n</td>
+        </tr>
+        <tr>
+            <td>秒(second)</td>
+            <td>ss或s</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>(b)、date引數</p>
+
+<p>date可以為time、date、smalldatetime、datetime、datetime2、datetimeoffset</p>
+
+<p>&nbsp;</p>
+
+<p>(c)、範例</p>
+
+<p>只取日期中的年的部份</p>
+
+<p><img height="113" src="1465348159_70196.png" width="334" /></p>
+
+<p>只取日期中的月的部份</p>
+
+<p><img height="114" src="1465348234_17796.png" width="326" /></p>
+
+<p>&nbsp;</p>
+
+<p>(3)、日期累加函數</p>
+
+<p>語法：</p>
+
+<p>DATEADD(datepart , number , date)</p>
+
+<p>(a)、datepart引數</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+    <tbody>
+        <tr>
+            <td><strong>date的部份</strong></td>
+            <td><strong>縮寫</strong></td>
+        </tr>
+        <tr>
+            <td>年(year)</td>
+            <td>yy或yyyy</td>
+        </tr>
+        <tr>
+            <td>季(quarter)</td>
+            <td>qq或q</td>
+        </tr>
+        <tr>
+            <td>月(month)</td>
+            <td>mm或m</td>
+        </tr>
+        <tr>
+            <td>日(day)</td>
+            <td>dd或d</td>
+        </tr>
+        <tr>
+            <td>一年中的第幾週(week)</td>
+            <td>wk或ww</td>
+        </tr>
+        <tr>
+            <td>一週中的第幾天(weekday)</td>
+            <td>dw</td>
+        </tr>
+        <tr>
+            <td>時(hour)</td>
+            <td>hh</td>
+        </tr>
+        <tr>
+            <td>分(minute)</td>
+            <td>mi或n</td>
+        </tr>
+        <tr>
+            <td>秒(second)</td>
+            <td>ss或s</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>(b)、number引數</p>
+
+<p>指要累加的數量</p>
+
+<p>&nbsp;</p>
+
+<p>(c)、date引數</p>
+
+<p>date可以為time、date、smalldatetime、datetime、datetime2、datetimeoffset</p>
+
+<p>&nbsp;</p>
+
+<p>(d)、範例</p>
+
+<p>將原本日期累加一年</p>
+
+<p><img height="123" src="1465351122_58642.png" width="352" /></p>
+
+<p>將原本日期減三個月</p>
+
+<p><img height="120" src="1465351200_35799.png" width="356" /></p>
+
+<p>&nbsp;</p>
+
+<p>(4)、日期差異函數</p>
+
+<p>語法：</p>
+
+<p>DATEDIFF(datepart , startdate&nbsp;, enddate)</p>
+
+<p>其算法為enddate減掉startdate</p>
+
+<p>&nbsp;</p>
+
+<p>(a)、範例</p>
+
+<p>計算兩日期在「年」部份的差異，差一年</p>
+
+<p><img height="123" src="1465351812_69869.png" width="372" /></p>
+
+<p>計算兩日期在「月」部份的差異，差十三個月</p>
+
+<p><img height="122" src="1465351856_29941.png" width="365" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、常用的字串函數</p>
+
+<p>(1)、大小寫轉換函數</p>
+
+<p>轉成大寫</p>
+
+<p><img height="117" src="1465352278_65986.png" width="174" /></p>
+
+<p>轉成小寫</p>
+
+<p><img height="117" src="1465352320_34584.png" width="177" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、計算字串長度函數與字串所佔的空間</p>
+
+<p>「ABC」字串長度為3</p>
+
+<p><img height="115" src="1465352772_54362.png" width="158" /></p>
+
+<p>中文字「我」所佔的byte數為一個字2byte</p>
+
+<p><img height="116" src="1465353318_18484.png" width="199" /></p>
+
+<p>&nbsp;</p>
+
+<p>(3)、取得一個子字串在另一個字串起始位置</p>
+
+<p>語法：CHARINDEX(pattem , source [ , start_location&nbsp;]&nbsp;)</p>
+
+<p>pattem：指定搜尋樣本，可以是字元或是字串</p>
+
+<p>source：來源字串</p>
+
+<p>start_location：指定從何處開始搜尋，起始值為1，代表從第一個字開始找。</p>
+
+<p>(a)、範例</p>
+
+<p>從ABCDE字串中找尋B字元的位置為2</p>
+
+<p><img height="111" src="1465354472_48599.png" width="248" /></p>
+
+<p>從來源字串的第三個字開始找尋A字元的位置為5</p>
+
+<p><img height="114" src="1465355110_30022.png" width="274" /></p>
+
+<p>&nbsp;</p>
+
+<p>(4)、取字串的左右邊的子字串</p>
+
+<p>從左邊開始取兩個字元</p>
+
+<p><img height="113" src="1465355468_57211.png" width="186" /></p>
+
+<p>從右邊開始取兩個字元</p>
+
+<p><img height="113" src="1465355568_97316.png" width="195" /></p>
+
+<p>&nbsp;</p>
+
+<p>(5)、取一個字串中的子字串</p>
+
+<p>語法：</p>
+
+<p>SUBSTRING(source&nbsp;, start_location , length )</p>
+
+<p>(a)、範例</p>
+
+<p>從ABCDE字串中的第二個位置取出三個字元</p>
+
+<p><img height="114" src="1465356092_63127.png" width="247" /></p>
+
+<p>&nbsp;</p>
+
+<p>(6)、重複字串函數</p>
+
+<p>其功能為將指定字串重複N次，如下範例</p>
+
+<p>目地為把「*」字元重複三次</p>
+
+<p><img height="116" src="1465356528_46655.png" width="202" /></p>
+
+<p>&nbsp;</p>
+
+<p>(7)、取代函數</p>
+
+<p>語法：</p>
+
+<p>REPLACE ( string_expression , string_pattern , string_replacement )</p>
+
+<p>例如將小寫的a取代成大寫的A</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">REPLACE</span><span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;abcd&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;a&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;A&#39;</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p><img height="118" src="1466572350_12903.png" width="288" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/T-SQL/" rel="tag"># T-SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/05/t-sql-date-format/" rel="prev" title="T-SQL如何產生特定日期格式">
+      <i class="fa fa-chevron-left"></i> T-SQL如何產生特定日期格式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/07/t-sql-select/" rel="next" title="select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT">
+      select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/06/06/t-sql-select1/";
+    this.page.identifier = "2016/06/06/t-sql-select1/";
+    this.page.title = "select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

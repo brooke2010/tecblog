@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EPPlus">
+<meta property="og:url" content="https://brooke2010.github.io/2018/11/22/EPPlus/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/22/EPPlus/1542864179_90758.png">
+<meta property="article:published_time" content="2018-11-22T09:56:35.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="工具教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2018/11/22/EPPlus/1542864179_90758.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2018/11/22/EPPlus/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>EPPlus | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2018/11/22/EPPlus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EPPlus
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-22 17:56:35" itemprop="dateCreated datePublished" datetime="2018-11-22T17:56:35+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具教學</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2018/11/22/EPPlus/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/22/EPPlus/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、EPPlus</p>
+
+<p>最以前依客戶需要做匯出 EXCEL 報表時，</p>
+
+<p>我使用的是&nbsp;Microsoft.Office.Interop.Excel 元件來達成，</p>
+
+<p>但致命的是程式必須要安裝 Microsoft office Excel 才行，</p>
+
+<p>遇到只安裝 Microsoft office Excel 2003 的，還要換成呼叫 Microsoft.Jet.OLEDB 元件。</p>
+
+<p>&nbsp;</p>
+
+<p>改用 NPOI 後，程式就不需要再配合安裝 Microsoft Excel 軟體了，</p>
+
+<p>但缺點就是程式控制複雜。</p>
+
+<p>&nbsp;</p>
+
+<p>之後有網路上的大神們推薦 EPPlus 似乎可以簡化流程不錯用，</p>
+
+<p>使用方法可利用 Nuget 找尋 EPPlus 安裝</p>
+
+<p><img height="205" src="1542864179_90758.png" width="368" /></p>
+
+<p>或是直接去官網拿 EEPlus.dll 檔來使用皆可。</p>
+
+<p>&nbsp;</p>
+
+<p>來參考下面的 sample code</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> OfficeOpenXml;
+<span style="color:#0000ff;">using</span> OfficeOpenXml.Style;
+<span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Drawing;
+<span style="color:#0000ff;">using</span> System.IO;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            <span style="color:#008000;">//開檔</span>
+            <span style="color:#0000ff;">using</span> (FileStream fs = <span style="color:#0000ff;">new</span> FileStream(Directory.GetCurrentDirectory() + <span style="color:#a31515;">&quot;\\a.xlsx&quot;</span>, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            &#123;
+                <span style="color:#008000;">//載入Excel檔案</span>
+                <span style="color:#0000ff;">using</span> (ExcelPackage package = <span style="color:#0000ff;">new</span> ExcelPackage(fs))
+                &#123;
+
+                    <span style="color:#008000;">// Add a new worksheet to the empty workbook</span>
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    <span style="color:#008000;">//Add the headers</span>
+                    worksheet.Cells[1, 1].Value = <span style="color:#a31515;">&quot;ID&quot;</span>;
+                    worksheet.Cells[1, 2].Value = <span style="color:#a31515;">&quot;Product&quot;</span>;
+                    worksheet.Cells[1, 3].Value = <span style="color:#a31515;">&quot;Quantity&quot;</span>;
+                    worksheet.Cells[1, 4].Value = <span style="color:#a31515;">&quot;Price&quot;</span>;
+                    worksheet.Cells[1, 5].Value = <span style="color:#a31515;">&quot;Value&quot;</span>;
+
+                    <span style="color:#008000;">//Add some items...</span>
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A2&quot;</span>].Value = 12001;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;B2&quot;</span>].Value = <span style="color:#a31515;">&quot;Nails&quot;</span>;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;C2&quot;</span>].Value = 37;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;D2&quot;</span>].Value = 3.99;
+
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A3&quot;</span>].Value = 12002;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;B3&quot;</span>].Value = <span style="color:#a31515;">&quot;Hammer&quot;</span>;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;C3&quot;</span>].Value = 5;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;D3&quot;</span>].Value = 12.10;
+
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A4&quot;</span>].Value = 12003;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;B4&quot;</span>].Value = <span style="color:#a31515;">&quot;Saw&quot;</span>;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;C4&quot;</span>].Value = 12;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;D4&quot;</span>].Value = 15.37;
+
+                    <span style="color:#008000;">//Add a formula for the value-column</span>
+                    worksheet.Cells[<span style="color:#a31515;">&quot;E2:E4&quot;</span>].Formula = <span style="color:#a31515;">&quot;C2*D2&quot;</span>;
+
+                    <span style="color:#008000;">//Ok now format the values;</span>
+                    <span style="color:#0000ff;">using</span> (<span style="color:#0000ff;">var</span> range = worksheet.Cells[1, 1, 1, 5])
+                    &#123;
+                        range.Style.Font.Bold = <span style="color:#0000ff;">true</span>;
+                        range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        range.Style.Fill.BackgroundColor.SetColor(Color.DarkBlue);
+                        range.Style.Font.Color.SetColor(Color.White);
+                    &#125;
+
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A5:E5&quot;</span>].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A5:E5&quot;</span>].Style.Font.Bold = <span style="color:#0000ff;">true</span>;
+
+                    worksheet.Cells[5, 3, 5, 5].Formula = <span style="color:#0000ff;">string</span>.Format(<span style="color:#a31515;">&quot;SUBTOTAL(9,&#123;0&#125;)&quot;</span>, <span style="color:#0000ff;">new</span> ExcelAddress(2, 3, 4, 3).Address);
+                    worksheet.Cells[<span style="color:#a31515;">&quot;C2:C5&quot;</span>].Style.Numberformat.Format = <span style="color:#a31515;">&quot;#,##0&quot;</span>;
+                    worksheet.Cells[<span style="color:#a31515;">&quot;D2:E5&quot;</span>].Style.Numberformat.Format = <span style="color:#a31515;">&quot;#,##0.00&quot;</span>;
+
+                    <span style="color:#008000;">//Create an autofilter for the range</span>
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A1:E4&quot;</span>].AutoFilter = <span style="color:#0000ff;">true</span>;
+
+                    worksheet.Cells[<span style="color:#a31515;">&quot;A2:A4&quot;</span>].Style.Numberformat.Format = <span style="color:#a31515;">&quot;@&quot;</span>;   <span style="color:#008000;">//Format as text</span>
+
+                    <span style="color:#008000;">//There is actually no need to calculate, Excel will do it for you, but in some cases it might be useful. </span>
+                    <span style="color:#008000;">//For example if you link to this workbook from another workbook or you will open the workbook in a program that hasn&#39;t a calculation engine or </span>
+                    <span style="color:#008000;">//you want to use the result of a formula in your program.</span>
+                    worksheet.Calculate();
+
+                    worksheet.Cells.AutoFitColumns(0);  <span style="color:#008000;">//Autofit columns for all cells</span>
+
+                    <span style="color:#008000;">// lets set the header text </span>
+                    worksheet.HeaderFooter.OddHeader.CenteredText = <span style="color:#a31515;">&quot;&amp;24&amp;U&amp;\&quot;Arial,Regular Bold\&quot; Inventory&quot;</span>;
+                    <span style="color:#008000;">// add the page number to the footer plus the total number of pages</span>
+                    worksheet.HeaderFooter.OddFooter.RightAlignedText =
+                        <span style="color:#0000ff;">string</span>.Format(<span style="color:#a31515;">&quot;Page &#123;0&#125; of &#123;1&#125;&quot;</span>, ExcelHeaderFooter.PageNumber, ExcelHeaderFooter.NumberOfPages);
+                    <span style="color:#008000;">// add the sheet name to the footer</span>
+                    worksheet.HeaderFooter.OddFooter.CenteredText = ExcelHeaderFooter.SheetName;
+                    <span style="color:#008000;">// add the file path to the footer</span>
+                    worksheet.HeaderFooter.OddFooter.LeftAlignedText = ExcelHeaderFooter.FilePath + ExcelHeaderFooter.FileName;
+
+                    worksheet.PrinterSettings.RepeatRows = worksheet.Cells[<span style="color:#a31515;">&quot;1:2&quot;</span>];
+                    worksheet.PrinterSettings.RepeatColumns = worksheet.Cells[<span style="color:#a31515;">&quot;A:G&quot;</span>];
+
+                    <span style="color:#008000;">// Change the sheet view to show it in page layout mode</span>
+                    worksheet.View.PageLayoutView = <span style="color:#0000ff;">true</span>;
+
+                    <span style="color:#008000;">// set some document properties</span>
+                    package.Workbook.Properties.Title = <span style="color:#a31515;">&quot;Invertory&quot;</span>;
+                    package.Workbook.Properties.Author = <span style="color:#a31515;">&quot;Jan K&auml;llman&quot;</span>;
+                    package.Workbook.Properties.Comments = <span style="color:#a31515;">&quot;This sample demonstrates how to create an Excel 2007 workbook using EPPlus&quot;</span>;
+
+                    <span style="color:#008000;">// set some extended property values</span>
+                    package.Workbook.Properties.Company = <span style="color:#a31515;">&quot;AdventureWorks Inc.&quot;</span>;
+
+                    <span style="color:#008000;">// set some custom property values</span>
+                    package.Workbook.Properties.SetCustomPropertyValue(<span style="color:#a31515;">&quot;Checked by&quot;</span>, <span style="color:#a31515;">&quot;Jan K&auml;llman&quot;</span>);
+                    package.Workbook.Properties.SetCustomPropertyValue(<span style="color:#a31515;">&quot;AssemblyName&quot;</span>, <span style="color:#a31515;">&quot;EPPlus&quot;</span>);
+
+
+                    <span style="color:#008000;">//建立檔案</span>
+                    <span style="color:#0000ff;">using</span> (FileStream createStream = <span style="color:#0000ff;">new</span> FileStream(Directory.GetCurrentDirectory() + <span style="color:#a31515;">&quot;\\output.xlsx&quot;</span>, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                    &#123;
+                        package.SaveAs(createStream);<span style="color:#008000;">//存檔</span>
+                    &#125;<span style="color:#008000;">//end using </span>
+                &#125;<span style="color:#008000;">//end   using </span>
+            &#125;<span style="color:#008000;">//end using </span>
+
+            Console.WriteLine(<span style="color:#a31515;">&quot;produce output.xlsx is OK&quot;</span>);
+            Console.ReadKey();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>二、NOPI</p>
+
+<p>這是 n 年前我所玩過的 NOPI</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#808030; ">#</span>Region <span style="color:#0000e6; ">&quot;  Imports&quot;</span>
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>HPSF
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>XSSF
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>XSSF<span style="color:#008c00; ">.</span>UserModel
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>POIFS
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>Util
+<span style="color:#800000; font-weight:bold; ">Imports</span> NPOI<span style="color:#008c00; ">.</span>XSSF<span style="color:#008c00; ">.</span>Util
+<span style="color:#800000; font-weight:bold; ">Imports</span> <span style="color:#800000; font-weight:bold; ">System</span><span style="color:#008c00; ">.</span>IO
+<span style="color:#808030; ">#</span><span style="color:#800000; font-weight:bold; ">End</span> Region
+
+<span style="color:#800000; font-weight:bold; ">Public</span> <span style="color:#800000; font-weight:bold; ">Class</span> Form1
+
+    <span style="color:#800000; font-weight:bold; ">Private</span> <span style="color:#800000; font-weight:bold; ">Sub</span> Button1_Click<span style="color:#808030; ">(</span>sender <span style="color:#800000; font-weight:bold; ">As</span> <span style="color:#800000; font-weight:bold; ">Object</span><span style="color:#808030; ">,</span> e <span style="color:#800000; font-weight:bold; ">As</span> EventArgs<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">Handles</span> Button1<span style="color:#008c00; ">.</span>Click
+        <span style="color:#800000; font-weight:bold; ">If</span> OpenFileDialog1<span style="color:#008c00; ">.</span>ShowDialog <span style="color:#808030; ">=</span> Windows<span style="color:#008c00; ">.</span>Forms<span style="color:#008c00; ">.</span>DialogResult<span style="color:#008c00; ">.</span>OK <span style="color:#800000; font-weight:bold; ">Then</span>
+            DataGridView1<span style="color:#008c00; ">.</span>DataSource <span style="color:#808030; ">=</span> ReadExcelNPOIX<span style="color:#808030; ">(</span>OpenFileDialog1<span style="color:#008c00; ">.</span>FileName<span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&quot;工作表1&quot;</span><span style="color:#808030; ">)</span>
+        <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">If</span>
+    <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">Sub</span>
+
+    <span style="color:#696969; ">&#39;只能讀取xlsx</span>
+    <span style="color:#800000; font-weight:bold; ">Public</span> <span style="color:#800000; font-weight:bold; ">Function</span> ReadExcelNPOIX<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">ByVal</span> filePath <span style="color:#800000; font-weight:bold; ">As</span> <span style="color:#800000; font-weight:bold; ">String</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">ByVal</span> SheetName <span style="color:#800000; font-weight:bold; ">As</span> <span style="color:#800000; font-weight:bold; ">String</span><span style="color:#808030; ">)</span>
+        <span style="color:#800000; font-weight:bold; ">Try</span>
+            <span style="color:#800000; font-weight:bold; ">Dim</span> table <span style="color:#800000; font-weight:bold; ">As</span> <span style="color:#800000; font-weight:bold; ">New</span> <span style="color:#800000; font-weight:bold; ">System</span><span style="color:#008c00; ">.</span>Data<span style="color:#008c00; ">.</span>DataTable
+            <span style="color:#800000; font-weight:bold; ">Dim</span> Fs <span style="color:#800000; font-weight:bold; ">As</span> FileStream <span style="color:#808030; ">=</span> File<span style="color:#008c00; ">.</span>OpenRead<span style="color:#808030; ">(</span>filePath<span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Dim</span> workbook <span style="color:#800000; font-weight:bold; ">As</span> XSSFWorkbook <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">New</span> XSSFWorkbook<span style="color:#808030; ">(</span>Fs<span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Dim</span> sheet <span style="color:#800000; font-weight:bold; ">As</span> XSSFSheet <span style="color:#808030; ">=</span> workbook<span style="color:#008c00; ">.</span>GetSheet<span style="color:#808030; ">(</span>SheetName<span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Dim</span> headerRow <span style="color:#800000; font-weight:bold; ">As</span> XSSFRow <span style="color:#808030; ">=</span> sheet<span style="color:#008c00; ">.</span>GetRow<span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Dim</span> cellCount <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> headerRow<span style="color:#008c00; ">.</span>LastCellNum
+            <span style="color:#800000; font-weight:bold; ">Dim</span> co <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> <span style="color:#008c00; ">0</span>
+            <span style="color:#800000; font-weight:bold; ">For</span> i <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> headerRow<span style="color:#008c00; ">.</span>FirstCellNum <span style="color:#800000; font-weight:bold; ">To</span> cellCount <span style="color:#808030; ">-</span> <span style="color:#008c00; ">1</span>
+                <span style="color:#800000; font-weight:bold; ">Dim</span> column <span style="color:#800000; font-weight:bold; ">As</span> DataColumn
+                <span style="color:#800000; font-weight:bold; ">If</span> <span style="color:#800000; font-weight:bold; ">IsNumeric</span><span style="color:#808030; ">(</span>headerRow<span style="color:#008c00; ">.</span>GetCell<span style="color:#808030; ">(</span>i<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>ToString<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span> <span style="color:#0f4d75; ">True</span> <span style="color:#800000; font-weight:bold; ">Then</span>
+                    co <span style="color:#808030; ">+</span><span style="color:#808030; ">=</span> <span style="color:#008c00; ">1</span>
+                    column <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">New</span> DataColumn<span style="color:#808030; ">(</span><span style="color:#0000e6; ">&quot;S&quot;</span> <span style="color:#808030; ">&amp;</span> co<span style="color:#808030; ">)</span>
+                    table<span style="color:#008c00; ">.</span>Columns<span style="color:#008c00; ">.</span>Add<span style="color:#808030; ">(</span>column<span style="color:#808030; ">)</span>
+                <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">If</span>
+                <span style="color:#800000; font-weight:bold; ">If</span> <span style="color:#800000; font-weight:bold; ">IsNumeric</span><span style="color:#808030; ">(</span>headerRow<span style="color:#008c00; ">.</span>GetCell<span style="color:#808030; ">(</span>i<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>ToString<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span> <span style="color:#0f4d75; ">False</span> <span style="color:#800000; font-weight:bold; ">Then</span>
+                    column <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">New</span> DataColumn<span style="color:#808030; ">(</span>headerRow<span style="color:#008c00; ">.</span>GetCell<span style="color:#808030; ">(</span>i<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>StringCellValue<span style="color:#808030; ">)</span>
+                    table<span style="color:#008c00; ">.</span>Columns<span style="color:#008c00; ">.</span>Add<span style="color:#808030; ">(</span>column<span style="color:#808030; ">)</span>
+                <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">If</span>
+            <span style="color:#800000; font-weight:bold; ">Next</span>
+
+            <span style="color:#800000; font-weight:bold; ">Dim</span> rowCount <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> sheet<span style="color:#008c00; ">.</span>LastRowNum
+            <span style="color:#800000; font-weight:bold; ">For</span> i <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> <span style="color:#808030; ">(</span>sheet<span style="color:#008c00; ">.</span>FirstRowNum <span style="color:#808030; ">+</span> <span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">To</span> sheet<span style="color:#008c00; ">.</span>LastRowNum
+                <span style="color:#800000; font-weight:bold; ">Dim</span> row <span style="color:#800000; font-weight:bold; ">As</span> XSSFRow <span style="color:#808030; ">=</span> sheet<span style="color:#008c00; ">.</span>GetRow<span style="color:#808030; ">(</span>i<span style="color:#808030; ">)</span>
+                <span style="color:#800000; font-weight:bold; ">If</span> IsNothing<span style="color:#808030; ">(</span>row<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">Then</span> Continue <span style="color:#800000; font-weight:bold; ">For</span>
+                <span style="color:#800000; font-weight:bold; ">Dim</span> dataRow <span style="color:#800000; font-weight:bold; ">As</span> DataRow <span style="color:#808030; ">=</span> table<span style="color:#008c00; ">.</span>NewRow<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+                <span style="color:#800000; font-weight:bold; ">For</span> j <span style="color:#800000; font-weight:bold; ">As</span> Int32 <span style="color:#808030; ">=</span> row<span style="color:#008c00; ">.</span>FirstCellNum <span style="color:#800000; font-weight:bold; ">To</span> cellCount <span style="color:#808030; ">-</span> <span style="color:#008c00; ">1</span>
+                    <span style="color:#800000; font-weight:bold; ">If</span> <span style="color:#800000; font-weight:bold; ">Not</span> <span style="color:#808030; ">(</span>row<span style="color:#008c00; ">.</span>GetCell<span style="color:#808030; ">(</span>j<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">Is</span> <span style="color:#800000; font-weight:bold; ">Nothing</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">Then</span>
+                        dataRow<span style="color:#808030; ">(</span>j<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span> row<span style="color:#008c00; ">.</span>GetCell<span style="color:#808030; ">(</span>j<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>ToString<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+                    <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">If</span>
+                <span style="color:#800000; font-weight:bold; ">Next</span>
+                table<span style="color:#008c00; ">.</span>Rows<span style="color:#008c00; ">.</span>Add<span style="color:#808030; ">(</span>dataRow<span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Next</span>
+            Fs<span style="color:#008c00; ">.</span><span style="color:#800000; font-weight:bold; ">Close</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+            workbook <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">Nothing</span>
+            sheet <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">Nothing</span>
+            <span style="color:#800000; font-weight:bold; ">Return</span> table
+        <span style="color:#800000; font-weight:bold; ">Catch</span> ex <span style="color:#800000; font-weight:bold; ">As</span> Exception
+            <span style="color:#800000; font-weight:bold; ">MsgBox</span><span style="color:#808030; ">(</span>ex<span style="color:#008c00; ">.</span>ToString<span style="color:#808030; ">)</span>
+            <span style="color:#800000; font-weight:bold; ">Throw</span> ex
+        <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">Try</span>
+    <span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">Function</span>
+
+<span style="color:#800000; font-weight:bold; ">End</span> <span style="color:#800000; font-weight:bold; ">Class</span>
+</pre>
+<!--Created using ToHtml.com on 2018-11-22 05:37:56 UTC -->
+
+<p><a target="_blank" rel="noopener" href="https://1drv.ms/u/s!Au3E0pOlHdyLhGgF7qUe_-Ja5imB">範例檔</a></p>
+
+<p>&nbsp;</p>
+
+<p>三、使用 C# 導出 EXCEL 的八種方式</p>
+
+<p>1、直接使用 IO 流</p>
+
+<p>2、Microsoft.Jet.OLEDB</p>
+
+<p>3、Microsoft.Office.Interop.Excel</p>
+
+<p>4、LinqToExcel (只能讀EXCEL檔)</p>
+
+<p>5、NPOI</p>
+
+<p>6、Open XML SDK</p>
+
+<p>7、ClosedXML (inherit Open XML SDK)</p>
+
+<p>8、EPPlus</p>
+
+<p>&nbsp;</p>
+
+<p>四、檔案格式名稱比較</p>
+
+<p>檔案格式的種類。下表可能有誤差，僅供參考</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <th style="width:230px;text-align:center;">檔案格式</th>
+            <th style="width:45px;text-align:center;">副檔名</th>
+            <th style="text-align:center;">典型軟體支援</th>
+        </tr>
+        <tr>
+            <td>Microsoft Word Binary File Format</td>
+            <td>.doc</td>
+            <td>Microsoft Word 97 &ndash; 2003</td>
+        </tr>
+        <tr>
+            <td>Microsoft Office XML</td>
+            <td>.xml</td>
+            <td>
+            <p>Microsoft Office XP</p>
+            <p>Microsoft Office 2007</p>
+            </td>
+        </tr>
+        <tr>
+            <td>Office Open XML</td>
+            <td>.docx</td>
+            <td>
+            <p>Microsoft Office 2010</p>
+            <p>Microsoft Office 2013</p>
+            <p>Microsoft Office 2016</p>
+            </td>
+        </tr>
+        <tr>
+            <td>OpenDocument</td>
+            <td>.odt</td>
+            <td>LibreOffice</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/JanKallman/EPPlus">JanKallman/EPPlus</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.nuget.org/packages/NPOI/">NPOI</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://hk.saowen.com/a/ee456ec7b94c694081c092ddf7bffaf1a331280269558d8c92f949132afd22a6">C# 導出 Excel 的各種方法總結</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/epplus/">比NPOI更討喜的Excel元件-EPPlus!</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/shadow/2012/07/13/73385">[C#] EPPlus 讀寫(read/write) Excel檔範例懶人Code</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" rel="tag"># 工具教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/11/20/Visual-Studio-Code-personal-setting/" rel="prev" title="[Visual Studio Code] 個人設定">
+      <i class="fa fa-chevron-left"></i> [Visual Studio Code] 個人設定
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/11/26/fail-certificate/" rel="next" title="做失敗的證書 (certificate)">
+      做失敗的證書 (certificate) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2018/11/22/EPPlus/";
+    this.page.identifier = "2018/11/22/EPPlus/";
+    this.page.title = "EPPlus";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

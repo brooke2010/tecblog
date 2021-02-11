@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HttpWebRequest類別 屬性演示">
+<meta property="og:url" content="https://brooke2010.github.io/2016/04/08/HttpWebRequest/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/04/08/HttpWebRequest/1460165511_64771.png">
+<meta property="article:published_time" content="2016-04-08T02:17:26.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="Internet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/04/08/HttpWebRequest/1460165511_64771.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/04/08/HttpWebRequest/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>HttpWebRequest類別 屬性演示 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/04/08/HttpWebRequest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HttpWebRequest類別 屬性演示
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-08 10:17:26" itemprop="dateCreated datePublished" datetime="2016-04-08T10:17:26+08:00">2016-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/Internet/" itemprop="url" rel="index">
+                    <span itemprop="name">Internet</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/04/08/HttpWebRequest/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/08/HttpWebRequest/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>HttpWebRequest的屬性為</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:275px;">名稱</td>
+            <td>描述</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.accept(v=vs.110).aspx">Accept</a></td>
+            <td>Gets or sets the value of the Accept HTTP header.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.address(v=vs.110).aspx">Address</a></td>
+            <td>取得實際回應要求的網際網路資源統一資源識別元 (URI)。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.allowautoredirect(v=vs.110).aspx">AllowAutoRedirect</a></td>
+            <td>Gets or sets a value that indicates whether the request should follow redirection responses.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.allowreadstreambuffering(v=vs.110).aspx">AllowReadStreamBuffering</a></td>
+            <td>取得或設定值，這個值表示是否要緩衝處理從網際網路資源接收的資料。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.allowwritestreambuffering(v=vs.110).aspx">AllowWriteStreamBuffering</a></td>
+            <td>取得或設定值，指出是否要緩衝傳送至網際網路資源的資料。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.authenticationlevel(v=vs.110).aspx">AuthenticationLevel</a></td>
+            <td>取得或設定值，指出用於這個要求的驗證和模擬等級。(繼承自&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest(v=vs.110).aspx">WebRequest</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.automaticdecompression(v=vs.110).aspx">AutomaticDecompression</a></td>
+            <td>取得或設定使用的解壓縮類型。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.cachepolicy(v=vs.110).aspx">CachePolicy</a></td>
+            <td>取得或設定這個要求的快取原則。(繼承自&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest(v=vs.110).aspx">WebRequest</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.clientcertificates(v=vs.110).aspx">ClientCertificates</a></td>
+            <td>取得或設定與這個要求關聯的安全憑證集合。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.connection(v=vs.110).aspx">Connection</a></td>
+            <td>取得或設定 Connection HTTP 標頭的值。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/6y3d5dts(v=vs.110).aspx">ConnectionGroupName</a></td>
+            <td>Gets or sets the name of the connection group for the request.(覆寫<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.connectiongroupname(v=vs.110).aspx">WebRequest.ConnectionGroupName</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.contentlength(v=vs.110).aspx">ContentLength</a></td>
+            <td>Gets or sets the&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Content-length</strong>&nbsp;HTTP header.(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.contentlength(v=vs.110).aspx">WebRequest.ContentLength</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.contenttype(v=vs.110).aspx">ContentType</a></td>
+            <td>取得或設定&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Content-type</strong>&nbsp;HTTP 標頭的值。(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.contenttype(v=vs.110).aspx">WebRequest.ContentType</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.continuedelegate(v=vs.110).aspx">ContinueDelegate</a></td>
+            <td>Gets or sets the delegate method called when an HTTP 100-continue response is received from the Internet resource.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.continuetimeout(v=vs.110).aspx">ContinueTimeout</a></td>
+            <td>取得或設定要在收到伺服器的 100-Continue 以前等候的逾時 (以毫秒為單位)。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.cookiecontainer(v=vs.110).aspx">CookieContainer</a></td>
+            <td>取得或設定與要求相關的 Cookie。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.creatorinstance(v=vs.110).aspx">CreatorInstance</a></td>
+            <td><strong>過時。&nbsp;</strong>在子代類別中覆寫時，取得衍生自&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.iwebrequestcreate(v=vs.110).aspx">IWebRequestCreate</a>&nbsp;類別的 Factory 物件，用來建立執行個體化的&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest(v=vs.110).aspx">WebRequest</a>&nbsp;以對指定的 URI 提出要求。(繼承自&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest(v=vs.110).aspx">WebRequest</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.credentials(v=vs.110).aspx">Credentials</a></td>
+            <td>取得或設定要求的驗證資訊。(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.credentials(v=vs.110).aspx">WebRequest.Credentials</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.date(v=vs.110).aspx">Date</a></td>
+            <td>取得或設定要用於 HTTP 要求中的&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Date</strong>&nbsp;HTTP 標頭值。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.defaultcachepolicy(v=vs.110).aspx">DefaultCachePolicy</a></td>
+            <td>取得或設定這個要求的預設快取原則。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.defaultmaximumerrorresponselength(v=vs.110).aspx">DefaultMaximumErrorResponseLength</a></td>
+            <td>Gets or sets the default maximum length of an HTTP error response.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.defaultmaximumresponseheaderslength(v=vs.110).aspx">DefaultMaximumResponseHeadersLength</a></td>
+            <td>Gets or sets the default for the&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.maximumresponseheaderslength(v=vs.110).aspx">MaximumResponseHeadersLength</a>&nbsp;property.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.expect(v=vs.110).aspx">Expect</a></td>
+            <td>取得或設定&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Expect</strong>&nbsp;HTTP 標頭的值。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.haveresponse(v=vs.110).aspx">HaveResponse</a></td>
+            <td>Gets a value that indicates whether a response has been received from an Internet resource.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.headers(v=vs.110).aspx">Headers</a></td>
+            <td>Specifies a collection of the name/value pairs that make up the HTTP headers.(覆寫<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.headers(v=vs.110).aspx">WebRequest.Headers</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.host(v=vs.110).aspx">Host</a></td>
+            <td>取得或設定 Host 標頭值，此標頭可用於獨立於要求 URI 的 HTTP 要求中。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.ifmodifiedsince(v=vs.110).aspx">IfModifiedSince</a></td>
+            <td>Gets or sets the value of the&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">If-Modified-Since</strong>&nbsp;HTTP header.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.impersonationlevel(v=vs.110).aspx">ImpersonationLevel</a></td>
+            <td>取得或設定目前要求的模擬等級。(繼承自&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest(v=vs.110).aspx">WebRequest</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.keepalive(v=vs.110).aspx">KeepAlive</a></td>
+            <td>Gets or sets a value that indicates whether to make a persistent connection to the Internet resource.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.maximumautomaticredirections(v=vs.110).aspx">MaximumAutomaticRedirections</a></td>
+            <td>取得或設定要求追蹤的最大重新導向數目。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.maximumresponseheaderslength(v=vs.110).aspx">MaximumResponseHeadersLength</a></td>
+            <td>Gets or sets the maximum allowed length of the response headers.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.mediatype(v=vs.110).aspx">MediaType</a></td>
+            <td>取得或設定要求的媒體類型。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.method(v=vs.110).aspx">Method</a></td>
+            <td>取得或設定要求的方法。(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.method(v=vs.110).aspx">WebRequest.Method</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.pipelined(v=vs.110).aspx">Pipelined</a></td>
+            <td>取得或設定值，指出是否將要求導送至網際網路資源。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.preauthenticate(v=vs.110).aspx">PreAuthenticate</a></td>
+            <td>Gets or sets a value that indicates whether to send an Authorization header with the request.(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.preauthenticate(v=vs.110).aspx">WebRequest.PreAuthenticate</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.protocolversion(v=vs.110).aspx">ProtocolVersion</a></td>
+            <td>取得或設定要求所使用的 HTTP 版本。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/czdt10d3(v=vs.110).aspx">Proxy</a></td>
+            <td>取得或設定要求的 Proxy 資訊。(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.proxy(v=vs.110).aspx">WebRequest.Proxy</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.readwritetimeout(v=vs.110).aspx">ReadWriteTimeout</a></td>
+            <td>取得或設定寫入或讀取資料流時的逾時 (以毫秒為單位)。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.referer(v=vs.110).aspx">Referer</a></td>
+            <td>Gets or sets the value of the&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Referer</strong>&nbsp;HTTP header.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.requesturi(v=vs.110).aspx">RequestUri</a></td>
+            <td>取得要求的原始統一資源識別元 (URI)。(覆寫&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.requesturi(v=vs.110).aspx">WebRequest.RequestUri</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.sendchunked(v=vs.110).aspx">SendChunked</a></td>
+            <td>取得或設定值，指出是否要分區段傳送資料至網際網路資源。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.servercertificatevalidationcallback(v=vs.110).aspx">ServerCertificateValidationCallback</a></td>
+            <td>取得或設定用來驗證伺服器憑證的回呼函式。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.servicepoint(v=vs.110).aspx">ServicePoint</a></td>
+            <td>取得要求所使用的服務點。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.supportscookiecontainer(v=vs.110).aspx">SupportsCookieContainer</a></td>
+            <td>Gets a value that indicates whether the request provides support for a&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.cookiecontainer(v=vs.110).aspx">CookieContainer</a>.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.timeout(v=vs.110).aspx">Timeout</a></td>
+            <td>取得或設定&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.getresponse(v=vs.110).aspx">GetResponse</a>&nbsp;和&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/d4cek6cc(v=vs.110).aspx">GetRequestStream</a>&nbsp;方法的逾時值 (以毫秒為單位)。(覆寫<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.timeout(v=vs.110).aspx">WebRequest.Timeout</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.transferencoding(v=vs.110).aspx">TransferEncoding</a></td>
+            <td>Gets or sets the value of the&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">Transfer-encoding</strong>&nbsp;HTTP header.</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.unsafeauthenticatedconnectionsharing(v=vs.110).aspx">UnsafeAuthenticatedConnectionSharing</a></td>
+            <td>取得或設定值，指出是否允許高速 NTLM 驗證連接共用。</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.usedefaultcredentials(v=vs.110).aspx">UseDefaultCredentials</a></td>
+            <td>取得或設定&nbsp;<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.boolean(v=vs.110).aspx">Boolean</a>&nbsp;值，控制是否隨著要求傳送預設認證。(覆寫<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.webrequest.usedefaultcredentials(v=vs.110).aspx">WebRequest.UseDefaultCredentials</a>。)</td>
+        </tr>
+        <tr>
+            <td><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest.useragent(v=vs.110).aspx">UserAgent</a></td>
+            <td>取得或設定&nbsp;<strong xmlns="http://www.w3.org/1999/xhtml">User-agent</strong>&nbsp;HTTP 標頭的值。</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>實際範例展示</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Text;
+<span style="color:#0000ff;">using</span> System.Threading.Tasks;
+<span style="color:#0000ff;">using</span> System.Net;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApplication1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            HttpWebRequest HttpWebRequest = HttpWebRequest.CreateHttp(<span style="color:#a31515;">&quot;https://dotblogs.com.tw/brooke&quot;</span>);
+
+            Console.WriteLine(<span style="color:#a31515;">&quot;Accept = &quot;</span> + HttpWebRequest.Accept);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Address = &quot;</span> + HttpWebRequest.Address);
+            Console.WriteLine(<span style="color:#a31515;">&quot;AllowAutoRedirect = &quot;</span> + HttpWebRequest.AllowAutoRedirect);
+            Console.WriteLine(<span style="color:#a31515;">&quot;AllowReadStreamBuffering = &quot;</span> + HttpWebRequest.AllowReadStreamBuffering);
+            Console.WriteLine(<span style="color:#a31515;">&quot;AllowWriteStreamBuffering = &quot;</span> + HttpWebRequest.AllowWriteStreamBuffering);
+            Console.WriteLine(<span style="color:#a31515;">&quot;AuthenticationLevel = &quot;</span> + HttpWebRequest.AuthenticationLevel);
+            Console.WriteLine(<span style="color:#a31515;">&quot;AutomaticDecompression = &quot;</span> + HttpWebRequest.AutomaticDecompression);
+            Console.WriteLine(<span style="color:#a31515;">&quot;CachePolicy = &quot;</span> + HttpWebRequest.CachePolicy);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ClientCertificates = &quot;</span> + HttpWebRequest.ClientCertificates);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Connection = &quot;</span> + HttpWebRequest.Connection);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ConnectionGroupName = &quot;</span> + HttpWebRequest.ConnectionGroupName);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ContentLength = &quot;</span> + HttpWebRequest.ContentLength);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ContentType = &quot;</span> + HttpWebRequest.ContentType);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ContinueDelegate = &quot;</span> + HttpWebRequest.ContinueDelegate);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ContinueTimeout = &quot;</span> + HttpWebRequest.ContinueTimeout);
+            Console.WriteLine(<span style="color:#a31515;">&quot;CookieContainer = &quot;</span> + HttpWebRequest.CookieContainer);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Credentials = &quot;</span> + HttpWebRequest.Credentials);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Date = &quot;</span> + HttpWebRequest.Date);
+            Console.WriteLine(<span style="color:#a31515;">&quot;DefaultCachePolicy = &quot;</span> + HttpWebRequest.DefaultCachePolicy);
+            Console.WriteLine(<span style="color:#a31515;">&quot;DefaultMaximumErrorResponseLength = &quot;</span> + HttpWebRequest.DefaultMaximumErrorResponseLength);
+            Console.WriteLine(<span style="color:#a31515;">&quot;DefaultMaximumResponseHeadersLength = &quot;</span> + HttpWebRequest.DefaultMaximumResponseHeadersLength);
+            Console.WriteLine(<span style="color:#a31515;">&quot;DefaultWebProxy = &quot;</span> + HttpWebRequest.DefaultWebProxy);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Expect = &quot;</span> + HttpWebRequest.Expect);
+            Console.WriteLine(<span style="color:#a31515;">&quot;HaveResponse = &quot;</span> + HttpWebRequest.HaveResponse);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Headers = &quot;</span> + HttpWebRequest.Headers);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Host = &quot;</span> + HttpWebRequest.Host);
+            Console.WriteLine(<span style="color:#a31515;">&quot;IfModifiedSince = &quot;</span> + HttpWebRequest.IfModifiedSince);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ImpersonationLevel = &quot;</span> + HttpWebRequest.ImpersonationLevel);
+            Console.WriteLine(<span style="color:#a31515;">&quot;KeepAlive = &quot;</span> + HttpWebRequest.KeepAlive);
+            Console.WriteLine(<span style="color:#a31515;">&quot;MaximumAutomaticRedirections = &quot;</span> + HttpWebRequest.MaximumAutomaticRedirections);
+            Console.WriteLine(<span style="color:#a31515;">&quot;MaximumResponseHeadersLength = &quot;</span> + HttpWebRequest.MaximumResponseHeadersLength);
+            Console.WriteLine(<span style="color:#a31515;">&quot;MediaType = &quot;</span> + HttpWebRequest.MediaType);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Method = &quot;</span> + HttpWebRequest.Method);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Pipelined = &quot;</span> + HttpWebRequest.Pipelined);
+            Console.WriteLine(<span style="color:#a31515;">&quot;PreAuthenticate = &quot;</span> + HttpWebRequest.PreAuthenticate);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ProtocolVersion = &quot;</span> + HttpWebRequest.ProtocolVersion);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Proxy = &quot;</span> + HttpWebRequest.Proxy);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ReadWriteTimeout = &quot;</span> + HttpWebRequest.ReadWriteTimeout);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Referer = &quot;</span> + HttpWebRequest.Referer);
+            Console.WriteLine(<span style="color:#a31515;">&quot;RequestUri = &quot;</span> + HttpWebRequest.RequestUri);
+            Console.WriteLine(<span style="color:#a31515;">&quot;SendChunked = &quot;</span> + HttpWebRequest.SendChunked);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ServerCertificateValidationCallback = &quot;</span> + HttpWebRequest.ServerCertificateValidationCallback);
+            Console.WriteLine(<span style="color:#a31515;">&quot;ServicePoint = &quot;</span> + HttpWebRequest.ServicePoint);
+            Console.WriteLine(<span style="color:#a31515;">&quot;SupportsCookieContainer = &quot;</span> + HttpWebRequest.SupportsCookieContainer);
+            Console.WriteLine(<span style="color:#a31515;">&quot;Timeout = &quot;</span> + HttpWebRequest.Timeout);
+            Console.WriteLine(<span style="color:#a31515;">&quot;TransferEncoding = &quot;</span> + HttpWebRequest.TransferEncoding);
+            Console.WriteLine(<span style="color:#a31515;">&quot;TransferEncoding = &quot;</span> + HttpWebRequest.UnsafeAuthenticatedConnectionSharing);
+            Console.WriteLine(<span style="color:#a31515;">&quot;UseDefaultCredentials = &quot;</span> + HttpWebRequest.UseDefaultCredentials);
+            Console.WriteLine(<span style="color:#a31515;">&quot;UserAgent = &quot;</span> + HttpWebRequest.UserAgent);       
+
+            Console.ReadKey();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p><img height="940" src="1460165511_64771.png" width="741" /></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.net.httpwebrequest(v=vs.110).aspx">HttpWebRequest 類別</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/Internet/" rel="tag"># Internet</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/04/08/HttpWebResponse/" rel="prev" title="HttpWebResponse類別 屬性演示">
+      <i class="fa fa-chevron-left"></i> HttpWebResponse類別 屬性演示
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/04/08/WebResponse/" rel="next" title="WebResponse類別 屬性演示">
+      WebResponse類別 屬性演示 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/04/08/HttpWebRequest/";
+    this.page.identifier = "2016/04/08/HttpWebRequest/";
+    this.page.title = "HttpWebRequest類別 屬性演示";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

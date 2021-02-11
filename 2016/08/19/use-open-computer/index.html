@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="USB開機、筆電重灌步驟簡述，以ACER V3-371-50BW筆電為例">
+<meta property="og:url" content="https://brooke2010.github.io/2016/08/19/use-open-computer/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1495074811_73404.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1528616121_62923.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471677402_0446.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471677644_29771.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471677949_7303.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471678714_69722.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471678992_51903.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1471679250_02084.png">
+<meta property="article:published_time" content="2016-08-19T12:22:13.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="OS重灌">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/08/19/use-open-computer/1495074811_73404.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/08/19/use-open-computer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>USB開機、筆電重灌步驟簡述，以ACER V3-371-50BW筆電為例 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/08/19/use-open-computer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          USB開機、筆電重灌步驟簡述，以ACER V3-371-50BW筆電為例
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-19 20:22:13" itemprop="dateCreated datePublished" datetime="2016-08-19T20:22:13+08:00">2016-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/OS%E9%87%8D%E7%81%8C/" itemprop="url" rel="index">
+                    <span itemprop="name">OS重灌</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/08/19/use-open-computer/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/19/use-open-computer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>以前筆電大都附有光碟機，如果要做作業系統重灌，</p>
+
+<p>其重灌流程跟桌電無異倒不成問題，</p>
+
+<p>但是現在筆電大家(我也是)都想買輕薄筆電勢必不會附上光碟機，</p>
+
+<p>用的時候很爽，但是有一天想要重灌時沒光碟機就要傷腦筋了，</p>
+
+<p>輕薄型筆電重灌方式不外乎有</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:219px;">&nbsp;</td>
+            <td style="width:136px;">優點</td>
+            <td style="width:197px;">缺點</td>
+            <td style="width:62px;">約10年前推薦順序</td>
+            <td>現在推薦順序</td>
+        </tr>
+        <tr>
+            <td>USB外接光碟機</td>
+            <td>方便、無相容性問題</td>
+            <td>額外花錢、早期很貴</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>內接光碟機+SATA to USB轉接器</td>
+            <td>便宜</td>
+            <td>些許SATA to USB相容性問題</td>
+            <td>1</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>USB隨身碟</td>
+            <td>方便、安裝最快速</td>
+            <td>早期USB開機不易、設定繁雜</td>
+            <td>3</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>早期，外接光碟機很貴，如果你有錢的話當然可以直接買一台，</p>
+
+<p>而使用筆電可能沒有提供USB隨身碟重灌或是設定繁雜失敗率很高，</p>
+
+<p>只有使用內接光碟機+SATA to USB轉接器才是比較划算的。</p>
+
+<p>&nbsp;</p>
+
+<p>而現在，USB外接光碟機也很便宜也推薦買一台來裝，</p>
+
+<p>但更推薦使用USB隨身碟來重灌筆電，因為最便宜最快，</p>
+
+<p>但還需要注意相關設定，所以寫一篇文章來作日後設定參考。</p>
+
+<p>&nbsp;</p>
+
+<p>一、製作USB開機安裝碟</p>
+
+<p><a target="_blank" rel="noopener" href="http://wudt.codeplex.com/">Windows USB/DVD Download Tool</a>與<a target="_blank" rel="noopener" href="http://blog.xuite.net/yh96301/blog/301778407-%E5%85%8D%E8%B2%BBISO%E5%85%89%E7%A2%9F%E6%98%A0%E5%83%8F%E6%AA%94%E8%A3%BD%E4%BD%9CUSB%E9%96%8B%E6%A9%9F%E9%9A%A8%E8%BA%AB%E7%A2%9F%E7%9A%84%E8%BB%9F%E9%AB%94Rufus">Rufus</a>我都有試過皆可以製作USB開機安裝碟，</p>
+
+<p>但Windows USB/DVD Download Tool比較簡單幾乎不用作什麼設定，</p>
+
+<p>通常按下一步、下一步就製作完成了，</p>
+
+<p>請參考<a target="_blank" rel="noopener" href="https://sofree.cc/windows-7-usb/">免光碟，速度更快，用隨身碟也能重灌Windows7！</a></p>
+
+<p>&nbsp;</p>
+
+<p>額外一提，Windows USB/DVD Download Tool似乎只能使用原版未修改的windows鏡像檔</p>
+
+<p>來製作USB開機碟，對於想製作修改過的，如Windows PE的USB開機碟，則會失敗。</p>
+
+<p>那我建議我成功用過的<a target="_blank" rel="noopener" href="http://www.easyuefi.com/wintousb/index.html">WinToUSB</a>，操作界面也非常簡單，</p>
+
+<p>他連修改過的windows鏡像檔，也可成功製作成USB開機碟。</p>
+
+<p><img height="561" src="1495074811_73404.png" width="728" /></p>
+
+<p>註：2018/02/09 發現最新版的 WinToUSB v3.9 在製作windows 10 usb安裝碟的過程上，有bug會跳出USB容量不足的訊息，</p>
+
+<p>因而導致製作失敗，我現改以&nbsp;Rufus v2.18 軟體來製作就成功了。</p>
+
+<p>&nbsp;</p>
+
+<p>Rufus v3.0 參數設定畫面</p>
+
+<p><img height="523" src="1528616121_62923.png" width="418" /></p>
+
+<p>當你使用 Rufus 來製作 usb 安裝碟，隨身碟插好、iso 檔選好後，</p>
+
+<p>參數設定如上圖，設定好後再按「執行」按紐開始製作&nbsp;usb 安裝碟即可。</p>
+
+<p>&nbsp;</p>
+
+<p>二、設定USB開機</p>
+
+<p>當做完USB開機安裝碟時，基本上就可以把他當作一片安裝光碟，</p>
+
+<p>然後於BIOS設定「USB開機」就好了，但事與願違就是讀不到USB開機安裝碟。</p>
+
+<p>以我的ACER V3-371-50BW筆電為例，</p>
+
+<p>啟動模式(Boot Mode)有分「UEFI主機板開機」與「BIOS主機板開機」，</p>
+
+<p>如果要使用「UEFI主機板開機」則可能需要停用Secure Boot才能順利開機，</p>
+
+<p>1、而我是使用「BIOS主機板開機」，設定如下：</p>
+
+<p>(1)、首先於剛開機時按「F2」，進入主機板設定畫面。</p>
+
+<p><img height="275" src="1471677402_0446.png" width="718" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、於啟動模式(Boot Mode)選擇<span style="color:#FF0000;">Legacy</span>，並於啟動順序(Boot priority order)將<span style="color:#FF0000;">USB HDD</span>放在第一順位。</p>
+
+<p><img height="252" src="1471677644_29771.png" width="695" /></p>
+
+<p>因為我還沒插隨身碟，如果有插的話，則會顯示該型號。</p>
+
+<p>&nbsp;</p>
+
+<p>(3)、最後別忘了存檔，重開機後應可USB開機安裝碟。</p>
+
+<p><img height="167" src="1471677949_7303.png" width="491" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、UEFI主機板開機</p>
+
+<p>我還未去試「UEFI主機板開機」，不過使用「UEFI主機板開機」我想注意要點有：</p>
+
+<p>(1)、於啟動模式(Boot Mode)選擇UEFI</p>
+
+<p><img height="299" src="1471678714_69722.png" width="665" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、於Security選單，要先設定Set Supervisor Password才能再設定其他項目。</p>
+
+<p><img height="249" src="1471678992_51903.png" width="540" /></p>
+
+<p>&nbsp;</p>
+
+<p>(3)、然後停用Secure Boot，下圖中該選項我無法選擇，也許是哪個細節我漏掉了。</p>
+
+<p><img height="605" src="1471679250_02084.png" width="818" /></p>
+
+<p>詳細請參考<a target="_blank" rel="noopener" href="http://blog.xuite.net/yh96301/blog/317040181-UEFI%E4%B8%BB%E6%A9%9F%E6%9D%BF%E9%97%9C%E9%96%89Secure+Boot">UEFI主機板關閉Secure Boot</a></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://www.asus.com/tw/support/faq/1013017/">Windows 10 如何從USB/光碟機中開機</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/download/windows-usb-dvd-download-tool">Windows USB/DVD Download Tool</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://rufus.akeo.ie/?locale=zh_TW">輕鬆製作可開機的 USB 磁碟機</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/OS%E9%87%8D%E7%81%8C/" rel="tag"># OS重灌</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/08/10/Utilities21/" rel="prev" title="Utilities (第21項)">
+      <i class="fa fa-chevron-left"></i> Utilities (第21項)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/08/24/Content-ContentResult/" rel="next" title="Content、ContentResult">
+      Content、ContentResult <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/08/19/use-open-computer/";
+    this.page.identifier = "2016/08/19/use-open-computer/";
+    this.page.title = "USB開機、筆電重灌步驟簡述，以ACER V3-371-50BW筆電為例";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

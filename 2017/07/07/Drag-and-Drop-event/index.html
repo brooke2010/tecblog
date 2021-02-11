@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Drag and Drop event">
+<meta property="og:url" content="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/1499998840_02742.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/1499481599_82629.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/1499481716_66017.png">
+<meta property="article:published_time" content="2017-07-07T08:38:52.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/1499998840_02742.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Drag and Drop event | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Drag and Drop event
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-07-07 16:38:52" itemprop="dateCreated datePublished" datetime="2017-07-07T16:38:52+08:00">2017-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/JavaScript/HTML/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2017/07/07/Drag-and-Drop-event/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/07/Drag-and-Drop-event/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>HTML5現在有支援了將文字或圖片拖放到其他地方放置的功能，</p>
+
+<p>我從w3schools找到一個很讚的範例來說明所有事件的應用。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE HTML&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#808030; ">.</span>droptarget <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">float</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">left</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">35</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">margin</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">15</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">10</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">aaaaaa</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Drag the p element back and forth between the two rectangles:<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;droptarget&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">draggable</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;true&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;dragtarget&quot;</span><span style="color:#a65700; ">&gt;</span>Drag me!<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;droptarget&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">style</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;</span><span style="color:#bb7977; font-weight:bold; ">clear</span><span style="color:#808030; ">:</span><span style="color:#074726; ">both</span><span style="color:#800080; ">;</span><span style="color:#0000e6; ">&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">strong</span><span style="color:#a65700; ">&gt;</span>Note:<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">strong</span><span style="color:#a65700; ">&gt;</span> drag events are not supported in Internet Explorer <span style="color:#008c00; ">8</span> and earlier versions or Safari <span style="color:#008c00; ">5.1</span> and earlier versions<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;demo&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#696969; ">/* Events fired on the drag target */</span>
+
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragstart</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#696969; ">// The dataTransfer.setData() method sets the data type and the value of the dragged data</span>
+            <span style="color:#696969; ">//save被抓取元素的id(為string值)</span>
+            event<span style="color:#808030; ">.</span>dataTransfer<span style="color:#808030; ">.</span>setData<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Text</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>id<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">// Output some text when starting to drag the p element</span>
+            document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>innerHTML <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Started to drag the p element.</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">// Change the opacity of the draggable element</span>
+            event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>opacity <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0.4</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        <span style="color:#696969; ">// While dragging the p element, change the color of the output text</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">drag</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>color <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">red</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        <span style="color:#696969; ">// Output some text when finished dragging the p element and reset the opacity</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragend</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>innerHTML <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Finished dragging the p element.</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>opacity <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">1</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+
+        <span style="color:#696969; ">/* Events fired on the drop target */</span>
+
+        <span style="color:#696969; ">// When the draggable p element enters the droptarget, change the DIVS&#39;s border style</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragenter</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>className <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">droptarget</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>border <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">3px dotted red</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        <span style="color:#696969; ">// By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragover</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            event<span style="color:#808030; ">.</span>preventDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        <span style="color:#696969; ">// When the draggable p element leaves the droptarget, reset the DIVS&#39;s border style</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragleave</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>className <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">droptarget</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>border <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        <span style="color:#696969; ">/* On drop - Prevent the browser default handling of the data (default is open as link on drop)</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset the color of the output text and DIV&#39;s border color</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the dragged data with the dataTransfer.getData() method</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The dragged data is the id of the dragged element (&quot;drag1&quot;)</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append the dragged element into the drop element</span>
+<span style="color:#696969; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+        document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">drop</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            event<span style="color:#808030; ">.</span>preventDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>className <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">droptarget</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>color <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+                event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>border <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+                <span style="color:#696969; ">//取得被抓取元素的id的document物件，並附加在div元素裡</span>
+                <span style="color:#800000; font-weight:bold; ">var</span> data <span style="color:#808030; ">=</span> event<span style="color:#808030; ">.</span>dataTransfer<span style="color:#808030; ">.</span>getData<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Text</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>appendChild<span style="color:#808030; ">(</span>document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span>data<span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>事件間的時序關係應該如下圖</p>
+
+<p><img height="333" src="1499998840_02742.png" width="1291" /></p>
+
+<p>一些事件與屬性的說明如下</p>
+
+<p>&nbsp;</p>
+
+<p>一、dragstart事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當一元素被抓取時觸發。</p>
+
+<p>&nbsp;</p>
+
+<p>二、drag事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，注意drag事件每350 milliseconds會觸發一次。</p>
+
+<p>&nbsp;</p>
+
+<p>三、dragend事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當拖曳一元素被滑鼠或鍵盤放開的時候觸發。</p>
+
+<p>&nbsp;</p>
+
+<p>四、dragenter事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當被抓取的元素離開或進入某一物件的範圍時被觸發。</p>
+
+<p>&nbsp;</p>
+
+<p>五、dragover事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當一個元素被拖到有效的放置目標時觸發。</p>
+
+<p>由於元素預設值是不能被拖進另一個元素裡，所以這事件專門用來解鎖此功能。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragover</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+    event<span style="color:#808030; ">.</span>preventDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>以下示範解鎖前與未解鎖前的差異，</p>
+
+<p>未解鎖前</p>
+
+<p><img height="237" src="1499481599_82629.png" width="524" /></p>
+
+<p>解鎖後</p>
+
+<p><img height="236" src="1499481716_66017.png" width="525" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、dragleave事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當被拖曳的元素離開原本的地方時觸發。</p>
+
+<p>&nbsp;</p>
+
+<p>七、dragexit事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，目前瀏覽器都不支援。</p>
+
+<p>&nbsp;</p>
+
+<p>八、drop事件</p>
+
+<p>該事件交給了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>處理，當一個元素被放置時觸發。</p>
+
+<p>當一個圖片被抓取放置時預設是打開該圖片。</p>
+
+<p>&nbsp;</p>
+
+<p>九、draggable屬性</p>
+
+<p>是一個HTML屬性，用來表示一個包含元素的文字是否可當成物件來拖動。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;droptarget&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; "><span style="background-color:#FFFF00;">draggable</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">=</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">&quot;true&quot;</span></span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;dragtarget&quot;</span><span style="color:#a65700; ">&gt;</span>Drag me!<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>十、DataTransfer屬性</p>
+
+<p>DataTransfer是<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DragEvent">DragEven介面</a>的屬性，常用的屬性與方法有，</p>
+
+<p>DataTransfer.dropEffect、DataTransfer.effectAllowed、DataTransfer.files、</p>
+
+<p>DataTransfer.items、DataTransfer.types、DataTransfer.clearData()、DataTransfer.getData()、</p>
+
+<p>DataTransfer.setData()、DataTransfer.setDragImage()</p>
+
+<p>範例如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+document<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragstart</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>event<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+    <span style="color:#696969; ">// The dataTransfer.setData() method sets the data type and the value of the dragged data</span>
+    <span style="color:#696969; ">//save被抓取元素的id(為string值)</span>
+    <span style="background-color:#FFFF00;">event</span><span style="color:#808030; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">dataTransfer</span><span style="color:#808030; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">setData</span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">Text</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">,</span></span><span style="background-color:#FFFF00;"> event</span><span style="color:#808030; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">target</span><span style="color:#808030; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">id</span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+
+    <span style="color:#696969; ">// Output some text when starting to drag the p element</span>
+    document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>innerHTML <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Started to drag the p element.</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+
+    <span style="color:#696969; ">// Change the opacity of the draggable element</span>
+    event<span style="color:#808030; ">.</span>target<span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>opacity <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0.4</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>十一、應用範例</p>
+
+<p>最後附上以Drag and Drop技術應用在圖片上傳的範例，就不多做說明了，</p>
+
+<p>此範例有前後端，程式需放在IIS上跑。</p>
+
+<p>前端</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@section header{
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#808030; ">.</span>dragleave <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">000000</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>dragenter <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">5</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">dashed</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">808080</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">center</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding-top</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">25</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">color</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">808080</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">font</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">26</span><span style="color:#006600; ">px</span> 微軟正黑體<span style="color:#808030; ">,</span><span style="color:#074726; ">sans-serif</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>displayNone <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">display</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">none</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+}
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;dragUpLoad&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;dragleave&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;result&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;progress text-center displayNone&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;upload_progress&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;progress-bar progress-bar-striped active&quot;</span><span style="color:#274796; "> role</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;progressbar&quot;</span><span style="color:#274796; "> aria-valuenow</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;&quot;</span><span style="color:#274796; "> aria-valuemin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;0&quot;</span><span style="color:#274796; "> aria-valuemax</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;100&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+@section scripts{
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> dragUpLoad <span style="color:#808030; ">=</span> document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragUpLoad</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        dragUpLoad<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragenter</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">.</span>className <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragenter</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">.</span>innerText <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">上傳</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        dragUpLoad<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragleave</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">.</span>className <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragleave</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">.</span>innerText <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        dragUpLoad<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragover</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            e<span style="color:#808030; ">.</span>preventDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        dragUpLoad<span style="color:#808030; ">.</span>addEventListener<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">drop</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            e<span style="color:#808030; ">.</span>preventDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">//顯示進度條</span>
+            document<span style="color:#808030; ">.</span>getElementsByClassName<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">progress</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">[</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">]</span><span style="color:#808030; ">.</span>setAttribute<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">class</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">progress text-center</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">/*FormData*/</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> file <span style="color:#808030; ">=</span> e<span style="color:#808030; ">.</span>dataTransfer<span style="color:#808030; ">.</span>files<span style="color:#808030; ">[</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">]</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> formData <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> FormData<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            formData<span style="color:#808030; ">.</span>append<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">userfile</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> file<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">/*XMLHttpRequest*/</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> xhttp <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> XMLHttpRequest<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            xhttp<span style="color:#808030; ">.</span>open<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">POST</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">@Url.Action(</span><span style="color:#800000; ">&quot;</span>Index<span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">)</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#0f4d75; ">true</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+            <span style="color:#696969; ">//註冊處理中委派</span>
+            xhttp<span style="color:#808030; ">.</span>upload<span style="color:#808030; ">.</span>onprogress <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>e<span style="color:#808030; ">.</span>lengthComputable<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                    <span style="color:#800000; font-weight:bold; ">var</span> intComplete <span style="color:#808030; ">=</span> <span style="color:#808030; ">(</span>e<span style="color:#808030; ">.</span>loaded <span style="color:#808030; ">/</span> e<span style="color:#808030; ">.</span>total<span style="color:#808030; ">)</span> <span style="color:#808030; ">*</span> <span style="color:#008c00; ">100</span><span style="color:#800080; ">;</span>
+                    document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">upload_progress</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>innerHTML <span style="color:#808030; ">=</span> <span style="color:#797997; ">Math</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">round</span><span style="color:#808030; ">(</span>intComplete<span style="color:#808030; ">)</span>  <span style="color:#808030; ">+</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">%</span><span style="color:#800000; ">&#39;</span><span style="color:#800080; ">;</span>
+                    document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">upload_progress</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>style<span style="color:#808030; ">.</span>width <span style="color:#808030; ">=</span> <span style="color:#797997; ">Math</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">round</span><span style="color:#808030; ">(</span>intComplete<span style="color:#808030; ">)</span> <span style="color:#808030; ">+</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">%</span><span style="color:#800000; ">&#39;</span><span style="color:#800080; ">;</span>
+                <span style="color:#800080; ">}</span>
+            <span style="color:#800080; ">}</span>
+
+            <span style="color:#696969; ">//註冊完成後委派</span>
+            xhttp<span style="color:#808030; ">.</span>upload<span style="color:#808030; ">.</span>onload <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span>e<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                <span style="color:#696969; ">//刪除上傳區域</span>
+                document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dragUpLoad</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>remove<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+                <span style="color:#696969; ">//隱藏進度條</span>
+                document<span style="color:#808030; ">.</span>getElementsByClassName<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">progress</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">[</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">]</span><span style="color:#808030; ">.</span>setAttribute<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">class</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">progress text-center displayNone</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+
+            xhttp<span style="color:#808030; ">.</span>onloadend <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                <span style="color:#696969; ">//顯示圖片</span>
+                <span style="color:#800000; font-weight:bold; ">var</span> arrData <span style="color:#808030; ">=</span> JSON<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">parse</span><span style="color:#808030; ">(</span>xhttp<span style="color:#808030; ">.</span>response<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                <span style="color:#800000; font-weight:bold; ">var</span> img <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> <span style="color:#797997; ">Image</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                img<span style="color:#808030; ">.</span>src <span style="color:#808030; ">=</span> arrData<span style="color:#800080; ">;</span>
+                img<span style="color:#808030; ">.</span>className <span style="color:#808030; ">=</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">image</span><span style="color:#800000; ">&#39;</span><span style="color:#800080; ">;</span>
+                img<span style="color:#808030; ">.</span>style <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">width:100%</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+                document<span style="color:#808030; ">.</span>getElementById<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">result</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>appendChild<span style="color:#808030; ">(</span>img<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+
+            xhttp<span style="color:#808030; ">.</span>send<span style="color:#808030; ">(</span>formData<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+}
+</pre>
+
+<p>&nbsp;</p>
+
+<p>後端</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.IO;
+<span style="color:#0000ff;">using</span> Newtonsoft.Json;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Index(HttpPostedFileBase userfile)
+        &#123;
+            <span style="color:#0000ff;">try</span>
+            &#123;
+                <span style="color:#0000ff;">string</span> fileName = System.IO.Path.GetFileName(userfile.FileName);
+                <span style="color:#0000ff;">string</span> path = System.IO.Path.Combine(Server.MapPath(<span style="color:#a31515;">&quot;/&quot;</span>), fileName);
+
+                <span style="color:#0000ff;">if</span> (Directory.Exists(path))
+                &#123;
+                    Directory.Delete(path);
+                &#125;
+
+                userfile.SaveAs(path);
+
+                <span style="color:#0000ff;">return</span> Content(JsonConvert.SerializeObject(<span style="color:#a31515;">&quot;/&quot;</span>+ fileName), <span style="color:#a31515;">&quot;application/json&quot;</span>);
+            &#125;
+            <span style="color:#0000ff;">catch</span> (System.Exception)
+            &#123;
+                <span style="color:#0000ff;">throw</span>;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://1drv.ms/u/s!Au3E0pOlHdyLhF5Pp-eSdzsklF56">範例檔下載</a></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/html/html5_draganddrop.asp">HTML5 Drag and Drop</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTML_Drag_and_Drop_API">HTML 拖放 API</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.w3.org/TR/2010/WD-html5-20101019/dnd.html#dnd">7.8 Drag and drop</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/DataTransfer">DataTransfer</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://code-beginner.logdown.com/posts/313821">JavaScript：拖曳圖片上傳功能</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tecblog/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/07/03/img-tag/" rel="prev" title="img tag">
+      <i class="fa fa-chevron-left"></i> img tag
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/07/12/XMLHttpRequest-processEvent/" rel="next" title="XMLHttpRequest.processEvent">
+      XMLHttpRequest.processEvent <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2017/07/07/Drag-and-Drop-event/";
+    this.page.identifier = "2017/07/07/Drag-and-Drop-event/";
+    this.page.title = "Drag and Drop event";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

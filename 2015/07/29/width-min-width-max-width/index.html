@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS width與min-width與max-width">
+<meta property="og:url" content="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/1453189603_39249.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/1499069822_2313.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/1499070369_90487.png">
+<meta property="article:published_time" content="2015-07-29T05:02:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/1453189603_39249.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CSS width與min-width與max-width | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/07/29/width-min-width-max-width/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS width與min-width與max-width
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-07-29 13:02:00" itemprop="dateCreated datePublished" datetime="2015-07-29T13:02:00+08:00">2015-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/07/29/width-min-width-max-width/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/29/width-min-width-max-width/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、CSS中的width</p>
+
+<p>CSS中的width屬性是用來設定一個元素的寬度，</p>
+
+<p>其值可為auto(預設值，browser將會自動計算寬度)、px、%，</p>
+
+<p>另外值得注意的是，CSS中的min-width與max-width屬性是可以與width屬性作用同時存在的，</p>
+
+<p>將會在第二點做舉例。</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span> name=&quot;viewport&quot; content=&quot;width=device-width<span style="color: rgb(128, 128, 48);">,</span> initial-scale=1<span style="color: rgb(128, 128, 48);">.</span>0&quot;<span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">img</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;"><span style="background-color:#FFFF00;">width</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color: rgb(0, 140, 0);"><span style="background-color:#FFFF00;">100</span></span><span style="color: rgb(0, 102, 0);"><span style="background-color:#FFFF00;">%</span></span><span style="color: rgb(128, 0, 128);"><span style="background-color:#FFFF00;">;</span></span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">height</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(7, 71, 38);">auto</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">img</span> src=&quot;http<span style="color: rgb(128, 128, 48);">:</span>//www.w3schools<span style="color: rgb(128, 128, 48);">.</span>com/css/img_chania<span style="color: rgb(128, 128, 48);">.</span>jpg&quot; <span style="background-color:#FFFF00;">width=&quot;460px&quot;</span> height=&quot;345px&quot;<span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>Resize the browser window to see how the image wil scale when the width is less than 460px<span style="color: rgb(128, 128, 48);">.</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>如上例，width屬性為100%代表元素的寬度會等於browser視窗的寬度(父層皆無padding與margin)，</p>
+
+<p>正確來說應該是width屬性為100%代表元素的寬度會等於父層的寬度。</p>
+
+<p>CSS的width屬性為100%代表元素的寬度將會覆寫原本img tag內的html width=&quot;460px&quot;屬性</p>
+
+<p>&nbsp;</p>
+
+<p>額外一提，width:100%與margin屬性一起設定的話是不會互相影響是不相干的，</p>
+
+<p>可能有人會認為如果margin屬性再加上去，</p>
+
+<p>則寬度會自動包含margin調整成browser視窗的寬度，</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">img</span> <span style="color:#800080; ">{</span>
+    <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+    <span style="color:#bb7977; font-weight:bold; ">height</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">auto</span><span style="color:#800080; ">;</span>
+    <span style="color:#bb7977; font-weight:bold; ">margin</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">0</span> <span style="color:#008c00; ">20</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span>
+</pre>
+
+<p>但實際上是錯的，例如未加margin: 0 20%前，width: 100%等於browser視窗的寬度為400px，</p>
+
+<p>加上margin後則整個父層的寬度會是400px再加上左右20%的margin為400+400*0.2*2=560px，</p>
+
+<p>並會出現X卷軸喔。</p>
+
+<p><img height="636" src="1453189603_39249.png" width="403" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、max-width</p>
+
+<p>承上例，我們藉由使用max-width來讓圖片縮放的比例較好看一點</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">meta</span> name=&quot;viewport&quot; content=&quot;width=device-width<span style="color: rgb(128, 128, 48);">,</span> initial-scale=1<span style="color: rgb(128, 128, 48);">.</span>0&quot;<span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">img</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">max-width</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">100</span><span style="color: rgb(0, 102, 0);">%</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">height</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(7, 71, 38);">auto</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">img</span> src=&quot;http<span style="color: rgb(128, 128, 48);">:</span>//www.w3schools<span style="color: rgb(128, 128, 48);">.</span>com/css/img_chania<span style="color: rgb(128, 128, 48);">.</span>jpg&quot; width=&quot;460&quot; height=&quot;345&quot;<span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>Resize the browser window to see how the image wil scale when the width is less than 460px<span style="color: rgb(128, 128, 48);">.</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>設置max-width屬性為100%的意思是，圖片的寬度可以依browser視窗寬度等比例的縮小，但是放大時，</p>
+
+<p>最多只能放大到圖片所設定大小，與browser視窗寬度100%寬度而已。</p>
+
+<p>例如：</p>
+
+<p>max-width設定成80%，html width屬性為460，圖片最多只能放大到460，與browser視窗寬度的80%而已。</p>
+
+<p>&nbsp;</p>
+
+<p>三、保持長寬比(aspect ratio)</p>
+
+<p>有時為了美觀，也要有保持適當的長寬比技術，範例如下。</p>
+
+<p>&nbsp;</p>
+
+<p>1、長寬比為1 : 1</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#808030; ">.</span>container <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">background-color</span><span style="color:#808030; ">:</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; "><span style="background-color:#FFFF00;">width</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#008c00; "><span style="background-color:#FFFF00;">100</span></span><span style="color:#006600; "><span style="background-color:#FFFF00;">%</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+            <span style="color:#bb7977; font-weight:bold; "><span style="background-color:#FFFF00;">padding-top</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#008c00; "><span style="background-color:#FFFF00;">100</span></span><span style="color:#006600; "><span style="background-color:#FFFF00;">%</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span> <span style="color:#696969; ">/* 1:1 Aspect Ratio */</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Maintain Aspect Ratio <span style="color:#008c00; ">1</span>:<span style="color:#008c00; ">1</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Resize the window to see the effect<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>2、長寬比為1 : 2</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#808030; ">.</span>container <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">background-color</span><span style="color:#808030; ">:</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding-top</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">50</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span> <span style="color:#696969; ">/* 1:2 Aspect Ratio */</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Maintain Aspect Ratio <span style="color:#008c00; ">1</span>:<span style="color:#008c00; ">2</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Resize the window to see the effect<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>由以上範例可知，主要是固定設定「width:100%」與動態設定「padding-top」屬性，來保持長寬比，</p>
+
+<p>例如做長寬比1 : 1時，則padding-top要往下推100%；做長寬比1 : 2時(也就是長寬比為0.5 : 1時)，則padding-top只要往下推50%。</p>
+
+<p>那為何這樣就可以達到保時長寬比？我也不曉得，這還蠻不直覺的。</p>
+
+<p>&nbsp;</p>
+
+<p>3、長寬比為 100 : 56.25</p>
+
+<p>為什麼要用padding-top屬性就可以達到保時長寬比？我想應該是div tag的關係吧，</p>
+
+<p>因為div tag是塊級元素，並沒有特定的高？</p>
+
+<p>現在這個例子是iframe tag是個行內元素</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">iframe</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">background-color</span><span style="color:#808030; ">:</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding-top</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">56.25</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Maintain Aspect Ratio <span style="color:#008c00; ">100</span>:<span style="color:#008c00; ">56.25</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Resize the window to see the effect<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">iframe</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;560&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;315&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://www.youtube.com/embed/X0QzdblXcR0&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">frameborder</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;0&quot;</span><span style="color:#274796; "> allowfullscreen</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">iframe</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>畫面為</p>
+
+<p><img height="605" src="1499069822_2313.png" width="397" /></p>
+
+<p>你會發現真的有往下推56.25%，但你的iframe卻是在56.25%之後，這樣很怪耶。</p>
+
+<p>&nbsp;</p>
+
+<p>改法如下，這樣就比較直覺了。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">iframe</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">background-color</span><span style="color:#808030; ">:</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">100</span><span style="color:#006600; "><span style="background-color:#FFFF00;">vw</span></span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; "><span style="background-color:#FFFF00;">height</span></span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">56.25</span><span style="color:#006600; "><span style="background-color:#FFFF00;">vw</span></span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Maintain Aspect Ratio <span style="color:#008c00; ">100</span>:<span style="color:#008c00; ">56.25</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Resize the window to see the effect<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">iframe</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;560&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;315&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://www.youtube.com/embed/X0QzdblXcR0&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">frameborder</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;0&quot;</span><span style="color:#274796; "> allowfullscreen</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">iframe</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>畫面為</p>
+
+<p><img height="544" src="1499070369_90487.png" width="813" /></p>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/07/29/CSS-overflow/" rel="prev" title="CSS overflow">
+      <i class="fa fa-chevron-left"></i> CSS overflow
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/07/31/Flexible-Box-flexbox/" rel="next" title="Flexible Box - flexbox">
+      Flexible Box - flexbox <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/07/29/width-min-width-max-width/";
+    this.page.identifier = "2015/07/29/width-min-width-max-width/";
+    this.page.title = "CSS width與min-width與max-width";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

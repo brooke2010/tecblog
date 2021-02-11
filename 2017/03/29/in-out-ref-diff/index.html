@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="參數修飾詞 in、out 和 ref 之間的差異">
+<meta property="og:url" content="https://brooke2010.github.io/2017/03/29/in-out-ref-diff/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/29/in-out-ref-diff/1580880028_84123.png">
+<meta property="article:published_time" content="2017-03-29T09:15:33.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2017/03/29/in-out-ref-diff/1580880028_84123.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2017/03/29/in-out-ref-diff/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>參數修飾詞 in、out 和 ref 之間的差異 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2017/03/29/in-out-ref-diff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          參數修飾詞 in、out 和 ref 之間的差異
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-29 17:15:33" itemprop="dateCreated datePublished" datetime="2017-03-29T17:15:33+08:00">2017-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2017/03/29/in-out-ref-diff/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/29/in-out-ref-diff/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>雖然對比於其他關鍵字，out 和 ref 關鍵字會較不熟悉，</p>
+
+<p>不過還是來比較一下兩者的不同。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            <span style="color:#0000ff;">string</span> a;
+            testOut(<span style="color:#0000ff;">out</span> a);
+
+            <span style="color:#0000ff;">string</span> b = <span style="color:#a31515;">&quot;ccc&quot;</span>;
+            testRef(<span style="color:#0000ff;">ref</span> b);
+
+            Console.WriteLine(<span style="color:#a31515;">&quot;string a = &#123;0&#125;, string b = &#123;1&#125;&quot;</span>, a, b);
+
+            <span style="color:#0000ff;">int</span> readonlyArgument = 44;
+            InArgExample(readonlyArgument);
+            Console.WriteLine(readonlyArgument);     <span style="color:#008000;">// value is still 44</span>
+
+            Console.ReadKey();
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> testOut(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">string</span> i)
+        &#123;
+            i = <span style="color:#a31515;">&quot;ggg&quot;</span>;
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> testRef(<span style="color:#0000ff;">ref</span> <span style="color:#0000ff;">string</span> i)
+        &#123;
+            <span style="color:#008000;">//can be do nothing</span>
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> InArgExample(<span style="color:#0000ff;">in</span> <span style="color:#0000ff;">int</span> number)
+        &#123;
+            <span style="color:#008000;">// Uncomment the following line to see error CS8331</span>
+            <span style="color:#008000;">//number = 19;</span>
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>1、在呼叫使用 ref 宣告輸入參數的方法時，呼叫端的輸入參數需先初始化；</p>
+
+<p>反而使用 out&nbsp;宣告輸入參數的方法，呼叫端的輸入參數不需要先初始化。</p>
+
+<p>2、使用 ref 宣告輸入參數的方法時，輸入參數允許什麼事都不用做；</p>
+
+<p>反而使用 out&nbsp;宣告輸入參數的方法時，在方法回傳前輸入參數一定要被指派值。</p>
+
+<p>3、編譯器在多載方法上，並不會把參數修飾詞視為不同的簽章 (signature)，</p>
+
+<p>也就是說，一種方法採用 ref 引數，而另一種方法採用 out 引數，</p>
+
+<p>只要&nbsp;ref、in、out 三者同時存在兩個，則不能多載方法。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">class</span> CS0663_Example
+&#123;
+    <span style="color:#008000;">// Compiler error CS0663: &quot;Cannot define overloaded</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> SampleMethod(<span style="color:#0000ff;">ref</span> <span style="color:#0000ff;">int</span> i) &#123; &#125;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> SampleMethod(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> i) &#123; i = 1; &#125;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> SampleMethod(<span style="color:#0000ff;">in</span> <span style="color:#0000ff;">int</span> i) &#123; &#125;
+&#125;
+</code></pre>
+
+<p>4、必須在 C# 7.2 以上能使用 in 參數修飾詞，in 參數修飾詞是以傳址方式傳遞引數，</p>
+
+<p>你可以先把 in 宣告的特性想成就是等於 ref 宣告，</p>
+
+<p>但與 ref 宣告不同的是，經由&nbsp;in 宣告的值是不能被修改的。</p>
+
+<p>5、ref 與 out 在使用上，其 method argument 與 method parameter 前面都要明確指定，</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            <span style="color:#0000ff;">string</span> a;
+            testOut(<span style="color:#0000ff;">out</span> a);
+
+            <span style="color:#0000ff;">string</span> b = <span style="color:#a31515;">&quot;ccc&quot;</span>;
+            testRef(<span style="color:#0000ff;"><span style="background-color:#FFFF00;">ref</span></span> b);
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> testOut(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">string</span> i) &#123; i = <span style="color:#a31515;">&quot;ggg&quot;</span>; &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> testRef(<span style="color:#0000ff;"><span style="background-color:#FFFF00;">ref</span></span> <span style="color:#0000ff;">string</span> i) &#123; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>而 in 在使用上則不須在&nbsp;method argument 前面指定 in 參數修飾詞</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            InArgExample(44);
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> InArgExample(<span style="color:#0000ff;">in</span> <span style="color:#0000ff;">int</span> number) &#123; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>6、在 C# 7.2，有加「in」參數修飾詞與沒有加修飾詞的方法，兩者可以多載，</p>
+
+<p>當想要使用帶有「in」參數修飾詞的方法時，</p>
+
+<p>只要在呼叫時也加上「in」參數修飾詞，就可區分開來。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            Show(3);
+
+            <span style="color:#0000ff;">int</span> readonlyArgument = 100;
+            Show(<span style="color:#0000ff;"><span style="background-color:#FFFF00;">in</span></span> readonlyArgument);
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Show(<span style="color:#0000ff;">int</span> arg)
+        &#123;
+            Console.WriteLine(arg);
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Show(<span style="color:#0000ff;"><span style="background-color:#FFFF00;">in</span></span> <span style="color:#0000ff;">int</span> arg)
+        &#123;
+            Console.WriteLine(<span style="color:#a31515;">&quot;in - &quot;</span> + arg);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果為</p>
+
+<p><img height="68" src="1580880028_84123.png" width="266" /></p>
+
+<p>&nbsp;</p>
+
+<p>7、out</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApp1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            Call();
+            <span style="color:#008000;">/*below the commented code,can not to be executed*/</span>
+            <span style="color:#008000;">//Console.WriteLine($&quot;(&#123;x&#125;, &#123;y&#125;)&quot;);</span>
+            Console.ReadKey();
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Call()
+        &#123;
+            GetCoordinates(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> x, <span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> y);
+            Console.WriteLine($<span style="color:#a31515;">&quot;(&#123;x&#125;, &#123;y&#125;)&quot;</span>);
+        &#125;
+
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> GetCoordinates(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> a, <span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> b)
+        &#123;
+            a = 100;
+            b = 200;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>說明：</p>
+
+<p>a、現在參數修飾詞「out」也可以在傳遞時再宣告，這可以減少程式碼的行數，增加可讀性。</p>
+
+<p>b、這個變數在包含它本身的 { } 封閉區塊範圍內，所以接續宣告後面的程式碼可以直接使用這些變數。</p>
+
+<p>c、如果你不在意某個 out 參數的傳回結果，可以使用 _ 代表忽略它:</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Call()
+&#123;
+    GetCoordinates(<span style="color:#0000ff;">out</span> <span style="color:#0000ff;">int</span> x, <span style="color:#0000ff;">out</span> _);
+    Console.WriteLine($<span style="color:#a31515;">&quot;(&#123;x&#125;)&quot;</span>);
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/szasx730.aspx">使用 ref 和 out 傳遞陣列 (C# 程式設計手冊)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/t3c3bfhx.aspx">out (C# 參考)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/14akc2c7.aspx">ref (C# 參考)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/keywords/in-parameter-modifier">in parameter modifier (C# Reference)</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/03/28/Dictionary/" rel="prev" title="Dictionary 類別的使用">
+      <i class="fa fa-chevron-left"></i> Dictionary 類別的使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/03/30/Tuple/" rel="next" title="Tuple 類別的使用">
+      Tuple 類別的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2017/03/29/in-out-ref-diff/";
+    this.page.identifier = "2017/03/29/in-out-ref-diff/";
+    this.page.title = "參數修飾詞 in、out 和 ref 之間的差異";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SelectListItem與SelectList的用法">
+<meta property="og:url" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/20158302425569.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1477535632_7585.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466667011_95629.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466667472_96233.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466669069_0653.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466670058_89551.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466669153_89014.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466670735_2346.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1466670947_41812.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1474012770_96635.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/1477551337_26734.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/20158313014671.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/20158313059656.png">
+<meta property="article:published_time" content="2016-06-21T01:18:45.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="MVC Helper Extension">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/20158302425569.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>SelectListItem與SelectList的用法 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SelectListItem與SelectList的用法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-06-21 09:18:45" itemprop="dateCreated datePublished" datetime="2016-06-21T09:18:45+08:00">2016-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/MVC-Helper-Extension/" itemprop="url" rel="index">
+                    <span itemprop="name">MVC Helper Extension</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/06/21/SelectListItem-SelectList/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/21/SelectListItem-SelectList/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、SelectListItem用法</p>
+
+<p>經由「<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/brooke/2015/08/28/153245">DropDownList與DropDownListFor的用法</a>」可知使用DropDownList或DropDownListFor時，</p>
+
+<p>會結合多組<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.web.mvc.selectlistitem(v=vs.118).aspx">SelectListItem</a>來當作option tag的選擇項目，</p>
+
+<p>其selectListItem只有三個屬性與建構函式很簡單，例如</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">new</span> SelectListItem()
+&#123;
+    Text = <span style="color:#a31515;">&quot;apple&quot;</span>,
+    Value = <span style="color:#a31515;">&quot;apple&quot;</span>,
+    Selected = <span style="color:#0000ff;">true</span>
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>而多組SelectListItem可以做成List傳給DropDownList來使用，例如</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+mySelectItemList.Add(<span style="color:#0000ff;">new</span> SelectListItem()
+&#123;
+    Text = <span style="color:#a31515;">&quot;apple&quot;</span>,
+    Value = <span style="color:#a31515;">&quot;apple&quot;</span>,
+    Selected = <span style="color:#0000ff;">false</span>
+&#125;);
+
+mySelectItemList.Add(<span style="color:#0000ff;">new</span> SelectListItem()
+&#123;
+    Text = <span style="color:#a31515;">&quot;banana&quot;</span>,
+    Value = <span style="color:#a31515;">&quot;banana&quot;</span>,
+    Selected = <span style="color:#0000ff;">true</span>
+&#125;);
+
+mySelectItemList.Add(<span style="color:#0000ff;">new</span> SelectListItem()
+&#123;
+    Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>,
+    Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>,
+    Selected = <span style="color:#0000ff;">false</span>
+&#125;);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>也可以縮短成</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+mySelectItemList.AddRange(<span style="color:#0000ff;">new</span>[]&#123;                
+    <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;apple&quot;</span>, Value = <span style="color:#a31515;">&quot;apple&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+    <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;banana&quot;</span>, Value = <span style="color:#a31515;">&quot;banana&quot;</span>, Selected = <span style="color:#0000ff;">true</span>&#125;,
+    <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;
+&#125;);</code></pre>
+
+<p>&nbsp;</p>
+
+<p>範例：</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult About()
+&#123;
+    List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+    mySelectItemList.AddRange(<span style="color:#0000ff;">new</span>[]&#123;                
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;apple&quot;</span>, Value = <span style="color:#a31515;">&quot;apple&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;banana&quot;</span>, Value = <span style="color:#a31515;">&quot;banana&quot;</span>, Selected = <span style="color:#0000ff;">true</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;
+    &#125;);
+
+    <span style="color:#0000ff;">return</span> View(mySelectItemList);
+&#125;</code></pre>
+
+<p>View為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#797997; ">@model</span> IEnumerable<span style="color:#808030; ">&lt;</span>SelectListItem<span style="color:#808030; ">&gt;</span>
+<span style="color:#797997; ">@Html</span><span style="color:#808030; ">.</span>DropDownListFor<span style="color:#808030; ">(</span>m <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> m<span style="color:#808030; ">.</span>FirstOrDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>Text<span style="color:#808030; ">,</span> Model<span style="color:#808030; ">)</span>
+</pre>
+
+<p>畫面為</p>
+
+<p><img border="0" src="20158302425569.png" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、SelectList用法</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx">SelectList</a>的建構式有</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues
+)</code></pre>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues,
+    IEnumerable disabledGroups
+)</code></pre>
+
+<p>&nbsp;</p>
+
+<p>1、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable)">SelectList(IEnumerable)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list.</p>
+
+<p>實例：</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult About()
+&#123;
+    List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+    mySelectItemList.AddRange(<span style="color:#0000ff;">new</span>[]&#123;                
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;apple&quot;</span>, Value = <span style="color:#a31515;">&quot;apple&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;banana&quot;</span>, Value = <span style="color:#a31515;">&quot;banana&quot;</span>, Selected = <span style="color:#0000ff;">true</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;
+    &#125;);
+
+    SelectList aSelectList = <span style="color:#0000ff;">new</span> SelectList(mySelectItemList);
+
+    <span style="color:#0000ff;">return</span> View(aSelectList.<span style="background-color:#FFFF00;">Items</span>);
+&#125;</code></pre>
+
+<p>View為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model IEnumerable&lt;SelectListItem&gt;
+
+@Html.DropDownList(<span style="color:#a31515;">&quot;aaa&quot;</span>, Model)</code></pre>
+
+<p>說明：</p>
+
+<p>aSelectList.Items的Items屬性是用來取得或設定aSelectList的集合，</p>
+
+<p>以這個例子就是指取得List&lt;SelectListItem&gt;型態的物件。</p>
+
+<p>&nbsp;</p>
+
+<p>2、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.Object)">SelectList(IEnumerable, Object)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list and a selected value.</p>
+
+<p>實例：</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult About()
+&#123;
+    List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+    mySelectItemList.AddRange(<span style="color:#0000ff;">new</span>[]&#123;
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;apple&quot;</span>, Value = <span style="color:#a31515;">&quot;apple&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;banana&quot;</span>, Value = <span style="color:#a31515;">&quot;banana&quot;</span>, <span style="background-color:#FFFF00;">Selected = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">true</span></span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;
+    &#125;);
+
+    SelectList aSelectList = <span style="color:#0000ff;">new</span> SelectList(mySelectItemList, <span style="background-color:#FFFF00;">(</span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">object</span></span><span style="background-color:#FFFF00;">)</span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;watermelon&quot;</span></span>);
+
+    <span style="color:#0000ff;">return</span> View(aSelectList.Items);
+&#125;</code></pre>
+
+<p>View為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model IEnumerable&lt;SelectListItem&gt;
+
+@Html.DropDownList(<span style="color:#a31515;">&quot;aaa&quot;</span>, Model)</code></pre>
+
+<p>結果</p>
+
+<p><img height="137" src="1477535632_7585.png" width="368" /></p>
+
+<p>發現SelectList建構式裡指定(object)&quot;watermelon&quot;都沒用，</p>
+
+<p>只會遵從SelectListItem建構式的設定。</p>
+
+<p>那為何SelectList(IEnumerable, Object)卻失靈了？如何才能使用他？</p>
+
+<p>事後才發現一定要指定dataValueField與dataTextField才可正常動作，</p>
+
+<p>那這不就是第五點建構式嗎？那這個第二點建構式的實用性是什麼？誤導別人？Orz</p>
+
+<p>&nbsp;</p>
+
+<p>3、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.Object,System.Collections.IEnumerable)">SelectList(IEnumerable, Object, IEnumerable)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    <span style="background-color:#FFFF00;">IEnumerable disabledValues</span>
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the selected value, and the disabled values.</p>
+
+<p>disabled values用來指定哪幾個選項不能選。</p>
+
+<p>實例：交由第六點說明。</p>
+
+<p>&nbsp;</p>
+
+<p>4、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String)">SelectList(IEnumerable, String, String)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;"><span style="background-color:#FFFF00;">string</span></span><span style="background-color:#FFFF00;"> dataValueField</span>,
+    <span style="color:#0000ff;"><span style="background-color:#FFFF00;">string</span></span><span style="background-color:#FFFF00;"> dataTextField</span>
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, and the data text field.</p>
+
+<p>用來決定誰要當Value、誰要當Text。</p>
+
+<p>實例：交由第六點說明。</p>
+
+<p>&nbsp;</p>
+
+<p>5、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String,System.Object)">SelectList(IEnumerable, String, String, Object)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, the data text field, and a selected value.</p>
+
+<p>實例：此建構式所包含的參數上面已經說明過了，但這裡額外提如何跟Entity Framework配合的應用。</p>
+
+<p>先準備範例資料庫</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> TEST_TABLE 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#800000; font-weight:bold; ">no</span>   TINYINT <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     name NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">20</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     age  TINYINT <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span><span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+  <span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TEST_TABLE <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>age<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bill&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">39</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span> 
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TEST_TABLE <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>age<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Mary&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">20</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span> 
+<span style="color:#800000; font-weight:bold; ">INSERT</span> TEST_TABLE <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>age<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Junefo&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+
+<p>再準備一個空白的WebApplication專案，並從Models資料夾添加一個Entity Model檔案</p>
+
+<p><img height="552" src="1466667011_95629.png" width="874" /></p>
+
+<p>指定Entity Model檔案名稱</p>
+
+<p><img height="109" src="1466667472_96233.png" width="387" /></p>
+
+<p>選擇從既有的資料庫建立Entity Model</p>
+
+<p><img height="527" src="1466669069_0653.png" width="593" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="550" src="1466670058_89551.png" width="618" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="547" src="1466669153_89014.png" width="615" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="549" src="1466670735_2346.png" width="615" /></p>
+
+<p>Model成功後</p>
+
+<p><img height="436" src="1466670947_41812.png" width="253" /></p>
+
+<p>再來看Controller部份，利用原本已經存在的HomeController改寫就好，黃色為新增的地方</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;"><span style="background-color:#FFFF00;">using</span></span><span style="background-color:#FFFF00;"> WebApplication1.Models;</span>
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="background-color:#FFFF00;">testDB2Entities db = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> testDB2Entities();</span>
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="background-color:#FFFF00;">ViewBag.Choose = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> SelectList(db.TEST_TABLE, </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;no&quot;</span></span><span style="background-color:#FFFF00;">, </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;name&quot;</span></span><span style="background-color:#FFFF00;">, db.TEST_TABLE.Where(a =&gt; a.no == 2).First().no);</span>
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult About()
+        &#123;
+            ViewBag.Message = <span style="color:#a31515;">&quot;Your application description page.&quot;</span>;
+
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Contact()
+        &#123;
+            ViewBag.Message = <span style="color:#a31515;">&quot;Your contact page.&quot;</span>;
+
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>再來看View的部份，利用原本已經存在的Index.cshtml，整個內容改成下列原始碼</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#797997; ">@Html</span><span style="color:#808030; ">.</span>DropDownList<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;Choose&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">null</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">new</span> <span style="color:#808030; ">{</span> <span style="color:#797997; ">@class</span> <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;form-control&quot;</span> <span style="color:#808030; ">}</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>範例說明：</p>
+
+<p>這個範例的重點在於Index Action裡，我們利用SelectList多載方法</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<p>但SelectList方法與Entity Framework配合的關係如下圖</p>
+
+<p><img height="503" src="1474012770_96635.png" width="699" /></p>
+
+<p>由上圖可知，IEnumerable items參數相當於資料表整個資料，</p>
+
+<p>dataValueField與dataTextField所對應的關係就是TEST_TABLE資料表的no與name屬性，</p>
+
+<p>而selectedValue為特別要指定TEST_TABLE資料表單一一筆記錄的指定值，這種關係有點特殊，需注意一下。</p>
+
+<p>&nbsp;</p>
+
+<p>再來看DropDownList</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#797997; ">@Html</span><span style="color:#808030; ">.</span>DropDownList<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;Choose&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">null</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">new</span> <span style="color:#808030; ">{</span> <span style="color:#797997; ">@class</span> <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;form-control&quot;</span> <span style="color:#808030; ">}</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>而該DropDownList多載方法可參考下面</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> MvcHtmlString DropDownList(
+    <span style="color:#0000ff;">this</span> HtmlHelper htmlHelper,
+    <span style="color:#0000ff;">string</span> name,
+    IEnumerable&lt;SelectListItem&gt; selectList,
+    Object htmlAttributes
+)</code></pre>
+
+<p>DropDownList值得注意的是，當只有指定第一個參數name，而第二參數不打算放入資料集(為null)時，</p>
+
+<p>此時第一參數也會擔任匯入資料集功能，DropDownList第一參數指定&quot;Choose&quot;名稱時，</p>
+
+<p>會找尋ViewBag底下動態名稱為Choose的物件，並完成匯入資料集功能，</p>
+
+<p>這種也是有點難理解的地方，需注意一下。</p>
+
+<p>&nbsp;</p>
+
+<p>如果要使用第二參數時，則要特別注意第一參數的字串名稱不能和ViewBag底下的動態名稱相同，</p>
+
+<p>也就是Choose名稱，否則DropDownList將無法正確選值，如下範例。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@&#123;
+    SelectList viewBagChoose = ViewBag.<span style="background-color:#FFFF00;">Choose</span>;
+&#125;
+@Html.DropDownList(<span style="color:#a31515;">&quot;<span style="background-color:#FFFF00;">viewBagChoose</span>&quot;</span>, viewBagChoose, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span> &#125;)</code></pre>
+
+<p>&nbsp;</p>
+
+<p>6、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String,System.Object,System.Collections.IEnumerable)">SelectList(IEnumerable, String, String, Object, IEnumerable)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, the data text field, the selected value, and the disabled values.</p>
+
+<p>實例：</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult About()
+&#123;
+    List&lt;SelectListItem&gt; mySelectItemList = <span style="color:#0000ff;">new</span> List&lt;SelectListItem&gt;();
+
+    mySelectItemList.AddRange(<span style="color:#0000ff;">new</span>[]&#123;
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;apple&quot;</span>, Value = <span style="color:#a31515;">&quot;apple&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;banana&quot;</span>, Value = <span style="color:#a31515;">&quot;banana&quot;</span>, <span style="background-color:#FFFF00;">Selected = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">true</span></span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Value = <span style="color:#a31515;">&quot;watermelon&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;,
+        <span style="color:#0000ff;">new</span> SelectListItem() &#123;Text = <span style="color:#a31515;">&quot;guava&quot;</span>, Value = <span style="color:#a31515;">&quot;guava&quot;</span>, Selected = <span style="color:#0000ff;">false</span>&#125;
+    &#125;);
+
+    List&lt;<span style="color:#0000ff;">string</span>&gt; disable = <span style="color:#0000ff;">new</span> List&lt;<span style="color:#0000ff;">string</span>&gt;();
+    disable.AddRange(<span style="color:#0000ff;">new</span>[] &#123; <span style="color:#a31515;">&quot;apple&quot;</span>, <span style="color:#a31515;">&quot;watermelon&quot;</span> &#125;);
+
+    SelectList aSelectList = <span style="color:#0000ff;">new</span> SelectList(mySelectItemList, <span style="color:#a31515;">&quot;Text&quot;</span>, <span style="color:#a31515;">&quot;Value&quot;</span>, <span style="background-color:#FFFF00;">(</span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">object</span></span><span style="background-color:#FFFF00;">)</span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;watermelon&quot;</span></span>, disable);
+
+    <span style="color:#0000ff;">return</span> View(aSelectList);
+&#125;</code></pre>
+
+<p>View為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model SelectList
+
+@Html.DropDownList(<span style="color:#a31515;">&quot;aaa&quot;</span>, Model)</code></pre>
+
+<p>畫面為</p>
+
+<p><img height="306" src="1477551337_26734.png" width="482" /></p>
+
+<p>說明：</p>
+
+<p>由上例可發現於SelectList建構式指定watermelon物件被選取會比</p>
+
+<p>由SelectListItem建構式指定banana物件被選取的優先權來的高。</p>
+
+<p>&nbsp;</p>
+
+<p>7、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String,System.String,System.Object)">SelectList(IEnumerable, String, String, String, Object)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, the data text field, the data group field, and the selected value.</p>
+
+<p>data group field用來指定你要所有item做群組的名稱為何</p>
+
+<p>實例：交由第八點一起說明。</p>
+
+<p>&nbsp;</p>
+
+<p>8、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String,System.String,System.Object,System.Collections.IEnumerable)">SelectList(IEnumerable, String, String, String, Object, IEnumerable)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, the data text field, the data group field, the selected value, and the disabled values.</p>
+
+<p>實例：</p>
+
+<p>Model為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">namespace</span> WebApplication1.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Class1
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> <span style="background-color:#FFFF00;">Love</span> &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult About()
+&#123;
+    List&lt;Class1&gt; LClass1 = <span style="color:#0000ff;">new</span> List&lt;Class1&gt;();
+    LClass1.Add(<span style="color:#0000ff;">new</span> Class1() &#123; Id = <span style="color:#a31515;">&quot;appleId&quot;</span>, name = <span style="color:#a31515;">&quot;appleName&quot;</span>, <span style="background-color:#FFFF00;">Love</span> = <span style="color:#a31515;">&quot;like&quot;</span> &#125;);
+    LClass1.Add(<span style="color:#0000ff;">new</span> Class1() &#123; Id = <span style="color:#a31515;">&quot;bananaId&quot;</span>, name = <span style="color:#a31515;">&quot;bananaName&quot;</span>, Love = <span style="color:#a31515;">&quot;like&quot;</span> &#125;);
+    LClass1.Add(<span style="color:#0000ff;">new</span> Class1() &#123; Id = <span style="color:#a31515;">&quot;watermelonId&quot;</span>, name = <span style="color:#a31515;">&quot;watermelonName&quot;</span>, Love = <span style="color:#a31515;">&quot;like&quot;</span> &#125;);
+    LClass1.Add(<span style="color:#0000ff;">new</span> Class1() &#123; Id = <span style="color:#a31515;">&quot;Bitter&quot;</span>, name = <span style="color:#a31515;">&quot;Bitter&quot;</span>, Love = <span style="color:#a31515;">&quot;do not like&quot;</span> &#125;);
+    LClass1.Add(<span style="color:#0000ff;">new</span> Class1() &#123; Id = <span style="color:#a31515;">&quot;Durian&quot;</span>, name = <span style="color:#a31515;">&quot;Durian&quot;</span>, Love = <span style="color:#a31515;">&quot;do not like&quot;</span> &#125;);
+
+    List&lt;<span style="color:#0000ff;">string</span>&gt; disable = <span style="color:#0000ff;">new</span> List&lt;<span style="color:#0000ff;">string</span>&gt;();
+    disable.AddRange(<span style="color:#0000ff;">new</span>[] &#123; <span style="color:#a31515;">&quot;appleId&quot;</span>, <span style="color:#a31515;">&quot;watermelonId&quot;</span> &#125;);
+
+    SelectList aSelectList = <span style="color:#0000ff;">new</span> SelectList(LClass1, <span style="color:#a31515;">&quot;Id&quot;</span>, <span style="color:#a31515;">&quot;name&quot;</span>, <span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;Love&quot;</span></span>, <span style="color:#a31515;">&quot;bananaId&quot;</span>, disable);
+
+    <span style="color:#0000ff;">return</span> View(aSelectList);
+&#125;</code></pre>
+
+<p>View為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#797997; ">@model</span> SelectList
+<span style="color:#797997; ">@Html</span><span style="color:#808030; ">.</span>DropDownListFor<span style="color:#808030; ">(</span>m <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> m<span style="color:#808030; ">.</span>FirstOrDefault<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>Text<span style="color:#808030; ">,</span> Model<span style="color:#808030; ">)</span>
+</pre>
+
+<p>畫面為</p>
+
+<p><img border="0" src="20158313014671.png" /></p>
+
+<p><img border="0" src="20158313059656.png" /></p>
+
+<p>&nbsp;</p>
+
+<p>9、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-US/library/system.web.mvc.selectlist.selectlist(v=vs.118).aspx#M:System.Web.Mvc.SelectList.#ctor(System.Collections.IEnumerable,System.String,System.String,System.String,System.Object,System.Collections.IEnumerable,System.Collections.IEnumerable)">SelectList(IEnumerable, String, String, String, Object, IEnumerable, IEnumerable)</a></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> SelectList(
+    IEnumerable items,
+    <span style="color:#0000ff;">string</span> dataValueField,
+    <span style="color:#0000ff;">string</span> dataTextField,
+    <span style="color:#0000ff;">string</span> dataGroupField,
+    <span style="color:#0000ff;">object</span> selectedValue,
+    IEnumerable disabledValues,
+    IEnumerable disabledGroups
+)</code></pre>
+
+<p>說明：Initializes a new instance of the SelectList class by using the specified items for the list, the data value field, the data text field, the data group field. the selected value, the disabled values, and the disabled groups.</p>
+
+<p>實例：此建構式所包含的參數上面已經說明過了，故不舉例。</p>
+
+<p>&nbsp;</p>
+
+<p>另外有關於<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.web.mvc.multiselectlist(v=vs.118).aspx">MultiSelectList</a>之後有空再舉例吧，因為其用法跟SelectList大同小異而且我也累了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/MVC-Helper-Extension/" rel="tag"># MVC Helper Extension</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/17/CTE/" rel="prev" title="通用資料表連算式CTE">
+      <i class="fa fa-chevron-left"></i> 通用資料表連算式CTE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/21/ViewModel/" rel="next" title="ViewModel">
+      ViewModel <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/06/21/SelectListItem-SelectList/";
+    this.page.identifier = "2016/06/21/SelectListItem-SelectList/";
+    this.page.title = "SelectListItem與SelectList的用法";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

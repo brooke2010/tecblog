@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="於jQuery使用ajax jQuery.get()、jQuery.post() 技術">
+<meta property="og:url" content="https://brooke2010.github.io/2015/01/28/ajax-jQuery-get-post/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-01-28T07:53:12.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="JSON">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/01/28/ajax-jQuery-get-post/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>於jQuery使用ajax jQuery.get()、jQuery.post() 技術 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/01/28/ajax-jQuery-get-post/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          於jQuery使用ajax jQuery.get()、jQuery.post() 技術
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-01-28 15:53:12" itemprop="dateCreated datePublished" datetime="2015-01-28T15:53:12+08:00">2015-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/JSON/" itemprop="url" rel="index">
+                    <span itemprop="name">JSON</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/01/28/ajax-jQuery-get-post/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/28/ajax-jQuery-get-post/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、.get技術</p>
+
+<p>syntax:<a target="_blank" rel="noopener" href="http://api.jquery.com/jquery.get/">jQuery.get( url [, data ] [, success ] [, dataType ] )</a></p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        $<span style="color:#808030; ">(</span>document<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>ready<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">button</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>click<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                $<span style="color:#808030; ">.</span>get<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">http://www.w3schools.com/jquery/demo_test.asp</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">function</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="background-color:#FFFF00;">data</span><span style="color:#808030; "><span style="background-color:#FFFF00;">,</span></span><span style="background-color:#FFFF00;"> status</span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span> <span style="color:#800080; ">{</span>
+                    $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">#myText</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>text<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Data: </span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> data <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "> Status: </span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> status<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">html</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myText&quot;</span><span style="color:#a65700; ">&gt;</span>a Text<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>Send an HTTP GET request to a page and get the result back<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p><a class="jsbin-embed" target="_blank" rel="noopener" href="http://jsbin.com/muquvo/1/embed?html,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>demo_test.asp檔案內容為</p>
+
+<p>This is some text from an external ASP file.</p>
+
+<p>&nbsp;</p>
+
+<p>1、先來看sucess function <span style="background-color:#ffff00;">function (data, status,dataType){}</span></p>
+
+<p style="margin-left: 40px;">(1).當使用.get()方法去server端get資料成功後，會把相關資訊放在第一参數(data)與第二參數(status)。</p>
+
+<p style="margin-left: 40px;">(2).其中的function(data,status,dataType){...}，data與status、dataType参數的變數命名式可以隨意取的。</p>
+
+<p style="margin-left: 40px;">(3).最主要是變數的順序不能動，第一参數為server端回傳的內容，第二參數為http狀態，第三個參數為回傳資料預定格式。</p>
+
+<p style="margin-left: 40px;">(4).這三個參數都是optional的。</p>
+
+<p style="margin-left: 40px;">(5)第三個參數可指定為json、xml、html等。</p>
+
+<p>&nbsp;</p>
+
+<p>2、此程式的動作為當按下按鈕時，a Text文字會被替換成This is some text from an external ASP file.</p>
+
+<p>當你在測試的時候卻發現無法動作，如果你有按F12打開console查看錯誤訊息時，就會發現</p>
+
+<p>「XMLHttpRequest cannot load http://www.w3schools.com/jquery/demo_test.asp.</p>
+
+<p>No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource. Origin &#39;http://null.jsbin.com&#39; is therefore not allowed access.」</p>
+
+<p>這段錯誤訊息，主要原因為當傳輸方式使用get或post時，伺服端並沒有允許你擁有跨網站存取權限，</p>
+
+<p>所以按下按鈕去get資料回來卻是失敗的。</p>
+
+<p>測試網址如下：</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_get">http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_get</a></p>
+
+<p>3、另外jQuery還有<a target="_blank" rel="noopener" href="http://api.jquery.com/get/">$(&quot;selector&quot;).get();</a>語法，</p>
+
+<p>這是用來取得該element的object，是個完全不同的東西。</p>
+
+<p>&nbsp;</p>
+
+<p>二、post技術</p>
+
+<p>1、$.post()</p>
+
+<p>syntax:<a target="_blank" rel="noopener" href="http://api.jquery.com/jquery.post/">$.post(URL,data,callback);</a></p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        $<span style="color:#808030; ">(</span>document<span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>ready<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">button</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>click<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                $<span style="color:#808030; ">.</span>post<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">demo_test_post.asp</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span>
+                <span style="color:#800080; ">{</span>
+                    name<span style="color:#800080; ">:</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Donald Duck</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span>
+                    city<span style="color:#800080; ">:</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Duckburg</span><span style="color:#800000; ">&quot;</span>
+                <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+                <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>data<span style="color:#808030; ">,</span> status<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                    $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">#myText</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>text<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Data: </span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> data <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "> Status: </span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> status<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myText&quot;</span><span style="color:#a65700; ">&gt;</span>a Text<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>Send an HTTP POST request to a page and get the result back<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>此程式的功能為按下按鈕時，將name與city所設定的值post到server端並取得所吐回的資料再秀出來。</p>
+
+<p>測試網址如下：</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_post">http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_post</a></p>
+
+<p>&nbsp;</p>
+
+<p>2、$.ajax()</p>
+
+<p>$.post()相當等於$.ajax()，用法大致相同唯有ajax的type要指定為post，範例如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+$<span style="color:#808030; ">.</span>ajax<span style="color:#808030; ">(</span><span style="color:#800080; ">{</span>
+    type<span style="color:#800080; ">:</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">POST</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span>
+    url<span style="color:#800080; ">:</span> url<span style="color:#808030; ">,</span>
+    data<span style="color:#800080; ">:</span> data<span style="color:#808030; ">,</span>
+    success<span style="color:#800080; ">:</span> success<span style="color:#808030; ">,</span>
+    dataType<span style="color:#800080; ">:</span> dataType
+<span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>3、MVC範例-使用post技術</p>
+
+<p>此範例文章過長，僅供參考</p>
+
+<p>(1)、Model</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">namespace</span> WebApplication1.Models
+&#123;
+    <span style="color:#0000ff;">using</span> System.ComponentModel.DataAnnotations;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> ACTICLE
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">int</span> Id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        [Display(Name = <span style="color:#a31515;">&quot;種類&quot;</span>)]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> type &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        [DataType(DataType.Date)]
+        [Display(Name = <span style="color:#a31515;">&quot;日期&quot;</span>)]
+        [DisplayFormat(DataFormatString = <span style="color:#a31515;">&quot;&#123;0:yyyy-MM-dd&#125;&quot;</span>, ApplyFormatInEditMode = <span style="color:#0000ff;">true</span>)]
+        <span style="color:#0000ff;">public</span> System.DateTime date &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        [RegularExpression(<span style="color:#a31515;">&quot;^.&#123;1,30&#125;$&quot;</span>, ErrorMessage = <span style="color:#a31515;">&quot;Invalid string&quot;</span>)]
+        [Display(Name = <span style="color:#a31515;">&quot;標題&quot;</span>)]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> title &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        [Display(Name = <span style="color:#a31515;">&quot;內文&quot;</span>)]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> context &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>(2)、Controller</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#008000;">// GET: ACTICLEs/Create</span>
+        <span style="color:#0000ff;">public</span> ActionResult Create()
+        &#123;
+            <span style="color:#0000ff;">var</span> a = <span style="color:#0000ff;">new</span> ACTICLE();
+            a.context = <span style="color:#a31515;">&quot;context&quot;</span>;
+            a.date = DateTime.Now;
+            a.title = <span style="color:#a31515;">&quot;title&quot;</span>;
+            a.type = <span style="color:#a31515;">&quot;type&quot;</span>;
+            ViewBag.type = <span style="color:#0000ff;">new</span> List&lt;<span style="color:#0000ff;">string</span>&gt;() &#123; <span style="color:#a31515;">&quot;公告訊息&quot;</span>, <span style="color:#a31515;">&quot;公益活動&quot;</span> &#125;;
+            <span style="color:#0000ff;">return</span> View(a);
+        &#125;
+
+        <span style="color:#008000;">// POST: ACTICLEs/Create</span>
+        <span style="color:#008000;">// To protect from overposting attacks, please enable the specific properties you want to bind to, for </span>
+        <span style="color:#008000;">// more details see http://go.microsoft.com/fwlink/?LinkId=317598.</span>
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Create([Bind(Include = <span style="color:#a31515;">&quot;Id,type,date,title,context&quot;</span>)] ACTICLE aCTICLE)
+        &#123;
+            <span style="color:#0000ff;">try</span>
+            &#123;
+                <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+                &#123;
+                    db.ACTICLESet.Add(aCTICLE);
+                    db.SaveChanges();
+                    <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+                &#125;
+                <span style="color:#0000ff;">return</span> View();<span style="color:#008000;">//前端已重新導向，此行較無作用</span>
+            &#125;
+            <span style="color:#0000ff;">catch</span> (Exception ex)
+            &#123;
+                System.Data.Entity.Validation.DbEntityValidationException DbEntityValidationException = (System.Data.Entity.Validation.DbEntityValidationException)ex;
+                <span style="color:#0000ff;">throw</span> DbEntityValidationException;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>(3)、View</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication1.Models.ACTICLE
+
+@&#123;
+    ViewBag.Title = <span style="color:#a31515;">&quot;Create&quot;</span>;
+    <span style="color:#0000ff;">var</span> selectItems = <span style="color:#0000ff;">new</span> SelectList(ViewBag.type);
+&#125;
+
+&lt;h2&gt;新增文章&lt;/h2&gt;
+
+@<span style="color:#0000ff;">using</span> (Html.BeginForm(<span style="color:#a31515;">&quot;Create&quot;</span>, <span style="color:#a31515;">&quot;ACTICLEs&quot;</span>, FormMethod.Post, htmlAttributes: <span style="color:#0000ff;">new</span> &#123; id = <span style="color:#a31515;">&quot;CreateForm&quot;</span> &#125;))
+&#123;
+    &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-horizontal&quot;</span>&gt;
+        &lt;hr /&gt;
+        @Html.ValidationSummary(<span style="color:#0000ff;">false</span>, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+        &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-group&quot;</span>&gt;
+            @Html.LabelFor(model =&gt; model.type, htmlAttributes: <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;control-label col-md-2&quot;</span> &#125;)
+            &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;col-md-10&quot;</span>&gt;
+                @*@Html.EditorFor(model =&gt; model.type, <span style="color:#0000ff;">new</span> &#123; htmlAttributes = <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span>, pattern = <span style="color:#a31515;">&quot;^.&#123;1,10&#125;$&quot;</span>, title = <span style="color:#a31515;">&quot;10個字元內&quot;</span>, required = <span style="color:#a31515;">&quot;required&quot;</span> &#125; &#125;)*@
+
+                @Html.DropDownListFor(model =&gt; model.type, selectItems, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span> &#125;)
+
+                @Html.ValidationMessageFor(model =&gt; model.type, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-group&quot;</span>&gt;
+            @Html.LabelFor(model =&gt; model.date, htmlAttributes: <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;control-label col-md-2&quot;</span> &#125;)
+            &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;col-md-10&quot;</span>&gt;
+                @Html.EditorFor(model =&gt; model.date, <span style="color:#0000ff;">new</span> &#123; htmlAttributes = <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span> &#125; &#125;)
+                @Html.ValidationMessageFor(model =&gt; model.date, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-group&quot;</span>&gt;
+            @Html.LabelFor(model =&gt; model.title, htmlAttributes: <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;control-label col-md-2&quot;</span> &#125;)
+            &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;col-md-10&quot;</span>&gt;
+                @Html.EditorFor(model =&gt; model.title, <span style="color:#0000ff;">new</span> &#123; htmlAttributes = <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span>, pattern = <span style="color:#a31515;">&quot;^.&#123;1,30&#125;$&quot;</span>, title = <span style="color:#a31515;">&quot;30個字元內&quot;</span>, required = <span style="color:#a31515;">&quot;required&quot;</span> &#125; &#125;)
+                @Html.ValidationMessageFor(model =&gt; model.title, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-group&quot;</span>&gt;
+            @Html.LabelFor(model =&gt; model.context, htmlAttributes: <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;control-label col-md-2&quot;</span> &#125;)
+            &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;col-md-10&quot;</span>&gt;
+                @Html.TextAreaFor(model =&gt; model.context, <span style="color:#0000ff;">new</span> &#123; htmlAttributes = <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;form-control&quot;</span> &#125; &#125;)
+                @Html.ValidationMessageFor(model =&gt; model.context, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;form-group&quot;</span>&gt;
+            &lt;div <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;col-md-offset-2 col-md-10&quot;</span>&gt;
+                &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;btn btn-default&quot;</span> /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&#125;
+
+&lt;div&gt;
+    @Html.ActionLink(<span style="color:#a31515;">&quot;回後台&quot;</span>, <span style="color:#a31515;">&quot;Index&quot;</span>)
+&lt;/div&gt;
+
+
+@section header&#123;
+    &lt;script src=<span style="color:#a31515;">&quot;http://cdn.ckeditor.com/4.4.6/standard/ckeditor.js&quot;</span>&gt;&lt;/script&gt;
+&#125;
+
+@section scripts&#123;
+    &lt;script&gt;
+        <span style="color:#0000ff;">var</span> editor = CKEDITOR.replace(<span style="color:#a31515;">&#39;context&#39;</span>);
+
+        $(<span style="color:#a31515;">&quot;#CreateForm&quot;</span>).submit(function (<span style="color:#0000ff;">event</span>) &#123;
+            <span style="color:#0000ff;">event</span>.preventDefault();
+            <span style="color:#0000ff;">var</span> url = <span style="color:#a31515;">&#39;@Url.Action(&quot;Create&quot;)&#39;</span>
+            $.post(url,
+                &#123;
+                    type: $(<span style="color:#a31515;">&quot;#type&quot;</span>).val(),
+                    date: $(<span style="color:#a31515;">&quot;#date&quot;</span>).val(),
+                    title: $(<span style="color:#a31515;">&quot;#title&quot;</span>).val(),
+                    Context: htmlEncode(editor.getData())
+                &#125;)
+            .done(function (data) &#123;
+                window.location.href = <span style="color:#a31515;">&#39;@Url.Action(&quot;Index&quot;)&#39;</span>;
+            &#125;);
+        &#125;);
+
+        function htmlEncode(value) &#123;
+            <span style="color:#0000ff;">return</span> $(<span style="color:#a31515;">&#39;&lt;div/&gt;&#39;</span>).text(value).html();
+        &#125;
+    &lt;/script&gt;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>三、jqXHR</p>
+
+<p>jqXHR有提供jqXHR.done()、jqXHR.fail()、jqXHR.always()方法讓USER來使用</p>
+
+<p>另外jqXHR.success()、jqXHR().error()、jqXHR.complete()於jQuery 1.8不推薦使用</p>
+
+<p>程式範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> jqxhr <span style="color:#808030; ">=</span> $<span style="color:#808030; ">.</span>get<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">example.php</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+    <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">success</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span><span style="color:#808030; ">)</span>
+  <span style="color:#808030; ">.</span>done<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+      <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">second success</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+  <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span>
+  <span style="color:#808030; ">.</span>fail<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+      <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">error</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+  <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span>
+  <span style="color:#808030; ">.</span>always<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+      <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">finished</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+  <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+<span style="color:#696969; ">// Perform other work here ...</span>
+
+<span style="color:#696969; ">// Set another completion function for the request above</span>
+jqxhr<span style="color:#808030; ">.</span>always<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+    <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">second finished</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>四、jQuery.ajax()</p>
+
+<p>由於這設定還蠻繁雜的，請先參考<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/brooke/2016/08/26/164900">jQuery.ajax()</a></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/ajax_get.asp">jQuery get() Method</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://api.jquery.com/jquery.post/">jQuery.post()</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://api.jquery.com/category/ajax/">Category: Ajax</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/jquery_ref_ajax.asp">jQuery AJAX Methods</a></p>
+
+<p>延伸參考：</p>
+
+<p><a target="_blank" rel="noopener" href="http://learn.jquery.com/ajax/">http://learn.jquery.com/ajax/</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.dotblogs.com.tw/jhsiao/archive/2014/08/31/146422.aspx">[AJAX]jQuery AJAX部分的應用</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.pureexample.com/tw/jquery/ajax.html">pureexample</a></p>
+
+<p>推薦書籍：</p>
+
+<p>jQuery cookbook錦囊妙計 / jQuery community experts著 ; Cody Lindley編 ; 法蘭克譯</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/JSON/" rel="tag"># JSON</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/01/26/RSA/" rel="prev" title="RSA加密演算法">
+      <i class="fa fa-chevron-left"></i> RSA加密演算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/02/02/html-form-input-attributes/" rel="next" title="HTML FORM input 元素裡的各種 attributes 屬性值之介紹">
+      HTML FORM input 元素裡的各種 attributes 屬性值之介紹 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/01/28/ajax-jQuery-get-post/";
+    this.page.identifier = "2015/01/28/ajax-jQuery-get-post/";
+    this.page.title = "於jQuery使用ajax jQuery.get()、jQuery.post() 技術";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

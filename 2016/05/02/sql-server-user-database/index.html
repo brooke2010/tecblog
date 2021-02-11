@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL SERVER系統或使用者資料庫物件">
+<meta property="og:url" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1462223961_13743.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467127839_94572.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467129097_40849.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467129170_47462.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1462226197_99975.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1462235030_86345.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467098399_95468.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467100170_64177.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467103381_5162.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1467106135_29772.png">
+<meta property="article:published_time" content="2016-05-02T01:52:10.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="SQL SERVER">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/05/02/sql-server-user-database/1462223961_13743.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/05/02/sql-server-user-database/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>SQL SERVER系統或使用者資料庫物件 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/05/02/sql-server-user-database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL SERVER系統或使用者資料庫物件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-02 09:52:10" itemprop="dateCreated datePublished" datetime="2016-05-02T09:52:10+08:00">2016-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/SQL-SERVER/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL SERVER</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/05/02/sql-server-user-database/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/02/sql-server-user-database/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>SQL SERVER系統或使用者資料庫物件都是由物件組成</p>
+
+<p>&nbsp;</p>
+
+<p>一、使用者資料庫物件</p>
+
+<p><img height="150" src="1462223961_13743.png" width="144" /></p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:74px;">物件</td>
+            <td>說明</td>
+        </tr>
+        <tr>
+            <td>資料庫圖表</td>
+            <td>使用圖形方式來顯示關聯表綱要</td>
+        </tr>
+        <tr>
+            <td>資料表</td>
+            <td>即關聯表(Relations)</td>
+        </tr>
+        <tr>
+            <td>檢視</td>
+            <td>即視界(Views)的虛擬關聯表</td>
+        </tr>
+        <tr>
+            <td>同義字</td>
+            <td>替本機或遠端伺服器的資料庫物件建立別名</td>
+        </tr>
+        <tr>
+            <td>可程式性</td>
+            <td>一些可程式化的相關物件</td>
+        </tr>
+        <tr>
+            <td>儲存體</td>
+            <td>全文檢索目錄、資料分割配置和函數等相關物件</td>
+        </tr>
+        <tr>
+            <td>安全性</td>
+            <td>安全性管理的相關物件</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>1、同義字</p>
+
+<p>請先往下參考「連結的伺服器」的範例再來學習如何使用「同義字」功能會比較有感覺</p>
+
+<p>由於每次查詢都要輸入一大串名稱，所以想使用同義字功能來幫一個名稱取一個別名，</p>
+
+<p>承「連結的伺服器」的範例，我們在ORDER_DB資料庫的Synonyms物件新增一個別名，</p>
+
+<p><img height="295" src="1467127839_94572.png" width="315" /></p>
+
+<p>如下圖第一部份為指定別名，第二部份為填入原本想被替換的資料表名稱與相關資訊</p>
+
+<p><img height="457" src="1467129097_40849.png" width="517" /></p>
+
+<p>現在「[27.105.53.188].vip_db.dbo.VIP」名稱同義於「VIP」名稱了。</p>
+
+<p><img height="251" src="1467129170_47462.png" width="341" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、可程式性物件下面又可分</p>
+
+<p><img height="286" src="1462226197_99975.png" width="166" /></p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:104px;">物件</td>
+            <td>說明</td>
+        </tr>
+        <tr>
+            <td>預存程序</td>
+            <td>將例行、常用和複雜的資料庫操作預先建立Transact-SQL指令敘述集合，這是在資料庫管理系統執行的指令敘述集合，可以簡化相關或重複的資料庫操作</td>
+        </tr>
+        <tr>
+            <td>函數</td>
+            <td>將一或多個Transact-SQL指令敘述建立成函數，以便能夠重複使用這些函數</td>
+        </tr>
+        <tr>
+            <td>資料庫觸發程序</td>
+            <td>一種特殊用途的預存程序，屬於主動執行的程序，不像預存程序是使用者執行，它是當資料表操作符合特定條件時，就自動執行觸發程序</td>
+        </tr>
+        <tr>
+            <td>規則</td>
+            <td>設定與CHECK條件相同功能的檢查條件，同一個規則物件可以套用在多個資料表的不同欄位</td>
+        </tr>
+        <tr>
+            <td>預設值</td>
+            <td>定義欄位的預設值，同一個預設物件可以套用在多個資料表的不同欄位</td>
+        </tr>
+        <tr>
+            <td>順序</td>
+            <td>SQL Server資料庫物件，可以根據建立順序時指定的開始值、增量和結束值來產生數值序列，即流水號</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>「規則」與「預設值」物件在SQL Server 2008就已經不建議使用，</p>
+
+<p>SQL Server2014仍然看的到，也只是為了與舊版SQL Server相容。</p>
+
+<p>&nbsp;</p>
+
+<p>3、安全性</p>
+
+<p><img height="247" src="1462235030_86345.png" width="143" /></p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:74px;">物件</td>
+            <td>說明</td>
+        </tr>
+        <tr>
+            <td>使用者</td>
+            <td>資料庫的使用者，即允許存取資料庫的使用者清單</td>
+        </tr>
+        <tr>
+            <td>角色</td>
+            <td>角色是將使用資料庫的權限以扮演的角色來進行分類，我們可以直接使用角色快速指定使用者的權限</td>
+        </tr>
+        <tr>
+            <td>結構描述</td>
+            <td>結構描述(Schema)可以替資料庫物件新增分類名稱，換句話說，SQL Server資料庫物件名稱的全名是「結構描述.物件名稱」</td>
+        </tr>
+        <tr>
+            <td>非對稱金鑰</td>
+            <td>資料加密建立的非對稱金鑰</td>
+        </tr>
+        <tr>
+            <td>憑證</td>
+            <td>資料加密建立的憑證</td>
+        </tr>
+        <tr>
+            <td>對稱金鑰</td>
+            <td>資料加密建立的對稱金鑰</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>二、系統資料庫物件</p>
+
+<p>1、連結的伺服器</p>
+
+<p>此功能主要可以讓你存取遠端伺服器的資料，接下來就來看如何操作</p>
+
+<p>(1)先準備測試環境</p>
+
+<p>被連結的伺服器IP：27.105.53.188</p>
+
+<p>被連結的資料表</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> VIP 
+  <span style="color:#808030; ">(</span> 
+     name NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+     <span style="color:#800000; font-weight:bold; ">level</span> <span style="color:#800000; font-weight:bold; ">CHAR</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">8</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span>name<span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span>VIP<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Bill&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;金級會員&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span>VIP<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Mary&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;商業會員&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+
+<p>本機裡的資料表</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#800000; font-weight:bold; ">no</span>      <span style="color:#800000; font-weight:bold; ">INT</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     name    <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">year</span>    <span style="color:#800000; font-weight:bold; ">SMALLINT</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     quarter TINYINT <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     item    <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     price   <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     amount  <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span> 
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bill&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2005</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;CPU&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">3000</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bill&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2005</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;RAM&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2000</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bill&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2006</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;MB&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2000</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Mary&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2010</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;SSD&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2500</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Mary&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2010</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;LCD&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">6700</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">6</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bryan&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2015</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;KB&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">500</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">7</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Bryan&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2015</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;ROUTER&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1500</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">8</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Tim&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2016</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;CPU&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">12000</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">9</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;Tim&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">2016</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;MB&#39;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">5000</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>(1)、於「Linked Server」按右鍵新增一個連結伺服器</p>
+
+<p><img height="211" src="1467098399_95468.png" width="343" /></p>
+
+<p>&nbsp;</p>
+
+<p>(2)、當然也可以連結其他形態的伺服器，但現在我們以連結遠端伺服器為例子</p>
+
+<p><img height="615" src="1467100170_64177.png" width="693" /></p>
+
+<p>&nbsp;</p>
+
+<p>(3)、設定登入遠端資料庫伺服器的安全性</p>
+
+<p><img height="615" src="1467103381_5162.png" width="693" /></p>
+
+<p>SQL SERVER對遠端資料庫伺服器的安全性處理，可分為以下兩大類</p>
+
+<p>a、本機伺服器登入與遠端伺服器登入對應</p>
+
+<p>在SQL SERVER中的帳號稱為「登入」(login)，</p>
+
+<p>此處可以加入本機「登入」對應到遠端伺服器另一個「登入」的對應關係。</p>
+
+<p>例如上圖中上半部說明</p>
+
+<p>(a)、「本機登入」為dale對應到「遠端使用者」andy及密碼為****：</p>
+
+<p>也就是當本機使用dale帳號登入時，即可同時利用遠端的andy帳號及密碼登入至遠端伺服器。</p>
+
+<p>(b)、若是勾選其中的「模擬」選項，則會用本機的「登入」和「密碼」模擬成遠端的使用者和密碼來進行登入；</p>
+
+<p>所以右側的「遠端使用者」如「遠端密碼」就不用且不能輸入。</p>
+
+<p>因此要使用「模擬」的方式，必須本機和遠端必須都有相同的「登入」以 及相同的「密碼」才行。例如圖中的andy。</p>
+
+<p>b、如果不是上述清單所定義的登入，可將連結設定為：</p>
+
+<p>(a)、「不建立」，表示未列於上方對應清單中的「登入」皆不得存取遠端伺服器。</p>
+
+<p>(b)、「不使用安全性內容建立」，表示未列於上方對應清單中的「登入」，</p>
+
+<p>皆不使用安全性內容存取遠端伺服器，因此僅可以存取未設安全性控制的資料庫，例如：Access。</p>
+
+<p>(c)、「使用登入的目前安全性內容建立」，表示未列於上方對應清單中的「登入」，</p>
+
+<p>皆會嘗試以本機的登入和密碼來登入遠端伺服器。</p>
+
+<p>倘若遠端伺服器內沒有相同的登入與密碼，則無法進行存取。</p>
+
+<p>(d)、「使用此安全性內容建立」，直接透過所輸入的「遠端登入」和「指定密碼」</p>
+
+<p>來存取遠端伺服器；也就是說，直接使用遠端的帳號與密碼來登入。</p>
+
+<p>&nbsp;</p>
+
+<p>此例我們直接使用遠端的帳號與密碼來登入。</p>
+
+<p>下面為已設定好的應用結果。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">year</span><span style="color:#808030; ">,</span>quarter<span style="color:#808030; ">,</span>item<span style="color:#808030; ">,</span>price<span style="color:#808030; ">,</span>amount 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> 
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> name<span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">level</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   <span style="color:#808030; ">[</span><span style="color:#008000; ">27.105</span><span style="color:#808030; ">.</span><span style="color:#008000; ">53.188</span><span style="color:#808030; ">]</span><span style="color:#808030; ">.</span>vip_db<span style="color:#808030; ">.</span>dbo<span style="color:#808030; ">.</span>VIP 
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#808030; ">*</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">ORDER</span><span style="color:#808030; ">]</span> 
+<span style="color:#800000; font-weight:bold; ">WHERE</span>  NAME <span style="color:#800000; font-weight:bold; ">IN</span><span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">SELECT</span> NAME 
+               <span style="color:#800000; font-weight:bold; ">FROM</span>   <span style="color:#808030; ">[</span><span style="color:#008000; ">27.105</span><span style="color:#808030; ">.</span><span style="color:#008000; ">53.188</span><span style="color:#808030; ">]</span><span style="color:#808030; ">.</span>vip_db<span style="color:#808030; ">.</span>dbo<span style="color:#808030; ">.</span>VIP<span style="color:#808030; ">)</span>
+</pre>
+
+<p><img height="643" src="1467106135_29772.png" width="465" /></p>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/SQL-SERVER/" rel="tag"># SQL SERVER</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/04/26/t-sql-insert/" rel="prev" title="insert指令">
+      <i class="fa fa-chevron-left"></i> insert指令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/05/03/sql-server-user-account-role/" rel="next" title="SQL SERVER使用者帳戶的伺服器角色與資料庫角色">
+      SQL SERVER使用者帳戶的伺服器角色與資料庫角色 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/05/02/sql-server-user-database/";
+    this.page.identifier = "2016/05/02/sql-server-user-database/";
+    this.page.title = "SQL SERVER系統或使用者資料庫物件";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

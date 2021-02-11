@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自訂日期和時間格式字串簡述">
+<meta property="og:url" content="https://brooke2010.github.io/2016/11/07/custom-data-time/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765507_86679.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765548_97385.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765621_62767.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765822_8835.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765860_53956.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766197_17727.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766284_71317.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766376_76378.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766586_44338.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766664_32733.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478766706_78047.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478795361_10317.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478795473_55688.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478795577_30202.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478795630_39556.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478795667_4511.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796187_01606.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796679_70075.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796689_92082.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796733_40765.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796737_19424.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796773_09381.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796805_0476.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796849_69126.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478796852_77346.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797003_82862.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797025_59785.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797061_66287.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797073_20554.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797117_77181.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797162_13085.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797213_42555.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797269_61832.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797293_31024.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797322_13435.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797695_50298.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478797986_20043.png">
+<meta property="article:published_time" content="2016-11-07T10:11:54.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/11/07/custom-data-time/1478765507_86679.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/11/07/custom-data-time/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>自訂日期和時間格式字串簡述 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/11/07/custom-data-time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自訂日期和時間格式字串簡述
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-11-07 18:11:54" itemprop="dateCreated datePublished" datetime="2016-11-07T18:11:54+08:00">2016-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/11/07/custom-data-time/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/07/custom-data-time/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>有標準日期格式規範當然也有自訂日期格式規範，</p>
+
+<p>也是一樣，一些易理解看圖就懂的格式規範就不說明了，SO，自己看圖說故事。</p>
+
+<p>&nbsp;</p>
+
+<p>一、使用單一自訂格式規範 &quot;%&quot;</p>
+
+<p>如果格式字串由<span style="background-color:#FFFF00;">單一字元</span>所組成的自訂格式規範，則應該在格式規範前面加上百分比 (%) 符號，</p>
+
+<p>以避免與標準格式規範產生混淆。之後的範例將會應用到。</p>
+
+<p>&nbsp;</p>
+
+<p>二、月份天數，從 1 到 31&nbsp;&quot;d&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;<span style="background-color:#FFFF00;">%</span>d&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478765507_86679.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="25" src="1478765507_86679.png" width="54" /></a></p>
+
+<p>說明：</p>
+
+<p>這裡就已經說明了為何在&quot;d&quot;字串前面還要再加上&quot;%&quot;，如果不加的話，</p>
+
+<p>將會被視為「標準格式規範」而非「自訂格式規範」。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;d&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478765548_97385.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="31" src="1478765548_97385.png" width="98" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三、月份天數，從 01 到 31&nbsp;&quot;dd&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;dd&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478765621_62767.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="24" src="1478765621_62767.png" width="60" /></a></p>
+
+<p>說明：</p>
+
+<p>此自訂格式規範由兩個以上字元所組成的話，則字串前面是不需要再加上 &quot;%&quot; 的。</p>
+
+<p>&nbsp;</p>
+
+<p>四、星期幾的縮寫名稱&nbsp;&quot;ddd&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478765822_8835.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="28" src="1478765822_8835.png" width="73" /></a></p>
+
+<p>說明：</p>
+
+<p>依照先前的範例修改就行，冗長的程式碼非必要就不列出了。</p>
+
+<p>&nbsp;</p>
+
+<p>五、星期幾的完整名稱&nbsp;&quot;dddd&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478765860_53956.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="37" src="1478765860_53956.png" width="91" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>六、日期和時間值中的十分之一秒 &nbsp;&quot;f&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 123);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;<span style="background-color:#FFFF00;">%</span>f&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766197_17727.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="31" src="1478766197_17727.png" width="69" /></a></p>
+
+<p>說明：</p>
+
+<p>此自訂格式規範只有由一個字元所組成，則字串前面要再加上 &quot;%&quot;。</p>
+
+<p>&nbsp;</p>
+
+<p>七、日期和時間值中的百分之一秒 &quot;ff&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766284_71317.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="27" src="1478766284_71317.png" width="62" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>八、日期和時間值中的千分之一秒 &quot;fff&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766376_76378.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="33" src="1478766376_76378.png" width="71" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>九、日期和時間值中的萬分之一秒 &quot;ffff&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十、日期和時間值中的十萬分之一秒 &quot;fffff&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十一、日期和時間值中的百萬分之一秒 &quot;ffffff&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十二、日期和時間值中的千萬分之一秒 &quot;fffffff&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十三、如果不是零，則為日期和時間值中的十分之一秒 &quot;F&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 023);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;%F&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766586_44338.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="30" src="1478766586_44338.png" width="67" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>十四、如果不是零，則為日期和時間值中的百分之一秒 &quot;FF&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766664_32733.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="29" src="1478766664_32733.png" width="77" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>十五、如果不是零，則為日期和時間值中的千分之一秒 &quot;FFF&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478766706_78047.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="28" src="1478766706_78047.png" width="73" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>十六、如果不是零，則為日期和時間值中的萬分之一秒 &quot;FFFF&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十七、如果不是零，則為日期和時間值中的十萬分之一秒&nbsp;&quot;FFFFF&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十八、如果不是零，則為日期和時間值中的百萬分之一秒&nbsp;&quot;FFFFFF&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>十九、如果不是零，則為日期和時間值中的千萬分之一秒&nbsp;&quot;FFFFFFF&quot;</p>
+
+<p>說明：</p>
+
+<p>雖然時間值的秒數部分可以顯示到萬分之一秒，但該值可能沒有太大的意義。</p>
+
+<p>日期和時間值的精確度會根據系統時鐘的解析度而定。</p>
+
+<p>在 Windows NT 3.5 (含) 以上版本和 Windows Vista 作業系統中，時鐘的解析度大約為 10-15 毫秒。</p>
+
+<p>&nbsp;</p>
+
+<p>二十、紀元&nbsp;&quot;g&quot;、&quot;gg&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478795361_10317.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="30" src="1478795361_10317.png" width="74" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二一、採用 12 小時制的小時，從 1 到 12&nbsp;&quot;h&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 023);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;%h&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478795473_55688.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="23" src="1478795473_55688.png" width="55" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二二、採用 12 小時制的小時，從 01 到 12 &quot;hh&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478795577_30202.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="27" src="1478795577_30202.png" width="61" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二三、採用 24 小時制的小時，從 0 到 23 &quot;H&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478795630_39556.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="26" src="1478795630_39556.png" width="59" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二四、採用 24 小時制的小時，從 00 到 23 &quot;HH&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478795667_4511.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="24" src="1478795667_4511.png" width="57" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二五、時區資訊&nbsp;&quot;K&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 023, DateTimeKind.Local);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;%K&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796187_01606.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="26" src="1478796187_01606.png" width="76" /></a></p>
+
+<p>說明：</p>
+
+<p>&quot;K&quot; 自訂格式規範表示日期和時間值的時區資訊，可藉由指定DateTimeKind來做變化，</p>
+
+<p>DateTimeKind的種類有Local、Unspecified、Utc。</p>
+
+<p>&nbsp;</p>
+
+<p>二六、分鐘，從 0 到 59 &quot;m&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 023);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;%m&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796679_70075.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="26" src="1478796679_70075.png" width="78" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二七、分鐘，從 00 到 59 &quot;mm&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796689_92082.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="26" src="1478796689_92082.png" width="78" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二八、月份，從 1 到 12 &quot;M&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796733_40765.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="28" src="1478796733_40765.png" width="63" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>二九、月份，從 1 到 12 &quot;MM&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796737_19424.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="28" src="1478796737_19424.png" width="63" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三十、月份的縮寫名稱 &quot;MMM&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796773_09381.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="27" src="1478796773_09381.png" width="83" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三一、月份的完整名稱 &quot;MMMM&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796805_0476.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="27" src="1478796805_0476.png" width="83" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三二、秒數，從 0 到 59 &quot;s&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796849_69126.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="23" src="1478796849_69126.png" width="54" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三三、秒數，從 00 到 59 &quot;ss&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478796852_77346.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="23" src="1478796852_77346.png" width="54" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三四、AM/PM 指示項的第一個字元 &quot;t&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797003_82862.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="19" src="1478797003_82862.png" width="50" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三五、AM/PM 指示項 &quot;tt&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797025_59785.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="29" src="1478797025_59785.png" width="66" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三六、年份，從 0 到 99 &quot;y&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797061_66287.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="25" src="1478797061_66287.png" width="54" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三七、年份，從 00 到 99 &quot;yy&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797073_20554.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="25" src="1478797073_20554.png" width="54" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三八、年份，至少三位數 &quot;yyy&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797117_77181.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="27" src="1478797117_77181.png" width="78" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>三九、以四位數表示的年份&nbsp;&quot;yyyy&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797162_13085.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="28" src="1478797162_13085.png" width="67" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>四十、以五位數表示的年份 &quot;yyyyy&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797213_42555.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="23" src="1478797213_42555.png" width="64" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>四一、與 UTC 相差的時數，不加上前置零 &quot;z&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797269_61832.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="22" src="1478797269_61832.png" width="52" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>四二、與 UTC 相差的時數，單一位數值會加上前置零 &quot;zz&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797293_31024.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="24" src="1478797293_31024.png" width="62" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>四三、與 UTC 相差的時數和分鐘數 &quot;zzz&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797322_13435.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="26" src="1478797322_13435.png" width="78" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>四四、時間分隔符號 &quot;:&quot;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Example
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main()
+    &#123;
+        DateTime a = <span style="color:#0000ff;">new</span> DateTime(2016, 11, 09, 13, 14, 15, 023);
+        Console.WriteLine(a.ToString(<span style="color:#a31515;">&quot;%:&quot;</span>));
+
+        Console.ReadKey();
+    &#125;
+&#125;</code></pre>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797695_50298.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="22" src="1478797695_50298.png" width="48" /></a></p>
+
+<p>說明：</p>
+
+<p>&quot;:&quot; 自訂格式規範表示時間分隔符號，用於區別時、分、秒。</p>
+
+<p>但你也可以把它當作只是要印出「:」冒號而已。</p>
+
+<p>&nbsp;</p>
+
+<p>四五、日期分隔符號 正斜線&quot;/&quot;</p>
+
+<p>執行結果</p>
+
+<p><a class="fancybox fancybox.image" data-fancybox="default" href="1478797986_20043.png" itemprop="url" itemscope="" itemtype="http://schema.org/ImageObject" rel="default"><img height="19" src="1478797986_20043.png" width="47" /></a></p>
+
+<p>說明：</p>
+
+<p>&quot;/&quot; 自訂格式規範表示日期分隔符號，用於區別年、月、日。</p>
+
+<p>但你也可以把它當作只是要印出「/」正斜線而已。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a href="https://msdn.microsoft.com/zh-tw/library/8kb3ddd4(v=vs.110).aspx#" rel="noopener" target="_blank">自訂日期和時間格式字串</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/11/07/complex-format/" rel="prev" title="複合格式簡述">
+      <i class="fa fa-chevron-left"></i> 複合格式簡述
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/11/07/standard-data-time/" rel="next" title="標準日期和時間格式字串簡述">
+      標準日期和時間格式字串簡述 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/11/07/custom-data-time/";
+    this.page.identifier = "2016/11/07/custom-data-time/";
+    this.page.title = "自訂日期和時間格式字串簡述";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="session 與 cookies 登入機制">
+<meta property="og:url" content="https://brooke2010.github.io/2015/05/20/session-cookies/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/20/session-cookies/201551914143312.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/20/session-cookies/1543896628_46366.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/20/session-cookies/1543999338_90646.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/20/session-cookies/2015521165256172.png">
+<meta property="article:published_time" content="2015-05-20T05:52:05.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="ASP.NET MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/05/20/session-cookies/201551914143312.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/05/20/session-cookies/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>session 與 cookies 登入機制 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/05/20/session-cookies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          session 與 cookies 登入機制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-05-20 13:52:05" itemprop="dateCreated datePublished" datetime="2015-05-20T13:52:05+08:00">2015-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/ASP-NET-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">ASP.NET MVC</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/05/20/session-cookies/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/20/session-cookies/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、session</p>
+
+<p>1、一個基本的session登入架構</p>
+
+<p><img border="0" src="201551914143312.png" /></p>
+
+<p>架構圖僅供參考，跟程式無關。</p>
+
+<p>&nbsp;</p>
+
+<p>一個最基本的登入機制原理就是「後台登入」，</p>
+
+<p>因為後臺可以用來新增文章、上架商品因此有必要設置登入機制來過濾一般人進入，</p>
+
+<p>而登入機制可以利用session技術來完成，</p>
+
+<p>以下程式是用來說明session用法，檔案結構如下</p>
+
+<p><img height="530" src="1543896628_46366.png" width="337" /></p>
+
+<p>HomeController.cs 為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">if</span> (Convert.ToBoolean(Session[<span style="color:#a31515;">&quot;auth&quot;</span>]) == <span style="color:#0000ff;">true</span>)
+            &#123;
+                ViewBag.Name = Session[<span style="color:#a31515;">&quot;Name&quot;</span>].ToString();
+                <span style="color:#0000ff;">return</span> View();
+            &#125;
+            <span style="color:#0000ff;">else</span>
+            &#123;
+                ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+                <span style="color:#0000ff;">return</span> View();
+            &#125;
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Login()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Login(<span style="color:#0000ff;">string</span> myid)
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">true</span>;
+            Session[<span style="color:#a31515;">&quot;Name&quot;</span>] = myid;
+            <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Logout()
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">false</span>;
+            ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+            <span style="color:#0000ff;">return</span> View(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult About()
+        &#123;
+            <span style="color:#0000ff;">if</span> (Convert.ToBoolean(Session[<span style="color:#a31515;">&quot;auth&quot;</span>]) == <span style="color:#0000ff;">true</span>)
+            &#123;
+                ViewBag.Name = Session[<span style="color:#a31515;">&quot;Name&quot;</span>].ToString();
+                <span style="color:#0000ff;">return</span> View();
+            &#125;
+            <span style="color:#0000ff;">else</span>
+            &#123;
+                ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+                <span style="color:#0000ff;">return</span> View();
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>_Layout.cshtml 的內容為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width, initial-scale=1.0&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>@ViewBag<span style="color:#008c00; ">.</span>Title - My ASP<span style="color:#008c00; ">.</span>NET Application<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+    @Styles<span style="color:#008c00; ">.</span>Render(&quot;~/Content/css&quot;)
+    @Scripts<span style="color:#008c00; ">.</span>Render(&quot;~/bundles/modernizr&quot;)
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar navbar-inverse navbar-fixed-top&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container&quot;</span><span style="color:#a65700; ">&gt;</span>
+            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-header&quot;</span><span style="color:#a65700; ">&gt;</span>
+                <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;button&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-toggle&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">data</span><span style="color:#274796; ">-toggle</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;collapse&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">data</span><span style="color:#274796; ">-</span><span style="color:#074726; ">target</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;.navbar-collapse&quot;</span><span style="color:#a65700; ">&gt;</span>
+                    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;icon-bar&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#a65700; ">&gt;</span>
+                    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;icon-bar&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#a65700; ">&gt;</span>
+                    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;icon-bar&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#a65700; ">&gt;</span>
+                <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>
+                @Html<span style="color:#008c00; ">.</span>ActionLink(&quot;Application name&quot;, &quot;Index&quot;, &quot;Home&quot;, new { area = &quot;&quot; }, new { @class = &quot;navbar-brand&quot; })
+            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;navbar-collapse collapse&quot;</span><span style="color:#a65700; ">&gt;</span>
+                @{
+                    if (Convert<span style="color:#008c00; ">.</span>ToBoolean(Session[&quot;auth&quot;]) == true)
+                    {
+                        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;nav navbar-nav&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;Home&quot;, &quot;Index&quot;, &quot;Home&quot;)<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;About&quot;, &quot;About&quot;, &quot;Home&quot;)<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;登出&quot;, &quot;Logout&quot;, &quot;Home&quot;, null, new { @class = &quot;btn btn-default&quot; })<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+                    }
+                    else
+                    {
+                        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;nav navbar-nav&quot;</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;Home&quot;, &quot;Index&quot;, &quot;Home&quot;)<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;About&quot;, &quot;About&quot;, &quot;Home&quot;)<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>@Html<span style="color:#008c00; ">.</span>ActionLink(&quot;登入&quot;, &quot;Login&quot;, &quot;Home&quot;, null, new { @class = &quot;btn btn-link&quot; })<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+                        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+                    }
+                }
+            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;container body-content&quot;</span><span style="color:#a65700; ">&gt;</span>
+        @RenderBody()
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">hr</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">footer</span><span style="color:#a65700; ">&gt;</span>
+            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#074726; ">&amp;</span><span style="color:#074726; ">copy</span><span style="color:#074726; ">;</span> @DateTime<span style="color:#008c00; ">.</span>Now<span style="color:#008c00; ">.</span>Year - My ASP<span style="color:#008c00; ">.</span>NET Application<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">footer</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    @Scripts<span style="color:#008c00; ">.</span>Render(&quot;~/bundles/jquery&quot;)
+    @Scripts<span style="color:#008c00; ">.</span>Render(&quot;~/bundles/bootstrap&quot;)
+    @RenderSection(&quot;scripts&quot;, required: false)
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-12-04 04:12:05 UTC -->
+
+<p>&nbsp;</p>
+
+<p>Index.cshtml 的內容為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    ViewBag<span style="color:#008c00; ">.</span>Title = &quot;Home Page&quot;;
+}
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">style</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;</span><span style="color:#bb7977; font-weight:bold; ">color</span><span style="color:#808030; ">:</span><span style="color:#797997; ">red</span><span style="color:#800080; ">;</span><span style="color:#0000e6; ">&quot;</span><span style="color:#a65700; ">&gt;</span>Hello! @ViewBag<span style="color:#008c00; ">.</span>Name<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;jumbotron&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>ASP<span style="color:#008c00; ">.</span>NET<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;lead&quot;</span><span style="color:#a65700; ">&gt;</span>ASP<span style="color:#008c00; ">.</span>NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://asp.net&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;btn btn-primary btn-lg&quot;</span><span style="color:#a65700; ">&gt;</span>Learn more <span style="color:#074726; ">&amp;</span><span style="color:#074726; ">raquo</span><span style="color:#074726; ">;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;row&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;col-md-4&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Getting started<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+            ASP<span style="color:#008c00; ">.</span>NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development<span style="color:#008c00; ">.</span>
+        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;btn btn-default&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://go.microsoft.com/fwlink/?LinkId=301865&quot;</span><span style="color:#a65700; ">&gt;</span>Learn more <span style="color:#074726; ">&amp;</span><span style="color:#074726; ">raquo</span><span style="color:#074726; ">;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;col-md-4&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Get more libraries<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;btn btn-default&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://go.microsoft.com/fwlink/?LinkId=301866&quot;</span><span style="color:#a65700; ">&gt;</span>Learn more <span style="color:#074726; ">&amp;</span><span style="color:#074726; ">raquo</span><span style="color:#074726; ">;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;col-md-4&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>Web Hosting<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>You can easily find a web hosting company that offers the right mix of features and price for your applications<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;btn btn-default&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://go.microsoft.com/fwlink/?LinkId=301867&quot;</span><span style="color:#a65700; ">&gt;</span>Learn more <span style="color:#074726; ">&amp;</span><span style="color:#074726; ">raquo</span><span style="color:#074726; ">;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-12-04 04:14:06 UTC -->
+
+<p>&nbsp;</p>
+
+<p>About.cshtml 的內容為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    ViewBag<span style="color:#008c00; ">.</span>Title = &quot;About&quot;;
+}
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>@ViewBag<span style="color:#008c00; ">.</span>Title<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#274796; "> </span><span style="color:#074726; ">style</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;</span><span style="color:#bb7977; font-weight:bold; ">color</span><span style="color:#808030; ">:</span><span style="color:#797997; ">red</span><span style="color:#800080; ">;</span><span style="color:#0000e6; ">&quot;</span><span style="color:#a65700; ">&gt;</span>@ViewBag<span style="color:#008c00; ">.</span>Name<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Use this area to provide additional information<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-12-04 04:14:29 UTC -->
+
+<p>&nbsp;</p>
+
+<p>Login.cshtml 的內容為</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">form</span><span style="color:#274796; "> </span><span style="color:#074726; ">action</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;@Url.Action(&quot;</span><span style="color:#274796; ">Login</span><span style="color:#0000e6; ">&quot;)&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">method</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;post&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;form-inline&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;form-group&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">label</span><span style="color:#274796; "> </span><span style="color:#074726; ">for</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myid&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;control-label&quot;</span><span style="color:#a65700; ">&gt;</span>請輸入登入名稱<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">label</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myid&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;myid&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;text&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;form-control&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;btn btn-primary&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;submit&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;登入&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">form</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-12-04 04:16:16 UTC -->
+
+<p>&nbsp;</p>
+
+<p>2、我們可以利用&nbsp;Authorization Filter 來讓程式變得更簡潔，</p>
+
+<p>承上例，我們新增一個自訂的&nbsp;Filter，檔名為 AuthorizePlusAttribute.cs，檔案結構如下</p>
+
+<p><img height="561" src="1543999338_90646.png" width="336" /></p>
+
+<p>&nbsp;</p>
+
+<p>AuthorizePlusAttribute.cs 的內容為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Filter
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> AuthorizePlusAttribute : AuthorizeAttribute
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">void</span> OnAuthorization(AuthorizationContext filterContext)
+        &#123;
+            <span style="color:#0000ff;">if</span> (Convert.ToBoolean(filterContext.HttpContext.Session[<span style="color:#a31515;">&quot;auth&quot;</span>]) == <span style="color:#0000ff;">true</span>)
+            &#123;
+                filterContext.Controller.ViewBag.Name = filterContext.HttpContext.Session[<span style="color:#a31515;">&quot;Name&quot;</span>].ToString();
+            &#125;
+            <span style="color:#0000ff;">else</span>
+            &#123;
+                HandleUnauthorizedRequest(filterContext);
+            &#125;
+        &#125;
+
+        <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">void</span> HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        &#123;
+            filterContext.Controller.ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>HomeController.cs 重新改為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication1.Filter;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        [AuthorizePlus]
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Login()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Login(<span style="color:#0000ff;">string</span> myid)
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">true</span>;
+            Session[<span style="color:#a31515;">&quot;Name&quot;</span>] = myid;
+            <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Logout()
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">false</span>;
+            ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+            <span style="color:#0000ff;">return</span> View(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        [AuthorizePlus]
+        <span style="color:#0000ff;">public</span> ActionResult About()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>二、HttpCookie</p>
+
+<p>承上部分程式再修改，實際應用如下</p>
+
+<p><img border="0" src="2015521165256172.png" /></p>
+
+<p>架構圖僅供參考，跟程式無關。</p>
+
+<p>&nbsp;</p>
+
+<p>HomeController.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication1.Filter;
+<span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Web;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        [AuthorizePlus]
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Login()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Login(<span style="color:#0000ff;">string</span> myid)
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">true</span>;
+            Session[<span style="color:#a31515;">&quot;Name&quot;</span>] = myid;
+
+            <span style="color:#0000ff;">var</span> theGuid = Guid.NewGuid().ToString();
+            DateTime validityPeriod = DateTime.UtcNow.AddSeconds(30d);
+
+            HttpContext.Application[theGuid] = validityPeriod;
+            <span style="color:#0000ff;">var</span> HttpCookie = <span style="color:#0000ff;">new</span> HttpCookie(<span style="color:#a31515;">&quot;myLogin&quot;</span>, theGuid)
+            &#123;
+                Expires = validityPeriod,
+                HttpOnly = <span style="color:#0000ff;">true</span>
+            &#125;;
+
+            Response.Cookies.Add(HttpCookie);
+
+            <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Logout()
+        &#123;
+            Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">false</span>;
+            ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+            <span style="color:#0000ff;">return</span> View(<span style="color:#a31515;">&quot;Index&quot;</span>);
+        &#125;
+
+        [AuthorizePlus]
+        <span style="color:#0000ff;">public</span> ActionResult About()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>AuthorizePlusAttribute.cs</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication1.Filter
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> AuthorizePlusAttribute : AuthorizeAttribute
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">void</span> OnAuthorization(AuthorizationContext filterContext)
+        &#123;
+            <span style="color:#0000ff;">string</span> theGuid = <span style="color:#a31515;">&quot;&quot;</span>;
+            <span style="color:#0000ff;">try</span>
+            &#123;
+                theGuid = Convert.ToString(filterContext.HttpContext.Request.Cookies[<span style="color:#a31515;">&quot;myLogin&quot;</span>].Value);
+            &#125;
+            <span style="color:#0000ff;">catch</span> (System.NullReferenceException)
+            &#123;
+                theGuid = <span style="color:#a31515;">&quot;&quot;</span>;
+            &#125;
+
+            <span style="color:#0000ff;">if</span> (Convert.ToBoolean(filterContext.HttpContext.Session[<span style="color:#a31515;">&quot;auth&quot;</span>]) == <span style="color:#0000ff;">true</span> &amp;&amp; !<span style="color:#0000ff;">string</span>.IsNullOrWhiteSpace(theGuid) &amp;&amp; CheckLoginTime(filterContext, theGuid))
+            &#123;
+                filterContext.Controller.ViewBag.Name = filterContext.HttpContext.Session[<span style="color:#a31515;">&quot;Name&quot;</span>].ToString();
+            &#125;
+            <span style="color:#0000ff;">else</span>
+            &#123;
+                HandleUnauthorizedRequest(filterContext);
+            &#125;
+        &#125;
+
+        <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">override</span> <span style="color:#0000ff;">void</span> HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        &#123;
+            filterContext.Controller.ViewBag.Name = <span style="color:#a31515;">&quot;Guest&quot;</span>;
+            filterContext.HttpContext.Session[<span style="color:#a31515;">&quot;auth&quot;</span>] = <span style="color:#0000ff;">false</span>;
+        &#125;
+
+        <span style="color:#0000ff;">private</span> Boolean CheckLoginTime(AuthorizationContext filterContext, <span style="color:#0000ff;">string</span> theGuid)
+        &#123;
+            <span style="color:#0000ff;">var</span> loginTime = Convert.ToDateTime(filterContext.HttpContext.Application[theGuid]);
+            <span style="color:#0000ff;">return</span> (loginTime &gt; DateTime.UtcNow) ? <span style="color:#0000ff;">true</span> : <span style="color:#0000ff;">false</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/ASP-NET-MVC/" rel="tag"># ASP.NET MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/05/18/edmx-change-no-clean/" rel="prev" title="如何避免*.edmx檔被異動時，所設置的驗證屬性被清除">
+      <i class="fa fa-chevron-left"></i> 如何避免*.edmx檔被異動時，所設置的驗證屬性被清除
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/06/02/Google-Maps-API-Hello-world/" rel="next" title="Google Maps API - Hello world">
+      Google Maps API - Hello world <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/05/20/session-cookies/";
+    this.page.identifier = "2015/05/20/session-cookies/";
+    this.page.title = "session 與 cookies 登入機制";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

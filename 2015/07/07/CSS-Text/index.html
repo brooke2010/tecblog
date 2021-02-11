@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Text">
+<meta property="og:url" content="https://brooke2010.github.io/2015/07/07/CSS-Text/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/07/07/CSS-Text/1522645847_28784.png">
+<meta property="article:published_time" content="2015-07-07T05:20:15.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/07/07/CSS-Text/1522645847_28784.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/07/07/CSS-Text/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CSS Text | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/07/07/CSS-Text/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS Text
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-07-07 13:20:15" itemprop="dateCreated datePublished" datetime="2015-07-07T13:20:15+08:00">2015-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/07/07/CSS-Text/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/07/CSS-Text/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>可以控制文字的屬性有color...等等。</p>
+
+<p>以下介紹還沒提到的屬性</p>
+
+<p>一、white-space</p>
+
+<p>用來決定超過寬度的一行英文字之中，是否利用英文單字自動斷行，</p>
+
+<p>其值有 normal (預設值)、nowrap、pre、pre-line、pre-wrap，</p>
+
+<p>預設值是會自動斷行。</p>
+
+<p>範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>nowrap <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">nowrap</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;nowrap&quot;</span><span style="color:#a65700; ">&gt;</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+        This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span> This is some text<span style="color:#008c00; ">.</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>Tip：在中文字方面，每一個中文字都被視為單字。</p>
+
+<p>&nbsp;</p>
+
+<p>二、word-wrap</p>
+
+<p>用來決定超過寬度的一行英文字之中，針對超過寬度的一整組單字，</p>
+
+<p>決定是否要強制斷行(<span style="background-color:#FFFF00;">被強制斷行的該組單字會先跳一行</span>)，</p>
+
+<p>word-wrap提供的樣式值為normal(預設值)、break-word，</p>
+
+<p>預設值是不會強制斷行。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">11</span><span style="color:#006600; ">em</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">000000</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-normal <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-nowrap <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">nowrap</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-break-word <span style="color:#800080; ">{</span>
+            <span style="color:#008484; "><span style="background-color:#FFFF00;">word-wrap</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#074726; "><span style="background-color:#FFFF00;">break-word</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-normal <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-wrap</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-nowrap&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-break-word&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>三、word-break</p>
+
+<p>用來決定超過寬度的一行英文字之中，針對超過寬度的一整組單字，決定是否要強制斷行。</p>
+
+<p>其值有&nbsp;normal (預設值，此時 white-space 值為單字自動斷行，word-wrap 值不為強制斷行)、</p>
+
+<p>keep-all、break-word、break-all。</p>
+
+<p>其餘說明如下：</p>
+
+<p>keep-all 在不考慮中文字之下，keep-all 效果等於&nbsp;normal。</p>
+
+<p>break-word 其效果等於同時具有&nbsp;white-space : normal; 與 word-wrap : break-word; 特性</p>
+
+<p>break-all 表示除了有&nbsp;white-space : normal; 特性之外，</p>
+
+<p>還具有強制斷行的效果(<span style="background-color:#FFFF00;">不用再考慮強制斷行的該組單字會先跳一行</span>，跟 word-wrap : break-word; 有點不太一樣)。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">11</span><span style="color:#006600; ">em</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">000000</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-normal <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-nowrap <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">nowrap</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-break-word <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-wrap</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">break-word</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-normal <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-wrap</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-break-normal <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-break</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-break-keep-all <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-break</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">keep-all</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-break-break-word <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-break</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">break-word</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-break-break-all <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-break</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">break-all</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-nowrap&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-break-word&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">hr</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-break-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-break-keep-all&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-break-break-word&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-break-break-all&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>四、text-overflow</p>
+
+<p>在&nbsp;overflow : hidden; 之下，當超過寬度的一行英文字之中，</p>
+
+<p>text-overflow 屬性將用來決定刪文樣式。</p>
+
+<p>text-overflow 提供的樣式值為clip(預設值)、ellipsis，</p>
+
+<p>而 overflow 提供的樣式值為visible(預設值)、hidden、scroll、auto</p>
+
+<p>範例如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">width</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">11</span><span style="color:#006600; ">em</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#008c00; ">#</span><span style="color:#008000; ">000000</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-normal <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">overflow</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">hidden</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-overflow</span><span style="color:#808030; ">:</span> ellipsis<span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>white-space-nowrap <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">nowrap</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">overflow</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">hidden</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-overflow</span><span style="color:#808030; ">:</span> ellipsis<span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-break-word <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-wrap</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">break-word</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">overflow</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">hidden</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-overflow</span><span style="color:#808030; ">:</span> ellipsis<span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>word-wrap-normal <span style="color:#800080; ">{</span>
+            <span style="color:#008484; ">word-wrap</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">normal</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">overflow</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">hidden</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-overflow</span><span style="color:#808030; ">:</span> ellipsis<span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;white-space-nowrap&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-break-word&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;word-wrap-normal&quot;</span><span style="color:#a65700; ">&gt;</span> This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword<span style="color:#008c00; ">.</span> The long word will break and wrap to the next line<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>五、text-indent</p>
+
+<p>用來指定一個句子第一行的縮排</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-indent</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">em</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        Ins my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>通常使用 text-indent 時會使用em單位，而不會使用px單位，</p>
+
+<p>關於em的用法請參考<a target="_blank" rel="noopener" href="http://www.minwt.com/css/5383.html">CSS教學－段落文字縮排、凸排設定</a></p>
+
+<p>&nbsp;</p>
+
+<p>範例：利用 text-indent 等屬性來做文字隱藏效果</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">white-space</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">nowrap</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; "><span style="background-color:#FFFF00;">text-indent</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#008c00; "><span style="background-color:#FFFF00;">100</span></span><span style="color:#006600; "><span style="background-color:#FFFF00;">%</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+            <span style="color:#bb7977; font-weight:bold; ">overflow</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">hidden</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        Ins my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me,
+        In my younger and more vulnerable years my father gave me
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>六、line-height</p>
+
+<p>指定行跟行之間的間距，可為單位長度或百分比</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">p</span><span style="color:#808030; ">.</span>small <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">line-height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">70</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">p</span><span style="color:#808030; ">.</span>big <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">line-height</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">200</span><span style="color:#006600; ">%</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a standard line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a standard line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        The default line height in most browsers is about <span style="color:#008c00; ">110</span>% to <span style="color:#008c00; ">120</span>%.<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;small&quot;</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a smaller line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a smaller line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a smaller line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a smaller line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;big&quot;</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a bigger line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a bigger line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a bigger line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+        This is a paragraph with a bigger line-height<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">br</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>七、text-align</p>
+
+<p>用來控制塊級元素裡的子元素一行中的文字是靠左還靠右、置中、平均分散，</p>
+
+<p>預設當然是靠左，有四種樣式分別為left、right、center、justify</p>
+
+<p>範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">h1</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">center</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>CSS text-align Example<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>再看一個例子，</p>
+
+<p>ul tag 是塊級元素，li tag 由塊級元素轉變為行內元素 ( inline-block)，</p>
+
+<p>藉由在塊級元素上指定 text-align 屬性將會影響到裡面行內元素的水平排列方式。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">ul</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#797997; ">blue</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">0</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">center</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+            <span style="color:#800000; font-weight:bold; ">ul</span> <span style="color:#808030; ">&gt;</span> <span style="color:#800000; font-weight:bold; ">li</span> <span style="color:#800080; ">{</span>
+                <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+                <span style="color:#bb7977; font-weight:bold; ">list-style-type</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">none</span><span style="color:#800080; ">;</span>
+                <span style="color:#bb7977; font-weight:bold; ">display</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">inline-block</span><span style="color:#800080; ">;</span>
+            <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;menu1&quot;</span><span style="color:#a65700; ">&gt;</span>a<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;menu2&quot;</span><span style="color:#a65700; ">&gt;</span>b<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;menu3&quot;</span><span style="color:#a65700; ">&gt;</span>c<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">li</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>八、vertical-align</p>
+
+<p>決定行內元素( inline、inline-block )往上擺或往下擺或置中，常用在文字垂直置中。</p>
+
+<p>可用的值有 top、middle、bottom、baseline、super、sub、text-top、text-bottom、px、%</p>
+
+<p>範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">div</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#797997; ">red</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; ">padding</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">10</span><span style="color:#006600; ">px</span><span style="color:#800080; ">;</span>
+            <span style="color:#bb7977; font-weight:bold; "><span style="background-color:#FFFF00;">line-height</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#008c00; "><span style="background-color:#FFFF00;">700</span></span><span style="color:#006600; "><span style="background-color:#FFFF00;">%</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">img</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">border</span><span style="color:#808030; ">:</span> <span style="color:#008c00; ">1</span><span style="color:#006600; ">px</span> <span style="color:#074726; ">solid</span> <span style="color:#797997; ">blue</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>top <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">top</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>middle <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">middle</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>bottom <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">bottom</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>baseline <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">baseline</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>super <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">super</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>sub <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">sub</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>text-top <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">text-top</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#808030; ">.</span>text-bottom <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">vertical-align</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">text-bottom</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;top&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a top alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;middle&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a middle alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;bottom&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a bottom alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;baseline&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a baseline alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;super&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a super alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sub&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a sub alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;text-top&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a text-top alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>An <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">img</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;text-bottom&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://mdn.mozillademos.org/files/12245/frame_image.svg&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">alt</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;link&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">width</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">height</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;32&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span> image with a text-bottom alignment<span style="color:#008c00; ">.</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>結果如下圖</p>
+
+<p><img height="792" src="1522645847_28784.png" width="369" /></p>
+
+<p>注意，在使用 vertical-align 時，請把&nbsp;line-height 給撐大一點，</p>
+
+<p>vertical-align 的特性才得以發揮出來。</p>
+
+<p>&nbsp;</p>
+
+<p>另一例子將明顯示出 vertical-align : middle ，是指在一父元素內的所有子元素垂直位置<span style="color:#FF0000;">互相</span>置中</p>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;head&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;meta</span> <span style="color: #7D9029">charset=</span><span style="color: #BA2121">&quot;utf-8&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;meta</span> <span style="color: #7D9029">name=</span><span style="color: #BA2121">&quot;viewport&quot;</span> <span style="color: #7D9029">content=</span><span style="color: #BA2121">&quot;width=device-width&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+    <span style="color: #008000; font-weight: bold">&lt;style&gt;</span>
+        <span style="color: #0000FF; font-weight: bold">.div0</span> {
+            <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">200px</span>;
+            <span style="color: #008000; font-weight: bold">height</span><span style="color: #666666">:</span> <span style="color: #666666">150px</span>;
+            <span style="color: #008000; font-weight: bold">border</span><span style="color: #666666">:</span> <span style="color: #666666">1px</span> <span style="color: #008000; font-weight: bold">solid</span> <span style="color: #666666">#000</span>;
+            <span style="color: #008000; font-weight: bold">text-align</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">center</span>;
+        }
+        <span style="color: #0000FF; font-weight: bold">.redbox</span> {
+            <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">30px</span>;
+            <span style="color: #008000; font-weight: bold"><span style="background-color:#FFFF00;">height</span></span><span style="color: #666666"><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #666666"><span style="background-color:#FFFF00;">30px</span></span><span style="background-color:#FFFF00;">;</span>
+            <span style="color: #008000; font-weight: bold">background</span><span style="color: #666666">:</span> <span style="color: #666666">#c00</span>;
+            <span style="color: #008000; font-weight: bold">display</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">inline</span><span style="color: #666666">-</span><span style="color: #008000; font-weight: bold">block</span>;
+            <span style="color: #008000; font-weight: bold">vertical-align</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">middle</span>;
+            <span style="color: #008000; font-weight: bold"><span style="background-color:#FFFF00;">line-height</span></span><span style="color: #666666"><span style="background-color:#FFFF00;">:</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #666666"><span style="background-color:#FFFF00;">30px</span></span><span style="background-color:#FFFF00;">;</span>
+        }
+        <span style="color: #0000FF; font-weight: bold">.greenbox</span> {
+            <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">30px</span>;
+            <span style="color: #008000; font-weight: bold">height</span><span style="color: #666666">:</span> <span style="color: #666666">60px</span>;
+            <span style="color: #008000; font-weight: bold">background</span><span style="color: #666666">:</span> <span style="color: #666666">#0c0</span>;
+            <span style="color: #008000; font-weight: bold">display</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">inline</span><span style="color: #666666">-</span><span style="color: #008000; font-weight: bold">block</span>;
+            <span style="color: #008000; font-weight: bold">vertical-align</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">middle</span>;
+            <span style="color: #008000; font-weight: bold">line-height</span><span style="color: #666666">:</span> <span style="color: #666666">60px</span>;
+        }
+        <span style="color: #0000FF; font-weight: bold">.yellowbox</span> {
+            <span style="color: #008000; font-weight: bold">width</span><span style="color: #666666">:</span> <span style="color: #666666">30px</span>;
+            <span style="color: #008000; font-weight: bold">height</span><span style="color: #666666">:</span> <span style="color: #666666">40px</span>;
+            <span style="color: #008000; font-weight: bold">background</span><span style="color: #666666">:</span> <span style="color: #666666">#F1E500</span>;
+            <span style="color: #008000; font-weight: bold">display</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">inline</span><span style="color: #666666">-</span><span style="color: #008000; font-weight: bold">block</span>;
+            <span style="color: #008000; font-weight: bold">vertical-align</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">middle</span>;
+            <span style="color: #008000; font-weight: bold">line-height</span><span style="color: #666666">:</span> <span style="color: #666666">40px</span>;
+        }
+    <span style="color: #008000; font-weight: bold">&lt;/style&gt;</span>
+
+<p><span style="color: #008000; font-weight: bold">&lt;/head&gt;</span><br><span style="color: #008000; font-weight: bold">&lt;body&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;div0&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span><br>        <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;redbox&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>a<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span><br>        <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;greenbox&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>b<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span><br>        <span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;yellowbox&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>c<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;/div&gt;</span><br><span style="color: #008000; font-weight: bold">&lt;/body&gt;</span><br><span style="color: #008000; font-weight: bold">&lt;/html&gt;</span><br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>九、text-decoration</p>
+
+<p>用來對文字加上底線、下底線、刪除線的樣式</p>
+
+<p>值可為overline、underline、line-through、none</p>
+
+<p>範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">h1</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-decoration</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">overline</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">h2</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-decoration</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">line-through</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">h3</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-decoration</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">underline</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">1</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">2</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">3</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>十、text-transform</p>
+
+<p>用來表示英文字母要大小寫還是每個字母大寫，值可為</p>
+
+<p>uppercase、lowercase、capitalize</p>
+
+<p>範例：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">h1</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-transform</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">uppercase</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">h2</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-transform</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">lowercase</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+
+        <span style="color:#800000; font-weight:bold; ">h3</span> <span style="color:#800080; ">{</span>
+            <span style="color:#bb7977; font-weight:bold; ">text-transform</span><span style="color:#808030; ">:</span> <span style="color:#074726; ">capitalize</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">style</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">1</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">2</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h2</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#a65700; ">&gt;</span>This is heading <span style="color:#008c00; ">3</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h3</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>十一、letter-spacing</p>
+
+<p>指定每一個字母的間距</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">letter-spacing</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">h2</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">letter-spacing</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(128, 128, 48);">-</span><span style="color: rgb(0, 140, 0);">3</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>This is heading 1&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">h2</span><span style="color: rgb(128, 128, 48);">&gt;</span>This is heading 2&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">h2</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>十二、word-spacing</p>
+
+<p>設定每一個單字間的空白間格距離</p>
+
+<p>範例：</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span> <span style="color: rgb(128, 0, 128);">{</span> 
+    <span style="color: rgb(187, 121, 119); font-weight: bold;">word-spacing</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">30</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+<span style="color: rgb(128, 0, 128);">}</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+This is some <span style="color: rgb(128, 0, 0); font-weight: bold;">text</span><span style="color: rgb(128, 128, 48);">.</span> This is some <span style="color: rgb(128, 0, 0); font-weight: bold;">text</span><span style="color: rgb(128, 128, 48);">.</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>十三、text-shadow</p>
+
+<p>用來對字型增加陰影，文法格式為</p>
+
+<p>text-shadow: h-shadow v-shadow blur-radius color，</p>
+
+<p>而且還可以增加一組以上的特效。</p>
+
+<p>範例1：</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">text-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">8</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">FF0000</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>Text-shadow with blur effect&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">Note</span><span style="color: rgb(128, 128, 48);">:</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span> Internet Explorer 9 and earlier do not support the text-shadow property<span style="color: rgb(128, 128, 48);">.</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>範例2：</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">text-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">0</span> <span style="color: rgb(0, 140, 0);">0</span> <span style="color: rgb(0, 140, 0);">3</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">FF0000</span><span style="color: rgb(128, 128, 48);">,</span> <span style="color: rgb(0, 140, 0);">0</span> <span style="color: rgb(0, 140, 0);">0</span> <span style="color: rgb(0, 140, 0);">50</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">0000FF</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>Text-shadow with red and blue neon glow&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">Note</span><span style="color: rgb(128, 128, 48);">:</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span> Internet Explorer 9 and earlier do not support the text-shadow property<span style="color: rgb(128, 128, 48);">.</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>十四、box-shadow</p>
+
+<p>其用法跟text-shadow差不多，功能為對元素外框加陰影</p>
+
+<p>範例：</p>
+
+<pre style="color: rgb(0, 0, 0); background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">
+&lt;!DOCTYPE <span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">span</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">text-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">8</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">FF0000</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">box-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">10</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">10</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">div</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">width</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">300</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">height</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">100</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">padding</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">15</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">background-color</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(121, 121, 151);">yellow</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">box-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">10</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">10</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(187, 121, 119); font-weight: bold;">text-shadow</span><span style="color: rgb(128, 128, 48);">:</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">2</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">8</span><span style="color: rgb(0, 102, 0);">px</span> <span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">FF0000</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    &lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">style</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>Text-shadow with &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(128, 128, 48);">&gt;</span>blur&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">span</span><span style="color: rgb(128, 128, 48);">&gt;</span> effect&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">h1</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>&lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">Note</span><span style="color: rgb(128, 128, 48);">:</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">b</span><span style="color: rgb(128, 128, 48);">&gt;</span> Internet Explorer 9 and earlier do not support the text-shadow property<span style="color: rgb(128, 128, 48);">.</span>&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+    &lt;<span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(128, 128, 48);">&gt;</span>This is <span style="color: rgb(128, 0, 0); font-weight: bold;">a</span> <span style="color: rgb(128, 0, 0); font-weight: bold;">div</span> element with <span style="color: rgb(128, 0, 0); font-weight: bold;">a</span> box-shadow&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(128, 128, 48);">&gt;</span>
+&lt;/<span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(128, 128, 48);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align">mozilla vertical-align</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/pr_pos_vertical-align.asp">CSS vertical-align Property</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.oxxostudio.tw/articles/201408/css-vertical-align.html">CSS 垂直置中的三個方法</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/07/07/Regular-Expression-Options/" rel="prev" title="Regular Expression Options">
+      <i class="fa fa-chevron-left"></i> Regular Expression Options
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/07/11/CSS-outline/" rel="next" title="CSS outline">
+      CSS outline <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/07/07/CSS-Text/";
+    this.page.identifier = "2015/07/07/CSS-Text/";
+    this.page.title = "CSS Text";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

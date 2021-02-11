@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM-events">
+<meta property="og:url" content="https://brooke2010.github.io/2014/09/15/DOM-events/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-09-15T01:38:38.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="DOM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2014/09/15/DOM-events/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>DOM-events | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2014/09/15/DOM-events/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DOM-events
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-09-15 09:38:38" itemprop="dateCreated datePublished" datetime="2014-09-15T09:38:38+08:00">2014-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/DOM/" itemprop="url" rel="index">
+                    <span itemprop="name">DOM</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2014/09/15/DOM-events/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/15/DOM-events/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、在Html的事件裡可以放入要執行的JavaScript code</p>
+
+<p><span class="highLT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&lt;</span><span class="highELE" style="color: rgb(165, 42, 42); font-family: Consolas, 'courier new'; font-size: 14px;">button</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'courier new'; font-size: 14px;">&nbsp;</span><span class="highATT" style="color: rgb(220, 20, 60); font-family: Consolas, 'courier new'; font-size: 14px;">onclick=</span><span class="highVAL" style="color: rgb(0, 0, 205); font-family: Consolas, 'courier new'; font-size: 14px;">&#39;getElementById(&quot;demo&quot;).innerHTML=Date()&#39;</span><span class="highGT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&gt;</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'courier new'; font-size: 14px;">The time is?</span><span class="highLT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&lt;</span><span class="highELE" style="color: rgb(165, 42, 42); font-family: Consolas, 'courier new'; font-size: 14px;">/button</span><span class="highGT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&gt;</span></p>
+
+<p>&nbsp;</p>
+
+<p>二、如果要自己改變自己的property可使用this</p>
+
+<p><span class="highLT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&lt;</span><span class="highELE" style="color: rgb(165, 42, 42); font-family: Consolas, 'courier new'; font-size: 14px;">button</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'courier new'; font-size: 14px;">&nbsp;</span><span class="highATT" style="color: rgb(220, 20, 60); font-family: Consolas, 'courier new'; font-size: 14px;">onclick=</span><span class="highVAL" style="color: rgb(0, 0, 205); font-family: Consolas, 'courier new'; font-size: 14px;">&quot;<span style="background-color:#ffff00;">this</span>.innerHTML=Date()&quot;</span><span class="highGT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&gt;</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'courier new'; font-size: 14px;">The time is?</span><span class="highLT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&lt;</span><span class="highELE" style="color: rgb(165, 42, 42); font-family: Consolas, 'courier new'; font-size: 14px;">/button</span><span class="highGT" style="color: blue; font-family: Consolas, 'courier new'; font-size: 14px;">&gt;</span></p>
+
+<p>&nbsp;</p>
+
+<p>三、一些Html常用的事件</p>
+
+<table class="reference" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onchange</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">An HTML element has been changed</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onclick</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The user clicks an HTML element</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onmouseover</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The user moves the mouse over an HTML element</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onmouseout</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The user moves the mouse away from an HTML element</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onkeydown</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The user pushes a keyboard key</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onload</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The browser has finished loading the page</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>四、於Script裡面寫觸發事件，而Html裡面的內容可以不指定event handle</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>Click &quot;Try it&quot; to execute the displayDate() function<span style="color: rgb(0, 140, 0);">.</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">id</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;myBtn&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>Try it<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">button</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">id</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;demo&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        document<span style="color: rgb(128, 128, 48);">.</span>getElementById<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">myBtn</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">.</span></span><span style="background-color:#ffff00;">onclick</span> <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> <span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span> displayDate<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 0, 128);">;</span>
+
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> displayDate<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            document<span style="color: rgb(128, 128, 48);">.</span>getElementById<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">demo</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(121, 121, 151);">Date</span><span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>五、在onload時執行function-checkCookies()</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">onload</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;checkCookies()&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">id</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;demo&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> checkCookies<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(128, 0, 0); font-weight: bold;">var</span> text <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 0); font-weight: bold;">if</span> <span style="color: rgb(128, 128, 48);">(</span>navigator<span style="color: rgb(128, 128, 48);">.</span>cookieEnabled <span style="color: rgb(128, 128, 48);">==</span> <span style="color: rgb(15, 77, 117);">true</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+                text <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Cookies are enabled.</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 128);">}</span> <span style="color: rgb(128, 0, 0); font-weight: bold;">else</span> <span style="color: rgb(128, 0, 128);">{</span>
+                text <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Cookies are not enabled.</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 128);">}</span>
+            document<span style="color: rgb(128, 128, 48);">.</span>getElementById<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">demo</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> text<span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>六、當資料輸入完畢確認後做onchange時</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> myFunction<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="color: rgb(128, 0, 0); font-weight: bold;">var</span> x <span style="color: rgb(128, 128, 48);">=</span> document<span style="color: rgb(128, 128, 48);">.</span>getElementById<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">fname</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+            x<span style="color: rgb(128, 128, 48);">.</span>value <span style="color: rgb(128, 128, 48);">=</span> x<span style="color: rgb(128, 128, 48);">.</span>value<span style="color: rgb(128, 128, 48);">.</span><span style="color: rgb(128, 0, 0); font-weight: bold;">toUpperCase</span><span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    Enter your name: <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">input</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">type</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;text&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">id</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;fname&quot;</span><span style="color: rgb(39, 71, 150);"> <span style="background-color:#ffff00;">onchange</span></span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;myFunction()&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>When you leave the input field, a function is triggered which transforms the input text to upper case<span style="color: rgb(0, 140, 0);">.</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>七、還有滑鼠的onmouseover、onmouseout與onmouseup、onmousedown事件</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">onmouseover</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;mOver(this)&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">onmouseout</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;mOut(this)&quot;</span>
+<span style="color: rgb(39, 71, 150);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(7, 71, 38);">style</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">background-color</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">D94A38</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">width</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">120</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">height</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">20</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">padding</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">40</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(0, 0, 230);">&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        Mouse Over Me
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> mOver<span style="color: rgb(128, 128, 48);">(</span>obj<span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Thank You</span><span style="color: rgb(128, 0, 0);">&quot;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> mOut<span style="color: rgb(128, 128, 48);">(</span>obj<span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Mouse Over Me</span><span style="color: rgb(128, 0, 0);">&quot;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">onmousedown</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;mDown(this)&quot;</span><span style="color: rgb(39, 71, 150);"> </span><span style="color: rgb(7, 71, 38);">onmouseup</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;mUp(this)&quot;</span>
+<span style="color: rgb(39, 71, 150);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: rgb(7, 71, 38);">style</span><span style="color: rgb(128, 128, 48);">=</span><span style="color: rgb(0, 0, 230);">&quot;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">background-color</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">#</span><span style="color: rgb(0, 128, 0);">D94A38</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">width</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">90</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">height</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">20</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(187, 121, 119); font-weight: bold;">padding</span><span style="color: rgb(128, 128, 48);">:</span><span style="color: rgb(0, 140, 0);">40</span><span style="color: rgb(0, 102, 0);">px</span><span style="color: rgb(128, 0, 128);">;</span><span style="color: rgb(0, 0, 230);">&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        Click Me
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">div</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> mDown<span style="color: rgb(128, 128, 48);">(</span>obj<span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>style<span style="color: rgb(128, 128, 48);">.</span>backgroundColor <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">#1ec5e5</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Release Me</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+
+        <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> mUp<span style="color: rgb(128, 128, 48);">(</span>obj<span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>style<span style="color: rgb(128, 128, 48);">.</span>backgroundColor <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">#D94A38</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+            obj<span style="color: rgb(128, 128, 48);">.</span>innerHTML <span style="color: rgb(128, 128, 48);">=</span> <span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">Thank You</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>&nbsp;</p>
+
+<p>八、HTML DOM Events參考資料</p>
+
+<p style="font-family: verdana, helvetica, arial, sans-serif; color: rgb(64, 64, 64); font-size: 14px;"><b>DOM:</b>&nbsp;Indicates in which DOM Level the property was introduced.</p>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Mouse Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onclick.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onclick</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user clicks on an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oncontextmenu.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oncontextmenu</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user right-clicks on an element to open a context menu</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondblclick.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondblclick</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user double-clicks on an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmousedown.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmousedown</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a user presses a mouse button over an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmouseenter.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmouseenter</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the pointer is moved onto an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmouseleave.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmouseleave</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the pointer a user moves the mouse pointer out of an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmousemove.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmousemove</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the pointer is moving while it is over an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmouseover.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmouseover</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the pointer is moved onto an element, or onto one of its children</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmouseout.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmouseout</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a user moves the mouse pointer out of an element, or out of one of its children</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onmouseup.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onmouseup</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a user releases a mouse button over an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Keyboard Events</h2>
+
+<table class="reference notranslate" id="table2" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onkeydown.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onkeydown</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user is pressing a key</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onkeypress.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onkeypress</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user presses a key</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onkeyup.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onkeyup</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user releases a key</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Frame/Object Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onabort.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onabort</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the loading of a resource has been aborted</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onbeforeunload</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs before the document is unloaded</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onerror.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onerror</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an error occurs while loading an external file</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onhashchange.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onhashchange</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when there has been changes to the anchor part of the current URL</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onload.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onload</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an object has loaded</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onresize.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onresize</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a document view is resized</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onscroll.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onscroll</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element&#39;s scrollbar is being scrolled</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onunload.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onunload</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs once a page has unloaded (for &lt;body&gt;)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Form Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onblur.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onblur</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element loses focus</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onchange.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onchange</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the content of a form element, the selection, or the checked state have changed (for &lt;input&gt;, &lt;keygen&gt;, &lt;select&gt;, and &lt;textarea&gt;)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onfocus.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onfocus</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element gets focus</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onfocusin.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onfocusin</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element is about to get focus</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onfocusout.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onfocusout</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element is about to lose focus</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oninput.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oninput</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element gets user input</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">3</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">oninvalid</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element is invalid</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onreset.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onreset</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a form is reset</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onsearch.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onsearch</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a user writes something in a search field (for &lt;input=&quot;search&quot;&gt;)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onselect.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onselect</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs after the user selects some&nbsp;text (for &lt;input&gt; and &lt;textarea&gt;)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onsubmit.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onsubmit</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a form is submitted</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Drag Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondrag.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondrag</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an element is being dragged</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondragend.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondragend</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user has finished dragging an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondragenter.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondragenter</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the dragged element enters the drop target</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondragleave.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondragleave</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the dragged element leaves the drop target</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondragover.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondragover</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the dragged element is over the drop target</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondragstart.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondragstart</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user starts to drag an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondrop.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondrop</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the dragged element is dropped on the drop target</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Clipboard Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oncopy.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oncopy</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user copies the content of an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oncut.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oncut</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user cuts the content of an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onpaste.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onpaste</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user pastes some content in an element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Print Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onafterprint.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onafterprint</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a page has started printing, or if the print dialogue box has been closed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onbeforeprint.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onbeforeprint</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a page is about to be printed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Media Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onabort_media.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onabort</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the loading of an audio/video is aborted</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oncanplay.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oncanplay</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser can start playing the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_oncanplaythrough.asp" style="color: rgb(64, 64, 64); background-color: transparent;">oncanplaythrough</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser can play through the audio/video without stopping for buffering</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ondurationchange.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ondurationchange</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the duration of the audio/video is changed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onemptied</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the current playlist is empty</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onended.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onended</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the audio/video has ended</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onerror_media.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onerror</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when an error occurred during the loading of an audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onloadeddata.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onloadeddata</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser has loaded the current frame of the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onloadedmetadata.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onloadedmetadata</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser has loaded meta data for the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onloadstart.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onloadstart</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser starts looking for the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onpause.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onpause</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the audio/video has been paused</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onplay.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onplay</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the audio/video has been started or is no longer paused</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onplaying.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onplaying</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the audio/video is ready to play after having been paused or stopped for buffering</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onprogress.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onprogress</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser is downloading the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onratechange.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onratechange</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the playing speed of the audio/video is changed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onseeked.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onseeked</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user is finished moving/skipping to a new position in the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onseeking.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onseeking</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user starts moving/skipping to a new position in the audio/video</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onstalled.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onstalled</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser is trying to get media data, but data is not available</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onsuspend.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onsuspend</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser is intentionally not getting media data</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ontimeupdate.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ontimeupdate</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the current playback position has changed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onvolumechange.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onvolumechange</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the volume has been changed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onwaiting.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onwaiting</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the video stops because it needs to buffer the next frame</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Animation Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_animationend.asp" style="color: rgb(64, 64, 64); background-color: transparent;">animationend</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a CSS animation has completed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_animationiteration.asp" style="color: rgb(64, 64, 64); background-color: transparent;">animationiteration</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a CSS animation is repeated</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_animationstart.asp" style="color: rgb(64, 64, 64); background-color: transparent;">animationstart</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a CSS animation has started</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Transition Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_transitionend.asp" style="color: rgb(64, 64, 64); background-color: transparent;">transitionend</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a CSS transition has completed</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Misc Events</h2>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Event</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onmessage</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a message is received through or from an object (WebSocket, Web Worker, Event Source or a child frame or a parent window)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ononline.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ononline</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser starts to work online</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onoffline.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onoffline</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the browser starts to work offline</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onpopstate</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the window&#39;s history changes</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_onshow.asp" style="color: rgb(64, 64, 64); background-color: transparent;">onshow</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a &lt;menu&gt; element is shown as a context menu</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onstorage</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when a Web Storage area is updated</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ontoggle.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ontoggle</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the user opens or closes the &lt;details&gt; element</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">onwheel</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The event occurs when the wheel button of a mouse rolls</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">Event Object</h2>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Constants</h3>
+
+<table class="reference notranslate" id="table5" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Constant</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">CAPTURING_PHASE</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The current event phase is the capture phase (3)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">1</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">AT_TARGET</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The current event is in the target phase, i.e. it is being evaluated at the event target (1)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">BUBBLING_PHASE</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">The current event phase is the bubbling phase (2)</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">3</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Properties</h3>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Property</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_bubbles.asp" style="color: rgb(64, 64, 64); background-color: transparent;">bubbles</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not an event is a bubbling event</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_cancelable.asp" style="color: rgb(64, 64, 64); background-color: transparent;">cancelable</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not an event can have its default action prevented</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_currenttarget.asp" style="color: rgb(64, 64, 64); background-color: transparent;">currentTarget</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the element whose event listeners triggered the event</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">eventPhase</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns which phase of the event flow is currently being evaluated</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_target.asp" style="color: rgb(64, 64, 64); background-color: transparent;">target</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the element that triggered the event</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_timestamp.asp" style="color: rgb(64, 64, 64); background-color: transparent;">timeStamp</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the time (in milliseconds relative to the epoch) at which the event was created</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_type.asp" style="color: rgb(64, 64, 64); background-color: transparent;">type</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the name of the event</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Methods</h3>
+
+<table class="reference notranslate" id="table3" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Method</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">initEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Specifies the event type, whether or not the event can bubble, whether or not the event&#39;s default action can be prevented</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">preventDefault()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">To cancel the event if it is cancelable, meaning that any default action normally taken by the implementation as a result of the event will not occur</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">stopPropagation()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">To prevent further propagation of an event during event flow</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">EventTarget Object</h2>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Methods</h3>
+
+<table class="reference notranslate" id="table4" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 166px; background-color: rgb(85, 85, 85);">Method</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">addEventListener()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Allows the registration of event listeners on the event target (IE8 = attachEvent())</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">dispatchEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Allows to send the event to the subscribed event listeners (IE8 = fireEvent())</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">removeEventListener()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Allows the removal of event listeners on the event target (IE8 = detachEvent())</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">EventListener Object</h2>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Methods</h3>
+
+<table class="reference notranslate" id="table6" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Method</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">handleEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Called whenever an event occurs of the event type for which the EventListener interface was registered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">DocumentEvent Object</h2>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Methods</h3>
+
+<table class="reference notranslate" id="table7" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Method</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">createEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">&nbsp;</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 22px; margin-top: 10px; margin-bottom: 10px; font-weight: normal; color: rgb(0, 0, 0);">MouseEvent/KeyboardEvent Object</h2>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Properties</h3>
+
+<table class="reference notranslate" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Property</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">DOM</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_altkey.asp" style="color: rgb(64, 64, 64); background-color: transparent;">altKey</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not the &quot;ALT&quot; key was pressed when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_button.asp" style="color: rgb(64, 64, 64); background-color: transparent;">button</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns which mouse button was clicked when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_clientx.asp" style="color: rgb(64, 64, 64); background-color: transparent;">clientX</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the horizontal coordinate of the mouse pointer, relative to the current window, when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_clienty.asp" style="color: rgb(64, 64, 64); background-color: transparent;">clientY</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the vertical coordinate of the mouse pointer, relative to the current window, when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_ctrlkey.asp" style="color: rgb(64, 64, 64); background-color: transparent;">ctrlKey</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not the &quot;CTRL&quot; key was pressed when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">keyIdentifier</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the identifier of a key</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">3</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">keyLocation</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the location of the key on the device</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">3</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_metakey.asp" style="color: rgb(64, 64, 64); background-color: transparent;">metaKey</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not the &quot;meta&quot; key was pressed when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_relatedtarget.asp" style="color: rgb(64, 64, 64); background-color: transparent;">relatedTarget</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the element related to the element that triggered the event</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_screenx.asp" style="color: rgb(64, 64, 64); background-color: transparent;">screenX</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the horizontal coordinate of the mouse pointer, relative to the screen, when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_screeny.asp" style="color: rgb(64, 64, 64); background-color: transparent;">screenY</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns the vertical coordinate of the mouse pointer, relative to the screen, when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;"><a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/event_shiftkey.asp" style="color: rgb(64, 64, 64); background-color: transparent;">shiftKey</a></td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Returns whether or not the &quot;SHIFT&quot; key was pressed when an event was triggered</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="font-family: verdana, helvetica, arial, sans-serif; font-size: 17px; font-weight: normal; color: rgb(0, 0, 0);">Methods</h3>
+
+<table class="reference notranslate" id="table8" style="font-family: verdana, helvetica, arial, sans-serif; font-size: 14px; border-collapse: collapse; width: 821px; color: rgb(64, 64, 64);">
+    <tbody>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 157px; background-color: rgb(85, 85, 85);">Method</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; background-color: rgb(85, 85, 85);">Description</th>
+            <th style="color: rgb(255, 255, 255); border-style: solid; border-color: rgb(85, 85, 85); padding: 3px; vertical-align: top; width: 42px; background-color: rgb(85, 85, 85);">W3C</th>
+        </tr>
+        <tr>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">initMouseEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Initializes the value of a MouseEvent object</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">2</td>
+        </tr>
+        <tr style="background-color: rgb(241, 241, 241);">
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">initKeyboardEvent()</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">Initializes the value of a KeyboardEvent object</td>
+            <td style="border-style: solid; border-color: rgb(212, 212, 212); padding: 7px 5px; vertical-align: top;">3</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/brooke/2016/07/11/171418">Events-Event Object</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Interfaces based on Event</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">EventTarget</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload">window.onload</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10197335">重新認識 JavaScript 番外篇 (6) - 網頁的生命週期</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/DOM/" rel="tag"># DOM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/12/JavaScript-example/" rel="prev" title="學習JavaScript-簡單範例">
+      <i class="fa fa-chevron-left"></i> 學習JavaScript-簡單範例
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/18/CSS-Pseudo-elements-Pseudo-classes/" rel="next" title="CSS-Pseudo-elements (偽元素)與 Pseudo-classes (偽類)">
+      CSS-Pseudo-elements (偽元素)與 Pseudo-classes (偽類) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Mouse Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Keyboard Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Frame&#x2F;Object Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Form Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Drag Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">Clipboard Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">Print Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">Media Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">Animation Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">Transition Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">Misc Events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">12.</span> <span class="nav-text">Event Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">12.1.</span> <span class="nav-text">Constants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">12.2.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">12.3.</span> <span class="nav-text">Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">13.</span> <span class="nav-text">EventTarget Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">13.1.</span> <span class="nav-text">Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">14.</span> <span class="nav-text">EventListener Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">14.1.</span> <span class="nav-text">Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">15.</span> <span class="nav-text">DocumentEvent Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">15.1.</span> <span class="nav-text">Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">16.</span> <span class="nav-text">MouseEvent&#x2F;KeyboardEvent Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">16.1.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">16.2.</span> <span class="nav-text">Methods</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2014/09/15/DOM-events/";
+    this.page.identifier = "2014/09/15/DOM-events/";
+    this.page.title = "DOM-events";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

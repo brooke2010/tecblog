@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Moment.js 的用法">
+<meta property="og:url" content="https://brooke2010.github.io/2020/08/30/Moment-js-use/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2020/08/30/Moment-js-use/1598768440.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/08/30/Moment-js-use/1598769205.png">
+<meta property="article:published_time" content="2020-08-30T06:41:22.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="工具教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2020/08/30/Moment-js-use/1598768440.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2020/08/30/Moment-js-use/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Moment.js 的用法 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2020/08/30/Moment-js-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Moment.js 的用法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-30 14:41:22" itemprop="dateCreated datePublished" datetime="2020-08-30T14:41:22+08:00">2020-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具教學</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2020/08/30/Moment-js-use/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/08/30/Moment-js-use/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>關於對時間格式的運算與操作，還蠻多人推薦使用&nbsp;Moment.js 套件的。</p>
+
+<p>&nbsp;</p>
+
+<p>一、使用&nbsp;Moment.js 套件</p>
+
+<p>範例如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>JS Bin<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>moment<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>format<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">yyyy-MM-DD</span></span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>moment<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>format<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">HH:mm:ss</span></span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2020-08-30 06:19:39 UTC -->
+
+<p>執行結果如下</p>
+
+<p><img height="85" src="1598768440.png" width="164" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、使用自行對 Date() 擴充的 Format 方法</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #008800">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+
+<p><span style="color: #008000; font-weight: bold">&lt;head&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;meta</span> <span style="color: #BB4444">charset=&quot;utf-8&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;meta</span> <span style="color: #BB4444">name=&quot;viewport&quot;</span> <span style="color: #BB4444">content=&quot;width=device-width&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span><br><span style="color: #008000; font-weight: bold">&lt;/head&gt;</span></p>
+<p><span style="color: #008000; font-weight: bold">&lt;body&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;script&gt;</span><br>        <span style="color: #008800; font-style: italic">// 對Date的擴充套件，將 Date 轉化為指定格式的String</span><br>        <span style="color: #008800; font-style: italic">// 月(M)、日(d)、小時(h)、分(m)、秒(s)、季度(q) 可以用 1-2 個佔位符，</span><br>        <span style="color: #008800; font-style: italic">// 年(y)可以用 1-4 個佔位符，毫秒(S)只能用 1 個佔位符(是 1-3 位的數字)</span><br>        <span style="color: #008800; font-style: italic">// 例子：</span><br>        <span style="color: #008800; font-style: italic">// new Date().format(&quot;yyyy-MM-dd hh:mm:ss.S&quot;) ==&gt; 2006-07-02 08:09:04.423</span><br>        <span style="color: #AA22FF">Date</span>.prototype.format <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (fmt) {<br>            <span style="color: #AA22FF; font-weight: bold">var</span> o <span style="color: #666666">=</span> {<br>                <span style="color: #BB4444">&quot;M+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getMonth() <span style="color: #666666">+</span> <span style="color: #666666">1</span>, <span style="color: #008800; font-style: italic">//月份</span><br>                <span style="color: #BB4444">&quot;d+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getDate(), <span style="color: #008800; font-style: italic">//日</span><br>                <span style="color: #BB4444">&quot;h+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getHours(), <span style="color: #008800; font-style: italic">//小時</span><br>                <span style="color: #BB4444">&quot;m+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getMinutes(), <span style="color: #008800; font-style: italic">//分</span><br>                <span style="color: #BB4444">&quot;s+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getSeconds(), <span style="color: #008800; font-style: italic">//秒</span><br>                <span style="color: #BB4444">&quot;q+&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF">Math</span>.floor((<span style="color: #AA22FF; font-weight: bold">this</span>.getMonth() <span style="color: #666666">+</span> <span style="color: #666666">3</span>) <span style="color: #666666">/</span> <span style="color: #666666">3</span>), <span style="color: #008800; font-style: italic">//季度</span><br>                <span style="color: #BB4444">&quot;S&quot;</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">this</span>.getMilliseconds() <span style="color: #008800; font-style: italic">//毫秒</span><br>            };<br>            <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #BB6688">/(y+)/</span>.test(fmt)) fmt <span style="color: #666666">=</span> fmt.replace(<span style="color: #AA22FF">RegExp</span>.$1, (<span style="color: #AA22FF; font-weight: bold">this</span>.getFullYear() <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;&quot;</span>).substr(<span style="color: #666666">4</span> <span style="color: #666666">-</span> <span style="color: #AA22FF">RegExp</span>.$1.length));<br>            <span style="color: #AA22FF; font-weight: bold">for</span> (<span style="color: #AA22FF; font-weight: bold">var</span> k <span style="color: #AA22FF; font-weight: bold">in</span> o)<br>                <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">RegExp</span>(<span style="color: #BB4444">&quot;(&quot;</span> <span style="color: #666666">+</span> k <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;)&quot;</span>).test(fmt)) fmt <span style="color: #666666">=</span> fmt.replace(<span style="color: #AA22FF">RegExp</span>.$1, (<span style="color: #AA22FF">RegExp</span>.$1.length <span style="color: #666666">==</span> <span style="color: #666666">1</span>) <span style="color: #666666">?</span> (o[k]) <span style="color: #666666">:</span> ((<span style="color: #BB4444">&quot;00&quot;</span> <span style="color: #666666">+</span> o[k]).substr((<span style="color: #BB4444">&quot;&quot;</span> <span style="color: #666666">+</span> o[k]).length)));<br>            <span style="color: #AA22FF; font-weight: bold">return</span> fmt;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addSeconds <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (seconds) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setSeconds(<span style="color: #AA22FF; font-weight: bold">this</span>.getSeconds() <span style="color: #666666">+</span> seconds);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addMinutes <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (minutes) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setMinutes(<span style="color: #AA22FF; font-weight: bold">this</span>.getMinutes() <span style="color: #666666">+</span> minutes);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addHours <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (hours) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setHours(<span style="color: #AA22FF; font-weight: bold">this</span>.getHours() <span style="color: #666666">+</span> hours);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addDays <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (days) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setDate(<span style="color: #AA22FF; font-weight: bold">this</span>.getDate() <span style="color: #666666">+</span> days);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addMonths <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (months) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setMonth(<span style="color: #AA22FF; font-weight: bold">this</span>.getMonth() <span style="color: #666666">+</span> months);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF">Date</span>.prototype.addYears <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (years) {<br>            <span style="color: #AA22FF; font-weight: bold">this</span>.setFullYear(<span style="color: #AA22FF; font-weight: bold">this</span>.getFullYear() <span style="color: #666666">+</span> years);<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span>;<br>        }<br>        <span style="color: #AA22FF; font-weight: bold">function</span> diffSeconds(milliseconds) {<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">Math</span>.floor(milliseconds <span style="color: #666666">/</span> <span style="color: #666666">1000</span>);<br>        }<br>        <span style="color: #AA22FF; font-weight: bold">function</span> diffMinutes(milliseconds) {<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">Math</span>.floor(milliseconds <span style="color: #666666">/</span> <span style="color: #666666">1000</span> <span style="color: #666666">/</span> <span style="color: #666666">60</span>);<br>        }<br>        <span style="color: #AA22FF; font-weight: bold">function</span> diffHours(milliseconds) {<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">Math</span>.floor(milliseconds <span style="color: #666666">/</span> <span style="color: #666666">1000</span> <span style="color: #666666">/</span> <span style="color: #666666">60</span> <span style="color: #666666">/</span> <span style="color: #666666">60</span>);<br>        }<br>        <span style="color: #AA22FF; font-weight: bold">function</span> diffDays(milliseconds) {<br>            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">Math</span>.floor(milliseconds <span style="color: #666666">/</span> <span style="color: #666666">1000</span> <span style="color: #666666">/</span> <span style="color: #666666">60</span> <span style="color: #666666">/</span> <span style="color: #666666">60</span> <span style="color: #666666">/</span> <span style="color: #666666">24</span>);<br>        }<br>    <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;script&gt;</span><br>        <span style="color: #AA22FF">document</span>.addEventListener(<span style="color: #BB4444">&quot;DOMContentLoaded&quot;</span>, <span style="color: #AA22FF; font-weight: bold">function</span> () {<br>            console.log(<span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>().format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>));<br>            console.log(<span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>().format(<span style="color: #BB4444">&quot;<span style="background-color:#FFFF00;">yyyy-MM-dd</span>&quot;</span>));<br>            console.log(<span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>().format(<span style="color: #BB4444">&quot;<span style="background-color:#FFFF00;">hh:mm:ss</span>&quot;</span>));<br>        });<br>    <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span><br>    <span style="color: #008800; font-style: italic">&lt;!– 日期運算範例 –&gt;</span><br>    <span style="color: #008000; font-weight: bold">&lt;script&gt;</span><br>        <span style="color: #008800; font-style: italic">// Now Time</span><br>        <span style="color: #AA22FF; font-weight: bold">let</span> now_d <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>();<br>        <span style="color: #008800; font-style: italic">// Specific Time</span><br>        <span style="color: #AA22FF; font-weight: bold">var</span> spe_d1 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #BB4444">&#39;August 19, 2018 23:15:30&#39;</span>);<br>        <span style="color: #AA22FF; font-weight: bold">var</span> spe_d2 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #BB4444">&#39;2019-03-12 21:34:00&#39;</span>);<br>        <span style="color: #AA22FF; font-weight: bold">var</span> spe_d3 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #BB4444">&#39;2019/03/12 21:34:00&#39;</span>);<br>        <span style="color: #AA22FF; font-weight: bold">var</span> spe_d4 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">1558947486000</span>); <span style="color: #008800; font-style: italic">// timestamp millisecond</span><br>        console.log([<br>            now_d.format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            spe_d1.format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            spe_d2.format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            spe_d3.format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            spe_d4.format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>        ]);<br>        <span style="color: #008800; font-style: italic">// Add days</span><br>        console.log([<br>            now_d.addDays(<span style="color: #666666">1</span>).format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            now_d.addDays(<span style="color: #666666">-1</span>).format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>        ]);<br>        <span style="color: #008800; font-style: italic">// Add years</span><br>        console.log([<br>            now_d.addYears(<span style="color: #666666">3</span>).format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>            now_d.addYears(<span style="color: #666666">-3</span>).format(<span style="color: #BB4444">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>),<br>        ]);<br>        <span style="color: #008800; font-style: italic">// Date diff function</span><br>        console.log(diffSeconds(now_d <span style="color: #666666">-</span> spe_d2));<br>        console.log(diffMinutes(now_d <span style="color: #666666">-</span> spe_d2));<br>        console.log(diffHours(now_d <span style="color: #666666">-</span> spe_d2));<br>        console.log(diffDays(now_d <span style="color: #666666">-</span> spe_d2));<br>    <span style="color: #008000; font-weight: bold">&lt;/script&gt;</span></p>
+<p><span style="color: #008000; font-weight: bold">&lt;/body&gt;</span></p>
+<p><span style="color: #008000; font-weight: bold">&lt;/html&gt;</span><br></pre></p>
+</div>
+
+<p>執行畫面</p>
+
+<p><img height="114" src="1598769205.png" width="226" /></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://momentjs.com/docs/">Moment.js Documentation</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://blog.scottchayaa.com/post/2019/05/27/javascript_date_memo/">How to format date (yyyy-mm-dd)</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" rel="tag"># 工具教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/08/30/Anonymous-Types-example/" rel="prev" title="匿名陣列裡面包含匿名物件之範例">
+      <i class="fa fa-chevron-left"></i> 匿名陣列裡面包含匿名物件之範例
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/09/05/already-exists-in-the-current-database/" rel="next" title="User, group, or role already exists in the current database.">
+      User, group, or role already exists in the current database. <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2020/08/30/Moment-js-use/";
+    this.page.identifier = "2020/08/30/Moment-js-use/";
+    this.page.title = "Moment.js 的用法";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

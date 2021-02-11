@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Metadata的使用">
+<meta property="og:url" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477986900_78241.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477997661_93497.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477997675_42102.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477998663_08799.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477999389_3899.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477999451_70721.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478073164_47637.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478073174_57613.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478073404_82151.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478073570_38047.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1502606698_60669.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478058158_02045.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478058392_87023.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478059433_23554.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478069949_59242.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1478070135_31324.png">
+<meta property="og:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1502609410_40301.png">
+<meta property="article:published_time" content="2015-05-16T05:58:43.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="ASP.NET MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2015/05/16/mvc-Metadata/1477986900_78241.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/05/16/mvc-Metadata/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Metadata的使用 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/05/16/mvc-Metadata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Metadata的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-05-16 13:58:43" itemprop="dateCreated datePublished" datetime="2015-05-16T13:58:43+08:00">2015-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/ASP-NET-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">ASP.NET MVC</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/05/16/mvc-Metadata/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/16/mvc-Metadata/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>於Model的類別檔新增Metadata，但請注意使用Metadata前必先Include System.ComponentModel.DataAnnotations元件，</p>
+
+<p>System.ComponentModel.DataAnnotations底下提供了很多可用的驗證類別，</p>
+
+<p>例如：Required、DataType、Password等類別，</p>
+
+<p>而每個驗證類別通常有共通的ErrorMessage、RequiresValidationContext等屬性；</p>
+
+<p>也另提供資料欄位格式化屬性，例如：DisplayFormat。</p>
+
+<p>&nbsp;</p>
+
+<p>一、前置準備</p>
+
+<p>Model部分</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.ComponentModel.DataAnnotations;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Class1
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>Controller部分</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication2.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> List&lt;Class1&gt; db = <span style="color:#0000ff;">null</span>;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Create()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Create(Class1 Class1)
+        &#123;
+            <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+            &#123;
+                db.Add(Class1);
+                <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View(Class1);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>View部分-Create.cshtml</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication2.Models.Class1
+
+@<span style="color:#0000ff;">using</span> (Html.BeginForm())
+&#123;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;id&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.id, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;name&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> /&gt;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>二、Matadata的使用</p>
+
+<p>1、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.requiredattribute(v=vs.110).aspx">Required類別</a></p>
+
+<p>判斷式類別，功用為指出哪一個資料欄位為必填。</p>
+
+<p>藉由上面的準備範例我們於Model的Class1對id屬性加上Metadata [Required]，</p>
+
+<p><img height="251" src="1477986900_78241.png" width="638" /></p>
+
+<p>Create.cshtml起始畫面</p>
+
+<p><img height="191" src="1477997661_93497.png" width="371" /></p>
+
+<p>由於已限定id欄位為必填，所以我們直接按Create按鈕，看看結果如何</p>
+
+<p><img height="194" src="1477997675_42102.png" width="370" /></p>
+
+<p>由上畫面可知id欄位沒填入資料將會被檢測出來。</p>
+
+<p>注意，Matadata在前端會跟ValidationMessageFor配合，然後秀出有問題的訊息，</p>
+
+<p>而後端則是利用「ModelState.IsValid」來做判斷。</p>
+
+<p>&nbsp;</p>
+
+<p>2、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.maxlengthattribute(v=vs.110).aspx">MaxLength類別</a></p>
+
+<p>判斷式類別，此功能顧名思義為驗證該欄位的最大字數不應超過n個字，</p>
+
+<p>注意，一定要指定MaxLength類別的Length屬性，否則無作用。</p>
+
+<p><img height="218" src="1477998663_08799.png" width="410" /></p>
+
+<p>MaxLength類別的建構子的形式範例可為</p>
+
+<p>[MaxLength(2)]、</p>
+
+<p>[MaxLength(length: 2)]</p>
+
+<p>還可以指定ErrorMessage如下</p>
+
+<p>[MaxLength(length: 2,ErrorMessage=&quot;happend a Error&quot;)]。</p>
+
+<p>畫面執行前</p>
+
+<p><img height="192" src="1477999389_3899.png" width="372" /></p>
+
+<p>執行後結果</p>
+
+<p><img height="194" src="1477999451_70721.png" width="500" /></p>
+
+<p>&nbsp;</p>
+
+<p>3、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.rangeattribute(v=vs.110).aspx">Range類別</a>與格式化錯誤訊息</p>
+
+<p>判斷式類別，功用為於Model的id屬性添加metadata [Range(0, 10)]</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.ComponentModel.DataAnnotations;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Class1
+    &#123;
+        <span style="background-color:#FFFF00;">[Range(0, 10</span><span style="background-color:#FFFF00;">)]</span>
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;        
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>Controller與View都維持範例不變</p>
+
+<p>執行結果如下</p>
+
+<p><img height="192" src="1478073164_47637.png" width="369" /></p>
+
+<p><img height="190" src="1478073174_57613.png" width="391" /></p>
+
+<p>如果於metadata再加上自訂的ErrorMessage的話，</p>
+
+<p>於Model的id屬性添加metadata [Range(0, 10, ErrorMessage = &quot;{0}的範圍介於{1}到{2}之間&quot;)]</p>
+
+<p><img height="221" src="1478073404_82151.png" width="555" /></p>
+
+<p>則執行結果為</p>
+
+<p><img height="192" src="1478073570_38047.png" width="367" /></p>
+
+<p>&nbsp;</p>
+
+<p>4、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.displayformatattribute(v=vs.110).aspx">DisplayFormat類別</a></p>
+
+<p>顯示式類別，功用為用來對欄位格式化，可用的屬性有</p>
+
+<p>(1)、DataFormatString</p>
+
+<p>我以時間欄位為例子，於Model改成</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.ComponentModel.DataAnnotations;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Class1
+    &#123;   
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="background-color:#FFFF00;">[DisplayFormat(DataFormatString = </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;&#123;0:MM-dd-yyyy&#125;&quot;</span></span><span style="background-color:#FFFF00;">)]</span>
+        <span style="color:#0000ff;">public</span> <span style="background-color:#FFFF00;">System.DateTime</span> name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>既然是對時間欄位格式化，則欄位型態記得使用System.DateTime。</p>
+
+<p>Controller的Create action則使用</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication2.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> List&lt;Class1&gt; db = <span style="color:#0000ff;">null</span>;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Create()
+        &#123;
+            Class1 Class1 = <span style="color:#0000ff;">new</span> Class1();
+            <span style="background-color:#FFFF00;">Class1.name = </span><span style="background-color:#FFFF00;">System.DateTime.Now;</span>
+            <span style="color:#0000ff;"><span style="background-color:#FFFF00;">return</span></span><span style="background-color:#FFFF00;"> View(Class1);</span>
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Create(Class1 Class1)
+        &#123;
+            <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+            &#123;
+                db.Add(Class1);
+                <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View(Class1);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>View的Create.cshtml則使用DisplayFor方法</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication2.Models.Class1
+@<span style="color:#0000ff;">using</span> (Html.BeginForm())
+&#123;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;id&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.id, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    <span style="background-color:#FFFF00;">@Html.DisplayFor(m =&gt; m.name)</span>
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    @Html.EditorFor(m =&gt; m.name)
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> /&gt;
+&#125;</code></pre>
+
+<p>畫面為</p>
+
+<p><img height="217" src="1502606698_60669.png" width="374" /></p>
+
+<p>由上可知DisplayFormat類別專門跟DisplayFor方法配合的；對於EditorFor方法則無作用。</p>
+
+<p>DisplayFormat類別除了最常用的DataFormatString屬性之外，</p>
+
+<p>還有[ApplyFormatInEditMode = bool ]、[ConvertEmptyStringToNull = bool]、</p>
+
+<p>[HtmlEncode = bool]、[NullDisplayText = string]四種非常實用的屬性可一起套用，</p>
+
+<p>如：<span style="color: rgb(0, 0, 0); font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; line-height: 18.4799995422363px;">[DisplayFormat(DataFormatString = </span><span class="str" style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; line-height: 18.4799995422363px; color: rgb(163, 21, 21);">&quot;{0:yyyy-MM-dd}&quot;</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; line-height: 18.4799995422363px;">, ApplyFormatInEditMode = </span><span class="key" style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; line-height: 18.4799995422363px; color: rgb(0, 0, 255);">true</span><span style="color: rgb(0, 0, 0); font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; line-height: 18.4799995422363px;">)]</span></p>
+
+<p>&nbsp;</p>
+
+<p>5、DataType類別</p>
+
+<p>顯示式類別，有多種列舉，請參閱<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.datatype.aspx">DataType Enumeration</a></p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:97px;"><strong>Member name</strong></td>
+            <td><strong>Description</strong></td>
+        </tr>
+        <tr>
+            <td>CreditCard</td>
+            <td>Represents a credit card number.</td>
+        </tr>
+        <tr>
+            <td>Currency</td>
+            <td>Represents a currency value.</td>
+        </tr>
+        <tr>
+            <td>Custom</td>
+            <td>Represents a custom data type.</td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td>Represents a date value.</td>
+        </tr>
+        <tr>
+            <td>DateTime</td>
+            <td>Represents an instant in time, expressed as a date and time of day.</td>
+        </tr>
+        <tr>
+            <td>Duration</td>
+            <td>Represents a continuous time during which an object exists.</td>
+        </tr>
+        <tr>
+            <td>EmailAddress</td>
+            <td>Represents an e-mail address.</td>
+        </tr>
+        <tr>
+            <td>Html</td>
+            <td>Represents an HTML file.</td>
+        </tr>
+        <tr>
+            <td>ImageUrl</td>
+            <td>Represents a URL to an image.</td>
+        </tr>
+        <tr>
+            <td>MultilineText</td>
+            <td>Represents multi-line text.</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>Represent a password value.</td>
+        </tr>
+        <tr>
+            <td>PhoneNumber</td>
+            <td>Represents a phone number value.</td>
+        </tr>
+        <tr>
+            <td>PostalCode</td>
+            <td>Represents a postal code.</td>
+        </tr>
+        <tr>
+            <td>Text</td>
+            <td>Represents text that is displayed.</td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td>Represents a time value.</td>
+        </tr>
+        <tr>
+            <td>Upload</td>
+            <td>Represents file upload data type.</td>
+        </tr>
+        <tr>
+            <td>Url</td>
+            <td>Represents a URL value.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>(1)、DataType.Date列舉</p>
+
+<p>於Model的name屬性添加metadata [DataType(DataType.Date)]</p>
+
+<p><img height="220" src="1478058158_02045.png" width="410" /></p>
+
+<p>將Create.cshtml改為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication2.Models.Class1
+@<span style="color:#0000ff;">using</span> (Html.BeginForm())
+&#123;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;id&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.id, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    <span style="background-color:#FFFF00;">@Html.EditorFor(m =&gt; m.name)</span>
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> /&gt;
+&#125;</code></pre>
+
+<p>執行畫面為</p>
+
+<p><img height="192" src="1478058392_87023.png" width="370" /></p>
+
+<p>而又於Controller的Create action改成讓Create頁面於一開始載入預設值</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication2.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> List&lt;Class1&gt; db = <span style="color:#0000ff;">null</span>;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Create()
+        &#123;
+            <span style="background-color:#FFFF00;">Class1 Class1 = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> Class1();</span>
+            <span style="background-color:#FFFF00;">Class1.name = </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;2016-11-02&quot;</span></span><span style="background-color:#FFFF00;">;</span>
+            <span style="color:#0000ff;"><span style="background-color:#FFFF00;">return</span></span><span style="background-color:#FFFF00;"> View(Class1);</span>
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Create(Class1 Class1)
+        &#123;
+            <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+            &#123;
+                db.Add(Class1);
+                <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View(Class1);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>則可以成功讀取到日期格式</p>
+
+<p><img height="192" src="1478059433_23554.png" width="367" /></p>
+
+<p>由上範例可知DataType類別專門跟@Html.EditorFor()方法配合的，</p>
+
+<p>用來顯示數值與表現出相對應的格式。</p>
+
+<p>其主要目的就是幫你生成下面的Html原始碼</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;<span style="background-color:#FFFF00;">date</span>&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;id&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>(2)、DataType.Password列舉</p>
+
+<p>於Model的name屬性添加metadata [DataType(DataType.Password)]</p>
+
+<p><img height="221" src="1478069949_59242.png" width="406" /></p>
+
+<p>View方面也是跟EditorFor方法配合，將Create.cshtml改為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication2.Models.Class1
+@<span style="color:#0000ff;">using</span> (Html.BeginForm())
+&#123;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;id&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.id, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    <span style="background-color:#FFFF00;">@Html.EditorFor(m =&gt; m.name)</span>
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> /&gt;
+&#125;</code></pre>
+
+<p>操作的畫面如下</p>
+
+<p><img height="188" src="1478070135_31324.png" width="365" /></p>
+
+<p>其主要目的就是幫你生成下面的Html原始碼</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;<span style="background-color:#FFFF00;">password</span>&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;id&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>6、<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations.displayattribute(v=vs.110).aspx">DisplayAttribute</a>類別</p>
+
+<p>Model為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.ComponentModel.DataAnnotations;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Class1
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> id &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+        <span style="background-color:#FFFF00;">[Display(Name = </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;活動名稱&quot;</span></span><span style="background-color:#FFFF00;">)]</span>
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">using</span> WebApplication2.Models;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> List&lt;Class1&gt; db = <span style="color:#0000ff;">null</span>;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult Create()
+        &#123;
+            Class1 Class1 = <span style="color:#0000ff;">new</span> Class1();
+            Class1.name = <span style="color:#a31515;">&quot;brooke&quot;</span>;
+            <span style="color:#0000ff;">return</span> View(Class1);
+        &#125;
+
+        [HttpPost]
+        <span style="color:#0000ff;">public</span> ActionResult Create(Class1 Class1)
+        &#123;
+            <span style="color:#0000ff;">if</span> (ModelState.IsValid)
+            &#123;
+                db.Add(Class1);
+                <span style="color:#0000ff;">return</span> RedirectToAction(<span style="color:#a31515;">&quot;Index&quot;</span>);
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View(Class1);
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>View為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model WebApplication2.Models.Class1
+@<span style="color:#0000ff;">using</span> (Html.BeginForm())
+&#123;
+    &lt;input type=<span style="color:#a31515;">&quot;text&quot;</span> name=<span style="color:#a31515;">&quot;id&quot;</span> value=<span style="color:#a31515;">&quot;&quot;</span> /&gt;
+    @Html.ValidationMessageFor(model =&gt; model.id, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    @Html.DisplayFor(m =&gt; m.name)
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    @Html.EditorFor(m =&gt; m.name)
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    <span style="background-color:#FFFF00;">@Html.DisplayNameFor(m =&gt; m.name)</span>
+    @Html.ValidationMessageFor(model =&gt; model.name, <span style="color:#a31515;">&quot;&quot;</span>, <span style="color:#0000ff;">new</span> &#123; @<span style="color:#0000ff;">class</span> = <span style="color:#a31515;">&quot;text-danger&quot;</span> &#125;)
+    &lt;br /&gt;
+    &lt;input type=<span style="color:#a31515;">&quot;submit&quot;</span> value=<span style="color:#a31515;">&quot;Create&quot;</span> /&gt;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>畫面為</p>
+
+<p><img height="227" src="1502609410_40301.png" width="371" /></p>
+
+<p>由此可知，可藉由在model端使用DisplayAttribute類別來改變前端所顯示的欄位名稱。</p>
+
+<p>特別注意，DisplayAttribute類別只在DisplayNameFor方法有作用。</p>
+
+<p>開發者可能會以為是使用<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.displaycolumnattribute(v=vs.110).aspx">DisplayColumnAttribute</a>類別，</p>
+
+<p>就可以改變前端所顯示的欄位名稱，其實是有問題的，這可能會搞混，要特別注意。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations%28v=vs.110%29.aspx">System.ComponentModel.DataAnnotations 命名空間</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.displayformatattribute(v=vs.110).aspx">DisplayFormatAttribute 類別</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.componentmodel.dataannotations.displayformatattribute.dataformatstring%28v=vs.110%29.aspx?f=255&amp;MSPPError=-2147217396">DisplayFormatAttribute.DataFormatString 屬性</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.web.dynamicdata.dynamicfield(v=vs.110).aspx">DynamicField 類別</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/brooke/2016/11/04/100633">.NET Framework 中的格式化類型簡述</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/ASP-NET-MVC/" rel="tag"># ASP.NET MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/05/14/EntityValidationErrors/" rel="prev" title="EntityValidationErrors">
+      <i class="fa fa-chevron-left"></i> EntityValidationErrors
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/05/18/edmx-change-no-clean/" rel="next" title="如何避免*.edmx檔被異動時，所設置的驗證屬性被清除">
+      如何避免*.edmx檔被異動時，所設置的驗證屬性被清除 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/05/16/mvc-Metadata/";
+    this.page.identifier = "2015/05/16/mvc-Metadata/";
+    this.page.title = "Metadata的使用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

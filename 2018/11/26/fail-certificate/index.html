@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做失敗的證書 (certificate)">
+<meta property="og:url" content="https://brooke2010.github.io/2018/11/26/fail-certificate/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543226853_40723.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543226205_50723.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543210384_88128.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543226939_91391.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227228_18265.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227239_33295.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227426_65356.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227538_4471.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227626_38608.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227672_63749.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227768_5109.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227828_48969.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543227975_39271.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543228034_09406.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543228110_02145.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543228158_46627.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543228220_85338.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543228294_13289.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543233605_60813.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543233613_47627.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543233781_23365.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543233872_13352.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543233949_11658.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543234211_82507.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543234771_16988.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543234982_48892.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543234994_59243.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543235000_65918.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543235006_29701.png">
+<meta property="article:published_time" content="2018-11-26T09:54:45.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="工具教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2018/11/26/fail-certificate/1543226853_40723.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2018/11/26/fail-certificate/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>做失敗的證書 (certificate) | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2018/11/26/fail-certificate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          做失敗的證書 (certificate)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-26 17:54:45" itemprop="dateCreated datePublished" datetime="2018-11-26T17:54:45+08:00">2018-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具教學</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2018/11/26/fail-certificate/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/26/fail-certificate/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>我使用的是&nbsp;Win64 OpenSSL v1.1.0j 版本，</p>
+
+<p>目地是在同一台機器裡，自己當&nbsp;Certificate Authority (CA) 然後頒發 certificate 給自己用，作法如下。</p>
+
+<p>&nbsp;</p>
+
+<p>一、Create a private key rootSSL.key</p>
+
+<p>$ .\openssl genrsa -des3 -out rootSSL.key 2048</p>
+
+<p>完成後會產生&nbsp;rootSSL.key</p>
+
+<p><img height="376" src="1543226853_40723.png" width="651" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、Create certificate rootSSL.pem file using private key rootSSL.key</p>
+
+<p>$ .\openssl req -x509 -new -nodes -key rootSSL.key -sha256 -days 1024 -out rootSSL.pem</p>
+
+<p>如果沒問題的話會出現要你填 Country Name...等等欄位，可參考下圖填入</p>
+
+<p><img height="273" src="1543226205_50723.png" width="887" /></p>
+
+<p>&nbsp;</p>
+
+<p>上步驟如果遇到下圖的 error</p>
+
+<p><img height="83" src="1543210384_88128.png" width="1128" /></p>
+
+<p>請將</p>
+
+<p>C:\OpenSSL-Win64\bin\cnf\openssl.cnf 檔案</p>
+
+<p>複製到</p>
+
+<p>C:\Program Files\Common Files\SSL\openssl.cnf</p>
+
+<p>即可</p>
+
+<p>&nbsp;</p>
+
+<p>完成後會產生 rootSSL.pem</p>
+
+<p><img height="393" src="1543226939_91391.png" width="653" /></p>
+
+<p>&nbsp;</p>
+
+<p>三、Do&nbsp;the Trust Certificate Authority (CA) on your local development machine</p>
+
+<p>看圖說故事，做法如下</p>
+
+<p><img height="200" src="1543227228_18265.png" width="403" /></p>
+
+<p><img height="284" src="1543227239_33295.png" width="384" /></p>
+
+<p><img height="538" src="1543227426_65356.png" width="789" /></p>
+
+<p><img height="462" src="1543227538_4471.png" width="609" /></p>
+
+<p><img height="461" src="1543227626_38608.png" width="605" /></p>
+
+<p><img height="541" src="1543227672_63749.png" width="787" /></p>
+
+<p><img height="450" src="1543227768_5109.png" width="456" /></p>
+
+<p><img height="570" src="1543227828_48969.png" width="618" /></p>
+
+<p><img height="576" src="1543227975_39271.png" width="1250" /></p>
+
+<p><img height="567" src="1543228034_09406.png" width="613" /></p>
+
+<p><img height="564" src="1543228110_02145.png" width="613" /></p>
+
+<p><img height="565" src="1543228158_46627.png" width="614" /></p>
+
+<p><img height="676" src="1543228220_85338.png" width="1081" /></p>
+
+<p><img height="386" src="1543228294_13289.png" width="977" /></p>
+
+<p>&nbsp;</p>
+
+<p>四、to issue Certificate for a local Domain</p>
+
+<p>Create a private key dowebsite.zapto.org.key</p>
+
+<p>$ .\openssl req -new -sha256 -nodes -out <span style="background-color:#FFFF00;">localhost.csr</span> -newkey rsa:2048 -keyout <span style="background-color:#FFFF00;">localhost.key</span> -subj &quot;/C=<span style="background-color:#FFFF00;">TW</span>/ST=<span style="background-color:#FFFF00;">Taiwan</span>/L=<span style="background-color:#FFFF00;">New Tsipei</span>/O=<span style="background-color:#FFFF00;">My Company</span>/OU=<span style="background-color:#FFFF00;">Demo</span>/CN=<span style="background-color: rgb(255, 255, 0);">Local Certificate</span>/emailAddress=<span style="background-color:#FFFF00;">example@outlook.com</span>&quot;</p>
+
+<p><img height="146" src="1543233605_60813.png" width="967" /></p>
+
+<p>產生了&nbsp;localhost.csr 與&nbsp;localhost.key</p>
+
+<p><img height="436" src="1543233613_47627.png" width="652" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、Create new certificate using rootSSL certificate</p>
+
+<p>$ .\openssl x509 -req -in <span style="background-color:#FFFF00;">localhost.csr</span> -CA <span style="background-color:#FFFF00;">rootSSL.pem</span> -CAkey <span style="background-color:#FFFF00;">rootSSL.key</span> -CAcreateserial -out <span style="background-color:#FFFF00;">localhost.crt</span> -days 500 -sha256</p>
+
+<p><img height="131" src="1543233781_23365.png" width="967" /></p>
+
+<p>產生了&nbsp;localhost.crt</p>
+
+<p><img height="475" src="1543233872_13352.png" width="651" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、convert&nbsp;localhost.crt to&nbsp;localhost.pfx</p>
+
+<p>$ .\openssl.exe pkcs12 -export -out <span style="background-color:#FFFF00;">localhost.pfx</span> -inkey <span style="background-color:#FFFF00;">localhost.key</span> -in <span style="background-color:#FFFF00;">localhost.crt</span></p>
+
+<p><img height="66" src="1543233949_11658.png" width="903" /></p>
+
+<p>產生了&nbsp;localhost.pfx</p>
+
+<p><img height="496" src="1543234211_82507.png" width="649" /></p>
+
+<p>&nbsp;</p>
+
+<p>七、將&nbsp;localhost.pfx 餵給 IIS，並將憑證掛載在 https://localhost 上檢視成果</p>
+
+<p><img height="213" src="1543234771_16988.png" width="946" /></p>
+
+<p>但還是失敗了</p>
+
+<p><img height="386" src="1543234982_48892.png" width="364" /></p>
+
+<p>檢視憑證應該也沒什麼異狀</p>
+
+<p><img height="568" src="1543234994_59243.png" width="470" /></p>
+
+<p><img height="569" src="1543235000_65918.png" width="474" /></p>
+
+<p><img height="570" src="1543235006_29701.png" width="472" /></p>
+
+<p>&nbsp;</p>
+
+<p>結論：</p>
+
+<p>不知道問題錯在哪邊，有可能我在某步驟因觀念錯誤而出錯了吧。</p>
+
+<p>不好意思浪費大家的時間，寫那麼長的文章，結論是 certificate&nbsp;做失敗了。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://reactpaths.com/how-to-get-https-working-in-localhost-development-environment-f17de34af046">How to get HTTPS working in localhost development environment</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/certificates-for-localhost/">Certificates for localhost</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://medium.com/@onlinemad/%E6%A5%B5%E9%80%9F%E6%89%93%E9%80%A0-https-localhost-431d89a0c2e4">極速打造 https://localhost</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/">Create a .pfx/.p12 certificate file using OpenSSL</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/6090885.html">openssl x509(签署和自签署)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec">How to get HTTPS working on your local development environment in 5 minutes</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" rel="tag"># 工具教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/11/22/EPPlus/" rel="prev" title="EPPlus">
+      <i class="fa fa-chevron-left"></i> EPPlus
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/11/28/Facebook-sign/" rel="next" title="Facebook 登入">
+      Facebook 登入 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2018/11/26/fail-certificate/";
+    this.page.identifier = "2018/11/26/fail-certificate/";
+    this.page.title = "做失敗的證書 (certificate)";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

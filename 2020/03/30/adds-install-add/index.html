@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Active Directory 網域服務 ADDS 安裝、加入網域">
+<meta property="og:url" content="https://brooke2010.github.io/2020/03/30/adds-install-add/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585490759.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585488875.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585475957.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476162.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476171.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476616.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476824.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476899.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585476988.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585477098.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585477165.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585477227.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585477557.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585483580.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585483791.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585483908.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585483991.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484104.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484172.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484226.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484339.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484480.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484534.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585484630.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585508556.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585508863.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585509066.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585509156.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585509259.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585507337.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585507787.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585507879.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585508022.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585508126.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585508254.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585509383.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585509384.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585558048.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585506854.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585559174.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585559666.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585559921.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585486801.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585506566.png">
+<meta property="og:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585560687.png">
+<meta property="article:published_time" content="2020-03-30T09:42:20.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="隨手文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2020/03/30/adds-install-add/1585490759.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2020/03/30/adds-install-add/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Active Directory 網域服務 ADDS 安裝、加入網域 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2020/03/30/adds-install-add/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Active Directory 網域服務 ADDS 安裝、加入網域
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-30 17:42:20" itemprop="dateCreated datePublished" datetime="2020-03-30T17:42:20+08:00">2020-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E9%9A%A8%E6%89%8B%E6%96%87%E7%AB%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">隨手文章</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2020/03/30/adds-install-add/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/30/adds-install-add/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、先前準備</p>
+
+<p>在開始安裝 ADDS 之前，先設定好網卡 IP&nbsp;位置，</p>
+
+<p>後續安裝的自動設定，會參考到該 IP 位置。範例如下</p>
+
+<p><img height="507" src="1585490759.png" width="466" /></p>
+
+<p>&nbsp;</p>
+
+<p>另外也要特別注意，如果你有什麼撥接 PPPoE 網卡之類，</p>
+
+<p>請記得拿掉，可以避免後續安裝好後出現無法連線靈異事件。</p>
+
+<p><img height="160" src="1585488875.png" width="531" /></p>
+
+<p>最好先只留一張網卡就好。</p>
+
+<p>&nbsp;</p>
+
+<p>二、安裝 ADDS</p>
+
+<p>此範例將示範於&nbsp;Windows Server 2019 安裝&nbsp;Active Directory 網域服務</p>
+
+<p><img height="267" src="1585475957.png" width="778" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="558" src="1585476162.png" width="789" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="556" src="1585476171.png" width="787" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="552" src="1585476616.png" width="786" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="547" src="1585476824.png" width="787" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="549" src="1585476899.png" width="786" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="551" src="1585476988.png" width="784" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="551" src="1585477098.png" width="787" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="550" src="1585477165.png" width="787" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="550" src="1585477227.png" width="785" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="551" src="1585477557.png" width="787" /></p>
+
+<p>&nbsp;</p>
+
+<p>三、將此伺服器升級為網域控制站</p>
+
+<p><img height="419" src="1585483580.png" width="781" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="552" src="1585483791.png" width="763" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="553" src="1585483908.png" width="761" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="552" src="1585483991.png" width="760" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="554" src="1585484104.png" width="762" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="552" src="1585484172.png" width="762" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="553" src="1585484226.png" width="761" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="553" src="1585484339.png" width="761" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="554" src="1585484480.png" width="763" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="155" src="1585484534.png" width="682" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="233" src="1585484630.png" width="683" /></p>
+
+<p>&nbsp;</p>
+
+<p>四、新增使用者</p>
+
+<p><img height="271" src="1585508556.png" width="780" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="555" src="1585508863.png" width="555" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="421" src="1585509066.png" width="509" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="422" src="1585509156.png" width="510" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="421" src="1585509259.png" width="508" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、將其他電腦加入網域</p>
+
+<p>在其他電腦加入網域前，需將該電腦的 IP 設定為同網段，</p>
+
+<p>之前所做好的 169.254.1.1 網域控制站也是一台 DNS 伺服器，所以也將 DNS 指向 169.254.1.1。</p>
+
+<p><img height="504" src="1585507337.png" width="465" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="462" src="1585507787.png" width="466" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="518" src="1585507879.png" width="479" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="435" src="1585508022.png" width="377" /></p>
+
+<p>&nbsp;</p>
+
+<p>如果可以成功連到該網域控制站的畫面如下。(不成功之後會有問題排除方法)</p>
+
+<p><img height="273" src="1585508126.png" width="454" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="152" src="1585508254.png" width="229" /></p>
+
+<p>&nbsp;</p>
+
+<p>登入畫面</p>
+
+<p><img height="472" src="1585509383.png" width="345" /></p>
+
+<p>&nbsp;</p>
+
+<p>也可以帳號前面加上網域名稱去登入，網域名稱不分大小寫。</p>
+
+<p><img height="" src="1585509384.png" width="" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、無法連絡任何網域控制器</p>
+
+<p>當無法連到該網域控制器時，可能解決方法如下幾點</p>
+
+<p><img height="446" src="1585558048.png" width="535" /></p>
+
+<p>&nbsp;</p>
+
+<p>1、先確認網域控制站的 IP、DNS 有沒有跑掉</p>
+
+<p>將伺服器升級為網域控制站做好後，該伺服器也是 DNS 伺服器，</p>
+
+<p>其&nbsp;DNS 伺服器位址將會指向自己 (127.0.0.1)</p>
+
+<p><img height="504" src="1585506854.png" width="465" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、檢查 DNS 管理員，是否已把網域控制站登錄到 DNS 裡</p>
+
+<p><img height="329" src="1585559174.png" width="803" /></p>
+
+<p>我們發現 _tcp._ldap 的 SRV 記錄指向&nbsp;WIN-8OS5AT3956M.ace.com，</p>
+
+<p>再來看 ace.com 節點</p>
+
+<p><img height="334" src="1585559666.png" width="755" /></p>
+
+<p>上圖這有問題，_tcp._ldap 的 SRV 記錄指向&nbsp;WIN-8OS5AT3956M.ace.com</p>
+
+<p>但&nbsp;ace.com 節點上卻沒有&nbsp;A 記錄 (WIN-8OS5AT3956M)，</p>
+
+<p>好吧，補一下&nbsp;A 記錄，於右邊空白處按右鍵</p>
+
+<p><img height="214" src="1585559921.png" width="447" /></p>
+
+<p>新增內容如下</p>
+
+<p><img height="392" src="1585486801.png" width="399" /></p>
+
+<p>完成後</p>
+
+<p><img height="326" src="1585506566.png" width="753" /></p>
+
+<p>&nbsp;</p>
+
+<p>3、重啟 Netlogon 以對 DNS 伺服器重新註冊 SRV 記錄</p>
+
+<p><img height="342" src="1585560687.png" width="681" /></p>
+
+<p>&nbsp;</p>
+
+<p>4、一些常用指令</p>
+
+<p>例如：</p>
+
+<p>$ ipconfig /displaydns</p>
+
+<p>$ ipconfig /flushdns</p>
+
+<p>$ ping&nbsp;WIN-8OS5AT3956M.ace.com</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://channel9.msdn.com/Series/Windows-Server-2012-Entry-Level/Windows-Server-2012-Entry-Level-9">(09) 查不到網址、無法登入網域怎麼辦 - 名稱解析步驟檢查</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://shaurong.blogspot.com/2018/12/active-directory-windows-server-2019.html">[研究] Active Directory (AD) 網域服務安裝 (Windows Server 2019)</a></p>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E9%9A%A8%E6%89%8B%E6%96%87%E7%AB%A0/" rel="tag"># 隨手文章</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/03/20/NLog-hello-world/" rel="prev" title="[NLog] NLog hello world">
+      <i class="fa fa-chevron-left"></i> [NLog] NLog hello world
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2020/04/02/C-code-read-ad/" rel="next" title="C# 程式讀取 AD 帳號資訊">
+      C# 程式讀取 AD 帳號資訊 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2020/03/30/adds-install-add/";
+    this.page.identifier = "2020/03/30/adds-install-add/";
+    this.page.title = "Active Directory 網域服務 ADDS 安裝、加入網域";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

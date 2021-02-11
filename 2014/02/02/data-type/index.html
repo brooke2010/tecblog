@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料型別">
+<meta property="og:url" content="https://brooke2010.github.io/2014/02/02/data-type/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462502972_37345.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462616369_76958.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462674526_0631.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462675450_16947.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462675896_74572.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462697570_79908.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462698402_66293.png">
+<meta property="article:published_time" content="2014-02-02T04:26:15.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="T-SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2014/02/02/data-type/1462502972_37345.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2014/02/02/data-type/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>資料型別 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2014/02/02/data-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          資料型別
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-02-02 12:26:15" itemprop="dateCreated datePublished" datetime="2014-02-02T12:26:15+08:00">2014-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/T-SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">T-SQL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2014/02/02/data-type/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/02/02/data-type/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、整數型態</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:59px;">資料類型</td>
+            <td style="width:463px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>bit</td>
+            <td>0 或 1 或 Null</td>
+            <td>1 Bit</td>
+        </tr>
+        <tr>
+            <td>tinyint</td>
+            <td>0 至 255</td>
+            <td>1 Byte</td>
+        </tr>
+        <tr>
+            <td>smallint</td>
+            <td>(-2<sup>15</sup>) -32768 ~ (2<sup>15</sup>-1) 32767</td>
+            <td>2 Bytes</td>
+        </tr>
+        <tr>
+            <td>int</td>
+            <td>(-2<sup>31</sup>) -2,147,483,648 ~ (二十億多，2<sup>31</sup>-1) 2,147,483,647</td>
+            <td>4 Bytes</td>
+        </tr>
+        <tr>
+            <td>bigint</td>
+            <td>(-2<sup><span style="font-size: 12px;">63</span></sup>) -9,223,372,036,854,775,808&nbsp;~ (2<sup><span style="font-size: 12px;">63</span></sup>-1) 9,223,372,036,854,775,807</td>
+            <td>8 Bytes</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms177603(v=sql.120).aspx">bit (Transact-SQL)</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://https://msdn.microsoft.com/zh-tw/library/ms187745(v=sql.120).aspx">int、bigint、smallint 和 tinyint (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>二、固定有效位數和小數位數的數值資料類型</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:184px;">資料型態</td>
+            <td style="width:111px;">範圍</td>
+            <td style="width:59px;">有效位數</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td rowspan="4">numeric(p,s) 或 decimal(p,s)</td>
+            <td rowspan="4">-10<sup>38</sup>+1 ~ 10<sup>38</sup>-1</td>
+            <td>1~9</td>
+            <td>5 Bytes</td>
+        </tr>
+        <tr>
+            <td>10~19</td>
+            <td>9 Bytes</td>
+        </tr>
+        <tr>
+            <td>20~28</td>
+            <td>13 Bytes</td>
+        </tr>
+        <tr>
+            <td>29~38</td>
+            <td>17 Bytes</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>decimal(p,s)的格式，p代表精確度(Precision，全部的位數)，s代表小數位數(Scale，小數點右邊的位數)，</p>
+
+<p>p一定會大於等於s。</p>
+
+<p>在新版SQL SERVER建議使用decimal取代numeric資料類型。</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms187746(v=sql.120).aspx">decimal 和 numeric (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>三、貨幣型態</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:78px;">資料類型</td>
+            <td style="width:359px;">範圍</td>
+            <td>位元長度</td>
+        </tr>
+        <tr>
+            <td>money</td>
+            <td>-922,337,203,685,477.5808~992,337,203,685,477.5807</td>
+            <td>8 Byte</td>
+        </tr>
+        <tr>
+            <td>smallmoney</td>
+            <td>-214,748.3648~214,748.3647(二十萬多)</td>
+            <td>4 Byte</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、money與smallmoney皆可精確到小數點下4位數。</p>
+
+<p>2、對於money或smallmoney資料類型於T-SQL指令可以帶貨幣符號，</p>
+
+<p>而實際只會儲存數值在資料庫裡，並不會儲存貨幣符號。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">DECLARE</span> <span style="color:#797997; ">@dollars</span> <span style="color:#800000; font-weight:bold; ">AS</span> money
+<span style="color:#800000; font-weight:bold; ">SET</span> <span style="color:#797997; ">@dollars</span> <span style="color:#808030; ">=</span> $<span style="color:#008c00; ">100</span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#797997; ">@dollars</span>
+</pre>
+
+<p><img height="145" src="1462502972_37345.png" width="218" /></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms179882(v=sql.120).aspx">money 和 smallmoney (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>四、近似數值</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:59px;">資料類型</td>
+            <td style="width:381px;">範圍</td>
+            <td>位元長度</td>
+        </tr>
+        <tr>
+            <td>float(n)</td>
+            <td>- 1.79E+308 到 -2.23E-308、0 及 2.23E-308 到 1.79E+308</td>
+            <td>當n=25~53時，8 Byte</td>
+        </tr>
+        <tr>
+            <td>real(n)</td>
+            <td>- 3.40E + 38 到 -1.18E - 38、0 及 1.18E - 38 到 3.40E + 38</td>
+            <td>當n=1~24時，4 Byte</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>目前在SQL SERVER設定float與real似乎無法指定n值。</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms173773(v=sql.120).aspx">float 和 real (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>五、日期和時間</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:110px;">資料類型</td>
+            <td style="width:100px;">格式</td>
+            <td style="width:261px;">範圍</td>
+            <td style="width:154px;">精確度</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>time(n)</td>
+            <td>hh:mm:ss[.nnnnnnn]</td>
+            <td>00:00:00.0000000~23:59:59.9999999</td>
+            <td>10<sup>-0</sup>~10<sup>-7</sup>秒(n=0~7)</td>
+            <td>3~5</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>YYYY-MM-DD</td>
+            <td>0001-01-01~9999-12-31</td>
+            <td>1 天</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>smalldatetime</td>
+            <td>YYYY-MM-DD hh:mm:ss</td>
+            <td>1900-01-01 00:00:00~2079-06-06 23:59:00</td>
+            <td>1 分</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>datetime</td>
+            <td>YYYY-MM-DD hh:mm:ss[.nnn]</td>
+            <td>1753-01-01 00:00:00.000~9999-12-31 23:59:59.997</td>
+            <td>0~10<sup>-3</sup>秒</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>datetime2(n)</td>
+            <td>YYYY-MM-DD hh:mm:ss[.nnnnnnn]</td>
+            <td>0001-01-01 00:00:00.0000000~9999-12-31 23:59:59.9999999</td>
+            <td>10<sup>-0</sup>~10<sup>-7</sup>秒(n=0~7)</td>
+            <td>6~8</td>
+        </tr>
+        <tr>
+            <td>datetimeoffset(n)</td>
+            <td>YYYY-MM-DD hh:mm:ss[.nnnnnnn][+|-]hh:mm</td>
+            <td>0001-01-01 00:00:00.0000000~9999-12-31 23:59:59.9999999(以UTC為單位)</td>
+            <td>10<sup>-0</sup>~10<sup>-7</sup>秒(n=0~7)</td>
+            <td>8~10</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>例如：SELECT CONVERT(date,&#39;2016-01-01&#39;)或SELECT CONVERT(date,&#39;20160101&#39;)</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/bb677243(v=sql.120).aspx">時間 (Transact-SQL)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://technet.microsoft.com/zh-tw/library/bb630289(v=sql.105).aspx">datetimeoffset (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>六、字元字串</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:88px;">資料類型</td>
+            <td style="width:334px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>char(n)</td>
+            <td>n=1~8000(最大為8000個字元或4000個中文字)</td>
+            <td>8000Bytes</td>
+        </tr>
+        <tr>
+            <td>varchar(n)</td>
+            <td>n=1~8000(最大為8000個字元或4000個中文字)</td>
+            <td>可變長度至多8000Bytes</td>
+        </tr>
+        <tr>
+            <td>varchar(max)</td>
+            <td>max是保留字，可用範圍1~2<sup>31</sup>-1個可變長度之字元</td>
+            <td>可變長度至多2<sup>31</sup>-1Bytes</td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>最大長度是2<sup>31</sup>-1(2,147,483,647)個字元</td>
+            <td>可變長度至多2GB</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、例如：char(1)固定佔1byte空間，可放入一個字元，但不能放一個中文字。</p>
+
+<p>2、之後text將會由varchar(max)來取代。</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms176089(v=sql.120).aspx">char and varchar (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>七、Unicode字元字串</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:88px;">資料類型</td>
+            <td style="width:334px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>nchar(n)</td>
+            <td>n=1~4000個固定長度之字元</td>
+            <td>8000Bytes</td>
+        </tr>
+        <tr>
+            <td>nvarchar(n)</td>
+            <td>n=1~4000個可變長度之字元</td>
+            <td>可變長度至多8000Bytes</td>
+        </tr>
+        <tr>
+            <td>nvarchar(max)</td>
+            <td>max是保留字，可用範圍1~2<sup>31</sup>-1個可變長度之字元</td>
+            <td>可變長度，一個字元佔2 Bytes，總長度與實際字元佔位元數相同</td>
+        </tr>
+        <tr>
+            <td>ntext</td>
+            <td>最大長度是2<sup>31</sup>-1(2,147,483,647)個字元</td>
+            <td>變動長度至多為輸入字元的兩倍的位元組</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、例如：nchar(1)固定佔2byte空間，可放入一個字元，也可放入一個中文字。</p>
+
+<p>2、之後ntext將會由nvarchar(max)來取代。</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms186939(v=sql.120).aspx">nchar and nvarchar (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>八、二進位字串</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:88px;">資料類型</td>
+            <td style="width:378px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>binary(n)</td>
+            <td>n=1~8000個固定長度之二進位資料，n=1代表1byte</td>
+            <td>固定長度nBytes至多8000Bytes</td>
+        </tr>
+        <tr>
+            <td>varbinary(n)</td>
+            <td>n=1~8000個可變長度之二進位資料，n=1代表1byte</td>
+            <td>可變長度至多8000Bytes</td>
+        </tr>
+        <tr>
+            <td>varbinary(max)</td>
+            <td>max是保留字，可用範圍1~2<sup>31</sup>-1個二進位資料</td>
+            <td>實際輸入資料的長度再加2Bytes</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>0~2<sup>31</sup>-1(2,147,483,647)個位元組的可變長度之二進位資料</td>
+            <td>可變長度，與輸入資料長度相同</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、我們不可以直接在SSMS的編輯視窗新增或刪除二進制值，</p>
+
+<p><img height="65" src="1462616369_76958.png" width="245" /></p>
+
+<p>只能藉由T-SQL的insert或DELETE指令來輸入值或刪除值。</p>
+
+<p><img height="395" src="1462674526_0631.png" width="243" /></p>
+
+<p>2、新增的格式主要是十六進位值，也可輸入十進位值，如上圖。</p>
+
+<p>3、當輸入超過範圍的十進位值時，系統將不會儲存溢位部份。</p>
+
+<p><img height="369" src="1462675450_16947.png" width="247" /></p>
+
+<p>4、當輸入小於範圍的十六進位值時，系統將會自動補零。</p>
+
+<p><img height="367" src="1462675896_74572.png" width="236" /></p>
+
+<p>5、之後image將會由varbinary(max)來取代。</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms188362(v=sql.120).aspx">binary and varbinary (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>九、Timestamp識別碼</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%;">
+    <tbody>
+        <tr>
+            <td style="width:100px;">資料類型</td>
+            <td style="width:509px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>Timestamp (rowversion)</td>
+            <td>8Bytes的二進位識別碼(注意：一個Byte可以用兩個十六進位數值表示)，例如：0x000F2580ab177cc1</td>
+            <td>8Bytes</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、微軟未來似乎想要使用rowversion取代Timestamp，</p>
+
+<p>但現在於SQL SERVER 2014只能Timestamp而已。</p>
+
+<p>2、Timestamp資料類型會自行遞增產生8個Bytes的16進位識別碼，不用人為輸入。</p>
+
+<p><img height="356" src="1462697570_79908.png" width="292" /></p>
+
+<p>3、每次insert或update，timestamp數值都會遞增。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">USE</span> <span style="color:#808030; ">[</span>testDB<span style="color:#808030; ">]</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">DELETE</span> <span style="color:#800000; font-weight:bold; ">FROM</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>Table_1<span style="color:#808030; ">]</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>Table_1<span style="color:#808030; ">]</span>
+           <span style="color:#808030; ">(</span><span style="color:#808030; ">[</span>binary_1<span style="color:#808030; ">]</span>
+           <span style="color:#808030; ">,</span><span style="color:#808030; ">[</span>varbinary_1<span style="color:#808030; ">]</span><span style="color:#808030; ">)</span>
+     <span style="color:#800000; font-weight:bold; ">VALUES</span>
+           <span style="color:#808030; ">(</span><span style="color:#008c00; ">255</span>
+           <span style="color:#808030; ">,</span><span style="color:#008000; ">0xF</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">select</span> <span style="color:#808030; ">*</span> <span style="color:#800000; font-weight:bold; ">from</span> Table_1
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">UPDATE</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>Table_1<span style="color:#808030; ">]</span>
+   <span style="color:#800000; font-weight:bold; ">SET</span> <span style="color:#808030; ">[</span>binary_1<span style="color:#808030; ">]</span> <span style="color:#808030; ">=</span> <span style="color:#008000; ">0x02</span>
+      <span style="color:#808030; ">,</span><span style="color:#808030; ">[</span>varbinary_1<span style="color:#808030; ">]</span> <span style="color:#808030; ">=</span> <span style="color:#008000; ">0x02</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">select</span> <span style="color:#808030; ">*</span> <span style="color:#800000; font-weight:bold; ">from</span> Table_1
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>Table_1<span style="color:#808030; ">]</span>
+           <span style="color:#808030; ">(</span><span style="color:#808030; ">[</span>binary_1<span style="color:#808030; ">]</span>
+           <span style="color:#808030; ">,</span><span style="color:#808030; ">[</span>varbinary_1<span style="color:#808030; ">]</span><span style="color:#808030; ">)</span>
+     <span style="color:#800000; font-weight:bold; ">VALUES</span>
+           <span style="color:#808030; ">(</span><span style="color:#008c00; ">255</span>
+           <span style="color:#808030; ">,</span><span style="color:#008000; ">0xF</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">select</span> <span style="color:#808030; ">*</span> <span style="color:#800000; font-weight:bold; ">from</span> Table_1
+<span style="color:#800000; font-weight:bold; ">GO</span>
+</pre>
+
+<p><img height="181" src="1462698402_66293.png" width="294" /></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms182776(v=sql.120).aspx">rowversion (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>十、Uniqueidentifier識別碼</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%;">
+    <tbody>
+        <tr>
+            <td style="width:100px;">資料類型</td>
+            <td style="width:509px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>Uniqueidentifier</td>
+            <td>16Bytes的16進位識別碼表示格式如6F9619FF-8B86-D011-B42D-00C04FC964FF</td>
+            <td>16Bytes</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>1、uniqueidentifier資料類型是用來儲存全域唯一識別碼 (GUID)，儲存著十六個位元組二進位值，</p>
+
+<p>全世界的電腦都不會產生重複的GUID值(其實會重複，但機率非常非常低，所以被視為不會重複)。</p>
+
+<p>2、uniqueidentifier 資料類型並不像timestamp會自動產生識別碼。</p>
+
+<p>3、GUID可以藉由NewSequentialID()或NEWID()取得</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">USE</span> testDB<span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+<span style="color:#696969; ">----Create Test Table for with default columns values</span>
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> GUID_Example
+<span style="color:#808030; ">(</span>
+    SeqCol uniqueidentifier <span style="color:#800000; font-weight:bold; ">DEFAULT</span> NewSequentialID<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span>
+    IDCol uniqueidentifier <span style="color:#800000; font-weight:bold; ">DEFAULT</span> NEWID<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+<span style="color:#808030; ">)</span>
+<span style="color:#696969; ">----Inserting five default values in table</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> GUID_Example <span style="color:#800000; font-weight:bold; ">DEFAULT</span> <span style="color:#800000; font-weight:bold; ">VALUES</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> GUID_Example <span style="color:#800000; font-weight:bold; ">DEFAULT</span> <span style="color:#800000; font-weight:bold; ">VALUES</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> GUID_Example <span style="color:#800000; font-weight:bold; ">DEFAULT</span> <span style="color:#800000; font-weight:bold; ">VALUES</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> GUID_Example <span style="color:#800000; font-weight:bold; ">DEFAULT</span> <span style="color:#800000; font-weight:bold; ">VALUES</span><span style="color:#808030; ">;</span>
+<span style="color:#696969; ">---------------------------------------------------------</span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#808030; ">*</span>
+<span style="color:#800000; font-weight:bold; ">FROM</span> GUID_Example
+ 
+<span style="color:#696969; ">----Clean up database</span>
+ 
+<span style="color:#800000; font-weight:bold; ">DROP</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> GUID_Example
+</pre>
+
+<p><a target="_blank" rel="noopener" href="https://technet.microsoft.com/zh-tw/library/ms190215(v=sql.105).aspx">使用 Uniqueidentifier 資料</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms189786(v=sql.120).aspx">NEWSEQUENTIALID (Transact-SQL)</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.dbafire.com/2015/07/03/newid-vs-newsequentialid-performance-of-differences-between-and-examples/">Newid() vs Newsequentialid() &ndash; Performance Of, Differences Between and Examples</a></p>
+
+<p>&nbsp;</p>
+
+<p>十一、XML</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:59px;">資料類型</td>
+            <td style="width:157px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>xml</td>
+            <td>符合xml資料格式的資料</td>
+            <td>至多不可超過2GB</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>基本上，在資料表建立的XML欄位可以分為兩種：強制類型的XML欄位(Typed XML Columns)</p>
+
+<p>需要使用XML Schema進行驗證，否則只能建立非強制類型的XML欄位(Un-typed XML Columns)。</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.developer.com/db/article.php/3755106/Working-with-the-XML-Data-Type-of-SQL-Server.htm">Working with the XML Data Type of SQL Server</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/ms190798.aspx">xml Data Type Methods</a></p>
+
+<p>&nbsp;</p>
+
+<p>十二、其他</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:59px;">資料類型</td>
+            <td style="width:479px;">範圍</td>
+            <td>位元數長度</td>
+        </tr>
+        <tr>
+            <td>cursor</td>
+            <td>一種具有資料指標型態的資料集</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>sql_variant</td>
+            <td>除了text、ntext、image、timestamp之外，可存放各種資料型別的資料</td>
+            <td>最大長度為8016個位元</td>
+        </tr>
+        <tr>
+            <td>table</td>
+            <td>資料表型式的資料</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>hierarchyid</td>
+            <td>代表階層中的位置</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>geometry</td>
+            <td>支援儲存平面地球的地理資料，符合開放式地理空間協會(OGC)的規格。</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>geography</td>
+            <td>可以儲存球形地球資料，即地理座標的經緯度。</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/cc280487(v=sql.120).aspx">geometry (Transact-SQL)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/cc280766(v=sql.120).aspx">geography (Transact-SQL)</a></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/ms187752(v=sql.120).aspx">資料類型 (Transact-SQL)</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.guid(v=vs.110).aspx">Guid 結構</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/T-SQL/" rel="tag"># T-SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/02/02/SQL-EXPRESS-SQL-Agent-auto-backup/" rel="prev" title="當SQL EXPRESS也想使用類似SQL Agent做自動備份時">
+      <i class="fa fa-chevron-left"></i> 當SQL EXPRESS也想使用類似SQL Agent做自動備份時
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/02/03/sa-cant-login/" rel="next" title="當換了電腦名稱之後卻發現sa無法正常登入SQL SERVER時">
+      當換了電腦名稱之後卻發現sa無法正常登入SQL SERVER時 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2014/02/02/data-type/";
+    this.page.identifier = "2014/02/02/data-type/";
+    this.page.title = "資料型別";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".on()與.bind()方法">
+<meta property="og:url" content="https://brooke2010.github.io/2014/09/24/on-bind/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-09-24T01:31:33.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2014/09/24/on-bind/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>.on()與.bind()方法 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2014/09/24/on-bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          .on()與.bind()方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-09-24 09:31:33" itemprop="dateCreated datePublished" datetime="2014-09-24T09:31:33+08:00">2014-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2014/09/24/on-bind/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/24/on-bind/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、.on()</p>
+
+<p>.on( String events [, String selector ] [, Anything data ], Function handler )</p>
+
+<p>.on( PlainObject events [, String selector ] [, Anything data ] )</p>
+
+<p>其用來附加事件處理器於指定元素上</p>
+
+<p>1、範例一</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        $<span style="color: rgb(128, 128, 48);">(</span>document<span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>ready<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> <span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="background-color:#ffff00;">$</span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#ffff00;">p</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">)</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">.</span></span><span style="background-color:#ffff00;">on</span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#ffff00;">click</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">,</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 0, 0); font-weight: bold;"><span style="background-color:#ffff00;">function</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">)</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 0, 128);"><span style="background-color:#ffff00;">{</span></span>
+                alert<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">The paragraph was clicked.</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>Click this paragraph<span style="color: rgb(0, 140, 0);">.</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>此範例功能為「於&lt;p&gt;集合裡，掛載click事件，也就是說當p element被按下之後就會執行click事件</p>
+
+<p>，秀出<span style="font-size: medium; color: rgb(128, 0, 0);">&quot;</span><span style="font-size: medium; color: rgb(0, 0, 230);">The paragraph was clicked.</span><span style="font-size: medium; color: rgb(128, 0, 0);">&quot;</span>」</p>
+
+<p>&nbsp;</p>
+
+<p>2、範例二</p>
+
+<p>與上面寫法結果相同，但是目地不太一樣。</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        $<span style="color: rgb(128, 128, 48);">(</span>document<span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>ready<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> <span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            <span style="background-color:#ffff00;">$</span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#ffff00;">body</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">)</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">.</span></span><span style="background-color:#ffff00;">on</span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#ffff00;">click</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">,</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(0, 0, 230);"><span style="background-color:#ffff00;">p</span></span><span style="color: rgb(128, 0, 0);"><span style="background-color:#ffff00;">&quot;</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">,</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 0, 0); font-weight: bold;"><span style="background-color:#ffff00;">function</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">(</span></span><span style="color: rgb(128, 128, 48);"><span style="background-color:#ffff00;">)</span></span><span style="background-color:#ffff00;"> </span><span style="color: rgb(128, 0, 128);"><span style="background-color:#ffff00;">{</span></span>
+                alert<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">The paragraph was clicked.</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>Click this paragraph<span style="color: rgb(0, 140, 0);">.</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>此範例功能為「於&lt;body&gt;集合裡，針對所有的&lt;p&gt;元素，掛載click事件」，</p>
+
+<p>也就是說當p element被按下之後就會執行click事件，秀出<span style="font-size: medium; color: rgb(128, 0, 0);">&quot;</span><span style="font-size: medium; color: rgb(0, 0, 230);">The paragraph was clicked.</span><span style="font-size: medium; color: rgb(128, 0, 0);">&quot;</span>」</p>
+
+<p>&nbsp;</p>
+
+<p>3、範例三</p>
+
+<p>上面的範例會衍生出一個議題「<a target="_blank" rel="noopener" href="http://api.jquery.com/on/#direct-and-delegated-events">Direct and delegated events</a>」。</p>
+
+<p>如何在新增後，建構DOM時，也能再把更新click事件附加上去？</p>
+
+<p>如下範例，按下新增按紐後，會再添加一列tr元素，</p>
+
+<p>但卻發現新增的更新按紐click事件卻無反應，如何再把更新click事件附加上去呢？</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!DOCTYPE html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://code.jquery.com/jquery-3.1.0.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;wapper&quot;</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">table</span><span style="color:#a65700; ">&gt;</span>
+            <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">tbody</span><span style="color:#a65700; ">&gt;</span>
+                <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">tr</span><span style="color:#a65700; ">&gt;</span>
+                    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">td</span><span style="color:#a65700; ">&gt;</span>
+                        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;hidden&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;id&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;1&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+                        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;text&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;name&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;aaa&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+                        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;reflash&quot;</span><span style="color:#a65700; ">&gt;</span>更新<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>
+                    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">td</span><span style="color:#a65700; ">&gt;</span>
+                <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">tr</span><span style="color:#a65700; ">&gt;</span>
+            <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">tbody</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">table</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">hr</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">input</span><span style="color:#274796; "> </span><span style="color:#074726; ">type</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;text&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">id</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;txtCreate&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;txtCreate&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">value</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;bbb&quot;</span><span style="color:#274796; "> </span><span style="color:#a65700; ">/&gt;</span>
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#274796; "> </span><span style="color:#074726; ">class</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;create&quot;</span><span style="color:#a65700; ">&gt;</span>新增<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">button</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">div</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">.reflash</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>click<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">has been trigger</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">.create</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>click<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> id <span style="color:#808030; ">=</span> $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">tr</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">length</span> <span style="color:#808030; ">+</span> <span style="color:#008c00; ">1</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> name <span style="color:#808030; ">=</span> $<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>siblings<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>get<span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>value<span style="color:#800080; ">;</span>
+
+            <span style="color:#800000; font-weight:bold; ">var</span> textTrTdStart <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;tr&gt;&lt;td&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> textTdTrEnd <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;/td&gt;&lt;/tr&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> textButton <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "> &lt;button class=&#39;reflash&#39;&gt;更新&lt;/button&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> textId <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;input type=&#39;hidden&#39; name=&#39;id&#39; value=&#39;</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> id <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&#39; /&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            <span style="color:#800000; font-weight:bold; ">var</span> textName <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;input type=&#39;text&#39; name=&#39;name&#39; value=&#39;</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> name <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&#39; /&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+            $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">#wapper&gt;table&gt;tbody</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>append<span style="color:#808030; ">(</span>textTrTdStart <span style="color:#808030; ">+</span> textId <span style="color:#808030; ">+</span> textName <span style="color:#808030; ">+</span> textButton <span style="color:#808030; ">+</span> textTdTrEnd<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>由於$(&quot;.reflash&quot;).click();只會在第一個頁面生成的時間點直接把事件處理器給附加上去，</p>
+
+<p>而接下來動態生成的DOM就算已經寫上class=&quot;reflash&quot;也不會有事件被附加上去，</p>
+
+<p>所以要改成委派方式把事件處理器附加到動態生成的DOM裡去。</p>
+
+<p>script應該要改成</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="background-color:#FFFF00;">$</span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">tbody</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">on</span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">click</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">,</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">.reflash</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">,</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">function</span></span><span style="background-color:#FFFF00;"> myfunction</span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800080; "><span style="background-color:#FFFF00;">{</span></span>
+    <span style="background-color:#FFFF00;">    </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">alert</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">(</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">has been trigger</span></span><span style="color:#800000; "><span style="background-color:#FFFF00;">&quot;</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+    <span style="color:#800080; "><span style="background-color:#FFFF00;">}</span></span><span style="color:#808030; "><span style="background-color:#FFFF00;">)</span></span><span style="color:#800080; "><span style="background-color:#FFFF00;">;</span></span>
+
+    $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">.create</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>click<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">function</span> myfunction<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> id <span style="color:#808030; ">=</span> $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">tr</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">length</span> <span style="color:#808030; ">+</span> <span style="color:#008c00; ">1</span><span style="color:#800080; ">;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> name <span style="color:#808030; ">=</span> $<span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">this</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>siblings<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>get<span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>value<span style="color:#800080; ">;</span>
+
+        <span style="color:#800000; font-weight:bold; ">var</span> textTrTdStart <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;tr&gt;&lt;td&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> textTdTrEnd <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;/td&gt;&lt;/tr&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> textButton <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "> &lt;button class=&#39;reflash&#39;&gt;更新&lt;/button&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> textId <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;input type=&#39;hidden&#39; name=&#39;id&#39; value=&#39;</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> id <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&#39; /&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> textName <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&lt;input type=&#39;text&#39; name=&#39;name&#39; value=&#39;</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">+</span> name <span style="color:#808030; ">+</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">&#39; /&gt;</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+        $<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">#wapper&gt;table&gt;tbody</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>append<span style="color:#808030; ">(</span>textTrTdStart <span style="color:#808030; ">+</span> textId <span style="color:#808030; ">+</span> textName <span style="color:#808030; ">+</span> textButton <span style="color:#808030; ">+</span> textTdTrEnd<span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>注意，要先以靜態生成的&lt;tbody&gt;父節點為基底，然後於子元素集合裡再選擇reflash類別。</p>
+
+<p>&nbsp;</p>
+
+<p>二、.bind()</p>
+
+<pre style="color: rgb(0, 0, 0); font-size: medium;">
+<span style="color: rgb(0, 74, 67);">&lt;!DOCTYPE html&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&quot;</span><span style="color: rgb(166, 87, 0);">&gt;</span><span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+        $<span style="color: rgb(128, 128, 48);">(</span>document<span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>ready<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> <span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+            $<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">p</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 128, 48);">.</span>bind<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">click</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">,</span> <span style="color: rgb(128, 0, 0); font-weight: bold;">function</span> <span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 128, 48);">)</span> <span style="color: rgb(128, 0, 128);">{</span>
+                alert<span style="color: rgb(128, 128, 48);">(</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(0, 0, 230);">The paragraph was clicked.</span><span style="color: rgb(128, 0, 0);">&quot;</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+            <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+        <span style="color: rgb(128, 0, 128);">}</span><span style="color: rgb(128, 128, 48);">)</span><span style="color: rgb(128, 0, 128);">;</span>
+    <span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">script</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">head</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+    <span style="color: rgb(166, 87, 0);">&lt;</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>Click me!<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">p</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">body</span><span style="color: rgb(166, 87, 0);">&gt;</span>
+<span style="color: rgb(166, 87, 0);">&lt;/</span><span style="color: rgb(128, 0, 0); font-weight: bold;">html</span><span style="color: rgb(166, 87, 0);">&gt;</span></pre>
+
+<p>此範例bind用法就是將click event 繫結到&lt;p&gt;Tag上，當&lt;p&gt;Tag被click時，</p>
+
+<p>則執行function()</p>
+
+<p><a class="jsbin-embed" target="_blank" rel="noopener" href="http://jsbin.com/hivuzibebe/1/embed?html,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>P.S：bind()在jQuery1.7版已經被效能更好的on()取代掉了</p>
+
+<p>&nbsp;</p>
+
+<p>参考網址：</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/event_on.asp">jQuery on() Method</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://api.jquery.com/on/">http://api.jquery.com/on/</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/jquery_ref_events.asp">jQuery Event Methods</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.w3schools.com/jquery/event_bind.asp">jQuery bind() Method</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/19/jQuery-Hello-world/" rel="prev" title="jQuery Hello world">
+      <i class="fa fa-chevron-left"></i> jQuery Hello world
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/09/26/bootstrap-container/" rel="next" title="bootstrap的container樣式 Grid Options">
+      bootstrap的container樣式 Grid Options <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2014/09/24/on-bind/";
+    this.page.identifier = "2014/09/24/on-bind/";
+    this.page.title = ".on()與.bind()方法";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 6.0">
+<meta property="og:url" content="https://brooke2010.github.io/2015/11/01/csharp6-0/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-11-01T04:13:42.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2015/11/01/csharp6-0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>C# 6.0 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2015/11/01/csharp6-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C# 6.0
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-01 12:13:42" itemprop="dateCreated datePublished" datetime="2015-11-01T12:13:42+08:00">2015-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2015/11/01/csharp6-0/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/01/csharp6-0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>C#已經推進到6.0了，我想一些新的語法還是有必要了解一下，</p>
+
+<p>C#6.0是roslyn編譯器所支援，而roslyn是被內建在VS2015，</p>
+
+<p>雖然VS2013可以透過Nuget安裝Microsoft.Net.Compilers來使用C#6.0，</p>
+
+<p>但可能會有未知的相容問題，所以想要使用C#6.0新功能建議是使用VS2015。</p>
+
+<p>&nbsp;</p>
+
+<p>一、自動屬性初始化 Setting default values to Auto Properties</p>
+
+<p>以往自動屬性初始值無法直接指定，必須要寫在建構函式，</p>
+
+<p>現在可以直接對自動屬性設定初始值</p>
+
+<p>public string Name { get; set; } = &quot;Brooke&quot;;</p>
+
+<p>而C#5.0以前，自動屬性必須包含get與set，</p>
+
+<p>現在C#6.0允許你可以做自動屬性唯讀初始化</p>
+
+<p>public string Name { get; } = &quot;Brooke&quot;;</p>
+
+<p>&nbsp;</p>
+
+<p>二、使用 using 靜態命名類別</p>
+
+<p>於C#6.0可以直接using 靜態命名類別，用法跟using命名空間很像，</p>
+
+<p>只要是靜態類別，則可以使用 using static關鍵字，把類別當成命名空間來使用</p>
+
+<pre>
+<code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+<span class="key" style="color: rgb(0, 0, 255);">using</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> System.Math;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Console.WriteLine(Abs(-10));
+            Console.ReadKey();
+        &#125;
+    &#125;
+&#125;</code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>三、String Interpolation</p>
+
+<p>以前string.Format舊的寫法</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">string</span> name = <span class="key" style="color: rgb(0, 0, 255);">string</span>.Format(<span class="str" style="color: rgb(163, 21, 21);">&quot;FullName：&#123;0&#125;,&#123;1&#125;&quot;</span>, m.FirstName, m.LastName);</code></code></code></pre>
+
+<p>而使用「字串插補」功能後，新的寫法，$&quot;{變數}&quot;</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);">name = $<span class="str" style="color: rgb(163, 21, 21);">&quot;FullName：&#123;m.FirstName&#125; , &#123;m.LastName&#125;&quot;</span>;</code></code></code></code></pre>
+
+<p>也就是說String.Format( &quot;{0}{1}&quot; , x , y );格式會被簡化成 $&quot;{x}{y}&quot;;<br />
+我還看過有人還會在字串插補功能再加上if判斷式，蠻令人驚奇的。</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">var</span> s = $<span class="str" style="color: rgb(163, 21, 21);">&quot;&#123;m.FirstName&#125; is &#123;m.age&#125; year&#123;(m.age == 1 ? &quot;</span><span class="str" style="color: rgb(163, 21, 21);">&quot; : &quot;s</span><span class="str" style="color: rgb(163, 21, 21);">&quot;)&#125; old&quot;</span>;</code></code></code></code></code></pre>
+
+<p>範例如下<span style="color:#D3D3D3;">(感謝</span><a target="_blank" rel="noopener" href="https://disqus.com/by/wezmag/"><span style="color:#D3D3D3;">Wesley Huang</span><span style="color:#D3D3D3;"></span></a><span style="color:#D3D3D3;">指正)</span></p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Person m = <span class="key" style="color: rgb(0, 0, 255);">new</span> Person() &#123; FirstName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Lee&quot;</span>, LastName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Tom&quot;</span>, age = 16 &#125;;
+
+            <span class="key" style="color: rgb(0, 0, 255);">string</span> name = <span class="key" style="color: rgb(0, 0, 255);">string</span>.Format(<span class="str" style="color: rgb(163, 21, 21);">&quot;FullName：&#123;0&#125;,&#123;1&#125;&quot;</span>, m.FirstName, m.LastName);
+            name = $<span class="str" style="color: rgb(163, 21, 21);">&quot;FullName：&#123;m.FirstName&#125; , &#123;m.LastName&#125;&quot;</span>;
+            <span class="key" style="color: rgb(0, 0, 255);">var</span> s = $<span class="str" style="color: rgb(163, 21, 21);">&quot;&#123;m.FirstName&#125; is &#123;m.age&#125; year&#123;(m.age == 1 ? &quot;</span><span class="str" style="color: rgb(163, 21, 21);">&quot; : &quot;s</span><span class="str" style="color: rgb(163, 21, 21);">&quot;)&#125; old&quot;</span>;
+
+            Console.WriteLine(name);
+            Console.WriteLine(s);
+            Console.ReadKey();
+        &#125;
+    &#125;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Person
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FirstName;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> LastName;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">int</span> age;
+    &#125;
+&#125;</code></code></code></code></code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>四、Expression-bodied function members<br />
+於 C#5.0 以前類別屬性與方法還無法使用 lambda 運算式</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Person m = <span class="key" style="color: rgb(0, 0, 255);">new</span> Person() &#123; FirstName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Lee&quot;</span>, LastName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Tom&quot;</span>, age = 16 &#125;;
+            Console.WriteLine(m.FullName);
+            Console.ReadKey();
+        &#125;
+    &#125;
+
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Person
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FirstName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> LastName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">int</span> age &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FullName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span> &#123; <span class="key" style="color: rgb(0, 0, 255);">return</span> FirstName + LastName; &#125; &#125;
+    &#125;
+&#125;</code></code></code></code></code></code></code></pre>
+
+<p>但是現在 C#6.0 的類別屬性與方法已經可以使用 lambda 運算式了<br />
+1、屬性</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Person m = <span class="key" style="color: rgb(0, 0, 255);">new</span> Person() &#123; FirstName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Lee&quot;</span>, LastName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Tom&quot;</span>, age = 16 &#125;;
+            Console.WriteLine(m.FullName);
+            Console.ReadKey();
+        &#125;
+    &#125;
+
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Person
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FirstName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> LastName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">int</span> age &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FullName =&gt; $<span class="str" style="color: rgb(163, 21, 21);">&quot;&#123;FirstName&#125;&#123;LastName&#125;&quot;</span>;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></pre>
+
+<p>2、方法</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Person m = <span class="key" style="color: rgb(0, 0, 255);">new</span> Person() &#123; FirstName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Lee&quot;</span>, LastName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Tom&quot;</span>, age = 16 &#125;;
+            Console.WriteLine(m.FullName());
+            Console.ReadKey();
+        &#125;
+    &#125;
+
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Person
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FirstName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> LastName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">int</span> age &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FullName() =&gt; $<span class="str" style="color: rgb(163, 21, 21);">&quot;&#123;FirstName&#125;&#123;LastName&#125;&quot;</span>;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>五、索引初始設定式(Dictionary Initializer)<br />
+以前索引初始化都使用以下格式</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">var</span> numbers = <span class="key" style="color: rgb(0, 0, 255);">new</span> Dictionary&lt;<span class="key" style="color: rgb(0, 0, 255);">int</span>, <span class="key" style="color: rgb(0, 0, 255);">string</span>&gt;()
+&#123;
+    &#123; 1, <span class="str" style="color: rgb(163, 21, 21);">&quot;tom&quot;</span>&#125;,
+    &#123; 2, <span class="str" style="color: rgb(163, 21, 21);">&quot;bob&quot;</span>&#125;,
+    &#123; 3, <span class="str" style="color: rgb(163, 21, 21);">&quot;tim&quot;</span>&#125;,
+&#125;;</code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>現在改為</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">var</span> numbers1 = <span class="key" style="color: rgb(0, 0, 255);">new</span> Dictionary&lt;<span class="key" style="color: rgb(0, 0, 255);">int</span>, <span class="key" style="color: rgb(0, 0, 255);">string</span>&gt;()
+&#123;
+    [1] = <span class="str" style="color: rgb(163, 21, 21);">&quot;tom&quot;</span>,
+    [2] = <span class="str" style="color: rgb(163, 21, 21);">&quot;bob&quot;</span>,
+    [3] = <span class="str" style="color: rgb(163, 21, 21);">&quot;tim&quot;</span>,
+&#125;;</code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>範例：</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+<span class="key" style="color: rgb(0, 0, 255);">using</span> System.Collections.Generic;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            <span class="key" style="color: rgb(0, 0, 255);">var</span> numbers = <span class="key" style="color: rgb(0, 0, 255);">new</span> Dictionary&lt;<span class="key" style="color: rgb(0, 0, 255);">int</span>, <span class="key" style="color: rgb(0, 0, 255);">string</span>&gt;()
+            &#123;
+                &#123; 1, <span class="str" style="color: rgb(163, 21, 21);">&quot;tom&quot;</span>&#125;,
+                &#123; 2, <span class="str" style="color: rgb(163, 21, 21);">&quot;bob&quot;</span>&#125;,
+                &#123; 3, <span class="str" style="color: rgb(163, 21, 21);">&quot;tim&quot;</span>&#125;,
+            &#125;;
+
+            <span class="key" style="color: rgb(0, 0, 255);">var</span> numbers1 = <span class="key" style="color: rgb(0, 0, 255);">new</span> Dictionary&lt;<span class="key" style="color: rgb(0, 0, 255);">int</span>, <span class="key" style="color: rgb(0, 0, 255);">string</span>&gt;()
+            &#123;
+                [1] = <span class="str" style="color: rgb(163, 21, 21);">&quot;tom&quot;</span>,
+                [2] = <span class="str" style="color: rgb(163, 21, 21);">&quot;bob&quot;</span>,
+                [3] = <span class="str" style="color: rgb(163, 21, 21);">&quot;tim&quot;</span>,
+            &#125;;
+
+            Console.WriteLine(numbers1[1]);
+            Console.ReadKey();
+        &#125;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>六、Null-conditional operators「?.」、「?[]」<br />
+一般null條件判斷會這樣寫</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">private</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">int</span>? GetFirstNameLength(Person person)
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">int</span>? result = <span class="key" style="color: rgb(0, 0, 255);">null</span>;
+    <span class="key" style="color: rgb(0, 0, 255);">if</span> (person == <span class="key" style="color: rgb(0, 0, 255);">null</span> || person.FirstName == <span class="key" style="color: rgb(0, 0, 255);">null</span>)
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">return</span> <span class="key" style="color: rgb(0, 0, 255);">null</span>;
+    &#125;
+    result = person.FirstName.Length;
+    <span class="key" style="color: rgb(0, 0, 255);">return</span> result;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p><s>而現在可以用問號取代 == null ||，如person? ||，意思為如果person等於null時則||左邊為true；</s><br />
+<s>也同義於問號取代 != null &amp;&amp;，如person? &amp;&amp;，意思為如果person不等於null時則&amp;&amp;左邊為true</s></p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Person Person = <span class="key" style="color: rgb(0, 0, 255);">new</span> Person() &#123; FirstName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Lee&quot;</span>, LastName = <span class="str" style="color: rgb(163, 21, 21);">&quot;Tom&quot;</span>, age = 16 &#125;;
+            Console.WriteLine(GetFirstNameLength(Person));
+            Console.ReadKey();
+        &#125;
+
+        <span class="key" style="color: rgb(0, 0, 255);">private</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">int</span>? GetFirstNameLength(Person person)
+        &#123;
+            <span class="key" style="color: rgb(0, 0, 255);">int</span>? result = <span class="key" style="color: rgb(0, 0, 255);">null</span>;
+            <span class="com" style="color: rgb(0, 128, 0);">//if (person == null || person.FirstName == null)</span>
+            <span class="com" style="color: rgb(0, 128, 0);">//&#123;</span>
+            <span class="com" style="color: rgb(0, 128, 0);">//    return null;</span>
+            <span class="com" style="color: rgb(0, 128, 0);">//&#125;</span>
+            result = person?.FirstName?.Length;
+            <span class="key" style="color: rgb(0, 0, 255);">return</span> result;
+        &#125;
+    &#125;
+
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Person
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FirstName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> LastName &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">int</span> age &#123; <span class="key" style="color: rgb(0, 0, 255);">get</span>; <span class="key" style="color: rgb(0, 0, 255);">set</span>; &#125;
+        <span class="key" style="color: rgb(0, 0, 255);">public</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> FullName =&gt; $<span class="str" style="color: rgb(163, 21, 21);">&quot;&#123;FirstName&#125;&#123;LastName&#125;&quot;</span>;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>上例GetFirstNameLength()的意思同於如果person為null時則直接回傳null，若否，</p>
+
+<p>則繼續判斷FirstName是否為null，若是，則直接回傳null，若否，</p>
+
+<p>則回傳FirstName的字串長度。</p>
+
+<p>整個運作方式是如果左側為Null則整個運算式都是Null，</p>
+
+<p>如果左側不是Null則會以點屬性表示，並成為結果。</p>
+
+<p>再舉另一例子，請參考。<span style="color:#D3D3D3;">(感謝</span><a target="_blank" rel="noopener" href="https://disqus.com/by/disqus_X9TZNFhjdf/"><span style="color:#D3D3D3;">佑翔</span></a><span style="color:#D3D3D3;">指正)</span></p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApplication1
+&#123;
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            <span style="color:#008000;">//C#5.0之前</span>
+            <span style="color:#0000ff;">string</span> data = <span style="color:#a31515;">&quot;Some String&quot;</span>;
+            <span style="color:#0000ff;">var</span> test = data != <span style="color:#0000ff;">null</span> ? data.Substring(0, 4) : <span style="color:#0000ff;">string</span>.Empty;
+            Console.WriteLine(test);
+
+            <span style="color:#008000;">//C#6.0之後</span>
+            <span style="color:#0000ff;">string</span> data2 = <span style="color:#a31515;">&quot;Some String&quot;</span>;
+            <span style="color:#0000ff;">var</span> test2 = data2?.Substring(0, 4);
+            Console.WriteLine(test2);
+
+            Console.ReadLine();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>七、nameof運算子</p>
+
+<p>nameof運算子功能是回傳方法或是屬性的名稱，這功能配合try catch偵錯回傳訊息會非常有幫助。</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            Console.WriteLine(nameof(GetName));
+            Console.ReadKey();
+        &#125;
+
+        <span class="key" style="color: rgb(0, 0, 255);">private</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">string</span> GetName()
+        &#123;
+            <span class="key" style="color: rgb(0, 0, 255);">return</span> <span class="str" style="color: rgb(163, 21, 21);">&quot;tom&quot;</span>;
+        &#125;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>以下為回傳屬性名稱</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+
+<span style="color:#0000ff;">namespace</span> ConsoleApplication1
+&#123;
+    <span style="color:#0000ff;">class</span> SampleClass
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> ID &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125; = <span style="color:#a31515;">&quot;A123456789&quot;</span>;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125; = <span style="color:#a31515;">&quot;Brooke&quot;</span>;
+    &#125;
+
+    <span style="color:#0000ff;">class</span> Program
+    &#123;
+        <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> Main(<span style="color:#0000ff;">string</span>[] args)
+        &#123;
+            <span style="color:#0000ff;">var</span> SampleClass = <span style="color:#0000ff;">new</span> SampleClass();
+            Console.WriteLine(<span style="color:#a31515;">&quot;&#123;0&#125; : &#123;1&#125;&quot;</span> ,nameof(SampleClass.ID),SampleClass.ID);
+            Console.WriteLine(<span style="color:#a31515;">&quot;&#123;0&#125; : &#123;1&#125;&quot;</span>,nameof(SampleClass.Name),SampleClass.Name);
+            Console.ReadKey();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>八、例外過濾<br />
+增加when語句來決定是否進入指定的catch區段，如下範例，當例外訊息包含了keyErrot字串時則另做處理，否則拋出例外</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">private</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> CatchWhen()
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">try</span>
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">var</span> r = 0;
+        r = 0 / 0;
+    &#125;
+    <span class="key" style="color: rgb(0, 0, 255);">catch</span> (Exception ex) when (ex.Message.Contains(<span class="str" style="color: rgb(163, 21, 21);">&quot;keyError&quot;</span>))
+    &#123;
+        Console.WriteLine(<span class="str" style="color: rgb(163, 21, 21);">&quot;have handle exception&quot;</span>);
+    &#125;
+    <span class="key" style="color: rgb(0, 0, 255);">catch</span> (Exception ex)
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">throw</span>;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>九、例外使用非同步<br />
+於C#6.0 catch跟finally區段也能用await了，如下範例</p>
+
+<pre>
+<code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code class="language-cpp"><code style="font-family: Consolas, 'Courier New', Courier, monospace; font-size: 10pt; color: rgb(0, 0, 0);"><span class="key" style="color: rgb(0, 0, 255);">using</span> System;
+<span class="key" style="color: rgb(0, 0, 255);">using</span> System.Threading.Tasks;
+
+<span class="key" style="color: rgb(0, 0, 255);">namespace</span> C_Sharp6
+&#123;
+    <span class="key" style="color: rgb(0, 0, 255);">class</span> Program
+    &#123;
+        <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> Main()
+        &#123;
+            CatchWhen();
+            Console.ReadKey();
+        &#125;
+
+        <span class="key" style="color: rgb(0, 0, 255);">private</span> <span class="key" style="color: rgb(0, 0, 255);">static</span> <span class="key" style="color: rgb(0, 0, 255);">async</span> <span class="key" style="color: rgb(0, 0, 255);">void</span> CatchWhen()
+        &#123;
+            <span class="key" style="color: rgb(0, 0, 255);">try</span>
+            &#123;
+                <span class="key" style="color: rgb(0, 0, 255);">var</span> r = 0;
+                r = 0 / 0;
+            &#125;
+            <span class="key" style="color: rgb(0, 0, 255);">catch</span> (Exception ex) when (ex.Message.Contains(<span class="str" style="color: rgb(163, 21, 21);">&quot;keyError&quot;</span>))
+            &#123;
+                Console.WriteLine(<span class="str" style="color: rgb(163, 21, 21);">&quot;have handle exception&quot;</span>);
+                <span class="key" style="color: rgb(0, 0, 255);">await</span> Task.Delay(500);
+            &#125;
+            <span class="key" style="color: rgb(0, 0, 255);">catch</span> (Exception ex)
+            &#123;
+                <span class="key" style="color: rgb(0, 0, 255);">throw</span>;
+            &#125;
+            <span class="key" style="color: rgb(0, 0, 255);">finally</span>
+            &#123;
+                <span class="key" style="color: rgb(0, 0, 255);">await</span> Task.Delay(500);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></code></pre>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-6">What&#39;s New in C# 6</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/C/" rel="tag"># C#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/10/22/AutoResetEvent-WaitOne/" rel="prev" title="AutoResetEvent.WaitOne()">
+      <i class="fa fa-chevron-left"></i> AutoResetEvent.WaitOne()
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2015/11/09/Hello-Codova/" rel="next" title="[Codova] Hello Codova">
+      [Codova] Hello Codova <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2015/11/01/csharp6-0/";
+    this.page.identifier = "2015/11/01/csharp6-0/";
+    this.page.title = "C# 6.0";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

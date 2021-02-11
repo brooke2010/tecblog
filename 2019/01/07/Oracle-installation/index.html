@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle installation and using Entity Framework 6 connect to oracle database with ASP.NET MVC">
+<meta property="og:url" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546934676_55473.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546935663_32552.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546935706_73195.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546935886_0314.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546936089_96777.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546936245_21484.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546936342_52763.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546936464_9099.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546937588_74996.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547002461_8146.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547002512_35213.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547002550_83795.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547002618_70422.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547002710_74884.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547012456_87714.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547012522_41343.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547012788_06059.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547013356_62029.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547013493_40388.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547013596_71677.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547022941_62668.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023133_76751.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023386_11496.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023452_99136.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023682_21484.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023937_6453.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547023998_56913.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547014430_23592.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547014439_2586.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547014616_06032.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547014779_53804.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547025112_29937.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547026284_01161.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547026508_28027.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015379_07947.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015437_25893.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015563_72818.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015684_94019.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015754_86245.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015788_63459.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1547015921_32393.png">
+<meta property="article:published_time" content="2019-01-07T09:10:38.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="工具教學">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2019/01/07/Oracle-installation/1546934676_55473.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2019/01/07/Oracle-installation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Oracle installation and using Entity Framework 6 connect to oracle database with ASP.NET MVC | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2019/01/07/Oracle-installation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Oracle installation and using Entity Framework 6 connect to oracle database with ASP.NET MVC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-07 17:10:38" itemprop="dateCreated datePublished" datetime="2019-01-07T17:10:38+08:00">2019-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" itemprop="url" rel="index">
+                    <span itemprop="name">工具教學</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2019/01/07/Oracle-installation/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/07/Oracle-installation/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、安裝 VS2017 Community</p>
+
+<p>在 Windows 10 professional 安裝&nbsp;VS2017 Community。</p>
+
+<p>安裝完後請重新開機，避免之後在安裝 Oracle 時會遇到奇奇怪怪的問題。</p>
+
+<p>&nbsp;</p>
+
+<p>二、安裝 Oracle 18c (18.3)</p>
+
+<p>1、Oracle 18c 建議劃個 10GB 的記憶體給他，以滿足他的安裝需求，</p>
+
+<p>而 Oracle XE 版本官方建議至少 2GB。</p>
+
+<p>2、當下載好&nbsp;Oracle 18c (18.3) 時，其檔名為&nbsp;WINDOWS.X64_180000_db_home.zip，</p>
+
+<p>我是將之解壓縮到名為 WINDOWS.X64_180000_db_home 資料夾，</p>
+
+<p>注意&nbsp;WINDOWS.X64_180000_db_home 資料夾安裝完後也要保留，</p>
+
+<p>後續 Oracle 都會再使用他。</p>
+
+<p>&nbsp;</p>
+
+<p>3、開始安裝 oracle</p>
+
+<p><img height="587" src="1546934676_55473.png" width="786" /></p>
+
+<p>這裡的「起始資料庫」的意思比較像是 MSSQL 的 instance。</p>
+
+<p><img height="585" src="1546935663_32552.png" width="786" /></p>
+
+<p><img height="588" src="1546935706_73195.png" width="788" /></p>
+
+<p><img height="586" src="1546935886_0314.png" width="785" /></p>
+
+<p>先在 C 槽新增一個名為&nbsp;Oracle18c 的資料夾，該資料夾為 Oracle 基本目錄。</p>
+
+<p><img height="586" src="1546936089_96777.png" width="784" /></p>
+
+<p>全域資料庫名稱相當等同於&nbsp;MSSQL 的 instance 名稱。</p>
+
+<p>其密碼就是設定 SYSTEM 帳號的密碼，相當等同於&nbsp;MSSQL 的 sa&nbsp;帳號。</p>
+
+<p><img height="584" src="1546936245_21484.png" width="787" /></p>
+
+<p>我密碼組合為英文加數字，但 oracle 還是讓我過了</p>
+
+<p><img height="645" src="1546936342_52763.png" width="789" /></p>
+
+<p><img height="645" src="1546936464_9099.png" width="788" /></p>
+
+<p><img height="643" src="1546937588_74996.png" width="786" /></p>
+
+<p>安裝完後請重新開機，避免之後在安裝 Oracle 時會遇到奇奇怪怪的問題。</p>
+
+<p>&nbsp;</p>
+
+<p>三、安裝 ODAC (Oracle Data Access Components)</p>
+
+<p>請至&nbsp;<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/topics/dotnet/downloads/index.html">Oracle Data Access Components - .NET Downloads</a>&nbsp;頁面下載，</p>
+
+<p>這些&nbsp;<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/developer-tools/visual-studio/overview/index-097110.html">Oracle Developer Tools for Visual Studio (ODT)</a> 中，</p>
+
+<p>我已試過&nbsp;<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/topics/dotnet/downloads/odacmsidownloadvs2017-3806459.html">ODAC for Visual Studio 2017</a>&nbsp;檔，但我安裝失敗，裝不起來，</p>
+
+<p>可能要注意有些 ODAC 安裝條件是 Visual studio professonal 版本以上吧？</p>
+
+<p>&nbsp;</p>
+
+<p>後來是選 「<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/topics/dotnet/downloads/odacdev-4242174.html">ODAC - Oracle Universal Installer</a>&nbsp;(OUI) ODAC 18.3 - 561,909,827 bytes - November 23, 2018」來安裝。</p>
+
+<p><img height="584" src="1547002461_8146.png" width="788" /></p>
+
+<p><img height="586" src="1547002512_35213.png" width="787" /></p>
+
+<p><img height="588" src="1547002550_83795.png" width="789" /></p>
+
+<p><img height="583" src="1547002618_70422.png" width="788" /></p>
+
+<p><img height="588" src="1547002710_74884.png" width="789" /></p>
+
+<p><img height="587" src="1547012456_87714.png" width="788" /></p>
+
+<p>建立連線別名可建或可不建，建的好處當然是之後需要連線到資料庫的時候，</p>
+
+<p>不須一再重覆輸入下面四個欄位，可節省時間，</p>
+
+<ul>
+    <li>連線別名 (data source alias)</li>
+    <li>連接埠號碼 (port)</li>
+    <li>資料庫主機名稱 (hostname or IP)</li>
+    <li>資料庫服務名稱 (database service name)</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><img height="588" src="1547012522_41343.png" width="789" /></p>
+
+<p><img height="584" src="1547012788_06059.png" width="788" /></p>
+
+<p>&nbsp;</p>
+
+<p>四、在專案中使用&nbsp;NuGet 安裝 Oracle.ManagedDataAccess.EntityFramework 套件</p>
+
+<p><img height="717" src="1547013356_62029.png" width="760" /></p>
+
+<p><img height="482" src="1547013493_40388.png" width="488" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、準備測試資料表</p>
+
+<p><img height="619" src="1547013596_71677.png" width="327" /></p>
+
+<p>先利用 SYSTEM 帳號創立另一 user 帳號</p>
+
+<p><img height="734" src="1547022941_62668.png" width="1020" /></p>
+
+<p>填好上述欄位並測試成功後再正式連線。</p>
+
+<p>特別說明：上圖的 SID 欄位通常等於服務名稱欄位，而服務名稱欄位就是等於資料庫服務名稱 (database service name)</p>
+
+<p><img height="644" src="1547023133_76751.png" width="788" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="804" src="1547023386_11496.png" width="311" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="479" src="1547023452_99136.png" width="588" /></p>
+
+<p>於「使用者」頁籤依照上例填入後按「套用」按鈕。</p>
+
+<p>&nbsp;</p>
+
+<p>換設定「授權的角色」頁籤</p>
+
+<p><img height="342" src="1547023682_21484.png" width="280" /></p>
+
+<p>按「全部授權」再套用。</p>
+
+<p><img height="479" src="1547023937_6453.png" width="588" /></p>
+
+<p>「系統權限」頁籤也是「全部授權」再套用。</p>
+
+<p><img height="478" src="1547023998_56913.png" width="588" /></p>
+
+<p><img height="485" src="1547014430_23592.png" width="624" /></p>
+
+<p>雖然會看到「權限不足」的錯誤訊息，但我的目地只是弄出一個 demo 用的帳號，</p>
+
+<p>為了節省時間我只管給他最大權限可以 demo 即可。關掉視窗再進來看，部份權限還是有被授權的。</p>
+
+<p><img height="479" src="1547014439_2586.png" width="591" /></p>
+
+<p>接下來使用剛剛創立的 apple 帳號登入</p>
+
+<p><img height="427" src="1547014616_06032.png" width="740" /></p>
+
+<p>在 apple 帳號底下新增資料表</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> TABLE_NAME 
+  <span style="color:#808030; ">(</span> 
+     id_a      <span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">,</span> 
+     name_a    <span style="color:#800000; font-weight:bold; ">VARCHAR2</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">50</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     address_a <span style="color:#800000; font-weight:bold; ">VARCHAR2</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">50</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span>id_a<span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> <span style="color:#808030; ">;</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> table_name <span style="color:#808030; ">(</span>
+    id_a<span style="color:#808030; ">,</span>
+    name_a<span style="color:#808030; ">,</span>
+    address_a
+<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>
+    <span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span>
+    <span style="color:#0000e6; ">&#39;mary&#39;</span><span style="color:#808030; ">,</span>
+    <span style="color:#0000e6; ">&#39;taipei&#39;</span>
+<span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-01-09 06:17:53 UTC -->
+
+<p>&nbsp;</p>
+
+<p><img height="658" src="1547014779_53804.png" width="570" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、於&nbsp;ASP.NET MVC 用 EF6 連接 Oracle database</p>
+
+<p>怕文章會太長，連接 Oracle database 的流程只會重點圖片帶過。</p>
+
+<p><img height="565" src="1547025112_29937.png" width="724" /></p>
+
+<p>兩種登入方式，一種為 TNS，另一種為 EZCONNECT。</p>
+
+<p><img height="611" src="1547026284_01161.png" width="696" /></p>
+
+<p>如果你先前沒有設定好 tnsnames.ora，那就只能使用&nbsp;EZCONNECT 方式手 key 各個欄位了。</p>
+
+<p><img height="612" src="1547026508_28027.png" width="696" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="554" src="1547015379_07947.png" width="618" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="552" src="1547015437_25893.png" width="620" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="236" src="1547015563_72818.png" width="225" /></p>
+
+<p>記得使用 scaffolded 時請先把專案 Build 過一次。</p>
+
+<p><img height="700" src="1547015684_94019.png" width="837" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="649" src="1547015754_86245.png" width="948" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="371" src="1547015788_63459.png" width="590" /></p>
+
+<p>&nbsp;</p>
+
+<p><img height="350" src="1547015921_32393.png" width="771" /></p>
+
+<p>結果成功接上 Oracle database</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/18/cncpt/index.html">Oracle Database 18c Concepts</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/topics/dotnet/downloads/install183-5191071.html">ODAC 18c Release 1 (18.3.0.0.0) Installation Instructions, Setup, and Notes</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/topics/dotnet/index-085163.html?">Oracle Data Provider for .NET</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E11882_01/server.112/e41084/sql_elements001.htm#SQLRF0021">Database SQL Language Reference Data Types</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/%E5%B7%A5%E5%85%B7%E6%95%99%E5%AD%B8/" rel="tag"># 工具教學</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/01/04/Promise-resolve-then-reject-catch/" rel="prev" title="ES6 Promise、resolve()、then()、reject()、catch()">
+      <i class="fa fa-chevron-left"></i> ES6 Promise、resolve()、then()、reject()、catch()
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/01/14/Katana-project-example/" rel="next" title="Katana project example">
+      Katana project example <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2019/01/07/Oracle-installation/";
+    this.page.identifier = "2019/01/07/Oracle-installation/";
+    this.page.title = "Oracle installation and using Entity Framework 6 connect to oracle database with ASP.NET MVC";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

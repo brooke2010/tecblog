@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript String Methods">
+<meta property="og:url" content="https://brooke2010.github.io/2019/10/12/JavaScript-String-Methods/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-12T06:32:57.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2019/10/12/JavaScript-String-Methods/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JavaScript String Methods | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2019/10/12/JavaScript-String-Methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript String Methods
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-12 14:32:57" itemprop="dateCreated datePublished" datetime="2019-10-12T14:32:57+08:00">2019-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2019/10/12/JavaScript-String-Methods/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/12/JavaScript-String-Methods/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>在 javascript position 都是從 0 開始算起。</p>
+
+<p>一、Finding a position in a String</p>
+
+<p>如果都找不到則傳回 -1。</p>
+
+<p>1、indexOf()</p>
+
+<p>從一字串裡，找尋第一次出現指定字串的起始位置。</p>
+
+<p>語法：string.indexOf(searchvalue[, start])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0123<span style="background-color:#FFFF00;">welcome</span> to the universe.</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">indexOf</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">welcome</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 01:23:10 UTC -->
+
+<p>上述範例意思是找尋 str 字串裡，第一次出現「welcome」的起始位置，其結果為 4。</p>
+
+<p>參數 start (選項)表示從指定位置開始搜尋，如下範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01welcome9<span style="background-color:#FFFF00;">welcome</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">indexOf</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">welcome</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">3</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 01:29:15 UTC -->
+
+<p>其結果為 10。</p>
+
+<p>&nbsp;</p>
+
+<p>2、lastIndexOf()</p>
+
+<p>從一字串裡，找尋最後一次出現指定字串的起始位置。</p>
+
+<p>語法：string.lastIndexOf(searchvalue[, start])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01she5she9<span style="background-color:#FFFF00;">she</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">lastIndexOf</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 01:50:30 UTC -->
+
+<p>其結果為 10。</p>
+
+<p>參數 start (選項)表示搜尋到指定位置為止，如下範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01she5she9she</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">lastIndexOf</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span><span style="color:#008c00; ">9</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 02:21:55 UTC -->
+
+<p>其結果為 6。</p>
+
+<p>&nbsp;</p>
+
+<p>3、search()</p>
+
+<p>從一字串裡，找尋第一次出現指定字串的起始位置。</p>
+
+<p>語法：string.indexOf(regex)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she9she5she10</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">search</span><span style="color:#808030; ">(</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">she</span><span style="color:#800000; ">/</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 02:31:48 UTC -->
+
+<p>其結果為 0。</p>
+
+<p>search() 方法跟 indexOf() 方法作用一樣，只差別於&nbsp;search() 方法支援 regular expression。</p>
+
+<p>&nbsp;</p>
+
+<p>二、Extracting String Parts</p>
+
+<p>從一字串裡，提取某一部份字串。</p>
+
+<p>其取字串時，一率都是由左往右取。</p>
+
+<p>1、slice()</p>
+
+<p>語法：slice(start[, end])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01she5<span style="background-color:#FFFF00;">she9she</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">slice</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">6</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 02:59:46 UTC -->
+
+<p>其結果為 she9she。</p>
+
+<p>說明：從左邊數來第 6 位置往右取字串。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01she5s<span style="background-color:#FFFF00;">he9she</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">slice</span><span style="color:#808030; ">(</span><span style="color:#808030; ">-</span><span style="color:#008c00; ">6</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 06:45:02 UTC -->
+
+<p>其結果為 he9she。</p>
+
+<p>說明：從右邊數來第&nbsp;6 位置往右取字串。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0<span style="background-color:#FFFF00;">1she5</span>she9she</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">slice</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">6</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 03:00:13 UTC -->
+
+<p>其結果為 1she5。</p>
+
+<p>說明：從左邊數來第 1&nbsp;位置往右取到第 6&nbsp;位置前的字串。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0<span style="background-color:#FFFF00;">1she5she9</span>she</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">slice</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> <span style="color:#808030; ">-</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 06:50:53 UTC -->
+
+<p>其結果為 1she5she9。</p>
+
+<p>說明：從左邊數來第 1&nbsp;位置往右取到，從右邊數來第 3&nbsp;位置的字串。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01she5sh<span style="background-color:#FFFF00;">e9sh</span>e</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">slice</span><span style="color:#808030; ">(</span><span style="color:#808030; ">-</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">,</span> <span style="color:#808030; ">-</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 06:55:35 UTC -->
+
+<p>其結果為 e9sh。</p>
+
+<p>說明：從右邊數來第 5&nbsp;位置後往右取到，從右邊數來第 1&nbsp;位置的字串。</p>
+
+<p>&nbsp;</p>
+
+<p>2、substring(start[, end])</p>
+
+<p>substring() 方法很像&nbsp;slice() 方法，其差異為&nbsp;substring() 方法不接受負位置 (index)。</p>
+
+<p>&nbsp;</p>
+
+<p>3、substr(start[, length])</p>
+
+<p>substr() 方法很像&nbsp;slice() 方法，其差異為&nbsp;substr() 方法的第二個參數是長度而不是位置 (index)。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01sh<span style="background-color:#FFFF00;">e5she9</span>she</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">substr</span><span style="color:#808030; ">(</span><span style="color:#808030; ">-</span><span style="color:#008c00; ">9</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">6</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 07:07:34 UTC -->
+
+<p>其結果為 e5she9。</p>
+
+<p>說明：從右邊數來第 9&nbsp;位置後往右取 6 個字元。</p>
+
+<p>&nbsp;</p>
+
+<p>三、Extracting String Characters</p>
+
+<p>1、charAt()</p>
+
+<p>用來取第 n 位的字元。</p>
+
+<p>語法：string.charAt(index)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">01234<span style="background-color:#FFFF00;">5</span>6789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">charAt</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 08:46:11 UTC -->
+
+<p>其結果為 5。</p>
+
+<p>說明：如果沒取到時，則回傅空字串。</p>
+
+<p>&nbsp;</p>
+
+<p>2、charCodeAt()</p>
+
+<p>用來取第 n 位字元的 unicode。</p>
+
+<p>語法：string.charCodeAt(index)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "><span style="background-color:#FFFF00;">0</span>123456789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">charCodeAt</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 08:52:43 UTC -->
+
+<p>其結果為 48。</p>
+
+<p>&nbsp;</p>
+
+<p>3、fromCharCode()</p>
+
+<p>用來轉換一 unicode 成一個字元或字串。</p>
+
+<p>語法：string.fromCharCode(n1, n2, ..., nX)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span><span style="color:#797997; ">String</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">fromCharCode</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">65</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 08:58:40 UTC -->
+
+<p>其結果為 A。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span><span style="color:#797997; ">String</span><span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">fromCharCode</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">65</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">66</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">67</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 08:59:20 UTC -->
+
+<p>其結果為 ABC。</p>
+
+<p>&nbsp;</p>
+
+<p>4、Property access [ ]</p>
+
+<p>在&nbsp;ECMAScript 5 (2009)，字串可以使用「[]」方式來存取一字元。</p>
+
+<p>語法：string[index]</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">0123456789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">[</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">]</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:03:21 UTC -->
+
+<p>其結果為 5。</p>
+
+<p>說明：</p>
+
+<p>如果沒找到字元時，則回傅 undefined。</p>
+
+<p>&nbsp;</p>
+
+<p>四、check</p>
+
+<p>1、startsWith()</p>
+
+<p>用來判斷一字串在開頭是否可找到指定字串。</p>
+
+<p>語法：string.startsWith(searchvalue[, index])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello World!</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">startsWith</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:29:52 UTC -->
+
+<p>其結果為 true。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello World!</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">startsWith</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">World</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">6</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:30:45 UTC -->
+
+<p>其結果為 true。</p>
+
+<p>&nbsp;</p>
+
+<p>2、endsWith()</p>
+
+<p>用來判斷一字串在結尾是否可找到指定字串。</p>
+
+<p>語法：string.endsWith(searchvalue[, length])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello world, welcome to the <span style="background-color:#FFFF00;">universe.</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">endsWith</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">universe.</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:38:48 UTC -->
+
+<p>其結果為 true。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "></span><u><span style="color:#0000FF;">Hello <span style="background-color:#FFFF00;">world</span></span></u><span style="color:#0000e6; ">, welcome to the universe.</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">endsWith</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">world</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">11</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:39:33 UTC -->
+
+<p>其結果為 true。</p>
+
+<p>說明：從開頭取 str 字串裡的 11 個字元( Hello world&nbsp;)來比對，判斷 world 字串是否為這11 個字元的結尾。</p>
+
+<p>&nbsp;</p>
+
+<p>3、includes()</p>
+
+<p>用來判斷一字串中是否可找到指定字串。</p>
+
+<p>語法：string.includes(searchvalue[, start])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello, I am Tom</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span>includes<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">am</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:58:09 UTC -->
+
+<p>其結果為 true。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello, I am Tom</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span>includes<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">I</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">7</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:59:27 UTC -->
+
+<p>其結果為 true。</p>
+
+<p>說明：從第 7 個字元開始找，是否可以找到「I」字元。</p>
+
+<p>&nbsp;</p>
+
+<p>4、localeCompare()</p>
+
+<p>比較兩字串權重順序。</p>
+
+<p>語法：string.localeCompare(compareString)</p>
+
+<p>從第一個字元開始比，如果原字串順序排在被比字串前面則回傅 -1。</p>
+
+<p>從第一個字元開始比，如果原字串等於被比字串則回傅 0。</p>
+
+<p>從第一個字元開始比，如果原字串順序排在被比字串後面則回傅 1。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str1 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">cd</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+<span style="color:#800000; font-weight:bold; ">var</span> str2 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">ce</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str1<span style="color:#808030; ">.</span>localeCompare<span style="color:#808030; ">(</span>str2<span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 10:15:20 UTC -->
+
+<p>其結果為 -1。</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str1 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">b</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+<span style="color:#800000; font-weight:bold; ">var</span> str2 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">a</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str1<span style="color:#808030; ">.</span>localeCompare<span style="color:#808030; ">(</span>str2<span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 10:16:42 UTC -->
+
+<p>其結果為 1。</p>
+
+<p>&nbsp;</p>
+
+<p>五、Upper、Lower Case</p>
+
+<p>1、toUpperCase()</p>
+
+<p>將一字串全轉成大寫。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello World!</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">toUpperCase</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:15:04 UTC -->
+
+<p>其結果為 HELLO WORLD!。</p>
+
+<p>&nbsp;</p>
+
+<p>2、toLowerCase()</p>
+
+<p>將一字串全轉成小寫。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello World!</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">toLowerCase</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-14 09:16:02 UTC -->
+
+<p>其結果為 hello world!。</p>
+
+<p>&nbsp;</p>
+
+<p>3、toLocaleLowerCase()</p>
+
+<p>根據主機當前語言環境，將一字串全轉成大寫。</p>
+
+<p>&nbsp;</p>
+
+<p>4、toLocaleUpperCase()</p>
+
+<p>根據主機當前語言環境，將一字串全轉成小寫。</p>
+
+<p>&nbsp;</p>
+
+<p>六、其他</p>
+
+<p>1、replace()</p>
+
+<p>根據 pattern 找到被比對到的字串，並且替換他。</p>
+
+<p>語法：string.replace(regex, newvalue)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she <span style="background-color:#FFFF00;">hi</span> am <span style="background-color:#FFFF00;">hi</span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">replace</span><span style="color:#808030; ">(</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">hi</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#808030; ">,</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">hello</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 01:39:42 UTC -->
+
+<p>其結果為&nbsp;she hello am hello</p>
+
+<p>&nbsp;</p>
+
+<p>2、match()</p>
+
+<p>根據 pattern 找到所有被比對到的字串，並回傳成陣列。</p>
+
+<p>語法：string.match(regexp)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she hi am hi</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">match</span><span style="color:#808030; ">(</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">hi</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:24:44 UTC -->
+
+<p>其結果為&nbsp;[&quot;hi&quot;, &quot;hi&quot;]</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">she hi am his him</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">match</span><span style="color:#808030; ">(</span><span style="color:#800000; ">/</span><span style="color:#0f69ff; ">\b</span><span style="color:#0000e6; ">h</span><span style="color:#808030; ">[</span><span style="color:#0000e6; ">a</span><span style="color:#808030; ">-</span><span style="color:#0000e6; ">z</span><span style="color:#808030; ">]</span><span style="color:#808030; ">+</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-20 08:00:40 UTC -->
+
+<p>其結果為&nbsp;[&quot;hi&quot;, &quot;his&quot;, &quot;him&quot;]</p>
+
+<p>&nbsp;</p>
+
+<p>3、split()</p>
+
+<p>根據分離子，把一字串拆成陣列。separator 可以是字元、字串、regular expression。</p>
+
+<p>語法：string.split([separator[, limit]])</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">123dd456dd789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">split</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dd</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:40:09 UTC -->
+
+<p>其結果為&nbsp;[&quot;123&quot;, &quot;456&quot;, &quot;789&quot;]</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">123dd456dd789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">split</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:43:50 UTC -->
+
+<p>其結果為&nbsp;[&quot;123dd456dd789&quot;]</p>
+
+<p>&nbsp;</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">123dd456dd789</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">split</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">dd</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:45:07 UTC -->
+
+<p>其結果為&nbsp;[&quot;123&quot;, &quot;456&quot;]</p>
+
+<p>&nbsp;</p>
+
+<p>4、trim()</p>
+
+<p>用來移除兩側的空白。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "><span style="background-color:#FFFF00;"> </span>1 2 3 4 5<span style="background-color:#FFFF00;"> </span></span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">trim</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:51:13 UTC -->
+
+<p>其結果為&nbsp;1 2 3 4 5</p>
+
+<p>&nbsp;</p>
+
+<p>5、String Length</p>
+
+<p>用來取得一字串的字元數。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">12345</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">length</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 02:53:58 UTC -->
+
+<p>其結果為 5</p>
+
+<p>&nbsp;</p>
+
+<p>6、concat()</p>
+
+<p>用來把 n 個字串連接成一個。</p>
+
+<p>語法：string.concat(string1, string2, ..., stringX)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str1 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Hello</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+<span style="color:#800000; font-weight:bold; ">var</span> str2 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; "> </span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+<span style="color:#800000; font-weight:bold; ">var</span> str3 <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">Tom</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str1<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">concat</span><span style="color:#808030; ">(</span>str2<span style="color:#808030; ">,</span> str3<span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 03:03:31 UTC -->
+
+<p>其結果為&nbsp;Hello Tom</p>
+
+<p>&nbsp;</p>
+
+<p>7、repeat()</p>
+
+<p>將一字串複製 n 次並回傳。</p>
+
+<p>語法：string.repeat(n)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">good!</span><span style="color:#800000; ">&quot;</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">repeat</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 03:06:59 UTC -->
+
+<p>其結果為&nbsp;good!good!</p>
+
+<p>&nbsp;</p>
+
+<p>8、toString()</p>
+
+<p>將一變數轉為字串型態。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#008c00; ">123</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">toString</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 03:09:48 UTC -->
+
+<p>其結果為 &quot;123&quot;</p>
+
+<p>&nbsp;</p>
+
+<p>9、valueOf()</p>
+
+<p>取得一物件的 primitive value</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">var</span> str <span style="color:#808030; ">=</span> <span style="color:#008c00; ">123</span><span style="color:#800080; ">;</span>
+console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span>str<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">valueOf</span><span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-10-15 03:17:01 UTC -->
+
+<p>其結果為 123</p>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/10/11/JavaScript-Regular-Brackets-Metacharacters/" rel="prev" title="JavaScript Regular Expression - Brackets、Metacharacters">
+      <i class="fa fa-chevron-left"></i> JavaScript Regular Expression - Brackets、Metacharacters
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/10/12/JavaScript-Regular-Modifier/" rel="next" title="JavaScript Regular Expression - Modifier">
+      JavaScript Regular Expression - Modifier <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2019/10/12/JavaScript-String-Methods/";
+    this.page.identifier = "2019/10/12/JavaScript-String-Methods/";
+    this.page.title = "JavaScript String Methods";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

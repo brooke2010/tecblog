@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="routing routes.MapRoute">
+<meta property="og:url" content="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/1474527805_64854.png">
+<meta property="og:image" content="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/2014121023132890.png">
+<meta property="article:published_time" content="2014-12-09T23:32:40.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="ASP.NET MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/1474527805_64854.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>routing routes.MapRoute | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          routing routes.MapRoute
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-12-10 07:32:40" itemprop="dateCreated datePublished" datetime="2014-12-10T07:32:40+08:00">2014-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/ASP-NET-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">ASP.NET MVC</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2014/12/10/routing-routes-MapRoute/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/12/10/routing-routes-MapRoute/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一個預設的route範例為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> RegisterRoutes(RouteCollection routes)
+&#123;
+    routes.IgnoreRoute(<span style="color:#a31515;">&quot;&#123;resource&#125;.axd/&#123;*pathInfo&#125;&quot;</span>);
+
+    routes.MapRoute(
+        name: <span style="color:#a31515;">&quot;Default&quot;</span>,
+        url: <span style="color:#a31515;">&quot;&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,
+        defaults: <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Home&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;
+    );
+&#125;</code></pre>
+
+<p>一、基本說明</p>
+
+<p>1、IgnoreRoute</p>
+
+<p>IgnoreRoute可忽略特定網址樣式的匹配，</p>
+
+<p>{resource}與{pathInfo}為替代性符號，</p>
+
+<p>假設網址為aaa.axd/ccc/ddd/2</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.IgnoreRoute(<span style="color:#a31515;">&quot;&#123;resource&#125;.axd/&#123;pathInfo&#125;&quot;</span>);</code></pre>
+
+<p>只會比對到aaa.axd/ccc，而加上星號表示取得全部</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.IgnoreRoute(<span style="color:#a31515;">&quot;&#123;resource&#125;.axd/&#123;<span style="background-color:#FFFF00;">*</span>pathInfo&#125;&quot;</span>);</code></pre>
+
+<p>則會完整比對出aaa.axd/ccc/ddd/2，</p>
+
+<p>也就是說當使用者輸入樣式時，則會被忽略。</p>
+
+<p>&nbsp;</p>
+
+<p>2、Route的名稱必須是唯一</p>
+
+<p>3、{controller}與{action}是關鍵字不能隨意改名，其他{}參數可自行定義</p>
+
+<p>4、當有多個MapRoute時，比對順序是由上至下一比對成功就結束，下面待比對的MapRoute直接跳離。</p>
+
+<p>5、例如增加constraints參數限制只有Index與About能連</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> RegisterRoutes(RouteCollection routes)
+&#123;
+    routes.IgnoreRoute(<span style="color:#a31515;">&quot;&#123;resource&#125;.axd/&#123;*pathInfo&#125;&quot;</span>);
+
+    routes.MapRoute(
+        name: <span style="color:#a31515;">&quot;Default&quot;</span>,
+        url: <span style="color:#a31515;">&quot;&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,
+        defaults: <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Home&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;,
+        <span style="background-color:#FFFF00;">constraints: </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> &#123; action = </span><span style="color:#a31515;"><span style="background-color:#FFFF00;">&quot;Index|About&quot;</span></span><span style="background-color:#FFFF00;">&#125;</span>
+    );
+&#125;</code></pre>
+
+<p>如想要連到Contact頁面時，則會比對不到而導到預設路由Index頁面</p>
+
+<p><img height="198" src="1474527805_64854.png" width="495" /></p>
+
+<p>6、也可以實作IRouteConstraint介面來自訂的路由約束條件</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">void</span> RegisterRoutes(RouteCollection routes)
+&#123;
+    routes.IgnoreRoute(<span style="color:#a31515;">&quot;&#123;resource&#125;.axd/&#123;*pathInfo&#125;&quot;</span>);
+
+    routes.MapRoute(
+        name: <span style="color:#a31515;">&quot;Default&quot;</span>,
+        url: <span style="color:#a31515;">&quot;&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,
+        defaults: <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Home&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;,
+        <span style="background-color:#FFFF00;">constraints: </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> &#123; id = </span><span style="color:#0000ff;"><span style="background-color:#FFFF00;">new</span></span><span style="background-color:#FFFF00;"> GuidConstraint() &#125;</span>
+    );
+&#125;</code></pre>
+
+<p>這部份請參考<a target="_blank" rel="noopener" href="http://demo.tc/post/786">ASP.NET MVC Route 自訂限制條件（constraints）的技巧</a>會較詳細</p>
+
+<p>&nbsp;</p>
+
+<p>二、其他說明</p>
+
+<p>1、custom static route</p>
+
+<p>e.g. http://localhost/Privacy/aaa/bbb/ccc，that can pass below route role</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.MapRoute(
+    <span style="color:#a31515;">&quot;privacy_policy&quot;</span>,
+    <span style="color:#a31515;">&quot;Privacy/aaa/bbb/ccc&quot;</span>,
+    <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Privacy&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span> &#125;
+);</code></pre>
+
+<p>其Route的規則為</p>
+
+<p>route name:privacy_policy</p>
+
+<p>route url:Privacy/aaa/bbb/ccc</p>
+
+<p>&nbsp;</p>
+
+<p>(1)、由於這是靜態路由，url固定輸入為http://localhost/Privacy/aaa/bbb/ccc時，</p>
+
+<p>預設會找到controller為&quot;Privacy&quot;並且action為&quot;Index&quot;。</p>
+
+<p>(2)、但此路由沒有{controller}、也沒有{action}，</p>
+
+<p>也說明了網址沒有提供特別指定controller與action的選項，</p>
+
+<p>也就是路由只接受http://localhost/Privacy/aaa/bbb/ccc網址。</p>
+
+<p>&nbsp;</p>
+
+<p>2、custom dynamic route</p>
+
+<p>e.g. http://localhost/MyDate/aaa/bbb/ccc/1，that can pass below route role</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.MapRoute(
+   <span style="color:#a31515;">&quot;MyDate&quot;</span>,
+   <span style="color:#a31515;">&quot;MyDate/aaa/bbb/ccc/&#123;id&#125;&quot;</span>,
+   <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;MyDate&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;
+);</code></pre>
+
+<p>其url的固定格式為MyDate/aaa/bbb/ccc/，</p>
+
+<p>並加上代數名稱為id的参數，</p>
+
+<p>由於指定id = UrlParameter.Optional所以id的參數可有可無，</p>
+
+<p>以下url皆可通過route rule</p>
+
+<p>http://localhost/MyDate/aaa/bbb/ccc</p>
+
+<p>http://localhost/MyDate/aaa/bbb/ccc/2</p>
+
+<p>&nbsp;</p>
+
+<p>(1)、此路由大部份算是靜態路由，只有{id}是可以特別指定的選項，</p>
+
+<p>但此路由沒有{controller}、也沒有{action}，</p>
+
+<p>也說明了網址沒有提供特別指定controller與action的選項，</p>
+
+<p>也就是路由只接受http://localhost/MyDate/aaa/bbb/ccc/{id}網址(註一)。</p>
+
+<p>註一、{id}為動態可變。</p>
+
+<p>&nbsp;</p>
+
+<p>(2)、路由{id}可用來作網址到Controller參數傳遞</p>
+
+<p>由於{id}是UrlParameter.Optional的，所以Controller對應的寫法為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> MyRoute.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> MyDateController : Controller
+    &#123;
+        <span style="color:#008000;">// GET: MyDate</span>
+        <span style="color:#0000ff;">public</span> ActionResult Index(<span style="color:#0000ff;">int</span>? <span style="background-color:#FFFF00;">id</span>)
+        &#123;
+            ViewBag.Title = <span style="color:#a31515;">&quot;&quot;</span>;
+            <span style="color:#0000ff;">if</span> (id != <span style="color:#0000ff;">null</span>)
+            &#123;
+                ViewBag.Title = id;
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+
+<p>或</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> MyRoute.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> MyDateController : Controller
+    &#123;
+        <span style="color:#008000;">// GET: MyDate</span>
+        <span style="color:#0000ff;">public</span> ActionResult Index(<span style="color:#0000ff;">string</span> <span style="background-color:#FFFF00;">id</span>)
+        &#123;
+            ViewBag.Title = <span style="color:#a31515;">&quot;&quot;</span>;
+            <span style="color:#0000ff;">if</span> (id != <span style="color:#0000ff;">null</span>)
+            &#123;
+                ViewBag.Title = id;
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+
+<p>以上兩寫法其路由都可以過，則可以發現一個網址可不可以成功對到controller接收參數，</p>
+
+<p>是看action的參數名稱，而不是參數形態。</p>
+
+<p>&nbsp;</p>
+
+<p>3、較複雜的custom dynamic route</p>
+
+<p>e.g. http://localhost/Products/B3200/index，that can pass below route role</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.MapRoute(<span style="color:#a31515;">&quot;product&quot;</span>, 
+    <span style="color:#a31515;">&quot;products/&#123;productCode&#125;/&#123;action&#125;&quot;</span>,
+    <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;product&quot;</span>, action = <span style="color:#a31515;">&quot;index&quot;</span> &#125;
+);</code></pre>
+
+<p>以下url皆可通過</p>
+
+<p>http://localhost/Products/EG510/index</p>
+
+<p>http://localhost/Products/A6200/index</p>
+
+<p>&nbsp;</p>
+
+<p>(1)、路由products/{productCode}/{action}，如果{action}省略的話，</p>
+
+<p>則路由預設會指到controller = &quot;product&quot; and&nbsp;action = &quot;index&quot;。</p>
+
+<p>(2)、而如果{action}與{productCode}都省略的話，則找不到合適的路由，</p>
+
+<p>因為productCode因為沒指定urlParameter.Optional所以参數是必要存在的。</p>
+
+<p>(3)、由於此路由沒有{controller}所以無法特別指定controllerName。</p>
+
+<p>&nbsp;</p>
+
+<p>(4)、controller接收productCode參數的寫法，注意，參數形態不限於string。</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Collections.Generic;
+<span style="color:#0000ff;">using</span> System.Linq;
+<span style="color:#0000ff;">using</span> System.Web;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> MyRoute.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ProductController : Controller
+    &#123;
+        <span style="color:#008000;">// GET: Product</span>
+        <span style="color:#0000ff;">public</span> ActionResult Index(<span style="color:#0000ff;">string</span> <span style="background-color:#FFFF00;">productCode</span>)
+        &#123;
+            ViewBag.Title = <span style="color:#a31515;">&quot;&quot;</span>;
+            <span style="color:#0000ff;">if</span> (productCode != <span style="color:#0000ff;">null</span>)
+            &#123;
+                ViewBag.Title = productCode;
+            &#125;
+
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>則皆可通過</p>
+
+<p>http://localhost/Products/index</p>
+
+<p>http://localhost/Products/EG510/index</p>
+
+<p>&nbsp;</p>
+
+<p>4、ActionLink的routevalue與MapRoute和參數傳遞的關係</p>
+
+<p>Controller為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System.Web.Mvc;
+
+<span style="color:#0000ff;">namespace</span> WebApplication2.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> HomeController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> ActionResult Index()
+        &#123;
+            <span style="color:#0000ff;">return</span> View();
+        &#125;
+
+        <span style="color:#0000ff;">public</span> ActionResult About(<span style="color:#0000ff;">int</span>? id)
+        &#123;
+            <span style="color:#0000ff;">return</span> View(id);
+        &#125;
+
+        [ActionName(<span style="color:#a31515;">&quot;About2&quot;</span>)]
+        <span style="color:#0000ff;">public</span> ActionResult About(<span style="color:#0000ff;">int</span>? id, <span style="color:#0000ff;">string</span> name)
+        &#123;
+            <span style="color:#0000ff;">return</span> View((<span style="color:#0000ff;">object</span>)(id + name));
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>Index.cshtml為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@&#123;
+    ViewBag.Title = <span style="color:#a31515;">&quot;Home Page&quot;</span>;
+&#125;
+
+@Html.ActionLink(<span style="color:#a31515;">&quot;About&quot;</span>, <span style="color:#a31515;">&quot;About&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id = 3 &#125;)
+&lt;br&gt;
+@Html.ActionLink(<span style="color:#a31515;">&quot;About2&quot;</span>, <span style="color:#a31515;">&quot;About2&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id = 3, name = <span style="color:#a31515;">&quot;aaa&quot;</span> &#125;)</code></pre>
+
+<p>About.cshtml為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model <span style="color:#0000ff;">int</span>
+
+@Model</code></pre>
+
+<p>About2.cshtml為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model <span style="color:#0000ff;">string</span>
+
+@Model</code></pre>
+
+<p>確認一下RouteConfig的預設路由</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.MapRoute(
+    name: <span style="color:#a31515;">&quot;Default&quot;</span>,
+    url: <span style="color:#a31515;">&quot;&#123;controller&#125;/&#123;action&#125;/&#123;id&#125;&quot;</span>,
+    defaults: <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Home&quot;</span>, action = <span style="color:#a31515;">&quot;Index&quot;</span>, id = UrlParameter.Optional &#125;
+);
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>(1)、第一個連結@Html.ActionLink(&quot;About&quot;, &quot;About&quot;, new { id = 3 })</p>
+
+<p>相信大家很熟悉了，點擊後跑出的連結為</p>
+
+<p>http://localhost:52544/Home/About/3</p>
+
+<p>(2)、第二個連結@Html.ActionLink(&quot;About2&quot;, &quot;About2&quot;, new { id = 3, name = &quot;aaa&quot; })</p>
+
+<p>可能有些疑問，點擊後跑出的連結為</p>
+
+<p>http://localhost:52544/Home/About2/3?name=aaa</p>
+
+<p>變成id = 3原本就是路由的一部份，而name = &quot;aaa&quot;為傳統參數傳遞方式。</p>
+
+<p>&nbsp;</p>
+
+<p>5、其他例子</p>
+
+<p><a target="_blank" rel="noopener" href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/creating-custom-routes-cs">http://localhost:60789/Archive/12-25-2009</a></p>
+
+<p>其controller接收参數為datatime</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">routes.MapRoute(
+    <span style="color:#a31515;">&quot;Blog&quot;</span>,                                           <span style="color:#008000;">// Route name</span>
+    <span style="color:#a31515;">&quot;Archive/&#123;entryDate&#125;&quot;</span>,                            <span style="color:#008000;">// URL with parameters</span>
+    <span style="color:#0000ff;">new</span> &#123; controller = <span style="color:#a31515;">&quot;Archive&quot;</span>, action = <span style="color:#a31515;">&quot;Entry&quot;</span> &#125;  <span style="color:#008000;">// Parameter defaults</span>
+);</code></pre>
+
+<p>&nbsp;</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">using</span> System;
+<span style="color:#0000ff;">using</span> System.Web.Mvc;
+<span style="color:#0000ff;">namespace</span> MvcApplication1.Controllers
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ArchiveController : Controller
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Entry(DateTime entryDate)
+        &#123;
+            <span style="color:#0000ff;">return</span> <span style="color:#a31515;">&quot;You requested the entry from &quot;</span> + entryDate.ToString();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>學到這邊產生這種url也不是問題了http://localhost/events/2014/12/10</p>
+
+<p><img border="0" src="2014121023132890.png" /></p>
+
+<p>最後提供「<a target="_blank" rel="noopener" href="http://1drv.ms/1B8zS7n">飯粒檔</a>」自行玩玩</p>
+
+<p>&nbsp;</p>
+
+<p>参考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="http://haacked.com/archive/2008/03/13/url-routing-debugger.aspx/">ASP.NET Routing Debugger</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/asp-net-mvc-routing-overview-cs">ASP.NET MVC Routing Overview (C#)</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://blog.darkthread.net/post-2014-10-13-dot-in-extensionless-url-cause-http404-in-iis6.aspx">【茶包射手日記】CSS Bundle路徑有&quot;.&quot;造成HTTP 404</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.dotblogs.com.tw/h091237557/archive/2014/08/14/146260.aspx">MVC文章-『Routing網址路由流程』</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://blog.miniasp.com/post/2011/08/02/ASPNET-MVC-Developer-Note-Part-21-Routing-Concepts-and-Skills.aspx">ASP.NET MVC 開發心得分享 (21)：Routing 觀念與技巧</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.dotblogs.com.tw/h091237557/archive/2014/08/18/146288.aspx">MVC文章-『Route Debugger』</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://www.dotblogs.com.tw/brooke/archive/2014/07/04/145819.aspx">同名Controller處理方法</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/ASP-NET-MVC/" rel="tag"># ASP.NET MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/12/09/panel/" rel="prev" title="panel">
+      <i class="fa fa-chevron-left"></i> panel
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2014/12/12/Model-First/" rel="next" title="Model First">
+      Model First <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2014/12/10/routing-routes-MapRoute/";
+    this.page.identifier = "2014/12/10/routing-routes-MapRoute/";
+    this.page.title = "routing routes.MapRoute";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

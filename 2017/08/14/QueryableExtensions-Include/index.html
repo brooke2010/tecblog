@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IQueryable擴充方法QueryableExtensions.Include">
+<meta property="og:url" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781144_85526.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781190_27995.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781574_68772.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781594_02887.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781662_55552.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502782201_35191.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502782463_22111.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502782483_77267.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502782496_14176.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502782755_36961.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502783334_50878.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502783580_2087.png">
+<meta property="article:published_time" content="2017-08-14T08:23:08.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="LINQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/1502781144_85526.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>IQueryable擴充方法QueryableExtensions.Include | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IQueryable擴充方法QueryableExtensions.Include
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-08-14 16:23:08" itemprop="dateCreated datePublished" datetime="2017-08-14T16:23:08+08:00">2017-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/LINQ/" itemprop="url" rel="index">
+                    <span itemprop="name">LINQ</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2017/08/14/QueryableExtensions-Include/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/14/QueryableExtensions-Include/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>在使用scaffolded時無意發現有這個QueryableExtensions.Include方法，</p>
+
+<p>到底他的作用是什麼呢？如何用？以下重現原問題。</p>
+
+<p>&nbsp;</p>
+
+<p>一、先準備資料庫</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">CATEGORY</span><span style="color:#808030; ">]</span> 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#808030; ">[</span>category_id<span style="color:#808030; ">]</span>  <span style="color:#808030; ">[</span>TINYINT<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>categoryType<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span>category_id<span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>NEWS<span style="color:#808030; ">]</span> 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#808030; ">[</span>news_id<span style="color:#808030; ">]</span>     <span style="color:#808030; ">[</span>UNIQUEIDENTIFIER<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>title<span style="color:#808030; ">]</span>       <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">50</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">date</span><span style="color:#808030; ">]</span>        <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">DATE</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>category_id<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>TINYINT<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NULL</span> <span style="color:#800000; font-weight:bold; ">REFERENCES</span> <span style="color:#800000; font-weight:bold; ">CATEGORY</span><span style="color:#808030; ">(</span>category_id<span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">context</span><span style="color:#808030; ">]</span>     <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#bb7977; font-weight:bold; ">max</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span>news_id<span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+
+<span style="color:#696969; ">-- `dbo.CATEGORY`</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">CATEGORY</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;公告訊息&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">CATEGORY</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;臨時公告&#39;</span><span style="color:#808030; ">)</span>
+
+<span style="color:#696969; ">-- `dbo.NEWS`</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;77289FB6-A7BA-770A-F801-09FF58D932B8&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;中華民國口腔病理學會-口腔扁平苔癬症病人口腔預保健計畫研討會&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;20170724&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;&lt;p&gt;&lt;img src=&quot;/Dentist/AdminConsoleNEWS/GetImage?img_id=1583980530&amp;amp;news_id=77289fb6-a7ba-770a-f801-09ff58d932b8&quot; style=&quot;height:1415px; width:1000px&quot; /&gt;&lt;/p&gt;</span>
+<span style="color:#0000e6; ">&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;64C56473-A7CC-B749-BC01-9B93A17468C7&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;嬰幼兒齲齒　何時該做口腔檢查？&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;20170811&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;&lt;p&gt;&lt;img src=&quot;/Dentist/AdminConsoleNEWS/GetImage?img_id=1101658763&amp;amp;news_id=64c56473-a7cc-b749-bc01-9b93a17468c7&quot; style=&quot;height:350px; width:610px&quot; /&gt;&lt;/p&gt;</span>
+<span style="color:#0000e6; "></span>
+<span style="color:#0000e6; ">&lt;p&gt;嬰幼兒究竟該何時開始檢查牙齒呢？根據美國兒童牙科醫學會兒童家庭牙醫觀念，當第一顆乳牙長出後，最慢在一歲前，家長就可帶嬰幼兒接受口腔檢查；兒童牙科醫師鄧醫師指出，透過專業醫師協助，給予適合的潔牙衛教以及嬰幼兒飲食習慣等建議，讓家長們可以確保嬰幼兒的口腔健康。&amp;nbsp;&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;CF74B42D-A7BC-6C45-F501-A4431F8F248F&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;植牙也要精準！？醫師透露關鍵&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;20170726&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;&lt;p&gt;&lt;img src=&quot;/Dentist/AdminConsoleNEWS/GetImage?img_id=1554305787&amp;amp;news_id=cf74b42d-a7bc-6c45-f501-a4431f8f248f&quot; style=&quot;height:479px; width:800px&quot; /&gt;&lt;/p&gt;</span>
+<span style="color:#0000e6; "></span>
+<span style="color:#0000e6; ">&lt;p&gt;缺牙會降低進食功能、說話發音，更會影響信心與門面，長期下來，對身心健康影響很大！隨著醫療科技發展，透過植牙手術能夠再度擁有一口好牙；牙科醫師並指出，藉由電腦3D軟體設計及列印技術製作的導引式植牙手術板，可以輔助植牙的精準判讀，不但大幅降低手術時間、傷口大小，就連復原時間也較快。&amp;nbsp;&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;5CFB5EF1-A7BA-2152-F801-A9108AC4E6B1&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;社法人中華民國牙醫師公會全國聯合會-106年國小學童含氟漱口水齲二年計畫&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;20170724&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;&lt;p&gt;&lt;img src=&quot;/Dentist/AdminConsoleNEWS/GetImage?img_id=2050639876&amp;amp;news_id=5cfb5ef1-a7ba-2152-f801-a9108ac4e6b1&quot; style=&quot;height:1414px; width:1000px&quot; /&gt;&lt;/p&gt;</span>
+<span style="color:#0000e6; ">&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;07F4173D-A7BA-80C1-4C02-D4BFB878E5B3&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;寶寶看牙時機　醫：1歲前最佳&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;20170724&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;&lt;p&gt;&lt;img src=&quot;/Dentist/AdminConsoleNEWS/GetImage?img_id=1334095780&amp;amp;news_id=07f4173d-a7ba-80c1-4c02-d4bfb878e5b3&quot; style=&quot;height:356px; width:550px&quot; /&gt;&lt;/p&gt;</span>
+<span style="color:#0000e6; "></span>
+<span style="color:#0000e6; ">&lt;p&gt;何時該帶嬰幼兒去檢查牙齒，許多新手爸媽的共同疑問，根據美國兒童牙科醫學會提倡的「兒童家庭牙醫」觀念，嬰兒長出第1顆乳牙後，最慢在1歲前，家長就應該帶嬰幼兒接受口腔檢查，切勿等到孩子口腔問題浮現時才治療，如此容讓牙痛與牙醫聯結，形成不良的看牙經驗。&amp;nbsp;&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&lt;br /&gt;</span>
+<span style="color:#0000e6; ">&#39;</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>二、Model</p>
+
+<p>於預設的ASP.NET MVC專案連結並新增該資料庫，</p>
+
+<p>有些基本步驟一步一步列出來會太壟長了，故會省略一些。</p>
+
+<p><img height="371" src="1502781144_85526.png" width="779" /></p>
+
+<p>next</p>
+
+<p><img height="118" src="1502781190_27995.png" width="393" /></p>
+
+<p>next</p>
+
+<p><img height="555" src="1502781574_68772.png" width="622" /></p>
+
+<p>next</p>
+
+<p><img height="551" src="1502781594_02887.png" width="620" /></p>
+
+<p>next</p>
+
+<p><img height="549" src="1502781662_55552.png" width="615" /></p>
+
+<p>完成後畫面如下</p>
+
+<p><img height="313" src="1502782201_35191.png" width="458" /></p>
+
+<p>&nbsp;</p>
+
+<p>三、在controller資料夾使用scaffolded</p>
+
+<p><img height="394" src="1502782463_22111.png" width="809" /></p>
+
+<p>next</p>
+
+<p><img height="618" src="1502782483_77267.png" width="903" /></p>
+
+<p>next</p>
+
+<p><img height="373" src="1502782496_14176.png" width="588" /></p>
+
+<p>新增完成後在NEWSController裡的Index Action的程式中，</p>
+
+<p>看到了程式為何使用了「Include(n =&gt; n.CATEGORY)」？</p>
+
+<p><img height="390" src="1502782755_36961.png" width="498" /></p>
+
+<p>&nbsp;</p>
+
+<p>四、探討</p>
+
+<p>不修改程式試著把NEWSController的Index View跑起來</p>
+
+<p>Index View內容為</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;">@model IEnumerable&lt;WebApplication1.Models.NEWS&gt;
+
+@&#123;
+    ViewBag.Title = <span style="color:#a31515;">&quot;Index&quot;</span>;
+&#125;
+
+&lt;h2&gt;Index&lt;/h2&gt;
+
+&lt;p&gt;
+    @Html.ActionLink(<span style="color:#a31515;">&quot;Create New&quot;</span>, <span style="color:#a31515;">&quot;Create&quot;</span>)
+&lt;/p&gt;
+&lt;table <span style="color:#0000ff;">class</span>=<span style="color:#a31515;">&quot;table&quot;</span>&gt;
+    &lt;tr&gt;
+        &lt;th&gt;
+            @Html.DisplayNameFor(model =&gt; model.title)
+        &lt;/th&gt;
+        &lt;th&gt;
+            @Html.DisplayNameFor(model =&gt; model.date)
+        &lt;/th&gt;
+        &lt;th&gt;
+            @Html.DisplayNameFor(model =&gt; model.context)
+        &lt;/th&gt;
+        &lt;th&gt;
+            @Html.DisplayNameFor(model =&gt; model.CATEGORY.categoryType)
+        &lt;/th&gt;
+        &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+
+@<span style="color:#0000ff;">foreach</span> (<span style="color:#0000ff;">var</span> item <span style="color:#0000ff;">in</span> Model) &#123;
+    &lt;tr&gt;
+        &lt;td&gt;
+            @Html.DisplayFor(modelItem =&gt; item.title)
+        &lt;/td&gt;
+        &lt;td&gt;
+            @Html.DisplayFor(modelItem =&gt; item.date)
+        &lt;/td&gt;
+        &lt;td&gt;
+            @Html.DisplayFor(modelItem =&gt; item.context)
+        &lt;/td&gt;
+        &lt;td&gt;
+            @Html.DisplayFor(modelItem =&gt; item.CATEGORY.categoryType)
+        &lt;/td&gt;
+        &lt;td&gt;
+            @Html.ActionLink(<span style="color:#a31515;">&quot;Edit&quot;</span>, <span style="color:#a31515;">&quot;Edit&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id=item.news_id &#125;) |
+            @Html.ActionLink(<span style="color:#a31515;">&quot;Details&quot;</span>, <span style="color:#a31515;">&quot;Details&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id=item.news_id &#125;) |
+            @Html.ActionLink(<span style="color:#a31515;">&quot;Delete&quot;</span>, <span style="color:#a31515;">&quot;Delete&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id=item.news_id &#125;)
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&#125;
+
+&lt;/table&gt;</code></pre>
+
+<p>執行結果</p>
+
+<p><img height="395" src="1502783334_50878.png" width="903" /></p>
+
+<p>再來看不使用「Include(n =&gt; n.CATEGORY)」也是可以正常跑起來</p>
+
+<p><img height="513" src="1502783580_2087.png" width="1161" /></p>
+
+<p>經由網友的解說，原來用途為</p>
+
+<p>「當類別內導航屬性(Navigation Properties)確定會被使用到且頻繁時，</p>
+
+<p>可透過IQueryable擴充方法Include將導航屬性資料也一併取出並儲存於記憶體中。」</p>
+
+<p>其效能可比喻為原本要執行101條SQL指令瞬間變成了1條，這其中的性能可想而知。</p>
+
+<p>&nbsp;</p>
+
+<p>要注意使用QueryableExtensions.Include擴充方法時，需事先做「using System.Data.Entity;」才行。</p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="http://blog.darkthread.net/post-2012-10-23-iqueryable-experiment.aspx">關於IQueryable&lt;T&gt;特性的小實驗</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/wasichris/archive/2015/03/04/150633.aspx">[Entity Framework][LINQ] IEnumerable與IQueryable差異比較</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/wasichris/2014/11/24/147410">[Entity Framework][LINQ] IQueryable擴充方法Include的使用時機</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/bb351562(v=vs.110).aspx">IQueryable&lt;T&gt; 介面</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-tw/library/system.data.entity.queryableextensions(v=vs.113).aspx">QueryableExtensions 類別</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/LINQ/" rel="tag"># LINQ</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/08/01/URL-createObjectURL/" rel="prev" title="URL.createObjectURL方法的使用">
+      <i class="fa fa-chevron-left"></i> URL.createObjectURL方法的使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/08/23/InfiniteScroll/" rel="next" title="Infinite Scroll.js的使用">
+      Infinite Scroll.js的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2017/08/14/QueryableExtensions-Include/";
+    this.page.identifier = "2017/08/14/QueryableExtensions-Include/";
+    this.page.title = "IQueryable擴充方法QueryableExtensions.Include";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

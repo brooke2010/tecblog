@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Razor syntax">
+<meta property="og:url" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557129016_25632.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557129478_52737.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557136658_80973.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557136791_84191.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557137372_54026.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557137294_21267.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557137445_21822.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557200685_76532.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557204383_92249.png">
+<meta property="og:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557205904_83181.png">
+<meta property="article:published_time" content="2019-05-18T08:23:19.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="ASP.NET MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2019/05/18/Razor-syntax/1557129016_25632.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2019/05/18/Razor-syntax/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Razor syntax | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2019/05/18/Razor-syntax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Razor syntax
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-18 16:23:19" itemprop="dateCreated datePublished" datetime="2019-05-18T16:23:19+08:00">2019-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/ASP-NET-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">ASP.NET MVC</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2019/05/18/Razor-syntax/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/18/Razor-syntax/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、「@」保留字</p>
+
+<p>在 Razor 語法中，「@」是保留字，</p>
+
+<p>當想要秀出「@」字元時，可以再加上第二個「@」字元,，於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>@@Username<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 12:54:40 UTC -->
+
+<p>而所呈現的 HTML 將會是</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>@Username<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 12:54:59 UTC -->
+
+<p>&nbsp;</p>
+
+<p>二、email addresses 格式的「@」字元</p>
+
+<p>Razor 對&nbsp;email addresses 格式的「@」字元不會把他看成是保留字，於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#274796; "> </span><span style="color:#074726; ">href</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;mailto:Support@contoso.com&quot;</span><span style="color:#a65700; ">&gt;</span>Support@contoso<span style="color:#008c00; ">.</span>com<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">a</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 07:57:02 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="22" src="1557129016_25632.png" width="156" /></p>
+
+<p>另外一特點，只要是「@」字元前後都有緊接英文或數字的話，也不會被看成是保留字</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>abc@abc<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#008c00; ">123</span>@abc<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span><span style="color:#008c00; ">123</span>@<span style="color:#008c00; ">123</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 07:56:38 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="69" src="1557129478_52737.png" width="74" /></p>
+
+<p>&nbsp;</p>
+
+<p>三、Razor expressions</p>
+
+<p>用來將 C# 的值呈現在 HTML 上</p>
+
+<p>1、Implicit Razor expressions</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>@DateTime<span style="color:#008c00; ">.</span>Now<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 12:55:31 UTC -->
+
+<p>&nbsp;</p>
+
+<p>2、Explicit Razor expressions</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Last week this time: @<span style="background-color:#FFFF00;">(</span>DateTime<span style="color:#008c00; ">.</span>Now - TimeSpan<span style="color:#008c00; ">.</span>FromDays(<span style="color:#008c00; ">7</span>)<span style="background-color:#FFFF00;">)</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 12:56:08 UTC -->
+
+<p>&nbsp;</p>
+
+<p>3、Helpers belong to&nbsp;&nbsp;Razor expressions</p>
+
+<p>雖然我不是很確定，但目前我會把 @Html、@Url&hellip;等等的 Helpers 歸類為&nbsp;Razor expressions，</p>
+
+<p>如有錯誤請指正。</p>
+
+<p>&nbsp;</p>
+
+<p>4、結合 code block 的型式</p>
+
+<p>這是結合 code block 的型式，使用&nbsp;Implicit Razor expressions 或&nbsp;Explicit Razor expressions，</p>
+
+<p>都可以將 C# 的值呈現在 HTML 上</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    string hello = &quot;Hello&quot;;
+}
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>@hello<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>@<span style="background-color:#FFFF00;">(</span>hello<span style="background-color:#FFFF00;">)</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 03:30:30 UTC -->
+
+<p>&nbsp;</p>
+
+<p>四、Expression encoding</p>
+
+<p>1、於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@(&quot;<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#a65700; ">&gt;</span>Hello World<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">span</span><span style="color:#a65700; ">&gt;</span>&quot;)
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 03:05:41 UTC -->
+
+<p>而所呈現的 HTML 將會是</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#074726; ">&amp;</span><span style="color:#074726; ">lt</span><span style="color:#074726; ">;</span>span<span style="color:#074726; ">&amp;</span><span style="color:#074726; ">gt</span><span style="color:#074726; ">;</span>Hello World<span style="color:#074726; ">&amp;</span><span style="color:#074726; ">lt</span><span style="color:#074726; ">;</span>/span<span style="color:#074726; ">&amp;</span><span style="color:#074726; ">gt</span><span style="color:#074726; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 03:06:08 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="22" src="1557136658_80973.png" width="190" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、於 CSHTML 寫法如下</p>
+
+<p>@Html.Raw(&quot;&lt;span&gt;Hello World&lt;/span&gt;&quot;)</p>
+
+<p>而所呈現的 HTML 將會是</p>
+
+<p>&lt;span&gt;Hello World&lt;/span&gt;</p>
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="22" src="1557136791_84191.png" width="93" /></p>
+
+<p>&nbsp;</p>
+
+<p>五、Razor code blocks</p>
+
+<p>Razor code blocks 可以與&nbsp;Razor expressions 相配合。</p>
+
+<p>在 Razor code blocks 裡，如果你想將 C# 變數呈現到 HTML 則變數前要加「@」字元，</p>
+
+<p>若否，則不用加。</p>
+
+<p>1、Implicit transitions</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="background-color:#FFFF00;">@</span>{
+    var inCSharp = true;
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>Now in HTML, was in C# <span style="background-color:#FFFF00;">@</span>inCSharp<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 10:09:11 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="23" src="1557137372_54026.png" width="200" /></p>
+
+<p>&nbsp;</p>
+
+<p>2、Explicit delimited transition</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="background-color:#FFFF00;">@</span>for (var i = <span style="color:#008c00; ">0</span>; i &lt; <span style="color:#008c00; ">5</span>; i++)
+{
+    var digit = i;
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>digit: <span style="background-color:#FFFF00;">@</span>digit<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 10:05:29 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="113" src="1557137294_21267.png" width="60" /></p>
+
+<p>&nbsp;</p>
+
+<p>3、Explicit Line Transition with @:</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    var inCSharp = true;
+    @:Name: @inCSharp
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 10:10:21 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="18" src="1557137445_21822.png" width="92" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、keywords</p>
+
+<p>1、Razor keyword&nbsp;- class</p>
+
+<p>class 是屬於 Razor 關鍵字之一，所以在 Razor expressions 裡使用他時，</p>
+
+<p>需要再加上「@」跳脫字元，如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@Html<span style="color:#808030; ">.</span>Label<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">StudentName</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">new</span> <span style="color:#800080; ">{</span> <span style="background-color:#FFFF00;">@</span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">class</span></span> <span style="color:#808030; ">=</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">text-danger</span><span style="color:#800000; ">&quot;</span> <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-19 00:03:41 UTC -->
+
+<p>&nbsp;</p>
+
+<p>2、Razor keywords</p>
+
+<p>page (Requires ASP.NET Core 2.0 and later)</p>
+
+<p>namespace</p>
+
+<p>functions</p>
+
+<p>inherits</p>
+
+<p>model</p>
+
+<p>section</p>
+
+<p>helper (Not currently supported by ASP.NET Core)</p>
+
+<p>以上通常只會使用一個跳脫字元「@」</p>
+
+<p>&nbsp;</p>
+
+<p>3、C# Razor keywords</p>
+
+<p>@switch、case、default</p>
+
+<p>@try、catch、finally</p>
+
+<p>@do、while</p>
+
+<p>@if、else</p>
+
+<p>@for、@foreach</p>
+
+<p>@lock</p>
+
+<p>@using</p>
+
+<p>以上皆可使用兩次跳脫字元「@」，第一個「@」字元 for Razor parser，</p>
+
+<p>第二個「@」字元 for C# parser，如下範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="background-color:#FFFF00;">@</span>for (var i = <span style="color:#008c00; ">0</span>; i &lt; <span style="color:#008c00; ">5</span>; i++)
+{
+    var digit = i;
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>digit: <span style="background-color:#FFFF00;">@</span>digit<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-06 23:57:01 UTC -->
+
+<p>相等於&nbsp;Razor code blocks 寫法</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    for (var i = <span style="color:#008c00; ">0</span>; i &lt; <span style="color:#008c00; ">5</span>; i++)
+    {
+        var digit = i;
+        <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>digit: @digit<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>
+    }
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 07:08:46 UTC -->
+
+<p>&nbsp;</p>
+
+<p>七、Comments</p>
+
+<p>於 CSHTML 裡的 C# 與 HTML 的註解寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    /* C# comment */
+    // Another C# comment
+}
+<span style="color:#696969; ">&lt;!-- HTML comment --&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 01:58:39 UTC -->
+
+<p>所呈現的 HTML 將會是</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#696969; ">&lt;!-- HTML comment --&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 02:00:01 UTC -->
+
+<p>&nbsp;</p>
+
+<p>而 Razor 註解的寫法則是使用 @**@ 寫法</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="background-color:#FFFF00;">@*</span>
+    @{
+        /* C# comment */
+        // Another C# comment
+    }
+    <span style="color:#696969; ">&lt;!-- HTML comment --&gt;</span>
+<span style="background-color:#FFFF00;">*@</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 02:01:10 UTC -->
+
+<p>&nbsp;</p>
+
+<p>八、Templated Razor delegates</p>
+
+<p>Templated Razor delegates 基本寫法如下型式，</p>
+
+<p>於 CSHTML 寫法如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    <span style="background-color:#FFFF00;">Func</span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;</span></span><span style="color:#5f5035; "><span style="background-color:#FFFF00;">dynamic</span></span><span style="color:#274796; "><span style="background-color:#FFFF00;">, System</span></span><span style="color:#008c00; "><span style="background-color:#FFFF00;">.</span></span><span style="color:#274796; "><span style="background-color:#FFFF00;">Web</span></span><span style="color:#008c00; "><span style="background-color:#FFFF00;">.</span></span><span style="color:#274796; "><span style="background-color:#FFFF00;">WebPages</span></span><span style="color:#008c00; "><span style="background-color:#FFFF00;">.</span></span><span style="color:#274796; "><span style="background-color:#FFFF00;">HelperResult</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span> hello = <span style="background-color:#FFFF00;">@</span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;</span></span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">p</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span>Hello world<span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;/</span></span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">p</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span>;
+}
+
+@hello(null)
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 03:43:32 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="16" src="1557200685_76532.png" width="79" /></p>
+
+<p>&nbsp;</p>
+
+<p>另一範例</p>
+
+<p>model</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">namespace</span> WebApplication1.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Pet
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>view</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@using WebApplication1<span style="color:#008c00; ">.</span>Models
+
+@{
+    Func<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">dynamic</span><span style="color:#274796; ">, </span><span style="color:#074726; ">object</span><span style="color:#a65700; ">&gt;</span> petTemplate = @<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>You have a pet named <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">strong</span><span style="color:#a65700; ">&gt;</span>@item<span style="color:#008c00; ">.</span>Name<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">strong</span><span style="color:#a65700; ">&gt;</span>.<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">p</span><span style="color:#a65700; ">&gt;</span>;
+
+    var pets = new List<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">Pet</span><span style="color:#a65700; ">&gt;</span>
+    {
+        new Pet { Name = &quot;Rin Tin Tin&quot; },
+        new Pet { Name = &quot;Mr<span style="color:#008c00; ">.</span> Bigglesworth&quot; },
+        new Pet { Name = &quot;K-<span style="color:#008c00; ">9</span>&quot; }
+    };
+}
+
+@foreach (var pet in pets)
+{
+    @petTemplate(pet)
+}
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 04:45:08 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="80" src="1557204383_92249.png" width="271" /></p>
+
+<p>&nbsp;</p>
+
+<p>另一 asp.net core 範例</p>
+
+<p>model</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">namespace</span> WebApplication1.Models
+&#123;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Pet
+    &#123;
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name &#123; <span style="color:#0000ff;">get</span>; <span style="color:#0000ff;">set</span>; &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>view</p>
+
+<pre style="color:#000000;background:#ffffff;">
+@{
+    var pets = new List<span style="color:#a65700; ">&lt;</span><span style="color:#5f5035; ">Pet</span><span style="color:#a65700; ">&gt;</span>
+{
+    new Pet { Name = &quot;Rin Tin Tin&quot; },
+    new Pet { Name = &quot;Mr<span style="color:#008c00; ">.</span> Bigglesworth&quot; },
+    new Pet { Name = &quot;K-<span style="color:#008c00; ">9</span>&quot; }
+    };
+}
+
+@using Microsoft<span style="color:#008c00; ">.</span>AspNetCore<span style="color:#008c00; ">.</span>Html
+
+@functions {
+    public static IHtmlContent Repeat(<span style="background-color:#00FF00;">IEnumerable</span><span style="color:#a65700; "><span style="background-color:#00FF00;">&lt;</span></span><span style="color:#5f5035; "><span style="background-color:#00FF00;">dynamic</span></span><span style="color:#a65700; "><span style="background-color:#00FF00;">&gt;</span></span><span style="background-color:#00FF00;"> items</span>, int times, <span style="background-color:#FFFF00;">Func</span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;</span></span><span style="color:#5f5035; "><span style="background-color:#FFFF00;">dynamic</span></span><span style="color:#274796; "><span style="background-color:#FFFF00;">, IHtmlContent</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span><span style="background-color:#FFFF00;"> template</span>)
+    {
+        var html = new HtmlContentBuilder();
+
+        foreach (var item in items)
+        {
+            for (var i = <span style="color:#008c00; ">0</span>; i &lt; times; i++)
+            {
+                html<span style="color:#008c00; ">.</span>AppendHtml(template(item));
+            }
+        }
+
+        return html;
+    }
+}
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+    @Repeat(<span style="background-color:#00FF00;">pets</span>, <span style="color:#008c00; ">3</span>, <span style="background-color:#FFFF00;">@</span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;</span></span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">li</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span><span style="background-color:#FFFF00;">@item</span><span style="color:#008c00; "><span style="background-color:#FFFF00;">.</span></span><span style="background-color:#FFFF00;">Name</span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&lt;/</span></span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">li</span></span><span style="color:#a65700; "><span style="background-color:#FFFF00;">&gt;</span></span>)
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">ul</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2019-05-07 05:09:21 UTC -->
+
+<p>於瀏覽器呈現的畫面為</p>
+
+<p><img height="162" src="1557205904_83181.png" width="130" /></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.2#directives">Razor syntax reference for ASP.NET Core</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/ASP-NET-MVC/" rel="tag"># ASP.NET MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/05/01/innerText-textContent-wholeText-nodeValue-data/" rel="prev" title="innerText、textContent、wholeText、nodeValue、data">
+      <i class="fa fa-chevron-left"></i> innerText、textContent、wholeText、nodeValue、data
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2019/05/19/Html-Label/" rel="next" title="@Html.Label()">
+      @Html.Label() <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2019/05/18/Razor-syntax/";
+    this.page.identifier = "2019/05/18/Razor-syntax/";
+    this.page.title = "Razor syntax";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

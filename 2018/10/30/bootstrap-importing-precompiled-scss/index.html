@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bootstrap importing precompiled scss">
+<meta property="og:url" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540888080_79869.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540888209_09059.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540892626_12178.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540890926_58554.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540892707_58598.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540891445_21381.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540891887_46743.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540892089_65335.png">
+<meta property="og:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540892193_59748.png">
+<meta property="article:published_time" content="2018-10-29T23:01:23.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/1540888080_79869.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>bootstrap importing precompiled scss | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          bootstrap importing precompiled scss
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-10-30 07:01:23" itemprop="dateCreated datePublished" datetime="2018-10-30T07:01:23+08:00">2018-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2018/10/30/bootstrap-importing-precompiled-scss/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/30/bootstrap-importing-precompiled-scss/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>我知道可以利用 npm 來安裝 Bootstrap 所需的相關套件，</p>
+
+<p>不過，這次我只想利用 webpack 來幫我對 bootstrap 的 scss 檔作自動轉譯成 css 並附加在網頁上。</p>
+
+<p>&nbsp;</p>
+
+<p>首先把&nbsp;bootstrap Source files 下載下來，我們只取&nbsp;scss 資料夾裡面的內容就好</p>
+
+<p><img height="303" src="1540888080_79869.png" width="650" /></p>
+
+<p>&nbsp;</p>
+
+<p>準備的資料結構如下</p>
+
+<p><img height="202" src="1540888209_09059.png" width="153" /></p>
+
+<p>&nbsp;</p>
+
+<p>index.html 內容如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#004a43; ">&lt;!doctype html&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#274796; "> </span><span style="color:#074726; ">lang</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;en&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#696969; ">&lt;!-- Required meta tags --&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;viewport&quot;</span><span style="color:#274796; "> </span><span style="color:#074726; ">content</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#696969; ">&lt;!-- Bootstrap CSS --&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;main.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>Hello, world!<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>Hello, world!<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">h1</span><span style="color:#a65700; ">&gt;</span>
+
+    <span style="color:#696969; ">&lt;!-- Optional JavaScript --&gt;</span>
+    <span style="color:#696969; ">&lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js&quot;</span><span style="color:#274796; "> integrity</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy&quot;</span><span style="color:#274796; "></span>
+<span style="color:#274796; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crossorigin</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;anonymous&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-10-30 09:40:46 UTC -->
+
+<p>&nbsp;</p>
+
+<p>index.js 內容如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">const</span> bootstrap <span style="color:#808030; ">=</span> require<span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">../src/scss/bootstrap.scss</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-10-30 08:39:25 UTC -->
+
+<p>&nbsp;</p>
+
+<p>webpack.config.js 內容如下</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">const</span> path <span style="color:#808030; ">=</span> require<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">path</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+module<span style="color:#808030; ">.</span>exports <span style="color:#808030; ">=</span> <span style="color:#800080; ">{</span>
+    entry<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">./src/index.js</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span>
+    output<span style="color:#800080; ">:</span> <span style="color:#800080; ">{</span>
+        filename<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">main.js</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span>
+        path<span style="color:#800080; ">:</span> path<span style="color:#808030; ">.</span>resolve<span style="color:#808030; ">(</span>__dirname<span style="color:#808030; ">,</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">dist</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span>
+    <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+    module<span style="color:#800080; ">:</span> <span style="color:#800080; ">{</span>
+        rules<span style="color:#800080; ">:</span> <span style="color:#808030; ">[</span>
+            <span style="color:#800080; ">{</span>
+                <span style="color:#800000; font-weight:bold; ">test</span><span style="color:#808030; ">:</span><span style="color:#0000e6; "> </span><span style="color:#800000; ">/</span><span style="color:#0f69ff; ">\.</span><span style="color:#0000e6; ">scss</span><span style="color:#808030; ">$</span><span style="color:#800000; ">/</span><span style="color:#808030; ">,</span>
+                use<span style="color:#800080; ">:</span> <span style="color:#808030; ">[</span>
+                    <span style="color:#800080; ">{</span>
+                        loader<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">style-loader</span><span style="color:#800000; ">&#39;</span>
+                    <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+                    <span style="color:#800080; ">{</span>
+                        loader<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">css-loader</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span>
+                        options<span style="color:#800080; ">:</span> <span style="color:#800080; ">{</span>
+                            url<span style="color:#800080; ">:</span> <span style="color:#0f4d75; ">false</span><span style="color:#808030; ">,</span>
+                            <span style="color:#696969; ">// sourceMap: true</span>
+                        <span style="color:#800080; ">}</span>
+                    <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+                    <span style="color:#800080; ">{</span>
+                        loader<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">postcss-loader</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#696969; ">// Run post css actions</span>
+                        options<span style="color:#800080; ">:</span> <span style="color:#800080; ">{</span>
+                            plugins<span style="color:#800080; ">:</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span> <span style="color:#696969; ">// post css plugins, can be exported to postcss.config.js</span>
+                                <span style="color:#800000; font-weight:bold; ">return</span> <span style="color:#808030; ">[</span>
+                                    require<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">precss</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span>
+                                    require<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">autoprefixer</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span>
+                                <span style="color:#808030; ">]</span><span style="color:#800080; ">;</span>
+                            <span style="color:#800080; ">}</span>
+                        <span style="color:#800080; ">}</span>
+                    <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+                    <span style="color:#800080; ">{</span> loader<span style="color:#800080; ">:</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">sass-loader</span><span style="color:#800000; ">&quot;</span> <span style="color:#800080; ">}</span>
+                <span style="color:#808030; ">]</span>
+            <span style="color:#800080; ">}</span>
+        <span style="color:#808030; ">]</span>
+    <span style="color:#800080; ">}</span><span style="color:#808030; ">,</span>
+<span style="color:#800080; ">}</span><span style="color:#800080; ">;</span>
+</pre>
+<!--Created using ToHtml.com on 2018-10-30 08:42:33 UTC -->
+
+<p>&nbsp;</p>
+
+<p>按照 <a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.1/getting-started/webpack/#importing-precompiled-sass">Bootstrap</a> 網官指示，用到的 loader 有 style-loader、css-loader、postcss-loader(註1)、sass-loader，</p>
+
+<p>而&nbsp;postcss-loader 裡，還會用到&nbsp;precss(註2)、Autoprefixer(註3) 套件。</p>
+
+<p>&nbsp;</p>
+
+<p>(註1)、postcss-loader 底下可掛載好幾個套件，所以他算是一個套件集合體。</p>
+
+<p>(註2)、precss是一個預處理CSS的插件包，集成了很多postcss插件的功能，比如嵌套，變量，繼承，混合，循環，判斷，</p>
+
+<p>可以像使用Stylus，Sass或LESS一樣使用PreCSS。</p>
+
+<p>(註3)、Autoprefixer 是對 css 檔額外加上 vendor prefixes，用來增加對瀏覽器版本的支援數。</p>
+
+<p>&nbsp;</p>
+
+<p>接下來打入 npx webpack 指令嘗試編譯看看</p>
+
+<p><img height="297" src="1540892626_12178.png" width="1277" /></p>
+
+<p>發現 webpack.config.js 會使用到的 style-loader 還沒有安裝，所以就來裝上他吧，指令為</p>
+
+<p>$ npm i style-loader --save-dev</p>
+
+<p><img height="18" src="1540890926_58554.png" width="431" /></p>
+
+<p>再編譯一次，此時出 css-loader 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i css-loader --save-dev</p>
+
+<p><img height="274" src="1540892707_58598.png" width="1282" /></p>
+
+<p>&nbsp;</p>
+
+<p>再編譯一次，此時出 postcss-loader 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i postcss-loader --save-dev</p>
+
+<p>再編譯一次，此時出 sass-loader 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i sass-loader --save-dev</p>
+
+<p>再編譯一次，此時出 sass-loader 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i sass-loader --save-dev</p>
+
+<p>&nbsp;</p>
+
+<p>再編譯一次，此時出 node-sass 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i node-sass --save-dev</p>
+
+<p><img height="441" src="1540891445_21381.png" width="1345" /></p>
+
+<p>&nbsp;</p>
+
+<p>再編譯一次，此時出 precss 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i precss --save-dev</p>
+
+<p><img height="492" src="1540891887_46743.png" width="1346" /></p>
+
+<p>&nbsp;</p>
+
+<p>再編譯一次，此時出 autoprefixer 還沒有安裝，所以請安裝</p>
+
+<p>$ npm i autoprefixer --save-dev</p>
+
+<p><img height="493" src="1540892089_65335.png" width="1348" /></p>
+
+<p>&nbsp;</p>
+
+<p>國父革命第十次才成功，我比他幸運，我編譯到第九次就成功了。</p>
+
+<p><img height="271" src="1540892193_59748.png" width="1276" /></p>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.1/getting-started/webpack/">Learn how to include Bootstrap in your project using Webpack 3.</a></p>
+
+<p><a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/4.1/getting-started/download/">Download Bootstrap to get the compiled CSS and JavaScript, source code, or include it with your favorite package managers like npm, RubyGems, and more.</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/webpack/" rel="tag"># webpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/10/29/import-System-Web-Mvc-UrlHelper/" rel="prev" title="import System.Web.Mvc.UrlHelper">
+      <i class="fa fa-chevron-left"></i> import System.Web.Mvc.UrlHelper
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2018/10/30/Mode/" rel="next" title="Mode">
+      Mode <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2018/10/30/bootstrap-importing-precompiled-scss/";
+    this.page.identifier = "2018/10/30/bootstrap-importing-precompiled-scss/";
+    this.page.title = "bootstrap importing precompiled scss";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

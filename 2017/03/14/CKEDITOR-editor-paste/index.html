@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CKEditor 4 CKEDITOR.editor paste事件的深人解析">
+<meta property="og:url" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489550453_10816.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489553760_58941.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489556031_49082.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489556561_22805.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489556763_93683.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489556878_95494.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489557102_04214.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1494395376_76733.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1494395394_17845.png">
+<meta property="og:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1494395669_66652.png">
+<meta property="article:published_time" content="2017-03-14T09:24:26.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="CKEditor">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/1489550453_10816.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>CKEditor 4 CKEDITOR.editor paste事件的深人解析 | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CKEditor 4 CKEDITOR.editor paste事件的深人解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-14 17:24:26" itemprop="dateCreated datePublished" datetime="2017-03-14T17:24:26+08:00">2017-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/CKEditor/" itemprop="url" rel="index">
+                    <span itemprop="name">CKEditor</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2017/03/14/CKEDITOR-editor-paste/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/14/CKEDITOR-editor-paste/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>準備一範例，此範例的paste事件是應用於檢查檔案大小。</p>
+
+<p>後端：</p>
+
+<pre style="margin:0em; overflow:auto; background-color:#ffffff;">
+<code style="font-family:Consolas,&quot;Courier New&quot;,Courier,Monospace; font-size:10pt; color:#000000;"><span style="color:#0000ff;">public</span> ActionResult UpLoadToDB(HttpPostedFileBase upload)
+&#123;
+    <span style="color:#0000ff;">try</span>
+    &#123;
+        <span style="color:#0000ff;">int</span> img_id = db.IMAGEs.Count() &gt; 0 ? db.IMAGEs.Max(a =&gt; a.img_id) + 1 : 1;
+
+        <span style="color:#0000ff;">byte</span>[] buffer = <span style="color:#0000ff;">new</span> <span style="color:#0000ff;">byte</span>[upload.ContentLength];
+        upload.InputStream.Read(buffer, 0, upload.ContentLength);
+
+        IMAGE image = <span style="color:#0000ff;">new</span> IMAGE();
+        image.img_id = img_id;
+        image.contentType = upload.ContentType;
+        image.imageContent = buffer;
+
+        db.IMAGEs.Add(image);
+        db.SaveChanges();
+
+        JObject obj = <span style="color:#0000ff;">new</span> JObject(
+             <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;uploaded&quot;</span>, 1),
+             <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;fileName&quot;</span>, img_id),
+             <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;url&quot;</span>, Url.Action(<span style="color:#a31515;">&quot;GetImage&quot;</span>, <span style="color:#0000ff;">new</span> &#123; id = img_id &#125;))
+         );
+
+        <span style="color:#0000ff;">return</span> Content(JsonConvert.SerializeObject(obj), <span style="color:#a31515;">&quot;application/json&quot;</span>);
+    &#125;
+    <span style="color:#0000ff;">catch</span> (Exception ex)
+    &#123;
+        JObject obj = <span style="color:#0000ff;">new</span> JObject(
+             <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;uploaded&quot;</span>, 0),
+             <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;error&quot;</span>, <span style="color:#0000ff;">new</span> JObject(
+                    <span style="color:#0000ff;">new</span> JProperty(<span style="color:#a31515;">&quot;message&quot;</span>, ex.ToString())
+                 )
+             )
+         );
+
+        <span style="color:#0000ff;">return</span> Content(JsonConvert.SerializeObject(obj), <span style="color:#a31515;">&quot;application/json&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<p>&nbsp;</p>
+
+<p>前端：</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>CKEditor<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;editor1&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> myEditor <span style="color:#808030; ">=</span> CKEDITOR<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">replace</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">editor1</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800080; ">{</span>
+            extraPlugins<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">uploadimage</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#696969; ">//表示使用uploadimage套件</span>
+            uploadUrl<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">@Url.Action(&quot;UpLoadToDB&quot;)</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span>
+
+            on<span style="color:#800080; ">:</span> <span style="color:#800080; ">{</span>
+                paste<span style="color:#800080; ">:</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                    <span style="color:#696969; ">//前端上傳前事先檢查圖檔大小，檔案不得大於800KB</span>
+                    <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>type <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">html</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">&amp;&amp;</span> evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>dataValue <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                        <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>dataTransfer<span style="color:#808030; ">.</span>getFile<span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>size <span style="color:#808030; ">&gt;</span> <span style="color:#008c00; ">800</span> <span style="color:#808030; ">*</span> <span style="color:#008c00; ">1024</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                            <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">The file is too big, please use a smaller one.</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                            evt<span style="color:#808030; ">.</span>stop<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                        <span style="color:#800080; ">}</span>
+                    <span style="color:#800080; ">}</span>
+                <span style="color:#800080; ">}</span>
+            <span style="color:#800080; ">}</span>
+
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>或等於</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>CKEditor<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;editor1&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> myEditor <span style="color:#808030; ">=</span> CKEDITOR<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">replace</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">editor1</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800080; ">{</span>
+            extraPlugins<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">uploadimage</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#696969; ">//表示使用uploadimage套件</span>
+            uploadUrl<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">@Url.Action(&quot;UpLoadToDB&quot;)</span><span style="color:#800000; ">&#39;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        myEditor<span style="color:#808030; ">.</span>on<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">paste</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            <span style="color:#696969; ">//前端上傳前事先檢查圖檔大小，檔案不得大於800KB</span>
+            <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>type <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">html</span><span style="color:#800000; ">&quot;</span> <span style="color:#808030; ">&amp;&amp;</span> evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>dataValue <span style="color:#808030; ">==</span> <span style="color:#800000; ">&quot;</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>dataTransfer<span style="color:#808030; ">.</span>getFile<span style="color:#808030; ">(</span><span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span><span style="color:#808030; ">.</span>size <span style="color:#808030; ">&gt;</span> <span style="color:#008c00; ">800</span> <span style="color:#808030; ">*</span> <span style="color:#008c00; ">1024</span><span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+                    <span style="color:#800000; font-weight:bold; ">alert</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">The file is too big, please use a smaller one.</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                    evt<span style="color:#808030; ">.</span>stop<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+                <span style="color:#800080; ">}</span>
+            <span style="color:#800080; ">}</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>後端只是參考，不是本文章要談的範圍，</p>
+
+<p>先來看型別為<a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.eventInfo">CKEDITOR.eventInfo</a>的名稱&nbsp;evt 物件其內容是什麼</p>
+
+<p><img height="440" src="1489550453_10816.png" width="773" /></p>
+
+<p>由此可發現 evt 物件確實如 spec 上所寫的一樣，有五個屬性、三個方法。</p>
+
+<p>比較重要的屬性有 data 與 editor 屬性，editor 屬性的型別是<a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor">CKEDITOR.editor</a>，</p>
+
+<p>如果要動到 editor 屬性時，表示將對ckeditor有更深層的應用，</p>
+
+<p>此範例還不用動到 editor 屬性(殺雞焉用牛刀~~~)，使用 data 屬性就足夠應付。</p>
+
+<p>&nbsp;</p>
+
+<p>來看 evt.data 屬性，此範例是將一圖檔拖放到編輯器裡，</p>
+
+<p>所以 evt.data.method 屬性顯示剛發生了「drop」事件，</p>
+
+<p><img height="124" src="1489553760_58941.png" width="636" /></p>
+
+<p>當放進編輯器裡的是文字時，則 evt.data.type 屬性通常為 text；</p>
+
+<p>而當放進編輯器裡的是圖片時，則 evt.data.type 屬性通常為 html，但請注意這不是絕對。</p>
+
+<p>當放進編輯器裡的是文字時，則 evt.data.dataVaue 屬性為 html string 內容；</p>
+
+<p>而當放進編輯器裡的是圖片時，則 evt.data.dataValue&nbsp;屬性為空字串。</p>
+
+<p>&nbsp;</p>
+
+<p>接下來看 <a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.plugins.clipboard.dataTransfer">CKEDITOR.plugins.clipboard.dataTransfer</a> 型別的 evt.data.dataTransfer 屬性，</p>
+
+<p><img height="106" src="1489556031_49082.png" width="550" /></p>
+
+<p>由 spec 可知&nbsp;evt.data.dataTransfer 屬性裡有提供「$」屬性可用來操作DOM&nbsp;object，</p>
+
+<p>看裡面的屬性內容就知道其可應用的地方可多了。</p>
+
+<p><img height="433" src="1489556561_22805.png" width="514" /></p>
+
+<p>&nbsp;evt.data.dataTransfer 屬性裡有提供「id」屬性方便於識別該物件，</p>
+
+<p><img height="64" src="1489556763_93683.png" width="292" /></p>
+
+<p>另外還有提供八種方法供開發者應用</p>
+
+<p><img height="422" src="1489556878_95494.png" width="687" /></p>
+
+<p>也應該知道範例的 evt.data.dataTransfer.getFile(0) 方法是如何用來判斷圖檔大小了吧。</p>
+
+<p><img height="152" src="1489557102_04214.png" width="476" /></p>
+
+<p>提醒一點&nbsp;evt.data.dataTransfer.getFile(0).size 的單位是以byte計算。</p>
+
+<p>&nbsp;</p>
+
+<p>額外一提，drop、paste、fileUploadRequest事件同時被註冊到編輯器的實體上，</p>
+
+<p>其觸發優先順序為何？答案為drop -&gt; paste -&gt; fileUploadRequest，</p>
+
+<p>了解其觸發優先順序與各個可事件可操作的物件，對以後開發上也是很有幫助的。</p>
+
+<p><img height="698" src="1494395376_76733.png" width="932" /></p>
+
+<p><img height="712" src="1494395394_17845.png" width="833" /></p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">meta</span><span style="color:#274796; "> </span><span style="color:#074726; ">charset</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;utf-8&quot;</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>CKEditor<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">title</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#274796; "> </span><span style="color:#074726; ">src</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;http://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">head</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#274796; "> </span><span style="color:#074726; ">name</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">&quot;editor1&quot;</span><span style="color:#a65700; ">&gt;</span><span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">textarea</span><span style="color:#a65700; ">&gt;</span>
+    <span style="color:#a65700; ">&lt;</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+        <span style="color:#800000; font-weight:bold; ">var</span> myEditor <span style="color:#808030; ">=</span> CKEDITOR<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">replace</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">editor1</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800080; ">{</span>
+            extraPlugins<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">uploadimage</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#696969; ">//表示使用uploadimage套件</span>
+            uploadUrl<span style="color:#800080; ">:</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">@Url.Action(&quot;UpLoadToDB&quot;)</span><span style="color:#800000; ">&#39;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        myEditor<span style="color:#808030; ">.</span>on<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">drop</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">drop</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        myEditor<span style="color:#808030; ">.</span>on<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">paste</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">paste</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+        myEditor<span style="color:#808030; ">.</span>on<span style="color:#808030; ">(</span><span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">fileUploadRequest</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span> <span style="color:#808030; ">(</span>evt<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+            console<span style="color:#808030; ">.</span><span style="color:#800000; font-weight:bold; ">log</span><span style="color:#808030; ">(</span><span style="color:#800000; ">&quot;</span><span style="color:#0000e6; ">fileUploadRequest</span><span style="color:#800000; ">&quot;</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+        <span style="color:#800080; ">}</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    <span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">script</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">body</span><span style="color:#a65700; ">&gt;</span>
+<span style="color:#a65700; ">&lt;/</span><span style="color:#800000; font-weight:bold; ">html</span><span style="color:#a65700; ">&gt;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p><img height="274" src="1494395669_66652.png" width="792" /></p>
+
+<pre style="color:#000000;background:#ffffff;">
+editor<span style="color:#808030; ">.</span>on<span style="color:#808030; ">(</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">fileUploadRequest</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">function</span><span style="color:#808030; ">(</span> evt <span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+    <span style="color:#800000; font-weight:bold; ">var</span> fileLoader <span style="color:#808030; ">=</span> evt<span style="color:#808030; ">.</span>data<span style="color:#808030; ">.</span>fileLoader<span style="color:#808030; ">,</span>
+        formData <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> FormData<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span>
+        xhr <span style="color:#808030; ">=</span> fileLoader<span style="color:#808030; ">.</span>xhr<span style="color:#800080; ">;</span>
+
+    xhr<span style="color:#808030; ">.</span>open<span style="color:#808030; ">(</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">POST</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> fileLoader<span style="color:#808030; ">.</span>uploadUrl<span style="color:#808030; ">,</span> <span style="color:#0f4d75; ">true</span> <span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    formData<span style="color:#808030; ">.</span>append<span style="color:#808030; ">(</span> <span style="color:#800000; ">&#39;</span><span style="color:#0000e6; ">upload</span><span style="color:#800000; ">&#39;</span><span style="color:#808030; ">,</span> fileLoader<span style="color:#808030; ">.</span>file<span style="color:#808030; ">,</span> fileLoader<span style="color:#808030; ">.</span>fileName <span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+    fileLoader<span style="color:#808030; ">.</span>xhr<span style="color:#808030; ">.</span>send<span style="color:#808030; ">(</span> formData <span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+
+    <span style="color:#696969; ">// Prevented the default behavior.</span>
+    evt<span style="color:#808030; ">.</span>stop<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span><span style="color:#800080; ">;</span>
+<span style="color:#800080; ">}</span><span style="color:#808030; ">,</span> <span style="color:#0f4d75; ">null</span><span style="color:#808030; ">,</span> <span style="color:#0f4d75; ">null</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">4</span> <span style="color:#808030; ">)</span><span style="color:#800080; ">;</span> <span style="color:#696969; ">// Listener with a priority 4 will be executed before priority 5.</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>參考資料：</p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-event-paste">CKEDITOR.editor paste</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-event-drop">CKEDITOR.editor drop</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.eventInfo">CKEDITOR.eventInfo</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.plugins.clipboard.dataTransfer">CKEDITOR.plugins.clipboard.dataTransfer</a></p>
+
+<p>延伸參考</p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-event-fileUploadRequest">CKEDITOR.editor fileUploadRequest</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.editor-event-fileUploadResponse">CKEDITOR.editor fileUploadResponse</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/api/CKEDITOR.fileTools.fileLoader">CKEDITOR.fileTools.fileLoader</a></p>
+
+<p>相關文章</p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/guide/dev_file_upload">Uploading Dropped or Pasted Files</a></p>
+
+<p><a target="_blank" rel="noopener" href="http://docs.ckeditor.com/#!/guide/dev_clipboard">Clipboard Integration</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/CKEditor/" rel="tag"># CKEditor</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/03/01/CKEDITOR-API/" rel="prev" title="CKEditor 4 CKEDITOR API 部份範例">
+      <i class="fa fa-chevron-left"></i> CKEditor 4 CKEDITOR API 部份範例
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/03/21/Loading-animation/" rel="next" title="Loading動畫範例">
+      Loading動畫範例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2017/03/14/CKEDITOR-editor-paste/";
+    this.page.identifier = "2017/03/14/CKEDITOR-editor-paste/";
+    this.page.title = "CKEditor 4 CKEDITOR.editor paste事件的深人解析";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

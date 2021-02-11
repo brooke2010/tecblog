@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCSS語法 - @import、@media、@extend">
+<meta property="og:url" content="https://brooke2010.github.io/2017/12/20/SCSS-import-media-extend/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-12-20T02:29:48.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="SASS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://brooke2010.github.io/2017/12/20/SCSS-import-media-extend/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>SCSS語法 - @import、@media、@extend | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2017/12/20/SCSS-import-media-extend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SCSS語法 - @import、@media、@extend
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-12-20 10:29:48" itemprop="dateCreated datePublished" datetime="2017-12-20T10:29:48+08:00">2017-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/SASS/" itemprop="url" rel="index">
+                    <span itemprop="name">SASS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2017/12/20/SCSS-import-media-extend/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/20/SCSS-import-media-extend/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>一、@Rules and Directives</p>
+
+<p>1、@Import</p>
+
+<p>Import指示詞除了可以把n個scss檔匯在一起編譯成一個css檔之外，</p>
+
+<p>還可以把內容單純為css語法的scss檔(注意該檔名第一個字母為底線)，</p>
+
+<p>不編譯，直接一起轉成css檔的功能，如下範例</p>
+
+<p>_reset.scss</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e90ff; font-weight: bold">body</span> {
+    <span style="color: #0000aa">padding</span>: <span style="color: #009999">0</span>;
+}
+</pre>
+</div>
+
+<p>base.scss</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #0000aa">@import</span> <span style="color: #aa5500">&#39;reset&#39;</span>;
+
+<p><span style="color: #1e90ff; font-weight: bold">body</span> {<br>    <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#fff</span>;<br>}<br></pre></p>
+</div>
+
+<p>output.css</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e90ff; font-weight: bold">body</span> {
+    <span style="color: #0000aa">padding</span>: <span style="color: #009999">0</span>;
+}
+
+<p><span style="color: #1e90ff; font-weight: bold">body</span> {<br>    <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#fff</span>;<br>}<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>還有一種是巢狀式import，比較不常用</p>
+
+<p>example.scss</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.example</span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">red</span>;
+}
+</pre>
+</div>
+
+<p>輸入scss檔</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline">#main</span> {
+    <span style="color: #0000aa">@import</span> <span style="color: #aa5500">&quot;example&quot;</span>;
+}
+</pre>
+</div>
+
+<p>輸出css檔</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00">#main</span> <span style="color: #00aa00; text-decoration: underline">.example</span> {
+  <span style="color: #0000aa">color</span>: <span style="color: #00aaaa">red</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>2、@media</p>
+
+<p>@media在scss裡的用法如下</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.sidebar</span> {
+    <span style="color: #1e90ff">width</span>: <span style="color: #009999">300</span><span style="color: #00aaaa">px</span>;
+    <span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">screen</span> <span style="color: #1e90ff; font-weight: bold">and</span> (<span style="color: #1e90ff; font-weight: bold">orientation</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">landscape</span>) {
+        <span style="color: #1e90ff">width</span>: <span style="color: #009999">500</span><span style="color: #00aaaa">px</span>;
+    }
+}
+</pre>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.sidebar</span> {
+  <span style="color: #0000aa">width</span>: <span style="color: #009999">300px</span>;
+}
+<span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">screen</span> <span style="color: #1e90ff; font-weight: bold">and</span> (<span style="color: #1e90ff; font-weight: bold">orientation</span>: <span style="color: #1e90ff; font-weight: bold">landscape</span>) {
+  <span style="color: #00aa00; text-decoration: underline">.sidebar</span> {
+    <span style="color: #0000aa">width</span>: <span style="color: #009999">500px</span>;
+  }
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>也可以做巢狀式嵌套</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">screen</span> {
+    <span style="color: #00aa00; text-decoration: underline">.sidebar</span> {
+        <span style="color: #0000aa">@media</span> (<span style="color: #1e90ff; font-weight: bold">orientation</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">landscape</span>) {
+            <span style="color: #1e90ff">width</span>: <span style="color: #009999">500</span><span style="color: #00aaaa">px</span>;
+        }
+    }
+}
+</pre>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">screen</span> <span style="color: #1e90ff; font-weight: bold">and</span> (<span style="color: #1e90ff; font-weight: bold">orientation</span>: <span style="color: #1e90ff; font-weight: bold">landscape</span>) {
+  <span style="color: #00aa00; text-decoration: underline">.sidebar</span> {
+    <span style="color: #0000aa">width</span>: <span style="color: #009999">500px</span>;
+  }
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>3、Extend/Inheritance</p>
+
+<p>a、在scss裡繼承基本的用法如下</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span> {
+    <span style="color: #1e90ff">border</span>: <span style="color: #009999">1</span><span style="color: #00aaaa">px</span> <span style="color: #009999">#f00</span>;
+    <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;<br>    <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span>, <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {
+  <span style="color: #0000aa">border</span>: <span style="color: #009999">1px</span> <span style="color: #009999">#f00</span>;
+  <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>  <span style="color: #0000aa">border-width</span>: <span style="color: #009999">3px</span>;<br>}<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>注意，只要指定繼承名稱在各個樣式有出現的地方都要被套用</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span> {
+  <span style="color: #1e90ff">border</span>: <span style="color: #009999">1</span><span style="color: #00aaaa">px</span> <span style="color: #009999">#f00</span>;
+  <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+<span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.error</span>.intrusion</span> {
+  <span style="color: #1e90ff">background-image</span>: <span style="color: #aa5500">url(&quot;/image/hacked.png&quot;)</span>;
+}
+<span style="color: #00aa00; text-decoration: underline">.seriousError</span> {
+  <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;
+  <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;
+}
+</pre>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span>, <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {
+  <span style="color: #0000aa">border</span>: <span style="color: #009999">1px</span> <span style="color: #009999">#f00</span>;
+  <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#fdd</span>; }
+
+<p><span style="color: #00aa00; text-decoration: underline">.error.intrusion</span>, <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.seriousError</span>.intrusion</span> {<br>  <span style="color: #0000aa">background-image</span>: <span style="color: #aa5500">url(&quot;/image/hacked.png&quot;)</span>; }</p>
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>  <span style="color: #0000aa">border-width</span>: <span style="color: #009999">3px</span>; }<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>另一個比較不一樣的例子</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.hoverlink</span> {
+    <span style="color: #0000aa">@extend</span> <span style="color: #1e90ff; font-weight: bold">a</span><span style="color: #888888">:hover</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.comment</span> <span style="color: #1e90ff; font-weight: bold"><span style="background-color:#FFFF00;">a</span></span><span style="color: #00aa00; text-decoration: underline">.user</span><span style="color: #888888"><span style="background-color:#FFFF00;">:hover</span></span> {<br>    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.comment</span> <span style="color: #1e90ff; font-weight: bold">a</span><span style="color: #00aa00; text-decoration: underline">.user</span><span style="color: #888888">:hover</span>, <span style="color: #00aa00; text-decoration: underline">.comment</span> <span style="color: #00aa00; text-decoration: underline">.user<span style="background-color:#FFFF00;">.hoverlink</span></span> {
+  <span style="color: #0000aa">font-weight</span>: <span style="color: #0000aa">bold</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>b、Multiple Extends</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span> {
+    <span style="color: #1e90ff">border</span>: <span style="color: #009999">1</span><span style="color: #00aaaa">px</span> <span style="color: #009999">#f00</span>;
+    <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.attention</span> {<br>    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">3</span><span style="color: #00aaaa">em</span>;<br>    <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#ff0</span>;<br>}</p>
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;<br>    @<span style="color: #1e90ff; font-weight: bold">extend</span> <span style="color: #00aa00; text-decoration: underline">.attention</span>;<br>    <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span>, <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {
+  <span style="color: #0000aa">border</span>: <span style="color: #009999">1px</span> <span style="color: #009999">#f00</span>;
+  <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.attention</span>, <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>  <span style="color: #0000aa">font-size</span>: <span style="color: #009999">3em</span>;<br>  <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#ff0</span>;<br>}</p>
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>  <span style="color: #0000aa">border-width</span>: <span style="color: #009999">3px</span>;<br>}<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>c、Chaining Extends</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span> {
+    <span style="color: #1e90ff">border</span>: <span style="color: #009999">1</span><span style="color: #00aaaa">px</span> <span style="color: #009999">#f00</span>;
+    <span style="color: #1e90ff">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;<br>    <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;<br>}</p>
+<p><span style="color: #00aa00; text-decoration: underline">.criticalError</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.seriousError</span>;<br>    <span style="color: #1e90ff; font-weight: bold">position</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">fixed</span>;<br>    <span style="color: #1e90ff; font-weight: bold">top</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">10</span><span style="color: #FF0000; background-color: #FFAAAA">%</span>;<br>    <span style="color: #1e90ff; font-weight: bold">bottom</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">10</span><span style="color: #FF0000; background-color: #FFAAAA">%</span>;<br>    <span style="color: #1e90ff; font-weight: bold">left</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">10</span><span style="color: #FF0000; background-color: #FFAAAA">%</span>;<br>    <span style="color: #1e90ff; font-weight: bold">right</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">10</span><span style="color: #FF0000; background-color: #FFAAAA">%</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.error</span>, <span style="color: #00aa00; text-decoration: underline">.seriousError</span>, <span style="color: #00aa00; text-decoration: underline">.criticalError</span> {
+  <span style="color: #0000aa">border</span>: <span style="color: #009999">1px</span> <span style="color: #009999">#f00</span>;
+  <span style="color: #0000aa">background-color</span>: <span style="color: #009999">#fdd</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.seriousError</span>, <span style="color: #00aa00; text-decoration: underline">.criticalError</span> {<br>  <span style="color: #0000aa">border-width</span>: <span style="color: #009999">3px</span>;<br>}</p>
+<p><span style="color: #00aa00; text-decoration: underline">.criticalError</span> {<br>  <span style="color: #0000aa">position</span>: <span style="color: #0000aa">fixed</span>;<br>  <span style="color: #0000aa">top</span>: <span style="color: #009999">10</span>%;<br>  <span style="color: #0000aa">bottom</span>: <span style="color: #009999">10</span>%;<br>  <span style="color: #0000aa">left</span>: <span style="color: #009999">10</span>%;<br>  <span style="color: #0000aa">right</span>: <span style="color: #009999">10</span>%;<br>}<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>d、Selector Sequences</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline">#fake-links</span> <span style="color: #00aa00; text-decoration: underline">.link</span> {
+  <span style="color: #0000aa">@extend</span> <span style="color: #1e90ff; font-weight: bold">a</span>;
+}
+
+<p><span style="color: #1e90ff; font-weight: bold">a</span> {<br>  <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;<br>  <span style="color: #0000aa">&amp;</span><span style="color: #888888">:hover</span> {<br>    <span style="color: #1e90ff">text-decoration</span>: <span style="color: #aa0000">underline</span>;<br>  }<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #1e90ff; font-weight: bold">a</span>, <span style="color: #00aa00">#fake-links</span> <span style="color: #00aa00; text-decoration: underline">.link</span> {
+  <span style="color: #0000aa">color</span>: <span style="color: #00aaaa">blue</span>;
+}
+<span style="color: #1e90ff; font-weight: bold">a</span><span style="color: #888888">:hover</span>, <span style="color: #00aa00">#fake-links</span> <span style="color: #00aa00; text-decoration: underline">.link</span><span style="color: #888888">:hover</span> {
+  <span style="color: #0000aa">text-decoration</span>: <span style="color: #0000aa">underline</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>e、Merging Selector Sequences</p>
+
+<p>如果被指定繼承的名稱其前面還有出現其他的selector，</p>
+
+<p>則會產生下面組合</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline"><span style="background-color:#DDA0DD;">#admin</span></span><span style="background-color:#DDA0DD;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#DDA0DD;">.tabbar</span></span> <span style="color: #1e90ff; font-weight: bold">a</span> {
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+}
+
+<p><span style="color: #00aaaa; text-decoration: underline"><span style="background-color:#FFFF00;">#demo</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.overview</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #1e90ff; font-weight: bold">a</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00">#admin</span> <span style="color: #00aa00; text-decoration: underline">.tabbar</span> <span style="color: #1e90ff; font-weight: bold">a</span>,
+<span style="color: #00aa00">#admin</span> <span style="color: #00aa00; text-decoration: underline">.tabbar</span> <span style="color: #00aa00"><span style="background-color:#FFFF00;">#demo</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.overview</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span>,
+<span style="color: #00aa00"><span style="background-color:#FFFF00;">#demo</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.overview</span></span> <span style="color: #00aa00"><span style="background-color:#DDA0DD;">#admin</span></span><span style="background-color:#DDA0DD;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#DDA0DD;">.tabbar</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span> {
+  <span style="color: #0000aa">font-weight</span>: <span style="color: #0000aa">bold</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>另一個例子你會發現有相同的selector id&nbsp;#admin 有發生被merge起來的情形</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline"><span style="background-color:#FFFF00;">#admin</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.tabbar</span></span> <span style="color: #1e90ff; font-weight: bold">a</span> {
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+}
+
+<p><span style="color: #00aaaa; text-decoration: underline"><span style="background-color:#DDA0DD;">#admin</span></span><span style="background-color:#DDA0DD;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#DDA0DD;">.overview</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #1e90ff; font-weight: bold">a</span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00">#admin</span> <span style="color: #00aa00; text-decoration: underline">.tabbar</span> <span style="color: #1e90ff; font-weight: bold">a</span>,
+<span style="color: #00aa00"><span style="background-color:#FFFF00;">#admin</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.tabbar</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#DDA0DD;">.overview</span></span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span>,
+<span style="color: #00aa00"><span style="background-color:#DDA0DD;">#admin</span></span><span style="background-color:#DDA0DD;"> </span><span style="color: #00aa00; text-decoration: underline"><span style="background-color:#DDA0DD;">.overview</span></span> <span style="color: #00aa00; text-decoration: underline">.tabbar</span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#00FFFF;">.fakelink</span></span> {
+  <span style="color: #0000aa">font-weight</span>: <span style="color: #0000aa">bold</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>f、@extend-Only Selectors #placeholders</p>
+
+<p>這個scss語法的樣式是可以單獨存在的，並且不會被render到css</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline">#context</span> <span style="color: #1e90ff; font-weight: bold">a</span><span style="color: #FF0000; background-color: #FFAAAA">%</span><span style="color: #1e90ff; font-weight: bold">extreme</span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">2</span><span style="color: #00aaaa">em</span>;
+}
+</pre>
+</div>
+
+<p>只有明確呼叫才會被render</p>
+
+<p>scss輸入</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aaaa; text-decoration: underline">#context</span> <span style="color: #1e90ff; font-weight: bold">a</span><span style="color: rgb(255, 0, 0);"><span style="background-color:#FFFF00;">%</span></span><span style="color: #1e90ff; font-weight: bold"><span style="background-color:#FFFF00;">extreme</span></span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">2</span><span style="color: #00aaaa">em</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.notice</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: rgb(255, 0, 0);"><span style="background-color:#FFFF00;">%</span></span><span style="color: #1e90ff; font-weight: bold"><span style="background-color:#FFFF00;">extreme</span></span>;<br>}<br></pre></p>
+</div>
+
+<p>css輸出</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00">#context</span> <span style="color: #1e90ff; font-weight: bold">a</span><span style="color: #00aa00; text-decoration: underline">.notice</span> {
+  <span style="color: #0000aa">color</span>: <span style="color: #00aaaa">blue</span>;
+  <span style="color: #0000aa">font-weight</span>: <span style="color: #0000aa">bold</span>;
+  <span style="color: #0000aa">font-size</span>: <span style="color: #009999">2em</span>;
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>g、The !optional Flag</p>
+
+<p>這是一個正常會動的範例</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.notice</span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">2</span><span style="color: #00aaaa">em</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.important</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.notice</span>;<br>}<br></pre></p>
+</div>
+
+<p>不過，如果故意extend不存在的樣式名稱，則會編譯出錯，如下</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.notice</span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">2</span><span style="color: #00aaaa">em</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.important</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.notice2</span></span>;<br>}<br></pre></p>
+</div>
+
+<p>可以加上「!optional」修飾詞，以表示當extend不存在樣式名稱時，則不做render</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline">.notice</span> {
+    <span style="color: #1e90ff">color</span>: <span style="color: #00aaaa">blue</span>;
+    <span style="color: #1e90ff">font-weight</span>: <span style="color: #aa0000">bold</span>;
+    <span style="color: #1e90ff">font-size</span>: <span style="color: #009999">2</span><span style="color: #00aaaa">em</span>;
+}
+
+<p><span style="color: #00aa00; text-decoration: underline">.important</span> {<br>    <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.notice2</span> <span style="background-color:#FFFF00;">!</span><span style="color: #1e90ff; font-weight: bold"><span style="background-color:#FFFF00;">optional</span></span>;<br>}<br></pre></p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>h、@extend in @media</p>
+
+<p>在@media範圍裡面使用@extend呼叫指定樣式名稱時，</p>
+
+<p>該樣式名稱不能放在@media範圍之外，否則會出錯，如下範例。</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.error</span></span><span style="background-color:#FFFF00;"> {
+    </span><span style="color: #1e90ff"><span style="background-color:#FFFF00;">border</span></span><span style="background-color:#FFFF00;">: </span><span style="color: #009999"><span style="background-color:#FFFF00;">1</span></span><span style="color: #00aaaa"><span style="background-color:#FFFF00;">px</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #009999"><span style="background-color:#FFFF00;">#f00</span></span><span style="background-color:#FFFF00;">;
+    </span><span style="color: #1e90ff"><span style="background-color:#FFFF00;">background-color</span></span><span style="background-color:#FFFF00;">: </span><span style="color: #009999"><span style="background-color:#FFFF00;">#fdd</span></span><span style="background-color:#FFFF00;">;
+}</span>
+
+<p><span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">print</span> {<br>    <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {<br>        <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;<br>        <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;<br>    }<br>}<br></pre></p>
+</div>
+
+<p>應該把該樣式名稱放在@media範圍裡面才行。</p>
+<!-- HTML generated using hilite.me -->
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+<span style="color: #0000aa">@media</span> <span style="color: #1e90ff; font-weight: bold">print</span> {
+    <span style="color: #00aa00; text-decoration: underline"><span style="background-color:#FFFF00;">.error</span></span><span style="background-color:#FFFF00;"> {</span>
+    <span style="background-color:#FFFF00;">    </span><span style="color: #1e90ff"><span style="background-color:#FFFF00;">border</span></span><span style="background-color:#FFFF00;">: </span><span style="color: #009999"><span style="background-color:#FFFF00;">1</span></span><span style="color: #00aaaa"><span style="background-color:#FFFF00;">px</span></span><span style="background-color:#FFFF00;"> </span><span style="color: #009999"><span style="background-color:#FFFF00;">#f00</span></span><span style="background-color:#FFFF00;">;</span>
+    <span style="background-color:#FFFF00;">    </span><span style="color: #1e90ff"><span style="background-color:#FFFF00;">background-color</span></span><span style="background-color:#FFFF00;">: </span><span style="color: #009999"><span style="background-color:#FFFF00;">#fdd</span></span><span style="background-color:#FFFF00;">;</span>
+    <span style="background-color:#FFFF00;">}</span>
+    <span style="color: #00aa00; text-decoration: underline">.seriousError</span> {
+        <span style="color: #0000aa">@extend</span> <span style="color: #00aa00; text-decoration: underline">.error</span>;
+        <span style="color: #1e90ff; font-weight: bold">border-width</span><span style="color: #888888">:</span> <span style="color: #1e90ff; font-weight: bold">3px</span>;
+    }
+}
+</pre>
+</div>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/SASS/" rel="tag"># SASS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/12/20/SCSS-at-root-include-Mixin-Directives/" rel="prev" title="SCSS語法 - @at-root、@include、Mixin Directives">
+      <i class="fa fa-chevron-left"></i> SCSS語法 - @at-root、@include、Mixin Directives
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2017/12/25/SCSS-Control-Directives-Expressions/" rel="next" title="SCSS語法 - Control Directives & Expressions">
+      SCSS語法 - Control Directives & Expressions <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2017/12/20/SCSS-import-media-extend/";
+    this.page.identifier = "2017/12/20/SCSS-import-media-extend/";
+    this.page.title = "SCSS語法 - @import、@media、@extend";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

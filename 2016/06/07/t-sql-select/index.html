@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/tecblog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/tecblog/images/myfavicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/tecblog/images/myfavicon-16x16-next.png">
+  <link rel="mask-icon" href="/tecblog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/tecblog/css/main.css">
+
+
+<link rel="stylesheet" href="/tecblog/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"brooke2010.github.io","root":"/tecblog/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"6ZZ00L8K2B","apiKey":"cf15d59da7fce7968b61c94959559c12","indexName":"index_Tecblog","hits":{"per_page":15},"labels":{"input_placeholder":"搜尋文章 & 內容","hits_empty":"找不到您輸入的關鍵字: ${query}","hits_stats":"找到了 ${hits} 筆結果，花了 ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT">
+<meta property="og:url" content="https://brooke2010.github.io/2016/06/07/t-sql-select/index.html">
+<meta property="og:site_name" content="朝風呂">
+<meta property="og:description" content="&amp;nbsp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465365564_19744.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465365978_01487.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465367502_78658.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465368898_57965.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465369240_30897.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1501045301_62915.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465371187_73213.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465371326_20921.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465371775_26363.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465371944_67387.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465626033_09115.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465626596_69318.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465380859_80652.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465381514_97292.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465383665_60929.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465384055_51415.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465384610_07725.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465385244_65617.png">
+<meta property="og:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465384272_85064.png">
+<meta property="article:published_time" content="2016-06-07T01:34:14.000Z">
+<meta property="article:modified_time" content="2021-02-04T19:55:58.000Z">
+<meta property="article:author" content="Brooke">
+<meta property="article:tag" content="T-SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brooke2010.github.io/2016/06/07/t-sql-select/1465365564_19744.png">
+
+<link rel="canonical" href="https://brooke2010.github.io/2016/06/07/t-sql-select/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT | 朝風呂</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86880134-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-86880134-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/tecblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝風呂</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/tecblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tecblog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">44</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/tecblog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">67</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://brooke2010.github.io/2016/06/07/t-sql-select/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/tecblog/images/avatar.gif">
+      <meta itemprop="name" content="Brooke">
+      <meta itemprop="description" content="^^">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝風呂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-06-07 09:34:14" itemprop="dateCreated datePublished" datetime="2016-06-07T09:34:14+08:00">2016-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 03:55:58" itemprop="dateModified" datetime="2021-02-05T03:55:58+08:00">2021-02-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/tecblog/categories/T-SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">T-SQL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/tecblog/2016/06/07/t-sql-select/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/07/t-sql-select/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&nbsp;</p>
+
+<a id="more"></a>
+
+<p>select基本語法</p>
+
+<p>SELECT select_list [ INTO new_table ]<br />
+FROM table_source<br />
+[ WHERE search_condition]<br />
+[ GROUP BY group_by_condition]<br />
+[ HAVING search_condition]<br />
+[ ORDER BY order_expression [ ASC | DESC ] ]</p>
+
+<p>&nbsp;</p>
+
+<p>先行準備要測試的資料</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> EMPLOYEE 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#800000; font-weight:bold; ">no</span>         TINYINT<span style="color:#808030; ">,</span> 
+     name       <span style="color:#800000; font-weight:bold; ">NCHAR</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     profession NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     sex        NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     birthday   <span style="color:#800000; font-weight:bold; ">DATE</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span> 
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYEE <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Brooke    &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;ceo&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19840404&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYEE <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Mary      &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;eng&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;girl&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19990101&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYEE <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Bill      &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;eng&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19200120&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYEE <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;john      &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;sale&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19901112&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYEE <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;tom       &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;sale&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19990101&#39;</span><span style="color:#808030; ">)</span>
+</pre>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>profession<span style="color:#808030; ">,</span>sex<span style="color:#808030; ">,</span>birthday 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE
+</pre>
+
+<p><img height="216" src="1465365564_19744.png" width="309" /></p>
+
+<p>&nbsp;</p>
+
+<p>一、DISTINCT：根據輸出所有資料與欄位，將會保證不會出現重複的記錄</p>
+
+<p><img height="342" src="1465365978_01487.png" width="259" /></p>
+
+<p>&nbsp;</p>
+
+<p>二、資料的基本條件篩選-WHERE</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#808030; ">*</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE 
+<span style="color:#800000; font-weight:bold; ">WHERE</span>  sex <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;boy&#39;</span> <span style="color:#800000; font-weight:bold; ">AND</span> profession <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;sale&#39;</span> 
+<span style="color:#800000; font-weight:bold; ">OR</span> sex <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;boy&#39;</span> <span style="color:#800000; font-weight:bold; ">AND</span> profession <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;eng&#39;</span> 
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#808030; ">*</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE 
+<span style="color:#800000; font-weight:bold; ">WHERE</span>  <span style="color:#808030; ">(</span>sex <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;boy&#39;</span> <span style="color:#800000; font-weight:bold; ">AND</span> profession <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;sale&#39;</span><span style="color:#808030; ">)</span> 
+<span style="color:#800000; font-weight:bold; ">OR</span> <span style="color:#808030; ">(</span>sex <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;boy&#39;</span> <span style="color:#800000; font-weight:bold; ">AND</span> profession <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;eng&#39;</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p><img height="388" src="1465367502_78658.png" width="359" /></p>
+
+<p>由上例可知，AND比OR優先順序還要高</p>
+
+<p>&nbsp;</p>
+
+<p>三、資料行的別名</p>
+
+<p>有時候為了讓表格名或資料行更易於理解，我們會使用「別名」，如下範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> profession <span style="color:#800000; font-weight:bold; ">AS</span> pro 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE EMP
+</pre>
+
+<p>資料行「profession」利用「AS」關鍵字宣告成「pro」別名，</p>
+
+<p>表格名「EMPLOYEE」可只利用空白也可宣告成「EMP」別名</p>
+
+<p>&nbsp;</p>
+
+<p>四、資料排序 ORDER BY ...[ ASC | DESC ]</p>
+
+<p>對資料排序可以是遞增(ASC)或遞減(DESC)方式，範例如下</p>
+
+<p>ORDER BY預設為遞增ASC(由小到大)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>profession<span style="color:#808030; ">,</span>sex<span style="color:#808030; ">,</span>birthday 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE
+<span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">ORDER</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">BY</span></span> <span style="color:#800000; font-weight:bold; ">no</span>
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name<span style="color:#808030; ">,</span>profession<span style="color:#808030; ">,</span>sex<span style="color:#808030; ">,</span>birthday 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE
+<span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">ORDER</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">BY</span></span> <span style="color:#800000; font-weight:bold; ">no</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">ASC</span></span>
+</pre>
+
+<p><img height="435" src="1465368898_57965.png" width="314" /></p>
+
+<p>而遞減(由大到小)結果如下</p>
+
+<p><img height="231" src="1465369240_30897.png" width="312" /></p>
+
+<p>&nbsp;</p>
+
+<p>如果希望以n個欄位當作排序條件則要如何做？</p>
+
+<p>先準備一範例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>NEWS<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span>
+    <span style="color:#808030; ">[</span>news_id<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">int</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">year</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">smallint</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">month</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>tinyint<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">day</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>tinyint<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">time</span><span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">int</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span>
+    <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">[</span>news_id<span style="color:#808030; ">]</span><span style="color:#808030; ">)</span>
+<span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">GO</span>
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2017</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">7</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">24</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">91051</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2017</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">7</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">24</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">91116</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2017</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">7</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">24</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">104303</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>NEWS <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">2017</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">7</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">26</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">90758</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>這是一張新聞發佈日期資料表，我們希望最新發佈的新聞將排在第一位(遞減)要如何做？</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> news_id<span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">year</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">month</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">day</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">time</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   NEWS 
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> news_id<span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">year</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">month</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">day</span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">time</span> 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   NEWS 
+<span style="color:#800000; font-weight:bold; ">ORDER</span>  <span style="color:#800000; font-weight:bold; ">BY</span> <span style="color:#800000; font-weight:bold; ">year</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">DESC</span></span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">month</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">DESC</span></span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">day</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">DESC</span></span><span style="color:#808030; ">,</span><span style="color:#800000; font-weight:bold; ">time</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">DESC</span></span>
+</pre>
+
+<p>結果如下圖</p>
+
+<p><img height="371" src="1501045301_62915.png" width="388" /></p>
+
+<p>如上例，會根據四個條件做排序，分別先從year開始排，</p>
+
+<p>然後再month、day、time，而本需求是全部都做遞減，</p>
+
+<p>所以需要在每個排序條件特別加上DESC(黃底部份)才行，這點很容易被人忽略須注意。</p>
+
+<p>&nbsp;</p>
+
+<p>五、輸出前&lt;n&gt;筆或百分比資料 TOP &lt;n&gt;與WITH TIES用法</p>
+
+<p>先來看原排序</p>
+
+<p><img height="211" src="1465371187_73213.png" width="315" /></p>
+
+<p>&nbsp;</p>
+
+<p>取前百分之五十的資料，如果總共有五筆資料，</p>
+
+<p>百分之五十就是五筆取2.5筆資料，但為了資料的正確性，</p>
+
+<p>則會五筆取三筆資料出來。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">TOP</span> <span style="color:#008c00; ">50</span> <span style="color:#800000; font-weight:bold; ">PERCENT</span> name 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE
+</pre>
+
+<p><img height="172" src="1465371326_20921.png" width="227" /></p>
+
+<p>&nbsp;</p>
+
+<p>以原來排序的狀態挑出前兩筆資料</p>
+
+<p><img height="152" src="1465371775_26363.png" width="352" /></p>
+
+<p>&nbsp;</p>
+
+<p>WITH TIES專門與ORDER BY配合，</p>
+
+<p>當只有ORDER BY profession而沒有WITH TIES時，</p>
+
+<p>則單純只是先依據profession排序後再選出前兩筆資料，</p>
+
+<p>但有加WITH TIES之後，除了選出前兩筆資料之外，</p>
+
+<p>還會參考profession，當沒被選到的資料其profession欄位記錄也有出現在前兩筆資料之內，</p>
+
+<p>則將會一併被選入。</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">TOP</span> <span style="color:#008c00; ">2</span> <span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">WITH</span></span><span style="background-color:#FFFF00;"> TIES</span> profession 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   EMPLOYEE 
+<span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">ORDER</span></span><span style="background-color:#FFFF00;">  </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">BY</span></span> profession
+</pre>
+
+<p><img height="190" src="1465371944_67387.png" width="270" /></p>
+
+<p>&nbsp;</p>
+
+<p>再舉一個WITH TIES例子，先準備一個名為成績單資料表</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> <span style="color:#808030; ">[</span>dbo<span style="color:#808030; ">]</span><span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#808030; ">[</span>學號<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NOT</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>姓名<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span>NVARCHAR<span style="color:#808030; ">]</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>國文<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>英文<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#808030; ">[</span>數學<span style="color:#808030; ">]</span> <span style="color:#808030; ">[</span><span style="color:#800000; font-weight:bold; ">INT</span><span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">NULL</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span><span style="color:#808030; ">[</span>學號<span style="color:#808030; ">]</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span> 
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096002&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;心怡&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">11</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">54</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">100</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096003&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;依倫&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">78</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">95</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">56</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096004&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;家旬&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">78</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">68</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">99</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096005&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;志龍&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">89</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">50</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">68</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096006&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;志宏&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">98</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">77</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">58</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096007&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;秀娟&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">56</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">88</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">100</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096008&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;信丞&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">68</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">88</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">89</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096009&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;姿玲&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">78</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">58</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">100</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096010&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;秋青&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">55</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">68</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">70</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096011&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;秋玉&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">80</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">66</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">45</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096012&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;淑惠&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">99</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">88</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">77</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096013&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;舜任&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">77</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">45</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">99</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096014&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;jack&#39;</span><span style="color:#0000e6; ">&#39;wu&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">44</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">65</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">85</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span><span style="color:#808030; ">[</span>成績單<span style="color:#808030; ">]</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span>N<span style="color:#0000e6; ">&#39;9096015&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;富民&#39;</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">57</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">98</span><span style="color:#808030; ">,</span> <span style="color:#008c00; ">87</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>先列出成績單的所有學生資料</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> 學號<span style="color:#808030; ">,</span>姓名<span style="color:#808030; ">,</span>國文<span style="color:#808030; ">,</span>英文<span style="color:#808030; ">,</span>數學 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   成績單
+</pre>
+
+<p><img height="384" src="1465626033_09115.png" width="260" /></p>
+
+<p>&nbsp;</p>
+
+<p>找出成績單資料表平均成績是前三&#39;名&#39;的紀錄</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">TOP</span> <span style="color:#008c00; ">3</span> <span style="color:#800000; font-weight:bold; ">WITH</span> TIES 學號<span style="color:#808030; ">,</span>姓名<span style="color:#808030; ">,</span>國文<span style="color:#808030; ">,</span>英文<span style="color:#808030; ">,</span>數學<span style="color:#808030; ">,</span><span style="color:#808030; ">(</span> 國文 <span style="color:#808030; ">+</span> 英文 <span style="color:#808030; ">+</span> 數學 <span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">AS</span> 總成績<span style="color:#808030; ">,</span><span style="color:#808030; ">(</span> 國文 <span style="color:#808030; ">+</span> 英文 <span style="color:#808030; ">+</span> 數學 <span style="color:#808030; ">)</span> <span style="color:#808030; ">/</span> <span style="color:#008c00; ">3</span> <span style="color:#800000; font-weight:bold; ">AS</span> 平均 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   成績單 
+<span style="color:#800000; font-weight:bold; ">ORDER</span>  <span style="color:#800000; font-weight:bold; ">BY</span> 平均 <span style="color:#800000; font-weight:bold; ">DESC</span><span style="color:#808030; ">;</span> 
+
+<span style="color:#800000; font-weight:bold; ">SELECT</span> 學號<span style="color:#808030; ">,</span>姓名<span style="color:#808030; ">,</span>國文<span style="color:#808030; ">,</span>英文<span style="color:#808030; ">,</span>數學<span style="color:#808030; ">,</span><span style="color:#808030; ">(</span> 國文 <span style="color:#808030; ">+</span> 英文 <span style="color:#808030; ">+</span> 數學 <span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">AS</span> 總成績<span style="color:#808030; ">,</span><span style="color:#808030; ">(</span> 國文 <span style="color:#808030; ">+</span> 英文 <span style="color:#808030; ">+</span> 數學 <span style="color:#808030; ">)</span> <span style="color:#808030; ">/</span> <span style="color:#008c00; ">3</span> <span style="color:#800000; font-weight:bold; ">AS</span> 平均 
+<span style="color:#800000; font-weight:bold; ">FROM</span>   成績單 
+<span style="color:#800000; font-weight:bold; ">ORDER</span>  <span style="color:#800000; font-weight:bold; ">BY</span> 平均 <span style="color:#800000; font-weight:bold; ">DESC</span><span style="color:#808030; ">;</span>
+</pre>
+
+<p><img height="597" src="1465626596_69318.png" width="844" /></p>
+
+<p>&nbsp;</p>
+
+<p>六、CHOOSE()與IIF()函數</p>
+
+<p>先行準備資料表</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> PERSON 
+  <span style="color:#808030; ">(</span> 
+     name NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     age  TINYINT<span style="color:#808030; ">,</span> 
+     sex  NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span> 
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> PERSON <span style="color:#808030; ">(</span>name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> sex<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Brooke&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">30</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> PERSON <span style="color:#808030; ">(</span>name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> sex<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Mary&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">40</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;girl&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> PERSON <span style="color:#808030; ">(</span>name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> sex<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Bill&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">50</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> PERSON <span style="color:#808030; ">(</span>name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> sex<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;John&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">60</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> <span style="color:#800000; font-weight:bold; ">INTO</span> PERSON <span style="color:#808030; ">(</span>name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> sex<span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#0000e6; ">&#39;Tom&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#008c00; ">70</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">)</span><span style="color:#808030; ">;</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>1、CHOOSE()選擇函數</p>
+
+<p>語法：</p>
+
+<p>CHOOSE(index , string1 , string2 , string3 [ , stringN&nbsp;]&nbsp;)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> name <span style="color:#808030; ">,</span> age <span style="color:#808030; ">,</span> <span style="color:#800000; font-weight:bold; ">CHOOSE</span><span style="color:#808030; ">(</span>age<span style="color:#808030; ">/</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">-</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;而立&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;不惑&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;知天命&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;耳順&#39;</span><span style="color:#808030; ">,</span><span style="color:#0000e6; ">&#39;從心所欲，不踰矩&#39;</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">AS</span> <span style="color:#0000e6; ">&#39;子曰&#39;</span> <span style="color:#800000; font-weight:bold; ">FROM</span> PERSON
+</pre>
+
+<p><img height="213" src="1465380859_80652.png" width="800" /></p>
+
+<p>其CHOOSE函數的index如果為1則輸出string1，如果為2則輸出string2，以此類推。</p>
+
+<p>&nbsp;</p>
+
+<p>2、IIF()函數</p>
+
+<p>語法：</p>
+
+<p>IIF(boolean_expression , true_value&nbsp;, false_value)</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> name <span style="color:#808030; ">,</span> sex <span style="color:#808030; ">,</span> IIF<span style="color:#808030; ">(</span>sex <span style="color:#808030; ">=</span> <span style="color:#0000e6; ">&#39;boy&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;先生&#39;</span> <span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;小姐&#39;</span><span style="color:#808030; ">)</span> <span style="color:#800000; font-weight:bold; ">AS</span> 稱呼 <span style="color:#800000; font-weight:bold; ">FROM</span> PERSON
+</pre>
+
+<p><img height="199" src="1465381514_97292.png" width="563" /></p>
+
+<p>其IIF函數的第一個引數的條件判斷式為true時，則傳回第二個引數值，若否，</p>
+
+<p>則傳回第三個引數值。</p>
+
+<p>&nbsp;</p>
+
+<p>七、UNION(聯集)、INTERSECT(交集)、EXCEPT(差集)的用法</p>
+
+<p>為了方便說明，再新增一個EMPLOYER資料表和先前的EMPLOYEE資料表配合演出</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">CREATE</span> <span style="color:#800000; font-weight:bold; ">TABLE</span> EMPLOYER 
+  <span style="color:#808030; ">(</span> 
+     <span style="color:#800000; font-weight:bold; ">no</span>         TINYINT<span style="color:#808030; ">,</span> 
+     name       <span style="color:#800000; font-weight:bold; ">NCHAR</span><span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     profession NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">10</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     sex        NVARCHAR<span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">)</span><span style="color:#808030; ">,</span> 
+     birthday   <span style="color:#800000; font-weight:bold; ">DATE</span><span style="color:#808030; ">,</span> 
+     <span style="color:#800000; font-weight:bold; ">PRIMARY</span> <span style="color:#800000; font-weight:bold; ">KEY</span> <span style="color:#808030; ">(</span><span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">)</span> 
+  <span style="color:#808030; ">)</span> 
+
+<span style="color:#800000; font-weight:bold; ">go</span> 
+
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYER <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">1</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Brooke    &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;president&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19840404&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYER <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">2</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Mary      &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;partner&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;girl&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19990101&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYER <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">3</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Bill      &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;partner&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19200120&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYER <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">4</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Brown     &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;partner&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19901112&#39;</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">INSERT</span> dbo<span style="color:#808030; ">.</span>EMPLOYER <span style="color:#800000; font-weight:bold; ">VALUES</span> <span style="color:#808030; ">(</span><span style="color:#008c00; ">5</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;Tim       &#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;partner&#39;</span><span style="color:#808030; ">,</span> N<span style="color:#0000e6; ">&#39;boy&#39;</span><span style="color:#808030; ">,</span> <span style="color:#0000e6; ">&#39;19990101&#39;</span><span style="color:#808030; ">)</span>
+</pre>
+
+<p>&nbsp;</p>
+
+<p>1、UNION</p>
+
+<p>已知有人的身份是雇員也是雇主，如果我們想得知雇主和雇員加起來共多少人，</p>
+
+<p>也就是整個公司共多少人要如何列出？</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYEE
+<span style="color:#800000; font-weight:bold; ">UNION</span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYER
+</pre>
+
+<p><img height="261" src="1465383665_60929.png" width="237" /></p>
+
+<p>使用 UNION，如果兩集合都有同一筆資料時，則出來的結果會被合併成一筆。</p>
+
+<p>&nbsp;</p>
+
+<p>如果只想要把EMPLOYEE與EMPLOYER合成一個資料連集，則使用UNION ALL</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYEE
+<span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">UNION</span></span><span style="background-color:#FFFF00;"> </span><span style="color:#800000; font-weight:bold; "><span style="background-color:#FFFF00;">ALL</span></span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYER
+</pre>
+
+<p><img height="687" src="1465384055_51415.png" width="427" /></p>
+
+<p>注意：使用UNION語法不能跟ORDER BY語法一起使用</p>
+
+<p>&nbsp;</p>
+
+<p>2、INTERSECT</p>
+
+<p>如果要列出有人的身份是雇員也是雇主則</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYEE
+<span style="color:#800000; font-weight:bold; ">INTERSECT</span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYER
+</pre>
+
+<p><img height="192" src="1465384610_07725.png" width="238" /></p>
+
+<p>&nbsp;</p>
+
+<p>3、EXCEPT</p>
+
+<p>A EXCEPT B 表示為 A集合減掉B集合，如下例</p>
+
+<pre style="color:#000000;background:#ffffff;">
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYEE
+<span style="color:#800000; font-weight:bold; ">EXCEPT</span>
+<span style="color:#800000; font-weight:bold; ">SELECT</span> <span style="color:#800000; font-weight:bold; ">no</span><span style="color:#808030; ">,</span>name <span style="color:#800000; font-weight:bold; ">FROM</span> EMPLOYER
+</pre>
+
+<p><img height="498" src="1465385244_65617.png" width="415" /></p>
+
+<p>&nbsp;</p>
+
+<p>注意，使用 UNION、INTERSECT 或 EXCEPT 運算子結合的所有查詢，其目標清單中的運算式數量必須相等，否則會出錯。</p>
+
+<p><img height="142" src="1465384272_85064.png" width="547" /></p>
+
+<p>&nbsp;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tecblog/tags/T-SQL/" rel="tag"># T-SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/06/t-sql-select1/" rel="prev" title="select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE">
+      <i class="fa fa-chevron-left"></i> select指令-ROUND、CEILING、FLOOR、SQRT、SQUARE、CAST、CONVERT、GETDATE、DATEPART、DATEADD、DATEDIFF、UPPER、LOWER、LEN、DATALENGTH、CHARINDEX、LEFT、RIGHT、SUBSTRING、REPLICATE、REPLACE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/tecblog/2016/06/08/group-function/" rel="next" title="彙總函數與GROUP BY HAVING SUM()、COUNT()、AVG()、MAX()、MIN()、WITH ROLLUP、WITH CUBE">
+      彙總函數與GROUP BY HAVING SUM()、COUNT()、AVG()、MAX()、MIN()、WITH ROLLUP、WITH CUBE <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Brooke</p>
+  <div class="site-description" itemprop="description">^^</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/tecblog/archives">
+          <span class="site-state-item-count">689</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/tecblog/categories/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tecblog/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brooke</span>
+</div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'AIzaSyBTuwqj10h1dBCKUa8xB1kEa1RroIN9i-o',
+      projectId: 'tecblog-3dd18'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/tecblog/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/tecblog/js/utils.js"></script>
+
+
+<script src="/tecblog/js/schemes/pisces.js"></script>
+
+
+<script src="/tecblog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/tecblog/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://tecblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://brooke2010.github.io/2016/06/07/t-sql-select/";
+    this.page.identifier = "2016/06/07/t-sql-select/";
+    this.page.title = "select指令-DISTINCT、WHERE、ORDER BY、TOP、WITH TIES、CHOOSE()、IIF()、UNION、INTERSECT、EXCEPT";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tecblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

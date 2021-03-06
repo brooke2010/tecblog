@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/09/05/javascript-syntax-sugar/</loc>
-    
-    <lastmod>2021-02-16T12:47:55.509Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/04/10/ASP-NET-Identity-Oauth-FB-signOn/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -44,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/11/29/ASP-NET-MVC-life-cycle/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/10/13/ASP-NET-core2-initial-project-run-on-the-ubuntu-17-04-with-Apache-2-4/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/10/13/ASP-NET-core2-initial-project-run-on-the-ubuntu-17-04-with-Apache-2-4/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/11/29/ASP-NET-MVC-life-cycle/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -107,13 +100,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/10/Ajax-Low-Level-Interface/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2014/08/29/AjaxOptions-HttpMethod/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -121,7 +107,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/08/24/AjaxOptions/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/10/Ajax-Low-Level-Interface/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -136,6 +122,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2020/08/30/Anonymous-Types-example/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/08/24/AjaxOptions/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -170,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/10/22/AutoResetEvent-WaitOne/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2017/02/20/BOM-Navigator/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -191,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/12/30/BOM-Screen-object-Width-Height/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/01/18/BOM-Window-Location-url-redirect/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/01/18/BOM-Window-Location-url-redirect/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/12/30/BOM-Screen-object-Width-Height/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -212,14 +198,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/01/20/BOM-history/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/10/22/AutoResetEvent-WaitOne/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/11/06/Backreference-Constructs/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/01/20/BOM-history/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -254,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/04/19/Box-Model/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/11/06/Backreference-Constructs/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/04/02/C-code-read-ad/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/04/19/Box-Model/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -290,6 +276,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/10/20/CKEditor4-Upload-Image/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2020/04/02/C-code-read-ad/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -366,21 +359,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Callbacks-Object/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/05/09/Carriage-Return-and-Line-Feed/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2014/02/15/Clipboard-GetDataObject/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Callbacks-Object/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -394,14 +380,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/12/11/Console-SetCursorPosition%E3%80%81CursorTop%E3%80%81CursorLeft/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/08/24/Content-ContentResult/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/05/09/Carriage-Return-and-Line-Feed/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -415,14 +394,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/02/22/CovarianceandContravarianceinGenerics/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/12/11/Console-SetCursorPosition%E3%80%81CursorTop%E3%80%81CursorLeft/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/07/23/DB-First/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/02/22/CovarianceandContravarianceinGenerics/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -436,7 +415,21 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/08/24/Content-ContentResult/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2017/05/24/DNS-Prefetching/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/07/23/DB-First/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -499,13 +492,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/08/22/Debug-WriteLine/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2017/03/28/Dictionary/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -513,14 +499,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Dimensions/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/08/22/Debug-WriteLine/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/02/04/Directory-DirectoryInfo-File-FileInfo-Path/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Dimensions/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -541,14 +527,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/08/28/ES6-Modules-samples-demo/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/02/04/Directory-DirectoryInfo-File-FileInfo-Path/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/05/14/EXCEL-GetObject/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/08/28/ES6-Modules-samples-demo/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -562,7 +548,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/11/18/Encoding-class/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/05/14/EXCEL-GetObject/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -570,6 +556,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2017/02/25/Emmet-Zen-Coding/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/11/18/Encoding-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -597,6 +590,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/09/16/Enumerable-Where/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/09/10/Enumerable-Select/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -605,13 +605,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/09/16/Enumerable-Take/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/09/16/Enumerable-Where/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -632,13 +625,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Events-Document-Loading/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/07/11/Events-Event-Handler-Attachment/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -647,6 +633,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/07/11/Events-Keyboard-Events/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Events-Document-Loading/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -688,13 +681,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/09/18/Function-Parameters-Function-Arguments-Parameter-Defaults/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/01/28/Generic/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -703,6 +689,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/07/11/Global-jQuery-Object/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2019/09/18/Function-Parameters-Function-Arguments-Parameter-Defaults/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -723,6 +716,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-functions/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-infoWindows/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -730,7 +730,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-functions/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-map-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -779,28 +779,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-map-class/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2017/07/30/HTML-Objects/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/07/14/HTML-radio-button/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/02/19/HTTP-Header/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -814,6 +793,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2018/07/14/HTML-radio-button/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2015/11/09/Hello-Codova/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -821,7 +807,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/01/23/Html-ActionLink/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/02/19/HTTP-Header/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -856,6 +842,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2015/01/23/Html-ActionLink/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2020/09/06/HttpWebRequest-post-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -863,14 +856,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/06/10/IIS-ASP-db-connection/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/04/08/HttpWebResponse/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/12/18/Indexers/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/06/10/IIS-ASP-db-connection/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -905,13 +898,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/09/17/JavaScript-Function-Definitions/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/09/24/JSONP/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -919,7 +905,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/04/08/HttpWebResponse/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/09/17/JavaScript-Function-Definitions/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -933,14 +919,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/12/18/JavaScript-Numbers-property/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/10/31/JavaScript-Obfuscator-Tool-setting/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/10/31/JavaScript-Obfuscator-Tool-setting/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/12/18/JavaScript-Numbers-property/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -975,14 +961,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/09/09/JavaScriptResult/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/09/23/JsonResult/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/09/23/JsonResult/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/09/09/JavaScriptResult/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1066,7 +1052,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/07/22/MVC-CRUD-Create/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/12/18/Indexers/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1074,6 +1060,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2014/07/25/MVC-CRUD-Edit-Delete/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/07/22/MVC-CRUD-Create/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1136,13 +1129,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Manipulation-Style-Properties/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/10/25/Match-Class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1150,14 +1136,21 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/05/29/Media-query/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/03/15/MaterialPro-admin-introduce/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/03/15/MaterialPro-admin-introduce/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Manipulation-Style-Properties/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2019/05/29/Media-query/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1192,14 +1185,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/10/30/Mode/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Miscellaneous-Data-Storage/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/12/12/Model-First/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/10/30/Mode/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1213,14 +1206,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/08/30/NameValueCollection-use/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/08/28/Navigate-property/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/08/28/Navigate-property/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/08/30/NameValueCollection-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1234,13 +1227,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/05/14/OFFICE-2003-2010/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/02/13/OWIN-Startup-Class-Detection/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1248,7 +1234,28 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/12/12/Model-First/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/05/14/OFFICE-2003-2010/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/07/11/Offset/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/04/01/Pluralize-or-singularize-generated-object-names/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1269,7 +1276,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/04/01/Pluralize-or-singularize-generated-object-names/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/04/28/Random-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1277,13 +1284,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2015/01/26/RSA/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/04/28/Random-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1311,14 +1311,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/10/29/Regex-IsMatch-Method/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/10/26/Regex-Match-Method/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/10/26/Regex-Match-Method/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/10/29/Regex-IsMatch-Method/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1346,14 +1346,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Removed/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/11/28/RenderSection/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/11/28/RenderSection/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Removed/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1381,14 +1381,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Miscellaneous-Data-Storage/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/12/17/SCSS-SassScript-Variables/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/01/11/SCSS-List-Functions-nth-index/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1396,6 +1389,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2018/05/06/SCSS-comment-function-directives/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2017/12/17/SCSS-SassScript-Variables/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1500,13 +1500,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/10/13/StreamWriter/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/11/14/StringBuilder/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1521,7 +1514,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/09/30/Sublime-Text3-SublimeHighlight/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/10/13/StreamWriter/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1529,6 +1522,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2015/01/12/System-Text-Encoding/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/09/30/Sublime-Text3-SublimeHighlight/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1543,13 +1543,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/06/16/T-SQL-page/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/02/16/Task-class-example/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1571,6 +1564,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/12/22/The-Browser-Object-Model/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2019/02/16/Task-class-example/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1640,13 +1640,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/08/10/Utilities21/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2014/04/14/VB-NET-XML/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1655,6 +1648,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2014/04/08/VB-NET-get-directory/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/08/10/Utilities21/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1675,14 +1675,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/08/07/ValidationSummary-ValidationMessageFor/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/01/25/Value-Type-and-Reference-Type/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/01/25/Value-Type-and-Reference-Type/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/08/07/ValidationSummary-ValidationMessageFor/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1696,20 +1696,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/01/20/View-use/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/06/21/ViewModel/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/01/06/Viewport/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1717,7 +1703,21 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2015/01/20/View-use/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/11/20/Visual-Studio-Code-personal-setting/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/06/21/ViewModel/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1738,6 +1738,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2020/08/01/Vue-js-v-model/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/08/14/Vuejs-Helloworld/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1752,21 +1759,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/08/01/Vue-js-v-model/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/12/25/WaitHandle-WaitOne/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/03/25/Web-Deploy-IIS/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1787,14 +1780,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/11/15/WebViewPage-WebPageBase-WebPageRenderingBase/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/05/13/Widget-element-and-wrapper/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/03/25/Web-Deploy-IIS/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1808,7 +1794,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/10/15/XMLHttpRequest-sample/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/11/15/WebViewPage-WebPageBase-WebPageRenderingBase/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2020/05/13/Widget-element-and-wrapper/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1837,6 +1830,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2014/04/06/add-System-Windows-Forms-dll/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/10/15/XMLHttpRequest-sample/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1899,13 +1899,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/02/17/async-await-example/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2015/10/12/async-term/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1913,14 +1906,21 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/02/02/attr-prop-diff/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/05/10/auto-login/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/05/10/auto-login/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/02/17/async-await-example/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2015/02/02/attr-prop-diff/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1948,14 +1948,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/02/18/blog-add-local-search/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/08/09/before-after-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/08/09/before-after-use/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/02/18/blog-add-local-search/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2081,6 +2081,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/04/01/csharp-7-3/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/10/30/csharp-array/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -2095,13 +2102,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/04/01/csharp-7-3/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2020/02/04/csharp-ref/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -2109,14 +2109,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/21/csharp7-2/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/18/csharp7-1/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/18/csharp7-1/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/21/csharp7-2/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2284,14 +2284,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/11/26/fail-certificate/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/09/06/expressjs-use-ejs/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/09/06/expressjs-use-ejs/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/11/26/fail-certificate/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2312,6 +2312,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2018/02/22/figure-figcaption-tag-use/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/11/05/file-loader-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -2326,14 +2333,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/02/08/focus/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/10/16/font-Awesome-icon/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/10/16/font-Awesome-icon/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/02/08/focus/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2410,6 +2417,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/03/01/go-top/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2015/05/04/github-page/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -2418,13 +2432,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2014/08/11/gitignore-commit-file/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/03/01/go-top/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2481,13 +2488,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2020/04/26/hexo-generator-sitemap/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/02/22/figure-figcaption-tag-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2613,14 +2613,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/12/22/jQuery-Say-Hello/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/jQuery-Object-Instances/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/jQuery-Object-Instances/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/12/22/jQuery-Say-Hello/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2655,14 +2655,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/16/jQuery-param/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/29/jQuery-offset/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/29/jQuery-offset/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/16/jQuery-param/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2823,13 +2823,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/01/11/SCSS-List-Functions-nth-index/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/09/15/passbyValue-vs-passbyReference/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -2851,14 +2844,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/03/01/picture-combine/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/20/picture-output-debug/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/20/picture-output-debug/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/03/01/picture-combine/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2873,6 +2866,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2018/02/23/pointer-events/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2018/02/20/picture-tag/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2921,14 +2921,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/10/25/reCAPTCHAv2/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/03/19/razor/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/01/03/reCAPTCHAv3/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/10/25/reCAPTCHAv2/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -2942,7 +2942,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/03/19/razor/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/01/03/reCAPTCHAv3/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3054,13 +3054,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/02/20/picture-tag/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/06/04/sql-server-note/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -3082,14 +3075,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/03/13/static-class-member-method-property/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/11/07/standard-value-format/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/11/07/standard-value-format/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/03/13/static-class-member-method-property/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3131,14 +3124,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/06/05/t-sql-date-format/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/07/03/syntax-sugar/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/07/03/syntax-sugar/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/06/05/t-sql-date-format/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3166,14 +3159,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/09/20/textbox-SelectAll-textbox-Select-use/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/10/04/text-decoration/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/10/04/text-decoration/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/09/20/textbox-SelectAll-textbox-Select-use/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3187,14 +3180,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/04/14/transport-read-data/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/10/17/translate-to-diff-destinetion/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/10/17/translate-to-diff-destinetion/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/04/14/transport-read-data/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3292,13 +3285,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/10/19/web-address/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2014/10/14/web-essentails-2013/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -3355,14 +3341,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/21/wpf-show-image/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/01/wpf-object-click/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/01/wpf-object-click/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/21/wpf-show-image/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3384,6 +3370,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2018/02/23/z-index/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/10/19/web-address/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3502,14 +3495,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/08/28/DropDownList-DropDownListFor/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/06/17/ECMAScript-2015-ES6-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/06/17/ECMAScript-2015-ES6-class/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/08/28/DropDownList-DropDownListFor/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3642,13 +3635,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Manipulation-DOM-Insertion-Outside/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2015/10/07/MessageBox-DialogResult/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -3656,14 +3642,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Miscellaneous-DOM-Element-Methods/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Manipulation-DOM-Insertion-Outside/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/01/21/Model-Binding-ViewBag-ViewData-TempData/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/07/11/Miscellaneous-DOM-Element-Methods/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3678,6 +3664,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2020/03/20/NLog-hello-world/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2015/01/21/Model-Binding-ViewBag-ViewData-TempData/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3719,14 +3712,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/12/25/SCSS-Control-Directives-Expressions/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/12/20/SCSS-at-root-include-Mixin-Directives/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/12/20/SCSS-at-root-include-Mixin-Directives/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/12/25/SCSS-Control-Directives-Expressions/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3740,14 +3733,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/02/10/ScrollSpy-0/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/03/21/Scrollspy/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/03/21/Scrollspy/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/02/10/ScrollSpy-0/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3789,6 +3782,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/01/01/SideBar/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/11/14/TagBuilder/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -3817,7 +3817,7 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/01/01/SideBar/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/02/16/a-tag-href-target-hover/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -3859,13 +3859,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/02/16/a-tag-href-target-hover/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2015/11/01/csharp6-0/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -3880,14 +3873,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/12/28/curse-smooth/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/12/22/css-logical-property/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/12/22/css-logical-property/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/12/28/curse-smooth/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4160,13 +4153,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/06/08/t-sql-filter/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/04/26/t-sql-insert/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -4175,6 +4161,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2016/06/02/t-sql-update/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/06/08/t-sql-filter/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4272,14 +4265,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/12/27/DOM-EventListener/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/05/10/DOM-Style-Object-Properties/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/05/10/DOM-Style-Object-Properties/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/12/27/DOM-EventListener/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4328,14 +4321,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/10/04/HttpPostedFileBase/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/03/27/HttpRequestBase/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/03/27/HttpRequestBase/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/10/04/HttpPostedFileBase/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4748,14 +4741,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/05/12/Bootstrap4-forms-point/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/07/07/CSS-Text/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/07/07/CSS-Text/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/05/12/Bootstrap4-forms-point/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4825,14 +4818,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/categories/index.html</loc>
+    <loc>https://brooke2010.github.io/tecblog/tags/index.html</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/tags/index.html</loc>
+    <loc>https://brooke2010.github.io/tecblog/categories/index.html</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     

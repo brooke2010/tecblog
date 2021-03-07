@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2016/09/09/RenderAction-Action-RenderPartial-Partial/</loc>
+    
+    <lastmod>2021-03-07T07:38:13.007Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/01/04/Promise-resolve-then-reject-catch/</loc>
     
     <lastmod>2021-03-07T06:51:24.670Z</lastmod>
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/04/03/Ajax-AntiForgeryToken/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/11/19/Ajax-ActionLink/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/11/19/Ajax-ActionLink/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/04/03/Ajax-AntiForgeryToken/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -121,14 +128,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/08/24/AjaxOptions/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/11/03/AngularJS/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/11/03/AngularJS/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2016/08/24/AjaxOptions/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -583,14 +590,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/07/14/Enumerable-Enumerator/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/05/14/EntityValidationErrors/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/05/14/EntityValidationErrors/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/07/14/Enumerable-Enumerator/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -681,14 +688,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2017/04/14/GUID/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2019/09/18/Function-Parameters-Function-Arguments-Parameter-Defaults/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2019/09/18/Function-Parameters-Function-Arguments-Parameter-Defaults/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2017/04/14/GUID/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -730,6 +737,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-infoWindows/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-map-class/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -738,13 +752,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-mapTemplate/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/05/02/Google-Maps-API-infoWindows/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1304,13 +1311,6 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/08/27/RedirectToAction-RedirectToActionPermanent/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://brooke2010.github.io/tecblog/2016/02/18/RedirectToRoute/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1326,6 +1326,13 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2019/10/26/Regex-Match-Method/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/08/27/RedirectToAction-RedirectToActionPermanent/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1682,6 +1689,13 @@
   </url>
   
   <url>
+    <loc>https://brooke2010.github.io/tecblog/2014/08/07/ValidationSummary-ValidationMessageFor/</loc>
+    
+    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://brooke2010.github.io/tecblog/2019/01/25/Value-Type-and-Reference-Type/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
@@ -1697,13 +1711,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2015/01/20/View-use/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/08/07/ValidationSummary-ValidationMessageFor/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1850,14 +1857,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/08/05/allpay/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/03/30/adds-install-add/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/03/30/adds-install-add/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/08/05/allpay/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -1962,14 +1969,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/02/18/blog-add-local-search/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/10/03/bootstrap-3-3-7-hello-world/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/10/03/bootstrap-3-3-7-hello-world/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/02/18/blog-add-local-search/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4048,14 +4055,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2020/03/04/linq-query2/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2015/03/11/linq-query/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2015/03/11/linq-query/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2020/03/04/linq-query2/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4364,13 +4371,6 @@
   
   <url>
     <loc>https://brooke2010.github.io/tecblog/2019/06/30/KendoUI-Grid-widget-dataSource-usage/</loc>
-    
-    <lastmod>2021-02-04T19:55:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://brooke2010.github.io/tecblog/2016/09/09/RenderAction-Action-RenderPartial-Partial/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
@@ -4734,14 +4734,14 @@
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2018/05/12/Bootstrap4-forms-point/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2014/09/30/Bootstrap-Table/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://brooke2010.github.io/tecblog/2014/09/30/Bootstrap-Table/</loc>
+    <loc>https://brooke2010.github.io/tecblog/2018/05/12/Bootstrap4-forms-point/</loc>
     
     <lastmod>2021-02-04T19:55:58.000Z</lastmod>
     
